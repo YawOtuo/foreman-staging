@@ -17,17 +17,42 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  color: black;
+  background-color: white;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+h1 {
+  @apply text-4xl;
+  /* Tailwind class for 48px font-size */
+}
+
+h2 {
+  @apply text-3xl;
+  /* Tailwind class for 40px font-size */
+}
+
+h3 {
+  @apply text-2xl;
+  /* Tailwind class for 32px font-size */
+}
+
+h4 {
+  @apply text-xl;
+  /* Tailwind class for 24px font-size */
+}
+
+h5 {
+  @apply text-lg;
+  /* Tailwind class for 20px font-size */
+}
+
+h6 {
+  @apply text-base;
+  /* Tailwind class for 16px font-size */
 }

@@ -1,0 +1,37 @@
+.heroSlideshowContainer {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .heroSlide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    animation: fade 9s infinite;
+  }
+  
+  .heroSlide:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .heroSlide:nth-child(2) {
+    animation-delay: 3s;
+  }
+  
+  .heroSlide:nth-child(3) {
+    animation-delay: 6s;
+  }
+  
+  @keyframes fade {
+    0%, 100% {
+      opacity: 0;
+    }
+    33.33% {
+      opacity: 1;
+    }
+    66.66% {
+      opacity: 0;
+    }
+  }
+  
