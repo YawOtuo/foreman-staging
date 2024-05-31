@@ -10,11 +10,11 @@ function HeroSection() {
   };
   const Slide = ({ heading, subheading, button, image }: SlideProps) => (
     <div
-      className={`w-full h-full flex flex-col items-start justify-center px-20 gap-5 ${styles.heroSlide} bg-cover bg-no-repeat`}
+      className={`w-full h-full flex flex-col items-start justify-center px-5 lg:px-20 gap-5 ${styles.heroSlide} bg-auto lg:bg-cover bg-no-repeat`}
       style={{ backgroundImage: `url(${image})` }}>
       <div>
-        <h3 className="font-semibold">{heading}</h3>
-        <h1 className="uppercase font-bold">{subheading}</h1>
+        <h3 className="font-semibold text-base lg:text-3xl">{heading}</h3>
+        <h1 className="uppercase font-bold text-lg lg:text-5xl">{subheading}</h1>
       </div>
 
       <Button
@@ -30,7 +30,7 @@ function HeroSection() {
 
   return (
     <div
-      className={`w-full flex flex-col items-start justify-center gap-5  h-[70vh] ${styles.heroSlideshowContainer}`}>
+      className={`w-full flex flex-col items-start justify-center gap-5 h-[30vh] lg:h-[70vh] ${styles.heroSlideshowContainer}`}>
       <Slide
         heading="Quality Afforfable Building One Place"
         subheading=" All the leading brands in one place"
