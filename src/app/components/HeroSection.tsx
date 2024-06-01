@@ -38,13 +38,13 @@ function HeroSection() {
       />
 
       <Slide
-        heading="Quality Afforfable Building One Place"
-        subheading=" All the leading brands in one place"
+        heading="Same Local Store Prices"
+        subheading="ENJOY CONVENIENCE AND PEACE OF MIND"
         image="/hero/slide_1.jpg"
       />
       <Slide
-        heading="Quality Afforfable Building One Place"
-        subheading=" All the leading brands in one place"
+        heading="SHOP NOW"
+        subheading="Build Your Dream With Us"
         image="/hero/slide_3.jpg"
       />
     </div>

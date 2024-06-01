@@ -10,6 +10,10 @@
     opacity: 0;
     animation: fade 9s infinite;
   }
+
+  .df {
+    color: #e4c27a;
+  }
   
   .heroSlide:nth-child(1) {
     animation-delay: 0s;
