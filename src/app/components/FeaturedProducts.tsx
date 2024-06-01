@@ -30,7 +30,7 @@ const mockProducts = [
 
 function FeaturedProducts() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 items-center gap-10 justify-center flex-wrap py-20 w-full lg:max-w-[70vw]">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-10 justify-center flex-wrap py-20 w-full lg:max-w-[70vw]">
       {mockProducts?.map((r, index) => (
         <ProductCard key={index} product={r} />
       ))}
