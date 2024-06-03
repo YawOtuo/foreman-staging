@@ -2,38 +2,65 @@ import ProductCard from "@/components/ProductCard";
 
 const mockProducts = [
   {
-    name: "Product 1",
-    price: 10.99,
-    image: "/test2.png",
+    name: "Concrete Blocks",
+    price: 45.99,
+    image: "/concrete_blocks.jpeg",
+    description:
+      "High-quality concrete blocks for various construction projects.",
+    category: "Building Materials",
+    material: "Concrete",
+    dimensions: "8x8x16 inches",
   },
   {
-    name: "Product 2",
-    price: 12.99,
-    image: "/test3.png",
+    name: "Brick Pavers",
+    price: 32.99,
+    image: "/brick_pavers.jpeg",
+    description: "Beautiful brick pavers for landscaping and outdoor projects.",
+    category: "Landscaping",
+    material: "Clay",
+    dimensions: "4x8 inches",
   },
   {
-    name: "Product 3",
-    price: 15.99,
-    image: "/test1.png",
+    name: "Lumber",
+    price: 59.99,
+    image: "/lumber.jpeg",
+    description: "High-quality lumber for framing and structural support.",
+    category: "Building Materials",
+    material: "Wood",
+    dimensions: "2x4 inches, 8 feet long",
   },
   {
-    name: "Product 4",
-    price: 19.99,
-    image: "/test5.png",
+    name: "Roof Shingles",
+    price: 89.99,
+    image: "/roof_shingles.jpeg",
+    description:
+      "Durable roof shingles for residential and commercial roofing projects.",
+    category: "Roofing",
+    material: "Asphalt",
+    dimensions: "12x12 inches",
   },
   {
-    name: "Product 5",
-    price: 9.99,
-    image: "/test4.png",
+    name: "Cement Mixer",
+    price: 349.99,
+    image: "/cement_mixer.jpeg",
+    description: "Powerful cement mixer for efficient mixing of concrete.",
+    category: "Construction Equipment",
+    material: "Metal",
+    dimensions: "20 gallon capacity",
   },
 ];
 
 function FeaturedProducts() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-10 justify-center flex-wrap py-20 w-full lg:max-w-[70vw]">
-      {mockProducts?.map((r, index) => (
-        <ProductCard key={index} product={r} />
-      ))}
+    <div className="flex flex-col gap-5 justify-center">
+
+      <p className="text-2xl font-semibold">Our Products</p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-10 justify-center flex-wrap  w-full lg:max-w-[70vw]">
+        {mockProducts?.map((r, index) => (
+          <ProductCard key={index} product={r} />
+        ))}
+      </div>
     </div>
   );
 }
