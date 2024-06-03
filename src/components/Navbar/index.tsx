@@ -22,10 +22,12 @@ const links = [
 function Navbar() {
   return (
     <div className="flex items-center justify-between lg:justify-cebter w-full py-5 px-5 lg:px-7">
-      <div className="relative w-full aspect-[178/36] max-w-[180px]">
-        {" "}
-        <Image src={"/logo-shop.png"} alt="Logo" fill objectFit="cover" />
-      </div>
+      <Link href={"/"} className="w-full">
+        <div className="relative w-full aspect-[178/36] max-w-[180px]">
+          {" "}
+          <Image src={"/logo-shop.png"} alt="Logo" fill objectFit="cover" />
+        </div>
+      </Link>
 
       <div className=" items-center gap-5   justify-center hidden lg:flex">
         {links?.map((r, index) => (
