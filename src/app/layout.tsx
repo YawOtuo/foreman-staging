@@ -20,8 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={mont.className}>
         <Navbar />
-       <div className="min-h-[50vh]"> {children}</div>
-        <Footer/>
+        <div className="min-h-[50vh]"> {children}</div>
+        <div className="mt-10 pt-5">
+          <Footer />
+        </div>
       </body>
     </html>
   );

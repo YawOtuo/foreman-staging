@@ -1,4 +1,7 @@
 import ProductCard from "@/components/ProductCard";
+import Link from "next/link";
+import { FaArrowRightLong } from "react-icons/fa6";
+
 
 const mockProducts = [
   {
@@ -52,7 +55,7 @@ const mockProducts = [
 
 function FeaturedProducts() {
   return (
-    <div className="flex flex-col gap-5 justify-center">
+    <div className="group/root flex flex-col gap-5 justify-center items-start">
 
       <p className="text-2xl font-semibold">Our Products</p>
 
@@ -61,6 +64,10 @@ function FeaturedProducts() {
           <ProductCard key={index} product={r} />
         ))}
       </div>
+
+      <Link href={'/store'} className="flex items-center justify-center gap-5 hover:text-brand-100">Show all
+      <FaArrowRightLong  />
+       </Link>
     </div>
   );
 }
