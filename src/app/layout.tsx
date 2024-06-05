@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={mont.className}>
         <Navbar />
         <div className="min-h-[50vh]"> {children}</div>
-        <div className="mt-10 pt-5">
+        <div className="">
           <Footer />
         </div>
       </body>
