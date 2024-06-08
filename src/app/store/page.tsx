@@ -1,23 +1,31 @@
-"use client"
+"use client";
 
-
+import FetchingState from "@/components/FetchingState";
 import ProductCard from "@/components/ProductCard";
+import PCSkeleton from "@/components/ProductCard/PCSkeleton";
 import { useProducts } from "@/lib/hooks/useProducts";
-import { ProductInterface } from "@/lib/types/product";
+import { Product } from "@/lib/types/product";
 
 function Store() {
-  const { allProducts } = useProducts();
+  const { allProductsError, allProductsLoading, allProducts } = useProducts();
 
   return (
     <div className="w-full flex items-start pt-5 justify-center min-h-[100vh]">
-      <div className="flex flex-col gap-5 justify-center">
+      <div className="flex flex-col gap-5 justify-center items-start w-full px-5 ">
         <p className="text-2xl font-semibold">Store</p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-10 justify-center flex-wrap  w-full lg:max-w-[70vw]">
-          {allProducts?.map((r : ProductInterface, index : number) => (
-            <ProductCard key={index} product={r} />
+        <FetchingState
+          className={
+            "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-10 justify-center flex-wrap  w-full lg:max-w-[70vw]"
+          }
+          success={allProducts?.map((r: Product) => (
+            <ProductCard key={r?.id} product={r} />
           ))}
-        </div>
+          skeletonCount={6}
+          loading={<PCSkeleton />}
+          isLoading={allProductsLoading}
+          isError={allProductsError}
+        />
       </div>
     </div>
   );

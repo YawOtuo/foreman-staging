@@ -15,7 +15,7 @@ function CartCard({ data }: Props) {
   const { handleDeleteFromCart } = useCart(2);
   return (
     <div className="flex flex-col gap-5 w-full border px-5 py-3 capitalize hover:scale-[1.01] transition-all cursor-pointer">
-      <div className="flex items-center justify-center w-full gap-5">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-center w-full gap-5">
         <div className="relative w-full aspect-[3/2] max-w-[150px] ">
           <Image
             src={"/concrete_blocks.jpeg"}
@@ -28,13 +28,13 @@ function CartCard({ data }: Props) {
           <h4 className="font-semibold">{data.product.name}</h4>
           <p className="text-shade-200 text-sm">{data.product.description}</p>
         </div>{" "}
-        <div className="flex items-center gap-1">
+        <div className="flex items-start lg:items-center gap-1">
           <p className="whitespace-nowrap font-bold text-2xl">
             GHS {data.product.price}
           </p>
         </div>{" "}
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col lg:flex-row items-center justify-between">
         <div className="flex  items-center gap-5 ">
           <Button
             onClick={() => handleDeleteFromCart(data.product.id)}
@@ -50,7 +50,7 @@ function CartCard({ data }: Props) {
             Move To Favourites
           </Button>
         </div>
-        <div className="flex items-center justify-center gap-2">
+        <div className="w-full lg:w-fit flex justify-end items-center lg:justify-center gap-2">
           <Button variant={"outline"} size={"sm"} fontSize={"xs"}>
             <FaMinus />
           </Button>

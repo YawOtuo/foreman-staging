@@ -13,7 +13,7 @@ function HeroSection() {
 
   return (
     <div
-      className={`w-full flex flex-row items-center justify-center gap-10 h-[30vh] lg:h-screen px-14  py-5 transition-all ${styles.heroSlideshowContainer}`}>
+      className={`w-full flex flex-col lg:flex-row items-center justify-center gap-10 h-[80vh] lg:h-screen px-5 lg:px-14  py-5 transition-all ${styles.heroSlideshowContainer}`}>
     
       <div className="flex flex-col gap-6 transition-all ">
         <div className="flex flex-col gap-3">
@@ -35,7 +35,7 @@ function HeroSection() {
           </Button>
         </div>
       </div>
-      <div className="h-full max-w-[50%] w-full transition-all">
+      <div className="hidden lg:flex h-full max-w-[50%] w-full transition-all">
         <HeroSlider />
       </div>{" "}
     </div>

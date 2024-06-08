@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-5 text-white bg-[#252a2c] h-[50vh] px-5 lg:px-20 py-10 items-start justify-center gap-10">
+    <div className="grid grid-cols-1 lg:grid-cols-5 text-white bg-[#252a2c] mt-10 px-5 lg:px-20 py-10 items-start justify-center gap-10">
       <div className="col-span-3">
         <h5 className="uppercase font-semibold">About Us</h5>
         <p>
