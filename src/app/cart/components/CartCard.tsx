@@ -6,6 +6,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaMinus } from "react-icons/fa6";
 import { IoMdAdd } from "react-icons/io";
 import useCart from "@/lib/hooks/useCart";
+import CardQuantityControls from "./CardQuantityControls";
 
 type Props = {
   data: CartItem;
@@ -14,9 +15,9 @@ type Props = {
 function CartCard({ data }: Props) {
   const { handleDeleteFromCart } = useCart(2);
   return (
-    <div className="flex flex-col gap-5 w-full border px-5 py-3 capitalize hover:scale-[1.01] transition-all cursor-pointer">
+    <div className="group flex flex-col gap-5 w-full border px-5 py-3 capitalize hover:scale-[1.01] transition-all cursor-pointer">
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-center w-full gap-5">
-        <div className="relative w-full aspect-[3/2] max-w-[150px] ">
+        <div className="relative w-full aspect-[3/2] lg:max-w-[150px] ">
           <Image
             src={"/concrete_blocks.jpeg"}
             alt="Logo"
@@ -25,17 +26,22 @@ function CartCard({ data }: Props) {
           />
         </div>
         <div className="flex flex-col items-start justify-start w-full">
-          <h4 className="font-semibold">{data.product.name}</h4>
+          <div className="flex items-center justify-between w-full">
+            <h4 className="font-semibold">{data.product.name}</h4>
+            <div className="lg:hidden">
+              <CardQuantityControls quantity={data.quantity} />
+            </div>{" "}
+          </div>
           <p className="text-shade-200 text-sm">{data.product.description}</p>
         </div>{" "}
         <div className="flex items-start lg:items-center gap-1">
-          <p className="whitespace-nowrap font-bold text-2xl">
+          <p className="whitespace-nowrap font-bold text-2xl group-hover:text-primary-100 transition-all">
             GHS {data.product.price}
           </p>
         </div>{" "}
       </div>
-      <div className="flex flex-col lg:flex-row items-center justify-between">
-        <div className="flex  items-center gap-5 ">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
+        <div className="flex items-start lg:items-center gap-1 lg:gap-5 ">
           <Button
             onClick={() => handleDeleteFromCart(data.product.id)}
             className="text-primary-100"
@@ -50,14 +56,8 @@ function CartCard({ data }: Props) {
             Move To Favourites
           </Button>
         </div>
-        <div className="w-full lg:w-fit flex justify-end items-center lg:justify-center gap-2">
-          <Button variant={"outline"} size={"sm"} fontSize={"xs"}>
-            <FaMinus />
-          </Button>
-          <p className="px-3">{data.quantity}</p>
-          <Button variant={"outline"} size={"sm"} fontSize={"xs"}>
-            <IoMdAdd />
-          </Button>
+        <div className="hidden lg:flex">
+          <CardQuantityControls quantity={data.quantity} />
         </div>{" "}
       </div>{" "}
     </div>
