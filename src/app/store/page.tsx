@@ -11,7 +11,7 @@ function Store() {
 
   return (
     <div className="w-full flex items-start pt-5 justify-center min-h-[100vh]">
-      <div className="flex flex-col gap-5 justify-center items-start  px-5 ">
+      <div className="flex flex-col gap-5 justify-center items-start  px-7 w-full lg:w-fit">
         <p className="text-2xl font-semibold">Store</p>
 
         <FetchingState
