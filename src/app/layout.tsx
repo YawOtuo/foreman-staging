@@ -3,6 +3,13 @@ import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
+import "swiper/css/effect-fade";
+import Providers from "@/lib/utils/provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const mont = Montserrat({ subsets: ["latin"] });
 
@@ -18,13 +25,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={mont.className}>
-        <Navbar />
-        <div className="min-h-[50vh]"> {children}</div>
-        <div className="">
-          <Footer />
-        </div>
-      </body>
+      <Providers>
+        <body className={mont.className}>
+          <Navbar />
+          <div className="min-h-[50vh]"> {children}</div>
+          <div className="">
+            <Footer />
+          </div>
+          <Toaster />
+        </body>
+      </Providers>
     </html>
   );
 }

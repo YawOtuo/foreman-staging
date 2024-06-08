@@ -1,7 +1,8 @@
+"use client"
 import ProductCard from "@/components/ProductCard";
+import { useProducts } from "@/lib/hooks/useProducts";
 import Link from "next/link";
 import { FaArrowRightLong } from "react-icons/fa6";
-
 
 const mockProducts = [
   {
@@ -54,20 +55,23 @@ const mockProducts = [
 ];
 
 function FeaturedProducts() {
+  const { allProducts } = useProducts();
   return (
     <div className="group/root flex flex-col gap-5 justify-center items-start">
-
       <p className="text-2xl font-semibold">Our Products</p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-10 justify-center flex-wrap  w-full lg:max-w-[70vw]">
-        {mockProducts?.map((r, index) => (
+        {allProducts?.map((r, index) => (
           <ProductCard key={index} product={r} />
         ))}
       </div>
 
-      <Link href={'/store'} className="flex items-center justify-center gap-5 hover:text-brand-100">Show all
-      <FaArrowRightLong  />
-       </Link>
+      <Link
+        href={"/store"}
+        className="flex items-center justify-center gap-5 hover:text-brand-100">
+        Show all
+        <FaArrowRightLong />
+      </Link>
     </div>
   );
 }

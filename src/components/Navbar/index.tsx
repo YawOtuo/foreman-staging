@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { IoCartOutline } from "react-icons/io5";
 
 const links = [
   {
@@ -21,7 +22,7 @@ const links = [
 ];
 function Navbar() {
   return (
-    <div className="flex items-center justify-between lg:justify-cebter w-full py-5 px-5 lg:px-7">
+    <div className="flex sticky bg-white z-[50] top-0 items-center justify-between lg:justify-cebter w-full py-3 px-5 lg:px-7 border-b-2 ">
       <Link href={"/"} className="w-full">
         <div className="relative w-full aspect-[178/36] max-w-[180px]">
           {" "}
@@ -35,6 +36,9 @@ function Navbar() {
             {r.name}
           </Link>
         ))}
+        <Link className="" href={'/cart'}>
+          <IoCartOutline size={20} />
+        </Link>
         <Link className="" href={"/login"}>
           Login
         </Link>
