@@ -4,7 +4,7 @@ import FormInput from "../components/FormInput";
 import FormWrapper from "../components/FormWrapper";
 import LoginButton from "../components/LoginButton";
 import { PiFacebookLogoDuotone, PiGoogleLogo, PiSignInDuotone } from "react-icons/pi";
-
+import { signIn } from "next-auth/react";
 
 function Page() {
 
@@ -13,8 +13,9 @@ function Page() {
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;
-    console.log({ email, name, password });
+    console.log({ email, password });
 
+    signIn("credentials", {email, password, callbackUrl: "/", redirect: true})
     // rest form
     e.currentTarget.reset();
   }
@@ -57,9 +58,9 @@ function Page() {
             <hr className="w-full" />
           </div>
 
-          <LoginButton icon={<PiGoogleLogo />} onClick={() => { }} type="button" name="Continue with Google" className="bg-[#DB4437]" />
+          <LoginButton icon={<PiGoogleLogo />} onClick={() => { signIn("google") }} type="button" name="Continue with Google" className="bg-[#DB4437]" />
           <LoginButton icon={<PiFacebookLogoDuotone />} onClick={() => { }} type="button" name="Continue with Facebook" className="bg-[#1877F2]" />
-        </FormWrapper>  
+        </FormWrapper>
       </div>
     </div>
   );
