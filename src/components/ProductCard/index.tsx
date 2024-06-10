@@ -4,41 +4,51 @@ import { IoCartSharp } from "react-icons/io5";
 import LottieFileBuilder from "../LottieFileBuilder";
 import animationData from "@/lotties/like1.json";
 import useCart from "@/lib/hooks/useCart";
+import { Product } from "@/lib/types/product";
+import { Button } from "../ui/button";
+import useLottie from "@/lib/hooks/useLottie";
+import { FaRegHeart } from "react-icons/fa6";
+import { IoHeart } from "react-icons/io5";
+import useFavourites from "@/lib/hooks/useFavourites";
 
 type Props = {
-  product: {
-    id: number,
-    name: string;
-    price: number;
-    image: string;
-    description: string;
-  };
+  product: Product;
 };
 function ProductCard({ product }: Props) {
   const { handleAddToCart } = useCart(2);
+  const { play, setPlay } = useLottie();
+  const { handleAddToFavourites } = useFavourites(1);
   return (
-    <div className="flex flex-col items-start justify-center border-[1px]  hover:scale-[1.02] transition-all cursor-pointer">
+    <div className="group flex flex-col items-start justify-center border-[1px]  hover:scale-[1.02] transition-all cursor-pointer">
       <div className="relative w-full aspect-[3/2] min-w-[200px] ">
         <Image
-          src={"/concrete_blocks.jpeg"}
-          alt="Logo"
+          src={`https://res.cloudinary.com/daurieb51/${product?.images[0]?.image}`}
+          alt={product.description}
           fill
           objectFit="cover"
         />
 
-        <div className="absolute bottom-0 left-0">
-          <LottieFileBuilder
-            animationData={animationData}
-            width={80}
-            height={80}
-            loop={false}
-          />
+        <div
+          className="absolute bottom-2 left-2"
+          onClick={() => {
+            console.log(play);
+            setPlay(true);
+          }}>
+          {/* <FaRegHeart color="red"/> */}
+          <button onClick={() => handleAddToFavourites(product.id)}>
+            <IoHeart
+              size={30}
+              className="stroke-shade-200 stroke-[40px] text-transparent transition-all hover:text-red-500 hover:stroke-red-500
+            
+            "
+            />
+          </button>
         </div>
       </div>
       <div className="flex flex-col gap-5 px-3 py-3 w-full">
         <div className="flex items-start justify-between w-full gap-1">
           <div className="flex flex-col gap-0">
-            <p className="font-semibold">{product?.name}</p>
+            <p className="capitalize font-semibold">{product?.name}</p>
             <p className="text-sm text-shade-200">
               {product?.description || "No description"}
             </p>
@@ -46,14 +56,18 @@ function ProductCard({ product }: Props) {
         </div>
 
         <div className="flex items-center gap-5 justify-between w-full">
-          <p className=" font-semibold text-lg">GHS {product?.price}</p>
+          <p className=" font-semibold text-lg transition-all duration-500 whi">
+            GHS {product?.price}
+          </p>
 
-          <button 
-          onClick={() => handleAddToCart(product?.id)}
-          className="flex items-center justify-center gap-2 text-sm bg-primary-200 text-black px-4 py-2 hover:scale-[1.02] transition-all">
-            <IoCartSharp />
+          <Button
+            variant={"secondary"}
+            fontSize={"sm"}
+            className="bg-primary-200 text-black"
+            onClick={() => handleAddToCart(product?.id)}>
+            <IoCartSharp className="mr-2" />
             Add to Cart
-          </button>
+          </Button>
         </div>
       </div>
     </div>
