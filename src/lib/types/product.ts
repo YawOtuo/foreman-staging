@@ -3,5 +3,12 @@ export interface Product {
   name: string;
   price: number;
   description: string
-  image: string
+  images: ProductImages[]
+}
+
+
+interface ProductImages {
+  id: number
+  image: string 
+  is_main: boolean
 }

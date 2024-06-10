@@ -1,0 +1,6 @@
+which model fields are required or not 
+models. cascade or set null
+item already added to favourites
+store pagination
+cart total
+mobile navbar
