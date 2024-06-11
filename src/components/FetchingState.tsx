@@ -10,7 +10,7 @@ type Props = {
 
 function FetchingState({ isLoading, isError, success, loading, error, skeletonCount = 5 , className}: Props) {
   return (
-    <div className={`${className}`}>
+    <div className={`${className} transition-all`}>
       {!isLoading && !isError && success}
 
       {isLoading &&

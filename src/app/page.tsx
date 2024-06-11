@@ -10,14 +10,14 @@ export default function Home() {
   return (
     <main className="w-full flex flex-col items-center justify-center gap-10">
       <HeroSection />
-      <div className=" flex flex-col gap-10 px-5 max-w-[1200px] mx-auto">
+      <div className=" flex flex-col gap-20 lg: px-5 items-center justify-center">
         <FeaturedProducts />
-        {/* <SupplySection />
+        <SupplySection />
 
         <DiscoverSection />
-        <CategoriesOfProducts />
+        {/* <CategoriesOfProducts /> */}
 
-        <WarehousingSection /> */}
+        <WarehousingSection />
       </div>
     </main>
   );

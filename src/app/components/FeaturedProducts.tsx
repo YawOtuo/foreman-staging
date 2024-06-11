@@ -60,12 +60,12 @@ const mockProducts = [
 function FeaturedProducts() {
   const { allProductsError, allProductsLoading, allProducts } = useProducts();
   return (
-    <div className="group/root flex flex-col gap-5 justify-center items-start">
+    <div className="group/root w-full flex flex-col gap-5 justify-center items-start  lg:max-w-[70vw]">
       <p className="text-2xl font-semibold">Our Products</p>
 
       <FetchingState
         className={
-          "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-10 justify-center flex-wrap  w-full lg:max-w-[70vw]"
+          "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-center gap-10 justify-center flex-wrap  w-full"
         }
         success={allProducts?.map((r: Product) => (
           <ProductCard key={r?.id} product={r} />
