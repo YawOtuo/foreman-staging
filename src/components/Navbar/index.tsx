@@ -1,7 +1,10 @@
+"use client"
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { IoCartOutline } from "react-icons/io5";
-
+import { Button } from "../ui/button";
+import { signOut } from "next-auth/react";
 const links = [
   {
     name: "Home",
@@ -21,6 +24,9 @@ const links = [
   },
 ];
 function Navbar() {
+
+  const { data } = useSession()
+
   return (
     <div className="flex sticky bg-white z-[50] top-0 items-center justify-between lg:justify-cebter w-full py-3 px-5 lg:px-7 border-b-2 ">
       <Link href={"/"} className="w-full">
@@ -39,9 +45,19 @@ function Navbar() {
         <Link className="" href={'/cart'}>
           <IoCartOutline size={20} />
         </Link>
-        <Link className="" href={"/login"}>
+        {!data?.user ? (<Link className="" href={"/login"}>
           Login
-        </Link>
+        </Link>) : (<>
+
+          <Link className="" href={"/profile"}>
+            {data.user.email}
+            {data?.user?.name}
+          </Link>
+          <Button onClick={() => { signOut() }} >
+            Logout
+          </Button>
+        </>
+        )}
       </div>
     </div>
   );
