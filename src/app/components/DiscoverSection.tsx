@@ -23,7 +23,7 @@ export default function DiscoverSection() {
     <section className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-center gap-10  flex-wrap lg:min-h-screen ">
       <div className="flex flex-col gap-6  ">
         <div className="flex flex-col gap-5">
-            <h2 className="text-4xl lg:text-6xl text-primary-50 font-bold ">Discover</h2>
+            <h2 className="text-4xl lg:text-6xl text-primary font-bold ">Discover</h2>
             <p className=" text-base">
               our best-selling products, trusted by <br /> contractors and builders
               alike
