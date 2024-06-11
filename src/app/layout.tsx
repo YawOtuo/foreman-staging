@@ -11,6 +11,7 @@ import "swiper/css/effect-fade";
 import Providers from "@/lib/utils/provider";
 import { Toaster } from "@/components/ui/toaster";
 import SessionProvider from "./SessionProvider";
+import MobileMenuWrapper from "@/components/MobileMenuWrapper";
 
 const mont = Montserrat({ subsets: ["latin"] });
 
@@ -29,12 +30,14 @@ export default function RootLayout({
       <Providers>
         <body className={mont.className}>
           <SessionProvider>
-            <Navbar />
-            <div className="min-h-[50vh]"> {children}</div>
-            <div className="">
-              <Footer />
-            </div>
-            <Toaster />
+            <MobileMenuWrapper>
+              <Navbar />
+              <div className="min-h-[50vh]"> {children}</div>
+              <div className="">
+                <Footer />
+              </div>
+              <Toaster />
+            </MobileMenuWrapper>
           </SessionProvider>
         </body>
       </Providers>

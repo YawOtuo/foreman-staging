@@ -1,10 +1,13 @@
-"use client"
+"use client";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { IoCartOutline } from "react-icons/io5";
 import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
+import { useMobileNavStore } from "../MobileNavbar/useMobileNavStore";
+import { GiHamburgerMenu } from "react-icons/gi";
+
 const links = [
   {
     name: "Home",
@@ -24,8 +27,8 @@ const links = [
   },
 ];
 function Navbar() {
-
-  const { data } = useSession()
+  const { data } = useSession();
+  const { setMobileMenuStore } = useMobileNavStore();
 
   return (
     <div className="flex sticky bg-white z-[50] top-0 items-center justify-between lg:justify-cebter w-full py-3 px-5 lg:px-7 border-b-2 ">
@@ -42,22 +45,33 @@ function Navbar() {
             {r.name}
           </Link>
         ))}
-        <Link className="" href={'/cart'}>
+        <Link className="" href={"/cart"}>
           <IoCartOutline size={20} />
         </Link>
-        {!data?.user ? (<Link className="" href={"/login"}>
-          Login
-        </Link>) : (<>
-
-          <Link className="" href={"/profile"}>
-            {data.user.email}
-            {data?.user?.name}
+        {!data?.user ? (
+          <Link className="" href={"/login"}>
+            Login
           </Link>
-          <Button onClick={() => { signOut() }} >
-            Logout
-          </Button>
-        </>
+        ) : (
+          <>
+            <Link className="" href={"/profile"}>
+              {data.user.email}
+              {data?.user?.name}
+            </Link>
+            <Button
+              onClick={() => {
+                signOut();
+              }}>
+              Logout
+            </Button>
+          </>
         )}
+      </div>
+
+      <div className="lg:hidden flex items-center">
+        <button onClick={() => setMobileMenuStore(true)}>
+          <GiHamburgerMenu />
+        </button>
       </div>
     </div>
   );

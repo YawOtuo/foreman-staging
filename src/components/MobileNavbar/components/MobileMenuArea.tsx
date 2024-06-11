@@ -1,9 +1,9 @@
 import React from "react";
-import { MobileMenu } from "../MobileMenu";
+import { MobileMenuDetails } from "../MobileMenuDetails";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { useMobileNavStore } from "./useMobileNavStore";
+import { useMobileNavStore } from "../useMobileNavStore";
 
-const TermsMenuArea = (props: any) => {
+const MobileMenuArea = (props: any) => {
   const { setMobileMenuStore } = useMobileNavStore();
 0
   return (
@@ -12,7 +12,7 @@ const TermsMenuArea = (props: any) => {
         <div className={"flex-flex-col px-8"}>
           <div
             className={
-              "flex w-full flex-row items-center justify-between pt-8 "
+              "flex w-full flex-row items-center justify-between  "
             }
           >
             <div
@@ -28,16 +28,13 @@ const TermsMenuArea = (props: any) => {
               <AiFillCloseCircle
                 onClick={() => setMobileMenuStore(false)}
                 color="white"
-                size={40}
+                size={30}
               />
             </button>
           </div>
         </div>
-        <div className={"mt-10"}>
-          <MobileMenu
-            data={props?.data}
-            className={"flex "}
-            // toggleMenu={props?.toggleMenu}
+        <div className={""}>
+          <MobileMenuDetails
           />
         </div>
       </div>
@@ -45,4 +42,4 @@ const TermsMenuArea = (props: any) => {
   );
 };
 
-export default TermsMenuArea;
+export default MobileMenuArea;
