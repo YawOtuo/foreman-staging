@@ -34,7 +34,7 @@ export const MobileMenuDetails = (props: any) => {
   const { setMobileMenuStore } = useMobileNavStore();
 
   return (
-    <div className={`flex flex-col justify-center h-[60vh]  gap-10 px-5  ${props?.className}`}>
+    <div className={`flex flex-col justify-center h-[50vh]  gap-10 px-5  ${props?.className}`}>
       <Link href={"/store"}>
         {" "}
         <Button
