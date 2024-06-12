@@ -34,12 +34,12 @@ export const MobileMenuDetails = (props: any) => {
   const { setMobileMenuStore } = useMobileNavStore();
 
   return (
-    <div className={`flex flex-col justify-center h-[50vh]  gap-10 px-5  ${props?.className}`}>
+    <div className={`flex flex-col justify-center   gap-10 px-5  ${props?.className}`}>
       <Link href={"/store"}>
         {" "}
         <Button
           size={"md"}
-          className="w-fit font-semibold px-8 bg-transparent text-white rounded-sm border-primary border-2">
+          className="w-fit font-semibold px-8 bg-transparent text-white rounded-sm border-primary border-2 text-lg py-5">
           Start Shopping
         </Button>
       </Link>

@@ -34,7 +34,7 @@ const MobileMenuArea = (props: any) => {
             </button>
           </div>
         </div>
-        <div className={""}>
+        <div className={"mt-20"}>
           <MobileMenuDetails />
         </div>
       </div>

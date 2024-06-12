@@ -70,7 +70,7 @@ function Navbar() {
 
       <div className="lg:hidden flex items-center">
         <button onClick={() => setMobileMenuStore(true)}>
-          <GiHamburgerMenu />
+          <GiHamburgerMenu  size={30}/>
         </button>
       </div>
     </div>
