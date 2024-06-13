@@ -28,16 +28,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <body className={mont.className}>
+        <body
+          className={`${mont.className} bg-slate-50 flex flex-col justify-center items-center`}>
           <SessionProvider>
-            <MobileMenuWrapper>
-              <Navbar />
-              <div className="min-h-[50vh]"> {children}</div>
-              <div className="">
-                <Footer />
-              </div>
-              <Toaster />
-            </MobileMenuWrapper>
+            <div className="w-full max-w-[1750px] flex flex-col items-center bg-white">
+              <MobileMenuWrapper>
+                <Navbar />
+                <div className=""> {children}</div>
+                <div className="">
+                  <Footer />
+                </div>
+                <Toaster />
+              </MobileMenuWrapper>
+            </div>
           </SessionProvider>
         </body>
       </Providers>

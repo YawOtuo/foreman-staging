@@ -7,19 +7,19 @@ const images = ["/hero/5.png", "/hero/6.png", "/hero/7.png"];
 
 function HeroSlider() {
   return (
-    <div className="w-full h-full">
+    <div className="w-full">
       <Swiper
         className="w-full h-full"
         loop={true}
         modules={[EffectFade, Autoplay]}
         effect="fade"
         autoplay={{
-          delay: 2500,
+          delay: 2500,  
           disableOnInteraction: false,
         }}>
         {images.map((image, index) => (
           <SwiperSlide key={index} className="w-full h-full">
-            <div className="relative w-full h-full">
+            <div className="relative w-full aspect-square">
               <Image
                 src={image}
                 fill

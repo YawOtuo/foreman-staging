@@ -20,7 +20,7 @@ export default function DiscoverSection() {
   ];
 
   return (
-    <section className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-center gap-10  flex-wrap lg:min-h-screen ">
+    <section className="w-full flex flex-col lg:flex-row items-start lg:items-center justify-center gap-10  flex-wrap  ">
       <div className="flex flex-col gap-6  ">
         <div className="flex flex-col gap-5">
             <h2 className="text-4xl lg:text-6xl text-primary font-bold ">Discover</h2>
@@ -41,7 +41,7 @@ export default function DiscoverSection() {
         </div>
       </div>
 
-      <div className="relative aspect-[546/588] lg:basis-[55%] grow-0 w-full ">
+      <div className="relative aspect-[546/588] lg:basis-[55%] grow-0 w-full md:max-h-[500px] lg:max-h-full">
         <Image
           src={"/discover_section.png"}
           objectFit="cover"

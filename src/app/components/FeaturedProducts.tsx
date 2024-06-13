@@ -60,7 +60,7 @@ const mockProducts = [
 function FeaturedProducts() {
   const { allProductsError, allProductsLoading, allProducts } = useProducts();
   return (
-    <div className="group/root w-full flex flex-col gap-5 justify-center items-start  lg:max-w-[70vw]">
+    <div className="group/root w-full flex flex-col gap-5 justify-center items-start  lg:max-w-[70%] 2xl:max-w-full ">
       <p className="text-2xl font-semibold">Our Products</p>
 
       <FetchingState

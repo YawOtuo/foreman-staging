@@ -7,10 +7,10 @@ import React from "react";
 
 export default function SupplySection() {
   return (
-    <section className="flex flex-col lg:flex-row  lg:h-screen items-center justify-center gap-10 lg:gap-20 w-full">
+    <section className="flex flex-col lg:flex-row  2xl:py-5 items-start lg:items-center justify-center gap-10 lg:gap-20 w-full">
 
 
-      <div className="w-full order-2 lg:order-1 lg:basis-[40%] lg:grow-0">
+      <div className="w-full order-2 lg:order-1 lg:basis-[40%] grow-1">
         <LottieFileBuilder animationData={animationData} width={"100%"} />
       </div>
 
