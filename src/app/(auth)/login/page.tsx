@@ -4,7 +4,9 @@ import FormInput from "../components/FormInput";
 import FormWrapper from "../components/FormWrapper";
 import LoginButton from "../components/LoginButton";
 import { PiFacebookLogoDuotone, PiGoogleLogo, PiSignInDuotone } from "react-icons/pi";
-import { signIn } from "next-auth/react";
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth } from "@/app/firebase";
+
 
 function Page() {
 
@@ -15,9 +17,16 @@ function Page() {
     const password = formData.get("password") as string;
     console.log({ email, password });
 
-    signIn("credentials", {email, password, callbackUrl: "/", redirect: true})
+    // sign In with firebase email and password
+    signInWithEmailAndPassword(auth, email, password)
     // rest form
     e.currentTarget.reset();
+  }
+
+  function GoogleSignIn() {
+    // Sign in with Google
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
   }
 
 
@@ -58,7 +67,7 @@ function Page() {
             <hr className="w-full" />
           </div>
 
-          <LoginButton icon={<PiGoogleLogo />} onClick={() => { signIn("google") }} type="button" name="Continue with Google" className="bg-[#DB4437]" />
+          <LoginButton icon={<PiGoogleLogo />} onClick={GoogleSignIn} type="button" name="Continue with Google" className="bg-[#DB4437]" />
           <LoginButton icon={<PiFacebookLogoDuotone />} onClick={() => { }} type="button" name="Continue with Facebook" className="bg-[#1877F2]" />
         </FormWrapper>
       </div>
