@@ -1,19 +1,21 @@
 "use client";
 import Link from "next/link";
 import FormInput from "../components/FormInput";
-import FormWrapper from "../components/FormWrapper";
 import LoginButton from "../components/LoginButton";
 import { PiFacebookLogoDuotone, PiGoogleLogo, PiSignInDuotone } from "react-icons/pi";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from "@/app/firebase";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import { useRouter } from "next/navigation";
 
 function Page() {
-
+    const { toast } = useToast();
+    const router = useRouter();
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         const email = formData.get("email") as string;
-        const name = formData.get("name") as string;
         const password = formData.get("password") as string;
         console.log({ email, name, password });
 
@@ -22,9 +24,20 @@ function Page() {
             // Signed in 
             const user = userCredential.user;
             console.log(user);
+            toast({
+                title: `Welcome`,
+                description: `You have successfully registered with ${email}`,
+                variant: "success"
+            })
+            router.push("/");
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            toast({
+                title: `Error ${errorCode}`,
+                description: errorMessage,
+                variant: "error"
+            })
             console.log({ errorCode, errorMessage });
         });
         // rest form
@@ -34,52 +47,59 @@ function Page() {
     function GoogleSignIn() {
         // Sign in with Google
         const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider)
+        signInWithPopup(auth, provider).then((result) => {
+            // The signed-in user info.
+            const user = result.user;
+            console.log(user);
+            toast({
+                title: `Welcome ${user.displayName}`,
+                description: `You have successfully logged in with Google`,
+                variant: "success"
+            })
+            router.push("/");
+        }).catch((error) => {
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            toast({
+                title: `Error ${errorCode}`,
+                description: errorMessage,
+                variant: "destructive"
+            })
+        });
     }
 
     return (
-        <div className="relative flex items-center justify-center min-h-screen bg-[url('/login4.png')] px-5 lg:px-0 bg-no-repeat bg-cover bg-bottom  lg:bg-center text-white">
-            {/* Blur and darken overlay */}
-            <div className="absolute insert-0 backdrop-blur-lg bg-black bg-opacity-75 w-full h-full z-[1]"></div>
 
-            {/* Content container */}
-            <div className="relative z-[1] flex flex-col items-center justify-center w-full md:w-[40%] gap-5  min-h-[50vh]">
-
-                <FormWrapper
-                    title="Welcome Back"
-                    description="Login to your account to continue"
-                    onSubmit={handleSubmit}
-                    className="w-full flex flex-col gap-3 sm:w-[60%] lg:w-[60%] p-5 bg-white text-black"
-                >
-                    <FormInput label="Email" type="" placeholder="Enter your email" value="" name="email" />
-                    <FormInput label="Name" type="text" placeholder="Enter your name" value="" name="name" />
-                    <FormInput label="Password" type="password" placeholder="Enter your password" value="" name="password" />
-                    <LoginButton type="submit" name="Login" icon={<PiSignInDuotone />} />
-
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-1">
-                            <input type="checkbox" />
-                            <label>Remember me</label>
-                        </div>
-                        <a href="#" className="text-slate-500">Forgot Password?</a>
-                    </div>
-
-                    <div className="flex items-center gap-1 text-center">
-                        <label>Already have an account?</label>
-                        <Link href="/login" className="text-slate-500">Login</Link>
-                    </div>
-
-                    <div className="flex flex-row gap-3 items-center">
-                        <hr className="w-full" />
-                        <span className="text-center">Or</span>
-                        <hr className="w-full" />
-                    </div>
-
-                    <LoginButton icon={<PiGoogleLogo />} onClick={GoogleSignIn} type="button" name="Continue with Google" className="bg-[#DB4437]" />
-                    <LoginButton icon={<PiFacebookLogoDuotone />} onClick={() => { }} type="button" name="Continue with Facebook" className="bg-[#1877F2]" />
-                </FormWrapper>
+        <form onSubmit={handleSubmit} className="self-start flex flex-col gap-4 pt-4">
+            <FormInput required label="Email" type="" placeholder="Enter your email" value="" name="email" />
+            <FormInput required label="Password" type="password" placeholder="Enter your password" value="" name="password" />
+            <Button variant={"default"} type="submit" className="bg-primary-100 text-white w-full p-3 flex items-center justify-center gap-2">
+                <PiSignInDuotone />
+                <span>Register</span>
+            </Button>
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1">
+                    <input type="checkbox" />
+                    <label>Remember me</label>
+                </div>
+                <a href="#" className="text-slate-500">Forgot Password?</a>
             </div>
-        </div>
+
+            <div className="flex items-center gap-1 text-center">
+                <label>Already have an account?</label>
+                <Link href="/login" className="text-slate-500">Login</Link>
+            </div>
+
+            <div className="flex flex-row gap-3 items-center">
+                <hr className="w-full" />
+                <span className="text-center">Or</span>
+                <hr className="w-full" />
+            </div>
+
+            <LoginButton icon={<PiGoogleLogo />} onClick={GoogleSignIn} type="button" name="Continue with Google" className="bg-[#DB4437]" />
+            <LoginButton icon={<PiFacebookLogoDuotone />} onClick={() => { }} type="button" name="Continue with Facebook" className="bg-[#1877F2]" />
+        </form>
     );
 }
 

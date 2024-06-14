@@ -25,16 +25,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Providers>
-        <body className={mont.className}>
-            <Navbar />
-            <div className="min-h-[50vh]"> {children}</div>
-            <div className="">
-              <Footer />
-            </div>
-            <Toaster />
-        </body>
-      </Providers>
+      <body className={mont.className}>
+        <Providers>
+          <Navbar />
+          <div className="min-h-[50vh]"> {children}</div>
+          <div className="">
+            <Footer />
+          </div>
+          <Toaster />
+        </Providers>
+      </body>
     </html>
   );
 }
