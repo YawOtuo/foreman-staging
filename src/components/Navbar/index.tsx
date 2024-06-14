@@ -25,10 +25,6 @@ const links = [
   },
 ];
 function Navbar() {
-
-
-  const { data, error, isLoading } = useAuthState(auth);
-
   return (
     <div className="flex sticky bg-white z-[50] top-0 items-center justify-between lg:justify-cebter w-full py-3 px-5 lg:px-7 border-b-2 ">
       <Link href={"/"} className="w-full">
@@ -47,19 +43,6 @@ function Navbar() {
         <Link className="" href={'/cart'}>
           <IoCartOutline size={20} />
         </Link>
-        {!data?.user ? (<Link className="" href={"/login"}>
-          Login
-        </Link>) : (<>
-
-          <Link className="" href={"/profile"}>
-            {data.user.email}
-            {data?.user?.name}
-          </Link>
-          <Button onClick={() => { signOut(auth) }} >
-            Logout
-          </Button>
-        </>
-        )}
       </div>
     </div>
   );
