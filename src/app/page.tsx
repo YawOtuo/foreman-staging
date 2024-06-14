@@ -12,9 +12,11 @@ export default function Home() {
       <HeroSection />
       <div className=" flex flex-col gap-10 px-5 max-w-[1200px] mx-auto">
         <FeaturedProducts />
-        <CategoriesOfProducts />
         <SupplySection />
+
         <DiscoverSection />
+        <CategoriesOfProducts />
+
         <WarehousingSection />
       </div>
     </main>
