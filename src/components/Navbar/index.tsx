@@ -49,15 +49,16 @@ function Navbar() {
         <Link className="" href={"/cart"}>
           <IoCartOutline size={20} />
         </Link>
-        {!data?.user ? (
+        {/* {!data?.user ? (
+          <div>
           <Link className="" href={"/login"}>
             Login
           </Link>
           <Button onClick={() => { signOut(auth) }} >
             Logout
           </Button>
-        </>
-        )}
+        </div>
+        )} */}
 
       </div>
 

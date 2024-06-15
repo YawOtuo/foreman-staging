@@ -24,7 +24,7 @@ import Link from "next/link";
 
 export default function InfoBar() {
 
-    const { data, error, isLoading } = useAuthState();
+    const { data, error, isLoading } = useAuthState(auth);
 
     return (
         <div className="flex flex-row gap-3 items-center justify-between p-2 px-8 bg-slate-800 text-white">
