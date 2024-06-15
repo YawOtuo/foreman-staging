@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { IoCartOutline } from "react-icons/io5";
@@ -8,7 +8,6 @@ import { auth } from "@/app/firebase";
 import { signOut } from "firebase/auth";
 import { useMobileNavStore } from "../MobileNavbar/useMobileNavStore";
 import { GiHamburgerMenu } from "react-icons/gi";
-
 
 const links = [
   {
@@ -50,6 +49,15 @@ function Navbar() {
         <Link className="" href={"/cart"}>
           <IoCartOutline size={20} />
         </Link>
+        {!data?.user ? (
+          <Link className="" href={"/login"}>
+            Login
+          </Link>
+          <Button onClick={() => { signOut(auth) }} >
+            Logout
+          </Button>
+        </>
+        )}
 
       </div>
 

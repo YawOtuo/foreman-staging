@@ -10,6 +10,7 @@ import "swiper/css/scrollbar";
 import "swiper/css/effect-fade";
 import Providers from "@/lib/utils/provider";
 import { Toaster } from "@/components/ui/toaster";
+
 import InfoBar from "@/components/InfoBar/infobar";
 import MobileMenuWrapper from "@/components/MobileMenuWrapper";
 
@@ -28,6 +29,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
 
       <Providers>
         <body
