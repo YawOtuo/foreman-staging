@@ -6,11 +6,20 @@ import PCSkeleton from "@/components/ProductCard/PCSkeleton";
 import { useProducts } from "@/lib/hooks/useProducts";
 import { Product } from "@/lib/types/product";
 import StoreSearch from "./components/StoreSearch";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useStoreStore } from "./components/useStoreStore";
 
 function Store() {
-  const [filter , setFilter] = useState("")
-  const { allProductsError, allProductsLoading, allProducts } = useProducts(filter);
+  const { filter, setFilter } = useStoreStore();
+  const { allProductsError, allProductsLoading, allProducts } =
+    useProducts(filter);
+  const searchParams = useSearchParams();
+  useEffect(() => {
+    if (searchParams?.get("category")) {
+      setFilter({ category__name: searchParams?.get("category") });
+    }
+  }, []);
 
   return (
     <div className="flex flex-col  w-full ">
@@ -19,7 +28,7 @@ function Store() {
           <p className="text-2xl font-semibold">Store</p>
 
           <div className="w-full lg:max-w-[40vw]">
-            <StoreSearch setFilter={setFilter}/>
+            <StoreSearch setFilter={setFilter} />
           </div>
           <FetchingState
             className={

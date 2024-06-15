@@ -3,9 +3,12 @@ import FetchingState from "@/components/FetchingState";
 import ProductCard from "@/components/ProductCard";
 import PCSkeleton from "@/components/ProductCard/PCSkeleton";
 import { useProducts } from "@/lib/hooks/useProducts";
+import { useAppStore } from "@/lib/store/useAppStore";
 import { Product } from "@/lib/types/product";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { useStoreStore } from "../store/components/useStoreStore";
 
 const mockProducts = [
   {
@@ -58,9 +61,11 @@ const mockProducts = [
 ];
 
 function FeaturedProducts() {
+  
+
   const { allProductsError, allProductsLoading, allProducts } = useProducts();
   return (
-    <div className="group/root w-full flex flex-col gap-5 justify-center items-start  lg:max-w-[70%] 2xl:max-w-full ">
+    <div className="group/root w-full flex flex-col gap-5 justify-center items-start  lg:max-w-[70%] ">
       <p className="text-2xl font-semibold">Our Products</p>
 
       <FetchingState

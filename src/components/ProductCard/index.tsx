@@ -28,7 +28,7 @@ function ProductCard({ product }: Props) {
           objectFit="cover"
         />
 
-        <div className="bg-white absolute top-5 right-5 text-xs capitalize rounded-md">
+        <div className="bg-white/90 absolute top-5 right-5 text-xs capitalize rounded-md z-[50]">
           {product?.category?.name}
         </div>
         <div

@@ -8,7 +8,7 @@ function StoreSearch({ setFilter }: Props) {
   return (
     <div className="flex items-center w-full    border-[1px]">
       <input
-        onChange={(e) => setFilter(e.target.value)}
+        onChange={(e) => setFilter({ name: e.target.value })}
         type="
             search"
         className="w-full  px-5 py-2"

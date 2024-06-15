@@ -2,11 +2,14 @@
 import { useQuery } from '@tanstack/react-query'; // Importing useQuery from React Query
 import { fetchProducts } from '../api/products';
 
-export const useProducts = (query? :string) => {
-  // Using useQuery with an object argument instead of an array
+export const useProducts = (filter?: { [key: string]: any }) => {
+  const queryKey = ["products", filter]; // Including filter in queryKey to manage cache
+
+  const queryFn = () => fetchProducts(filter); // Fetch products using filter
+
   const { data: allProducts, isLoading: allProductsLoading, error: allProductsError } = useQuery({
-    queryKey: ["products", query], // Providing the queryKey as an array
-    queryFn: () => fetchProducts(query), // Defining the queryFn to fetch products
+    queryKey,
+    queryFn,
   });
 
   return {
