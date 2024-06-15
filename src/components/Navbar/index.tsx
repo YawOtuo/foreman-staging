@@ -6,6 +6,10 @@ import { Button } from "../ui/button";
 import useAuthState from "@/lib/hooks/useAuthState";
 import { auth } from "@/app/firebase";
 import { signOut } from "firebase/auth";
+import { useMobileNavStore } from "../MobileNavbar/useMobileNavStore";
+import { GiHamburgerMenu } from "react-icons/gi";
+
+
 const links = [
   {
     name: "Home",
@@ -25,6 +29,9 @@ const links = [
   },
 ];
 function Navbar() {
+
+  const { setMobileMenuStore } = useMobileNavStore();
+
   return (
     <div className="flex sticky bg-white z-[50] top-0 items-center justify-between lg:justify-cebter w-full py-3 px-5 lg:px-7 border-b-2 ">
       <Link href={"/"} className="w-full">
@@ -40,9 +47,16 @@ function Navbar() {
             {r.name}
           </Link>
         ))}
-        <Link className="" href={'/cart'}>
+        <Link className="" href={"/cart"}>
           <IoCartOutline size={20} />
         </Link>
+
+      </div>
+
+      <div className="lg:hidden flex items-center">
+        <button onClick={() => setMobileMenuStore(true)}>
+          <GiHamburgerMenu  size={30}/>
+        </button>
       </div>
     </div>
   );

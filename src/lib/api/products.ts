@@ -2,7 +2,7 @@ import { url } from "../../../weburl";
 import { Product } from "../types/product";
 
 export const fetchProducts = async (query?: string): Promise<Product[]> => {
-  const queryString = query ? `?page=${query}` : '';
+  const queryString = query ? `?name=${query}` : '';
   const response = await fetch(`${url}api/products/${queryString}`);
   if (!response.ok) {
     throw new Error('Network response was not ok');

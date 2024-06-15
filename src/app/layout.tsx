@@ -11,6 +11,8 @@ import "swiper/css/effect-fade";
 import Providers from "@/lib/utils/provider";
 import { Toaster } from "@/components/ui/toaster";
 import InfoBar from "@/components/InfoBar/infobar";
+import MobileMenuWrapper from "@/components/MobileMenuWrapper";
+
 
 const mont = Montserrat({ subsets: ["latin"] });
 
@@ -26,17 +28,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={mont.className}>
-        <Providers>
-          <InfoBar />
-          <Navbar />
-          <div className="min-h-[50vh]"> {children}</div>
-          <div className="">
-            <Footer />
-          </div>
-          <Toaster />
-        </Providers>
-      </body>
+
+      <Providers>
+        <body
+          className={`${mont.className} bg-slate-50 flex flex-col justify-center items-center`}>
+            <div className="w-full max-w-[1750px] flex flex-col items-center bg-white">
+              <MobileMenuWrapper>
+                <Navbar />
+                <div className=""> {children}</div>
+                <div className="">
+                  <Footer />
+                </div>
+                <Toaster />
+              </MobileMenuWrapper>
+            </div>
+        </body>
+      </Providers>
     </html>
   );
 }

@@ -13,12 +13,14 @@ function HeroSection() {
 
   return (
     <div
-      className={`w-full flex flex-col lg:flex-row items-center justify-center gap-10 h-[80vh] lg:h-screen px-5 lg:px-14  py-5 transition-all ${styles.heroSlideshowContainer}`}>
+      className={`w-full grid grid-cols-1 lg:grid-cols-2 items-center justify-center gap-10 h-[70vh] lg:h-screen max-h-[500px] lg:max-h-[900px] px-5 lg:px-14  py-5 transition-all ${styles.heroSlideshowContainer} max-w-[1600px]`}>
     
       <div className="flex flex-col gap-6 transition-all ">
         <div className="flex flex-col gap-3">
           <p className="text-3xl lg:text-5xl font-bold">
-            High-Quality Construction Materials for Every Project
+            High-Quality
+            <br className="hidden 2xl:block"/>
+            Construction Materials for Every Project
           </p>
           <p className="text-base">
             Supplying builders with premium materials for over 20 years. Quality
@@ -35,7 +37,7 @@ function HeroSection() {
           </Button>
         </div>
       </div>
-      <div className="hidden lg:flex h-full max-w-[50%] w-full transition-all">
+      <div className="hidden lg:flex h-full items-center w-full  transition-all">
         <HeroSlider />
       </div>{" "}
     </div>

@@ -29,8 +29,8 @@ function CartCard({ data }: Props) {
           <div className="flex items-center justify-between w-full">
             <h4 className="font-semibold">{data.product.name}</h4>
             <div className="lg:hidden">
-              <CardQuantityControls quantity={data.quantity} />
-            </div>{" "}
+            <CardQuantityControls quantity={data.quantity} product_id={data.product.id}/>
+              </div>{" "}
           </div>
           <p className="text-shade-200 text-sm">{data.product.description}</p>
         </div>{" "}
@@ -57,7 +57,7 @@ function CartCard({ data }: Props) {
           </Button>
         </div>
         <div className="hidden lg:flex">
-          <CardQuantityControls quantity={data.quantity} />
+          <CardQuantityControls quantity={data.quantity} product_id={data.product.id}/>
         </div>{" "}
       </div>{" "}
     </div>

@@ -3,30 +3,32 @@ import { GrLike } from "react-icons/gr";
 
 export default function WarehousingSection() {
     return (
-        <section className="w-full flex items-center justify-center gap-10 sm:flex-nowrap flex-wrap mx-auto my-14">
-            <div className="image">
-                <Image src={"/WarehousingSection.png"} width={500} height={500} alt="An Illustration displayng warehousing " />
+        <section className="lg:mt-20 w-full grid grid-cols-1 lg:grid-cols-2 gap-14  items-center justify-center ">
+            <div className="w-full relative aspect-square order-2 lg:order-1">
+                <Image src={"/WarehousingSection.png"} fill alt="An Illustration displayng warehousing " />
             </div>
-            <div className="text" >
-                <h2 className="text-6xl font-bold mb-6">Innovative Warehousing</h2>
-                <p className="mb-6">
+            <div className="order-1 lg:order-2" >
+                <h2 className="text-4xl lg:text-6xl font-bold mb-3 text-primary">Innovative
+                <br />
+                 Warehousing</h2>
+                <p className="mb-6 lg:max-w-[70%]">
                     Need a place to store your materials? <br /> We offer warehousing services to keep your materials safe and secure.
                 </p>
-                <ul>
+                <ul className="text-sm">
                     <li className="flex gap-3 items-center p-3 ">
-                        <GrLike className="w-5 h-5 text-primary-100" />
+                        <GrLike className="w-5 h-5 " />
                         <p>
                             Very Secure and Safe Warehousing Facilities
                         </p>
                     </li>
                     <li className="flex gap-3 items-center p-3 ">
-                        <GrLike className="w-5 h-5 text-primary-100" />
+                        <GrLike className="w-5 h-5 " />
                         <p>
                             Climate Controlled Warehousing
                         </p>
                     </li>
                     <li className="flex gap-3 items-center p-3 ">
-                        <GrLike className="w-5 h-5 text-primary-100" />
+                        <GrLike className="w-5 h-5 " />
                         <p>
                             24/7 Security
                         </p>

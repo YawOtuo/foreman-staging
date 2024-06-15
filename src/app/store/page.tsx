@@ -6,9 +6,11 @@ import PCSkeleton from "@/components/ProductCard/PCSkeleton";
 import { useProducts } from "@/lib/hooks/useProducts";
 import { Product } from "@/lib/types/product";
 import StoreSearch from "./components/StoreSearch";
+import { useState } from "react";
 
 function Store() {
-  const { allProductsError, allProductsLoading, allProducts } = useProducts();
+  const [filter , setFilter] = useState("")
+  const { allProductsError, allProductsLoading, allProducts } = useProducts(filter);
 
   return (
     <div className="flex flex-col  w-full ">
@@ -17,7 +19,7 @@ function Store() {
           <p className="text-2xl font-semibold">Store</p>
 
           <div className="w-full lg:max-w-[40vw]">
-            <StoreSearch />
+            <StoreSearch setFilter={setFilter}/>
           </div>
           <FetchingState
             className={
