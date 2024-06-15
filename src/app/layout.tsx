@@ -14,6 +14,7 @@ import { Toaster } from "@/components/ui/toaster";
 import InfoBar from "@/components/InfoBar/infobar";
 import MobileMenuWrapper from "@/components/MobileMenuWrapper";
 import LoadingIndicator from "@/components/LoadingIndicator";
+import { Suspense } from "react";
 
 const mont = Montserrat({ subsets: ["latin"] });
 
@@ -32,18 +33,20 @@ export default function RootLayout({
       <Providers>
         <body
           className={`${mont.className} bg-slate-50 flex flex-col justify-center items-center`}>
-          <div className="w-full max-w-[1750px] flex flex-col items-center bg-white">
-            <MobileMenuWrapper>
-              {/* <InfoBar /> */}
-              <Navbar />
-              <div className="w-full"> {children}</div>
-              <div className="">
-                <Footer />
-              </div>
-              <Toaster />
-            </MobileMenuWrapper>
-          </div>
-          <LoadingIndicator />
+          <Suspense fallback={null}>
+            <div className="w-full max-w-[1750px] flex flex-col items-center bg-white">
+              <MobileMenuWrapper>
+                {/* <InfoBar /> */}
+                <Navbar />
+                <div className="w-full"> {children}</div>
+                <div className="">
+                  <Footer />
+                </div>
+                <Toaster />
+              </MobileMenuWrapper>
+            </div>
+            <LoadingIndicator />
+          </Suspense>
         </body>
       </Providers>
     </html>

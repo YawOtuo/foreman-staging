@@ -6,7 +6,6 @@ import { useProducts } from "@/lib/hooks/useProducts";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { Product } from "@/lib/types/product";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useStoreStore } from "../store/components/useStoreStore";
 

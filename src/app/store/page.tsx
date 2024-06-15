@@ -6,11 +6,11 @@ import PCSkeleton from "@/components/ProductCard/PCSkeleton";
 import { useProducts } from "@/lib/hooks/useProducts";
 import { Product } from "@/lib/types/product";
 import StoreSearch from "./components/StoreSearch";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useStoreStore } from "./components/useStoreStore";
 
-function Store() {
+function StoreContent() {
   const { filter, setFilter } = useStoreStore();
   const { allProductsError, allProductsLoading, allProducts } =
     useProducts(filter);
@@ -19,7 +19,7 @@ function Store() {
     if (searchParams?.get("category")) {
       setFilter({ category__name: searchParams?.get("category") });
     }
-  }, []);
+  }, [searchParams]);
 
   return (
     <div className="flex flex-col  w-full ">
@@ -45,6 +45,14 @@ function Store() {
         </div>
       </div>
     </div>
+  );
+}
+
+function Store() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <StoreContent />
+    </Suspense>
   );
 }
 
