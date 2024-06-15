@@ -1,6 +1,4 @@
-
 "use client";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { IoCartOutline } from "react-icons/io5";
@@ -10,6 +8,7 @@ import { auth } from "@/app/firebase";
 import { signOut } from "firebase/auth";
 import { useMobileNavStore } from "../MobileNavbar/useMobileNavStore";
 import { GiHamburgerMenu } from "react-icons/gi";
+
 const links = [
   {
     name: "Home",
@@ -29,7 +28,7 @@ const links = [
   },
 ];
 function Navbar() {
-  const { data } = useSession();
+
   const { setMobileMenuStore } = useMobileNavStore();
 
   return (
@@ -59,6 +58,7 @@ function Navbar() {
           </Button>
         </>
         )}
+
       </div>
 
       <div className="lg:hidden flex items-center">

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 
 export default function useAuthState(auth: any) {
+
     const [data, setData] = useState<any>(null);
     const [error, setError] = useState<any>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
