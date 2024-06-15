@@ -14,7 +14,7 @@ type Props = {
 function CategoryCard({ category }: Props) {
   const router = useRouter();
   return (
-    <Link href={`/store/?category=${category?.name}`}
+    <Link href={`/store/?category__name=${category?.name}`}
       className=" relative flex flex-col items-start justify-center border-[1px] rounded-md hover:scale-[1.02] transition-all cursor-pointer"
       >
       <div className="relative w-full aspect-[3/2] ">
