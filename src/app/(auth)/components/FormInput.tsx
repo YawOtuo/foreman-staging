@@ -6,9 +6,10 @@ interface FormInputProps {
     placeholder: string;
     value: string;
     name?: string;
+    required?: boolean;
 }
 
-export default function FormInput({ label, type, placeholder, value, name }: FormInputProps) {
+export default function FormInput({ label, type, placeholder, value, name, required }: FormInputProps) {
     const [_value, setValue] = useState(value);
 
 
@@ -23,6 +24,7 @@ export default function FormInput({ label, type, placeholder, value, name }: For
                 onChange={(e) => setValue(e.target.value)}
                 className="w-full p-2 border border-gray-300"
                 name={name}
+                required={required}
             />
         </div>
     );

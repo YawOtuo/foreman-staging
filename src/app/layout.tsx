@@ -10,8 +10,9 @@ import "swiper/css/scrollbar";
 import "swiper/css/effect-fade";
 import Providers from "@/lib/utils/provider";
 import { Toaster } from "@/components/ui/toaster";
-import SessionProvider from "./SessionProvider";
+import InfoBar from "@/components/InfoBar/infobar";
 import MobileMenuWrapper from "@/components/MobileMenuWrapper";
+
 
 const mont = Montserrat({ subsets: ["latin"] });
 
@@ -27,10 +28,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
       <Providers>
         <body
           className={`${mont.className} bg-slate-50 flex flex-col justify-center items-center`}>
-          <SessionProvider>
             <div className="w-full max-w-[1750px] flex flex-col items-center bg-white">
               <MobileMenuWrapper>
                 <Navbar />
@@ -41,7 +42,6 @@ export default function RootLayout({
                 <Toaster />
               </MobileMenuWrapper>
             </div>
-          </SessionProvider>
         </body>
       </Providers>
     </html>
