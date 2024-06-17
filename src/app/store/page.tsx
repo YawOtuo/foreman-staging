@@ -28,7 +28,7 @@ function StoreContent() {
           <p className="text-2xl font-semibold">Store</p>
 
           <div className="w-full lg:max-w-[40vw]">
-            <StoreSearch setFilter={setFilter} />
+            <StoreSearch  />
           </div>
           <FetchingState
             className={
