@@ -37,7 +37,7 @@ function StoreSearch() {
           />
         </button>
       </div>
-      <div className="flex items-center gap-5">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center gap-2 lg:gap-5">
         <CustomSelect
           onChange={(value: any) => setFilter({ category__name: value })}
           data={[{ id: 0, name: "All" }, ...(categories || [])]}
@@ -45,27 +45,32 @@ function StoreSearch() {
           labelField={"name"}
           placeholder="Categories"
         />
-        <CustomSelect
-          onChange={(value: any) => setFilter({ ordering: value })}
-          labelPosition="left"
-          data={productColumns}
-          valueField={"value"}
-          labelField={"name"}
-          placeholder="Name"
-          initialValue="name"
-          label="Order By"
-        />
-        <CustomSelect
-          onChange={(value: any) => setAscendingOrDescending(value)}
-          data={[
-            { name: "Ascending order", value: "ascending" },
-            { name: "Descending order", value: "descending" },
-          ]}
-          valueField={"value"}
-          labelField={"name"}
-          initialValue=""
-          placeholder="Ascending order"
-        />
+        {/* <div className="flex gap-5 lg:gap-0 items-center"> */}
+          <CustomSelect
+
+            onChange={(value: any) => setFilter({ ordering: value })}
+            labelPosition="left"
+            data={productColumns}
+            valueField={"value"}
+            labelField={"name"}
+            placeholder="Name"
+            initialValue="name"
+            label="Order By"
+          />
+          <CustomSelect
+            onChange={(value: any) => setAscendingOrDescending(value)}
+            data={[
+              { name: "Ascending order", value: "ascending" },
+              { name: "Descending order", value: "descending" },
+            ]}
+            valueField={"value"}
+            labelField={"name"}
+            initialValue=""
+            placeholder="Ascending order"
+            label="Sort In"
+
+          />
+        {/* </div> */}
       </div>
     </div>
   );

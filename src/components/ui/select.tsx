@@ -183,7 +183,7 @@ const CustomSelect = <T extends { [key: string]: any }>({
   };
 
   return (
-    <>
+    <div className="flex items-center gap-3">
       {label && <p className="text-xs whitespace-nowrap">{label}</p>}
       <Select onValueChange={handleValueChange}>
         <SelectTrigger className={`${className} w-[180px]`}>
@@ -206,7 +206,7 @@ const CustomSelect = <T extends { [key: string]: any }>({
           ))}
         </SelectContent>
       </Select>
-    </>
+    </div>
   );
 };
 
