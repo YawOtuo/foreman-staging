@@ -6,7 +6,6 @@ import { FaArrowRightLong } from "react-icons/fa6";
 type Props = {
   category: {
     name: string;
-    url: string;
     image: string;
   };
 };
