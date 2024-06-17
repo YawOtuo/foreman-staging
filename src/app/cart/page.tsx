@@ -26,7 +26,8 @@ function Page() {
             onClick={goBack}
             variant={"ghost"}
             size={"lg"}
-            className="!px-2">
+            className="!px-2"
+          >
             <MdKeyboardArrowLeft className="mr-2" />
             Back{" "}
           </Button>
@@ -55,7 +56,7 @@ function Page() {
           />
         </div>
         <div className="lg:col-span-2">
-          <CartSummary />
+          <CartSummary navigation={() => router.push("/checkout")} />
         </div>{" "}
       </div>
     </div>
