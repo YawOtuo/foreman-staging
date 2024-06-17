@@ -1,3 +1,4 @@
+"use client";
 import CategoryCard from "@/components/CategoryCard";
 import {
   Carousel,
@@ -6,54 +7,23 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
-const data = [
-  {
-    name: "cement",
-    url: "/store/cement",
-    image: "/categories/bricks.png",
-  },
-  {
-    name: "protective clothing",
-    url: "/store/cement",
-    image: "/categories/bricks.png",
-  },
-  {
-    name: "sand",
-    url: "/store/cement",
-    image: "/categories/helmet.png",
-  },
-  {
-    name: "cement",
-    url: "/store/cement",
-    image: "/categories/ironrods.png",
-  },
-  {
-    name: "cement",
-    url: "/store/cement",
-    image: "/categories/bricks2.png",
-  },
-  {
-    name: "cement",
-    url: "/store/cement",
-    image: "/categories/helmet.png",
-  },
-  {
-    name: "cement",
-    url: "/store/cement",
-    image: "/categories/ironrods.png",
-  },
-];
+import { fetchCategories } from "@/lib/api/categories";
+import { useAppStore } from "@/lib/store/useAppStore";
+import { useQuery } from "@tanstack/react-query";
 
 function CategoriesOfProducts() {
+  const { data, isLoading, error } = useQuery<any[]>({
+    queryKey: ["categories"],
+    queryFn: () => fetchCategories(),
+  });
   return (
-    <div className="flex flex-col gap-5 justify-center w-full lg:w-[70%] 2xl:w-full   items-start lg:items-start">
+    <div className="flex flex-col gap-5 justify-center w-full lg:w-[70%]   items-start lg:items-start">
       <p className="text-2xl  font-semibold ">Search by Categories</p>
 
       <div className="grid grid-cols-2 lg:grid-cols-3 items-center gap-1 lg:gap-5 justify-center  w-full ">
-        {data.map((r, index) => (
-          <div key={index}>
-            <CategoryCard product={r} />
+        {data?.map((r, index) => (
+          <div key={index} >
+            <CategoryCard category={r} />
           </div>
         ))}
       </div>

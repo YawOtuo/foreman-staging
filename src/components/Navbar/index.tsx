@@ -1,10 +1,11 @@
 "use client";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { IoCartOutline } from "react-icons/io5";
 import { Button } from "../ui/button";
-import { signOut } from "next-auth/react";
+import useAuthState from "@/lib/hooks/useAuthState";
+import { auth } from "@/app/firebase";
+import { signOut } from "firebase/auth";
 import { useMobileNavStore } from "../MobileNavbar/useMobileNavStore";
 import { GiHamburgerMenu } from "react-icons/gi";
 
@@ -27,7 +28,7 @@ const links = [
   },
 ];
 function Navbar() {
-  const { data } = useSession();
+
   const { setMobileMenuStore } = useMobileNavStore();
 
   return (
@@ -48,24 +49,17 @@ function Navbar() {
         <Link className="" href={"/cart"}>
           <IoCartOutline size={20} />
         </Link>
-        {!data?.user ? (
+        {/* {!data?.user ? (
+          <div>
           <Link className="" href={"/login"}>
             Login
           </Link>
-        ) : (
-          <>
-            <Link className="" href={"/profile"}>
-              {data.user.email}
-              {data?.user?.name}
-            </Link>
-            <Button
-              onClick={() => {
-                signOut();
-              }}>
-              Logout
-            </Button>
-          </>
-        )}
+          <Button onClick={() => { signOut(auth) }} >
+            Logout
+          </Button>
+        </div>
+        )} */}
+
       </div>
 
       <div className="lg:hidden flex items-center">

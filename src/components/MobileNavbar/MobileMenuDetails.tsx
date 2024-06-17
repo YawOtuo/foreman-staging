@@ -13,28 +13,37 @@ export const MobileMenuDetails = (props: any) => {
       url: "/login",
     },
     {
-      name: "Warehousing",
+      name: "Store",
+      url: "/store",
+    },
+    {
+      name: "warehousing",
       url: "/warehousing",
     },
-    {
-      name: "cart",
-      url: "/cart",
-    },
-    {
-      name: "Contact",
-      url: "/contact",
-    },
+    // {
+    //   name: "Project Management",
+    //   url: "/",
+    // },
 
+    // {
+    //   name: "workers",
+    //   url: "/",
+    // },
+    // {
+    //   name: "equip & Tool Rental",
+    //   url: "/",
+    // },
     {
-      name: "favourites",
-      url: "/favourites",
+      name: "contact us",
+      url: "/contact-us",
     },
   ];
   // const { setToggle } = useMenuStore();
   const { setMobileMenuStore } = useMobileNavStore();
 
   return (
-    <div className={`flex flex-col justify-center   gap-10 px-5  ${props?.className}`}>
+    <div
+      className={`flex flex-col justify-center   gap-10 px-5  ${props?.className}`}>
       <Link href={"/store"}>
         {" "}
         <Button
