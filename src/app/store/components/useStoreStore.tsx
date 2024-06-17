@@ -14,7 +14,7 @@ export const useStoreStore = create<AppStore>((set) => ({
   ascendingOrDescending: "ascending", // Initial ascending/descending state
   setFilter: (newFilter) =>
     set((state) => {
-      let ordering = newFilter.ordering || state.filter.ordering
+      let ordering = newFilter.ordering || state.filter.ordering.replace(/^-/, "" )
       return {
         filter: {
           ...state.filter,

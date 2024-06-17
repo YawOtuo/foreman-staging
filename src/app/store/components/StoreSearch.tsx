@@ -25,7 +25,7 @@ function StoreSearch() {
     <div className="flex flex-col gap-5">
       <div className="flex items-center w-full    border-[1px]">
         <input
-          onChange={(e) => setFilter({ name: e.target.value })}
+          onChange={(e) => setFilter({ search: e.target.value })}
           type="
               search"
           className="w-full  px-5 py-2"

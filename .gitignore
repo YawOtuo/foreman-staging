@@ -1,6 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
+todo.txt
 /node_modules
 /.pnp
 .pnp.js
