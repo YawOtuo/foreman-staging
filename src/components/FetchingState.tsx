@@ -2,7 +2,7 @@ type Props = {
   isLoading: boolean;
   isError: any;
   success: React.ReactNode;
-  nullComponent: React.ReactNode;
+  nullComponent?: React.ReactNode;
 
   loading: React.ReactNode;
   error?: React.ReactNode;
