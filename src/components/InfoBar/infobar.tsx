@@ -27,7 +27,7 @@ export default function InfoBar() {
     const { data, error, isLoading } = useAuthState(auth);
 
     return (
-        <div className="flex flex-row gap-3 items-center justify-between p-2 px-8 bg-slate-800 text-white">
+        <div className="flex flex-row gap-3 items-center justify-between p-2 px-8 bg-slate-800 text-white w-full">
             <div className="flex gap-3 items-center">
                 <a className="flex items-center gap-2" href="tel:+23354012483">
                     <PhoneCallIcon size={18} />
