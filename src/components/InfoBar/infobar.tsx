@@ -23,8 +23,8 @@ import Link from "next/link";
 import { useAppStore } from "@/lib/store/useAppStore";
 
 export default function InfoBar() {
-//   const { data, error, isLoading } = useAuthState(auth);
-//   const { user } = useUser();
+  //   const { data, error, isLoading } = useAuthState(auth);
+  //   const { user } = useUser();
   const { DBDetails, FBaseDetails } = useAppStore();
 
   return (
@@ -42,7 +42,7 @@ export default function InfoBar() {
         </a>
       </div>
       <div className="flex gap-3 items-center">
-        {FBaseDetails ? (
+        {Object.keys(FBaseDetails).length > 0 ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Avatar>
