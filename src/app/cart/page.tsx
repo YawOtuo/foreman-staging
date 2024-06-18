@@ -17,7 +17,7 @@ function Page() {
   const goBack = () => {
     router.back();
   };
-  const { isCartLoading, cartError, cartData } = useCart(2);
+  const { isCartLoading, cartError, cartData } = useCart();
   return (
     <div className="w-full flex-col gap-2 px-5 lg:px-10">
       <div className="grid grid-cols-1 lg:grid-cols-7 w-full lg:gap-x-5 ">
@@ -26,8 +26,7 @@ function Page() {
             onClick={goBack}
             variant={"ghost"}
             size={"lg"}
-            className="!px-2"
-          >
+            className="!px-2">
             <MdKeyboardArrowLeft className="mr-2" />
             Back{" "}
           </Button>
@@ -53,10 +52,13 @@ function Page() {
             }
             isLoading={isCartLoading}
             isError={cartError}
+            error={<p>Sorry no items in cart</p>}
           />
         </div>
         <div className="lg:col-span-2">
-          <CartSummary navigation={() => router.push("/checkout")} />
+          {cartData && (
+            <CartSummary navigation={() => router.push("/checkout")} />
+          )}
         </div>{" "}
       </div>
     </div>

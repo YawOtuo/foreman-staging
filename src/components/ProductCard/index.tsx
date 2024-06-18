@@ -11,13 +11,15 @@ import { FaRegHeart } from "react-icons/fa6";
 import { IoHeart } from "react-icons/io5";
 import useFavourites from "@/lib/hooks/useFavourites";
 
+import { TiTick } from "react-icons/ti";
+
 type Props = {
   product: Product;
 };
 function ProductCard({ product }: Props) {
-  const { handleAddToCart } = useCart(2);
+  const { handleAddToCart } = useCart();
   const { play, setPlay } = useLottie();
-  const { handleAddToFavourites } = useFavourites(1);
+  const { handleAddToFavourites } = useFavourites();
   return (
     <div className="group flex flex-col items-start justify-center border-[1px]  hover:scale-[1.02] transition-all cursor-pointer">
       <div className="relative w-full aspect-[3/2] min-w-[200px] ">
@@ -28,9 +30,12 @@ function ProductCard({ product }: Props) {
           objectFit="cover"
         />
 
-        <div className="bg-white/90 absolute top-5 right-5 text-xs capitalize rounded-md z-[50]">
-          {product?.category?.name}
-        </div>
+        {product?.availability !== "available" && (
+          <div className="bg-yellow-600 absolute top-3 left-3 capitalize rounded-md z-[50] px-2 py-1 flex items-center gap-1 text-white font-semibold text-[10px]">
+            {/* <TiTick /> */}
+            {product?.availability}
+          </div>
+        )}
         <div
           className="absolute bottom-2 left-2"
           onClick={() => {
@@ -50,8 +55,13 @@ function ProductCard({ product }: Props) {
       </div>
       <div className="flex flex-col gap-5 px-3 py-3 w-full">
         <div className="flex items-start justify-between w-full gap-1">
-          <div className="flex flex-col gap-0">
-            <p className="capitalize font-semibold">{product?.name}</p>
+          <div className="flex flex-col gap-0 w-full">
+            <div className="flex items-center gap-3 w-full justify-between">
+              <p className="capitalize font-semibold">{product?.name}</p>
+              <div className="border-shade-200/20 border-2 top-3 right-3 text-xs capitalize rounded-xs z-[50] px-2 py-1">
+                {product?.category?.name}
+              </div>
+            </div>
             <p className="text-sm text-shade-200">
               {product?.description || "No description"}
             </p>

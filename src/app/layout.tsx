@@ -31,8 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${mont.className} bg-slate-50 flex flex-col justify-center items-center`}
-      >
+        className={`${mont.className} bg-slate-50 flex flex-col justify-center items-center`}>
         <Providers>
           <Suspense fallback={null}>
             <div className="w-full max-w-[1750px] flex flex-col items-center bg-white">

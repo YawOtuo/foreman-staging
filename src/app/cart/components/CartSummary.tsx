@@ -7,7 +7,7 @@ type CartSummaryProps = {
 };
 
 function CartSummary({ navigation }: CartSummaryProps) {
-  const { cartData } = useCart(2);
+  const { cartData } = useCart();
   return (
     <div className="flex flex-col gap-5 items-start py-4 px-4 border h-fit">
       <p className="text-base font-semibold">CART SUMMARY</p>

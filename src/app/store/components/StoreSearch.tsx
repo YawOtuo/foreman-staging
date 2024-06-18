@@ -9,7 +9,7 @@ const productColumns = [
   // { id: 2, name: "Description", value: "description" },
   // { id: 3, name: "Category", value: "category" },
   { id: 4, name: "Price", value: "price" },
-  // { id: 5, name: "Availability", value: "availability" },
+  { id: 5, name: "Availability", value: "availability" },
   // { id: 6, name: "Status", value: "status" },
 ];
 

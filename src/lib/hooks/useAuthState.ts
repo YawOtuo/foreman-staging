@@ -1,25 +1,60 @@
-import { auth } from "@/app/firebase";
-import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
-
+import { onAuthStateChanged } from "firebase/auth";
+import { useAppStore } from "../store/useAppStore";
+import { useToast } from "@/components/ui/use-toast";
+import { fetchOrCreateUserByUid } from "../api/users";
 
 export default function useAuthState(auth: any) {
+  const { toast } = useToast();
+  const { setDBDetails, setFBaseDetails, error, setError, setIsLoading } =
+    useAppStore();
 
-    const [data, setData] = useState<any>(null);
-    const [error, setError] = useState<any>(null);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      async (userAuth: any) => {
+        console.log('userAuth', userAuth)
+        try {
+          if (userAuth) {
+            // Set Firebase details
+            setFBaseDetails(userAuth);
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user: any) => {
-            setData({ user });
-            setIsLoading(false);
-        }, (error: any) => {
-            setError(error);
-            setIsLoading(false);
-        });
+            // Fetch or create user by UID
+            const userData :any = await fetchOrCreateUserByUid({
+              username: userAuth?.displayName,
+              email: userAuth?.email,
+              uid: userAuth?.uid,
+            });
 
-        return () => unsubscribe();
-    }, [auth]);
+            // Set database details
+            setDBDetails(userData?.user);
+          }
+          setIsLoading(false);
+        } catch (error) {
+          setError(error);
+          setIsLoading(false);
+        }
+      },
+      (error: any) => {
+        setError(error);
+        setIsLoading(false);
+      }
+    );
 
-    return { data, error, isLoading };
+    return () => unsubscribe();
+  }, [auth, setFBaseDetails, setDBDetails]);
+
+  // Display authentication error toast
+  useEffect(() => {
+    if (error) {
+      toast({
+        title: "Authentication Error",
+        description: error.message,
+        variant: "error",
+        duration: 5000,
+        // isClosable: true,
+      });
+    }
+  }, [error, toast]);
+
 }

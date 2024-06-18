@@ -7,13 +7,15 @@ import { FaMinus } from "react-icons/fa6";
 import { IoMdAdd } from "react-icons/io";
 import useCart from "@/lib/hooks/useCart";
 import CardQuantityControls from "./CardQuantityControls";
+import useFavourites from "@/lib/hooks/useFavourites";
 
 type Props = {
   data: CartItem;
 };
 
 function CartCard({ data }: Props) {
-  const { handleDeleteFromCart } = useCart(2);
+  const { handleDeleteFromCart } = useCart();
+  const {handleAddToFavourites} = useFavourites()
   return (
     <div className="group flex flex-col gap-5 w-full border px-5 py-3 capitalize hover:scale-[1.01] transition-all cursor-pointer">
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-center w-full gap-5">
@@ -51,7 +53,9 @@ function CartCard({ data }: Props) {
             <MdDeleteOutline size={20} className="mr-1" />
             Remove
           </Button>
-          <Button variant={"ghost"} size={"sm"} fontSize={"xs"}>
+          <Button variant={"ghost"} size={"sm"} fontSize={"xs"}
+           onClick={() => handleAddToFavourites(data.product.id)}
+          >
             <FaRegHeart className="mr-2" />
             Move To Favourites
           </Button>

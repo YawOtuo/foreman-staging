@@ -8,16 +8,27 @@ import { MdKeyboardArrowLeft } from "react-icons/md";
 import FavouriteCard from "./components/FavouriteCard";
 import CardCartSkeleton from "../cart/components/CartCardSkeleton";
 import PCSkeleton from "@/components/ProductCard/PCSkeleton";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 function Page() {
   const { favouritesData, isFavouritesLoading, favouritesError } =
-    useFavourites(1);
+    useFavourites();
+  const router = useRouter();
+
+  // Function to handle going back to the previous page
+  const goBack = () => {
+    router.back();
+  };
 
   return (
     <div className="w-full flex-col gap-2 px-5 lg:px-10">
-
       <div className="flex flex-col items-start lg:gap-x-5 ">
-        <Button variant={"ghost"} size={"lg"} className="!px-0">
+        <Button
+          onClick={goBack}
+          variant={"ghost"}
+          size={"lg"}
+          className="!px-0">
           <MdKeyboardArrowLeft className="mr-2" />
           Back{" "}
         </Button>

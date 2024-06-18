@@ -12,7 +12,7 @@ type Props = {
   data: Favourite;
 };
 function FavouriteCard({ data }: Props) {
-  const { handleDeleteFromFavourites } = useFavourites(1);
+  const { handleDeleteFromFavourites } = useFavourites();
   return (
     <div className="group flex flex-col items-start justify-center border-[1px]  hover:scale-[1.02] transition-all cursor-pointer ">
       <div className="relative w-full aspect-[3/2] min-w-[200px] ">

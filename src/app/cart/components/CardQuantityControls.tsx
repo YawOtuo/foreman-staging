@@ -10,7 +10,7 @@ function CardQuantityControls({
   quantity: number;
   product_id: number;
 }) {
-  const { handleIncrementQuantity, handleDecrementQuantity } = useCart(2);
+  const { handleIncrementQuantity, handleDecrementQuantity } = useCart();
   return (
     <div className="w-full lg:w-fit flex justify-end items-center lg:justify-center gap-2">
       <Button

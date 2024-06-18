@@ -7,6 +7,7 @@ export interface Product {
   description: string
   category: Category
   images: ProductImages[]
+  availability: string
 }
 
 

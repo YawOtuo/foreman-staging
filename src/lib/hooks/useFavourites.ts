@@ -3,6 +3,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/components/ui/use-toast";
 import { Favourite } from "../types/favourite";
 import { FetchFavourites, DeleteFromFavourites, AddToFavourites } from "../api/favourites";
+import { useAppStore } from "../store/useAppStore";
 
 interface AddToFavouritesArgs {
   product_id: number;
@@ -12,10 +13,12 @@ interface DeleteFromFavouritesArgs {
   product_id: number;
 }
 
-function useFavourites(user_id: string | number) {
+function useFavourites() {
   const queryClient = useQueryClient();
   const { toast } = useToast();
+  const { DBDetails, FBaseDetails } = useAppStore();
 
+  const user_id = DBDetails?.id
   const {
     data: favouritesData,
     isLoading: isFavouritesLoading,
@@ -23,6 +26,8 @@ function useFavourites(user_id: string | number) {
   } = useQuery<Favourite[]>({
     queryKey: ["favourites"],
     queryFn: () => FetchFavourites(user_id),
+    enabled: !!user_id
+
   });
 
   const addToFavouritesMutation = useMutation({
