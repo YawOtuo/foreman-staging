@@ -28,7 +28,7 @@ function StoreContent() {
           <p className="text-2xl font-semibold">Store</p>
 
           <div className="w-full lg:max-w-[40vw]">
-            <StoreSearch setFilter={setFilter} />
+            <StoreSearch />
           </div>
           <FetchingState
             className={
@@ -41,6 +41,10 @@ function StoreContent() {
             loading={<PCSkeleton />}
             isLoading={allProductsLoading}
             isError={allProductsError}
+            nullComponent={
+              allProducts &&
+              allProducts.length < 1 && <div>No Products found</div>
+            }
           />
         </div>
       </div>

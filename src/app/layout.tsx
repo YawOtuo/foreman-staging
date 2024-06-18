@@ -30,14 +30,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Providers>
-        <body
-          className={`${mont.className} bg-slate-50 flex flex-col justify-center items-center`}
-        >
+      <body
+        className={`${mont.className} bg-slate-50 flex flex-col justify-center items-center`}
+      >
+        <Providers>
           <Suspense fallback={null}>
             <div className="w-full max-w-[1750px] flex flex-col items-center bg-white">
               <MobileMenuWrapper>
-                {/* <InfoBar /> */}
+                <InfoBar />
                 <Navbar />
                 <div className="w-full"> {children}</div>
                 <div className="">
@@ -48,8 +48,8 @@ export default function RootLayout({
             </div>
             <LoadingIndicator />
           </Suspense>
-        </body>
-      </Providers>
+        </Providers>
+      </body>
     </html>
   );
 }
