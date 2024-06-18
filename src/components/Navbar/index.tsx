@@ -28,7 +28,6 @@ const links = [
   },
 ];
 function Navbar() {
-
   const { setMobileMenuStore } = useMobileNavStore();
 
   return (
@@ -59,12 +58,11 @@ function Navbar() {
           </Button>
         </div>
         )} */}
-
       </div>
 
       <div className="lg:hidden flex items-center">
         <button onClick={() => setMobileMenuStore(true)}>
-          <GiHamburgerMenu  size={30}/>
+          <GiHamburgerMenu size={30} />
         </button>
       </div>
     </div>

@@ -32,7 +32,8 @@ export default function RootLayout({
     <html lang="en">
       <Providers>
         <body
-          className={`${mont.className} bg-slate-50 flex flex-col justify-center items-center`}>
+          className={`${mont.className} bg-slate-50 flex flex-col justify-center items-center`}
+        >
           <Suspense fallback={null}>
             <div className="w-full max-w-[1750px] flex flex-col items-center bg-white">
               <MobileMenuWrapper>
