@@ -17,7 +17,7 @@ type Props = {
   product: Product;
 };
 function ProductCard({ product }: Props) {
-  const { handleAddToCart } = useCart();
+  const { AddToCart } = useCart();
   const { play, setPlay } = useLottie();
   const { handleAddToFavourites } = useFavourites();
   return (
@@ -77,7 +77,7 @@ function ProductCard({ product }: Props) {
             variant={"secondary"}
             fontSize={"sm"}
             className="bg-primary-200 text-black"
-            onClick={() => handleAddToCart(product?.id)}>
+            onClick={() => AddToCart({ id: product?.id, product: product, quantity: 1, totalCost:  product?.price })}>
             <IoCartSharp className="mr-2" />
             Add to Cart
           </Button>

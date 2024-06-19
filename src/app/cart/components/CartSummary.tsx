@@ -1,13 +1,14 @@
 import { Button } from "@/components/ui/button";
 import PayStackPay from "./PayStackPay";
 import useCart from "@/lib/hooks/useCart";
+import Link from "next/link";
 
 type CartSummaryProps = {
   navigation: () => void;
 };
 
 function CartSummary({ navigation }: CartSummaryProps) {
-  const { cartData } = useCart();
+  const { cart } = useCart();
   return (
     <div className="flex flex-col gap-5 items-start py-4 px-4 border h-fit">
       <p className="text-base font-semibold">CART SUMMARY</p>
@@ -19,18 +20,15 @@ function CartSummary({ navigation }: CartSummaryProps) {
         </div>
 
         <div className="flex flex-col items-end font-semibold">
-          <p className="">{cartData?.[2]?.["total_items"]}</p>
-          <p>GHS {cartData?.[2]?.["total_price"]}</p>
+          <p className="">{cart?.totalQuantity}</p>
+          <p>GHS {cart?.totalCost}</p>{" "}
         </div>
       </div>
-
-      <Button
-        className="mt-4 uppercase w-full"
-        size={"lg"}
-        onClick={navigation}
-      >
-        Checkout
-      </Button>
+      <Link href={"/checkout"} className="w-full">
+        <Button className="mt-4 uppercase w-full" size={"lg"}>
+          Checkout
+        </Button>
+      </Link>
       {/* <PayStackPay /> */}
     </div>
   );

@@ -1,10 +1,11 @@
 import { Product } from "./product";
 
 export interface Cart {
-  id: number;
-  cart_items: CartItem[]
-  total_items: number | string
-  total_price: number | string
+  id?: number;
+  items: CartItem[]
+  
+  totalQuantity: number 
+  totalCost: number 
 }
 
 export interface CartItem {
@@ -12,5 +13,6 @@ export interface CartItem {
   quantity: number, 
   
   product: Product;
+  totalCost: number
   // add other fields as necessary
 }

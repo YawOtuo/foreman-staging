@@ -14,15 +14,15 @@ type Props = {
 };
 
 function CartCard({ data }: Props) {
-  const { handleDeleteFromCart } = useCart();
-  const {handleAddToFavourites} = useFavourites()
+  const { removeItemFromCart } = useCart();
+  const { handleAddToFavourites } = useFavourites();
   return (
     <div className="group flex flex-col gap-5 w-full border px-5 py-3 capitalize hover:scale-[1.01] transition-all cursor-pointer">
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-center w-full gap-5">
         <div className="relative w-full aspect-[3/2] lg:max-w-[150px] ">
           <Image
-            src={"/concrete_blocks.jpeg"}
-            alt="Logo"
+            src={`https://res.cloudinary.com/daurieb51/${data.product?.images[0]?.image}`}
+            alt={data.product.description}
             fill
             objectFit="cover"
           />
@@ -31,8 +31,8 @@ function CartCard({ data }: Props) {
           <div className="flex items-center justify-between w-full">
             <h4 className="font-semibold">{data.product.name}</h4>
             <div className="lg:hidden">
-            <CardQuantityControls quantity={data.quantity} product_id={data.product.id}/>
-              </div>{" "}
+              <CardQuantityControls quantity={data.quantity} cart_item={data} />
+            </div>{" "}
           </div>
           <p className="text-shade-200 text-sm">{data.product.description}</p>
         </div>{" "}
@@ -45,7 +45,7 @@ function CartCard({ data }: Props) {
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
         <div className="flex items-start lg:items-center gap-1 lg:gap-5 ">
           <Button
-            onClick={() => handleDeleteFromCart(data.product.id)}
+            onClick={() => removeItemFromCart(data.id)}
             className="text-primary-100"
             variant={"ghost"}
             size={"sm"}
@@ -53,15 +53,17 @@ function CartCard({ data }: Props) {
             <MdDeleteOutline size={20} className="mr-1" />
             Remove
           </Button>
-          <Button variant={"ghost"} size={"sm"} fontSize={"xs"}
-           onClick={() => handleAddToFavourites(data.product.id)}
-          >
+          <Button
+            variant={"ghost"}
+            size={"sm"}
+            fontSize={"xs"}
+            onClick={() => handleAddToFavourites(data.product.id)}>
             <FaRegHeart className="mr-2" />
             Move To Favourites
           </Button>
         </div>
         <div className="hidden lg:flex">
-          <CardQuantityControls quantity={data.quantity} product_id={data.product.id}/>
+          <CardQuantityControls quantity={data.quantity} cart_item={data} />
         </div>{" "}
       </div>{" "}
     </div>

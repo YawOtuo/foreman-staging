@@ -7,26 +7,11 @@ import DeliveryAddressForm from "./components/DeliveryAddress";
 import Summary from "./components/Summary";
 import { FaShoppingCart } from "react-icons/fa";
 import { IoArrowRedo } from "react-icons/io5";
+import useCart from "@/lib/hooks/useCart";
+import { CartItem } from "@/lib/types/cart";
 
 export default function CheckOutPage() {
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: "Iron Rod",
-      size: "20mm",
-      unitPrice: 53.33,
-      unit: "Pieces",
-      quantity: 20,
-    },
-    {
-      id: 2,
-      name: "Nails",
-      size: "4mm",
-      unitPrice: 1.33,
-      unit: "Pieces",
-      quantity: 600,
-    },
-  ]);
+  const { cart, removeItemFromCart, updateItemQuantity } = useCart();
 
   const [address, setAddress] = useState({
     city: "",
@@ -37,36 +22,30 @@ export default function CheckOutPage() {
 
   const [deliveryCharge, setDeliveryCharge] = useState(50.0);
 
-  const updateQuantity = (index: number, quantity: number) => {
-    const newProducts = [...products];
-    newProducts[index].quantity = quantity;
-    setProducts(newProducts);
-  };
-
   const updateAddress = (field: string, value: string) => {
     setAddress({ ...address, [field]: value });
   };
 
-  const subTotal = products.reduce(
-    (sum, product) => sum + product.unitPrice * product.quantity,
-    0
-  );
+  // const subTotal = products.reduce(
+  //   (sum, product) => sum + product.unitPrice * product.quantity,
+  //   0
+  // );
 
-  const handleDelete = (prodId: number) => {
-    const prods = [...products];
-    const updatedArr = prods.filter((item, index) => prodId !== index);
-    setProducts(updatedArr);
-  };
+  // const removeItemFromCart = (prodId: number) => {
+  //   const prods = [...products];
+  //   const updatedArr = prods.filter((item, index) => prodId !== index);
+  //   setProducts(updatedArr);
+  // };
 
   return (
     <div className="w-full flex-1">
-      <div className="bg-[#e8e8e8] w-screen flex-1 p-6">
+      <div className="bg-[#e8e8e8] w-full flex-1 p-6">
         <div className="flex justify-between items-center flex-row w-full">
-          <h6 className="font-semibold text-4xl">Cart</h6>
+          <h6 className="font-semibold text-3xl">Checkout</h6>
           <div className="flex flex-row w-1/3 sm:w-1/6 md:w-[10%]  items-center justify-evenly text-gray-400">
-            <Link href="/">Home</Link>
+            {/* <Link href="/">Home</Link>
             <AiOutlineRight />
-            <Link href="/store">Store</Link>
+            <Link href="/store">Store</Link> */}
           </div>
         </div>
       </div>
@@ -81,15 +60,10 @@ export default function CheckOutPage() {
             <p>Total</p>
           </div>
         </div>
-        {products.length > 0 ? (
+        {cart?.items?.length > 0 ? (
           <div className="mt-4">
-            {products?.map((product, index) => (
-              <ProductRow
-                product={product}
-                updateQuantity={(quantity) => updateQuantity(index, quantity)}
-                key={index}
-                onDelete={() => handleDelete(index)}
-              />
+            {cart?.items?.map((cart_item: CartItem, index) => (
+              <ProductRow cart_item={cart_item} key={index} />
             ))}
           </div>
         ) : (
@@ -105,24 +79,25 @@ export default function CheckOutPage() {
             updateAddress={updateAddress}
           />
           <div className="w-full flex justify-center items-center">
-            <button className="mt-4 p-4 bg-black text-white rounded-md hover:bg-white hover:text-black  hover:border-[1px] hover:border-black transition-all w-full duration-300 ease-in flex items-center justify-center md:w-1/2">
-              <FaShoppingCart className="mr-2 text-xl" />
-              Cotinue Shopping
-            </button>
+            <Link href={"/store"} className="w-full">
+              <button className="mt-4 p-4 bg-black text-white rounded-md hover:bg-white hover:text-black  hover:border-[1px] hover:border-black transition-all w-full duration-300 ease-in flex items-center justify-center md:w-1/2">
+                <FaShoppingCart className="mr-2 text-xl" />
+                Cotinue Shopping
+              </button>
+            </Link>
           </div>
         </div>
         <div className="w-full sm:w-1/2 h-full flex flex-col mt-10 sm:mt-0">
-          <Summary subTotal={subTotal} deliveryCharge={deliveryCharge} />
-          <div className="flex w-full justify-center">
-            <button className="mt-4 w-1/2 p-4 bg-red-600 text-white rounded-md hover:bg-white hover:text-red-600  hover:border-[1px] hover:border-red-600 transition-all duration-300 ease-in flex justify-center items-center">
+          <Summary subTotal={cart.totalCost} deliveryCharge={deliveryCharge} />
+          <div className="flex w-full justify-end">
+            <button className="mt-4 w-1/2 p-4 bg-primary text-white rounded-md hover:scale-[1.02] hover:border-[1px] hover:border-primary transition-all duration-300 ease-in flex justify-center items-center">
               <IoArrowRedo className="mr-2 text-2xl" />
               Buy Now
             </button>
           </div>
           <Link
             href="/warehousing"
-            className="text-yellow-400 uppercase text-center mt-6 underline"
-          >
+            className="text-shade-300 uppercase text-right mt-6 underline">
             Try warehousing
           </Link>
         </div>
