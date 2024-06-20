@@ -41,7 +41,8 @@ function ProductCard({ product }: Props) {
           onClick={() => {
             console.log(play);
             setPlay(true);
-          }}>
+          }}
+        >
           {/* <FaRegHeart color="red"/> */}
           <button onClick={() => handleAddToFavourites(product.id)}>
             <IoHeart
@@ -76,8 +77,9 @@ function ProductCard({ product }: Props) {
           <Button
             variant={"secondary"}
             fontSize={"sm"}
-            className="bg-primary-200 text-black"
-            onClick={() => handleAddToCart(product?.id)}>
+            className="z text-black"
+            onClick={() => handleAddToCart(product?.id)}
+          >
             <IoCartSharp className="mr-2" />
             Add to Cart
           </Button>

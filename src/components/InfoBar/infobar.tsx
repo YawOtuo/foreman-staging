@@ -1,11 +1,4 @@
 "use client";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { MailIcon, PhoneCallIcon, UserIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -21,6 +14,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/app/firebase";
 import Link from "next/link";
 import { useAppStore } from "@/lib/store/useAppStore";
+import CurrencyConv from "@/app/components/CurrencyConv";
 
 export default function InfoBar() {
   //   const { data, error, isLoading } = useAuthState(auth);
@@ -36,7 +30,8 @@ export default function InfoBar() {
         </a>
         <a
           className="flex items-center gap-2"
-          href="mailto:myforemangh@gmail.com">
+          href="mailto:myforemangh@gmail.com"
+        >
           <MailIcon size={18} />
           myforemangh@gmail.com
         </a>
@@ -76,7 +71,8 @@ export default function InfoBar() {
               <DropdownMenuItem
                 onClick={() => {
                   signOut(auth);
-                }}>
+                }}
+              >
                 Logout
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -87,16 +83,7 @@ export default function InfoBar() {
           </Link>
         )}
 
-        <Select value="ghs">
-          <SelectTrigger className="text-black p-4 py-0">
-            <SelectValue placeholder="Select Currency" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="ghs">GHS</SelectItem>
-            <SelectItem value="ngn">NGN</SelectItem>
-            <SelectItem value="usd">USD</SelectItem>
-          </SelectContent>
-        </Select>
+        <CurrencyConv />
       </div>
     </div>
   );
