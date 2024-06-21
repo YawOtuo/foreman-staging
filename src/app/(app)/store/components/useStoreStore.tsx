@@ -5,6 +5,7 @@ type AppStore = {
   ascendingOrDescending: "ascending" | "descending" | undefined;
   setFilter: (newFilter: { [key: string]: any }) => void;
   setAscendingOrDescending: (order: "ascending" | "descending") => void;
+  clearFilter: () => void; // New method to clear all filters
 };
 
 export const useStoreStore = create<AppStore>((set) => ({
@@ -14,7 +15,7 @@ export const useStoreStore = create<AppStore>((set) => ({
   ascendingOrDescending: "ascending", // Initial ascending/descending state
   setFilter: (newFilter) =>
     set((state) => {
-      let ordering = newFilter.ordering || state.filter.ordering.replace(/^-/, "" )
+      let ordering = newFilter.ordering || state.filter.ordering.replace(/^-/, "");
       return {
         filter: {
           ...state.filter,
@@ -22,7 +23,7 @@ export const useStoreStore = create<AppStore>((set) => ({
           ordering:
             state.ascendingOrDescending === "descending"
               ? `-${ordering}`
-              : ordering.replace(/^-/, "" ), // Remove '-' if present },
+              : ordering.replace(/^-/, ""), // Remove '-' if present
         },
         ascendingOrDescending: state.ascendingOrDescending,
       };
@@ -38,4 +39,11 @@ export const useStoreStore = create<AppStore>((set) => ({
             : state.filter.ordering.replace(/^-/, ""), // Remove '-' if present
       },
     })),
+  clearFilter: () =>
+    set({
+      filter: {
+        ordering: "name", // Reset ordering to default
+      },
+      ascendingOrDescending: undefined, // Reset ascending/descending state
+    }),
 }));

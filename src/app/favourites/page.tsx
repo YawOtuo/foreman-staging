@@ -5,11 +5,9 @@ import { Button } from "@/components/ui/button";
 import useFavourites from "@/lib/hooks/useFavourites";
 import { Favourite } from "@/lib/types/favourite";
 import { MdKeyboardArrowLeft } from "react-icons/md";
-import FavouriteCard from "./components/FavouriteCard";
-import CardCartSkeleton from "../cart/components/CartCardSkeleton";
 import PCSkeleton from "@/components/ProductCard/PCSkeleton";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import FavouriteCard from "../dashboard/favourites/components/FavouriteCard";
 
 function Page() {
   const { favouritesData, isFavouritesLoading, favouritesError } =

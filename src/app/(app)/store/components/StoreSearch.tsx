@@ -3,6 +3,7 @@ import { CustomSelect } from "@/components/ui/select";
 import useCategories from "@/lib/hooks/useCategories";
 import { FaSearch } from "react-icons/fa";
 import { useStoreStore } from "./useStoreStore";
+import { useEffect } from "react";
 
 const productColumns = [
   { id: 1, name: "Name", value: "name" },
@@ -19,8 +20,13 @@ type Props = {
 
 function StoreSearch() {
   const { categories } = useCategories();
+  useEffect(() => {
+    return () => {
+      clearFilter(); // Clear filters when component unmounts (leaving the page)
+    };
+  }, []);
 
-  const { setFilter, setAscendingOrDescending } = useStoreStore();
+  const { setFilter, setAscendingOrDescending, clearFilter } = useStoreStore();
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center w-full    border-[1px]">
@@ -46,30 +52,28 @@ function StoreSearch() {
           placeholder="Categories"
         />
         {/* <div className="flex gap-5 lg:gap-0 items-center"> */}
-          <CustomSelect
-
-            onChange={(value: any) => setFilter({ ordering: value })}
-            labelPosition="left"
-            data={productColumns}
-            valueField={"value"}
-            labelField={"name"}
-            placeholder="Name"
-            initialValue="name"
-            label="Order By"
-          />
-          <CustomSelect
-            onChange={(value: any) => setAscendingOrDescending(value)}
-            data={[
-              { name: "Ascending order", value: "ascending" },
-              { name: "Descending order", value: "descending" },
-            ]}
-            valueField={"value"}
-            labelField={"name"}
-            initialValue=""
-            placeholder="Ascending order"
-            label="Sort In"
-
-          />
+        <CustomSelect
+          onChange={(value: any) => setFilter({ ordering: value })}
+          labelPosition="left"
+          data={productColumns}
+          valueField={"value"}
+          labelField={"name"}
+          placeholder="Name"
+          initialValue="name"
+          label="Order By"
+        />
+        <CustomSelect
+          onChange={(value: any) => setAscendingOrDescending(value)}
+          data={[
+            { name: "Ascending order", value: "ascending" },
+            { name: "Descending order", value: "descending" },
+          ]}
+          valueField={"value"}
+          labelField={"name"}
+          initialValue=""
+          placeholder="Ascending order"
+          label="Sort In"
+        />
         {/* </div> */}
       </div>
     </div>

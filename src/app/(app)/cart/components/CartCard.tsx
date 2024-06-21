@@ -45,7 +45,7 @@ function CartCard({ data }: Props) {
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between">
         <div className="flex items-start lg:items-center gap-1 lg:gap-5 ">
           <Button
-            onClick={() => removeItemFromCart(data.id)}
+            onClick={() => removeItemFromCart(Number(data.id))}
             className="text-primary-100"
             variant={"ghost"}
             size={"sm"}

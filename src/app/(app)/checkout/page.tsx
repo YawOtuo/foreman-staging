@@ -15,10 +15,12 @@ import { useAppStore } from "@/lib/store/useAppStore";
 import { Modal } from "@/components/ui/dialog";
 import LoginComponent from "../(auth)/login/components/LoginComponent";
 import AuthLayout from "../(auth)/layout";
+import useCheckout from "./useCheckout";
 
 export default function CheckOutPage() {
   const { cart, removeItemFromCart, updateItemQuantity } = useCart();
   const { startPayment } = usePayStack();
+  const { checkout } = useCheckout();
   const [address, setAddress] = useState({
     city: "",
     suburb: "",
@@ -97,7 +99,7 @@ export default function CheckOutPage() {
           <Summary subTotal={cart.totalCost} deliveryCharge={deliveryCharge} />
           <div className="flex w-full justify-end">
             {DBDetails.email ? (
-              <CheckoutButton onClick={() => startPayment(1)} />
+              <CheckoutButton onClick={checkout} />
             ) : (
               <Modal
                 size={"5xl"}

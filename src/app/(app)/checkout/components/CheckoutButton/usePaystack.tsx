@@ -1,5 +1,6 @@
 import { useToast } from "@/components/ui/use-toast";
 import useAuthState from "@/lib/hooks/useAuthState";
+import useOrders from "@/lib/hooks/useOrder";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { useState } from "react";
 import { usePaystackPayment } from "react-paystack";
@@ -8,6 +9,7 @@ function usePayStack() {
   const { DBDetails } = useAppStore();
   const { toast } = useToast();
   const [price, setPrice] = useState<number>(1);
+  const { handleUpdateOrder } = useOrders();
 
   const baseConfig = {
     reference: new Date().getTime().toString(),
@@ -35,14 +37,13 @@ function usePayStack() {
 
   const startPayment = (
     price: number,
-    currency = "GHS",
     onSuccess = defaultOnSuccess,
     onClose = defaultOnClose
   ) => {
     const config = {
       ...baseConfig,
-      amount: price,
-      currency: currency,
+      amount: price * 100,
+      currency: "GHS",
     };
     initializePayment({
       config,

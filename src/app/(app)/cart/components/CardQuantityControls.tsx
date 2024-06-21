@@ -15,7 +15,7 @@ function CardQuantityControls({
   return (
     <div className="w-full lg:w-fit flex justify-end items-center lg:justify-center gap-2">
       <Button
-        onClick={() => updateItemQuantity(cart_item.id, cart_item.quantity - 1)}
+        onClick={() => updateItemQuantity(Number(cart_item.id), cart_item.quantity - 1)}
         variant={"outline"}
         size={"sm"}
         fontSize={"xs"}>
@@ -23,7 +23,7 @@ function CardQuantityControls({
       </Button>
       <p className="px-3">{quantity}</p>
       <Button
-        onClick={() => updateItemQuantity(cart_item.id, cart_item.quantity + 1)}
+        onClick={() => updateItemQuantity(Number(cart_item.id), cart_item.quantity + 1)}
         variant={"outline"}
         size={"sm"}
         fontSize={"xs"}>

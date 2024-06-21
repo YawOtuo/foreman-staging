@@ -3,6 +3,7 @@
 import { useLocalStorage } from "@uidotdev/usehooks";
 import { useEffect } from "react";
 import { Cart, CartItem } from "../types/cart";
+import { useToast } from "@/components/ui/use-toast";
 
 const initialCart: Cart = {
   items: [],
@@ -11,8 +12,10 @@ const initialCart: Cart = {
 };
 
 const useCart = () => {
-    let cart: Cart = initialCart; // Initialize cart with initialCart
-    let setCart: (cart: Cart) => void;
+  let cart: Cart = initialCart; // Initialize cart with initialCart
+  let setCart: (cart: Cart) => void;
+  const { toast } = useToast();
+
 
   if (typeof window !== "undefined") {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -49,9 +52,14 @@ const useCart = () => {
     }
 
     setCart({ ...cart });
+    toast({
+      title: "Success",
+      description: "Item added to Cart",
+      variant: "success",
+    });
   };
 
-  const updateItemQuantity = (itemId: string | number, quantity: number) => {
+  const updateItemQuantity = (itemId: number, quantity: number) => {
     const item = cart.items.find((cartItem) => cartItem.id === itemId);
 
     if (item) {
@@ -59,13 +67,23 @@ const useCart = () => {
       item.totalCost = item.quantity * item.product.price;
       setCart({ ...cart });
     }
+    toast({
+      title: "Success",
+      description: "Item quantity updated in cart",
+      variant: "success",
+    });
   };
 
-  const removeItemFromCart = (itemId: string | number) => {
+  const removeItemFromCart = (itemId: number) => {
     const updatedItems = cart.items.filter(
       (cartItem) => cartItem.id !== itemId
     );
     setCart({ ...cart, items: updatedItems });
+    toast({
+      title: "Success",
+      description: "Item removed from cart",
+      variant: "success",
+    });
   };
 
   const clearCart = () => {

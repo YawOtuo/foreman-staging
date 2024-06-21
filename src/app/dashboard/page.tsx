@@ -1,6 +1,6 @@
 function Page() {
     return ( 
-        <div>g</div>
+        <div>Dashboard Home</div>
      );
 }
 
