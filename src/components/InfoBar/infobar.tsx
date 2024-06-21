@@ -21,11 +21,13 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/app/firebase";
 import Link from "next/link";
 import { useAppStore } from "@/lib/store/useAppStore";
+import { useRouter } from "next/navigation";
 
 export default function InfoBar() {
   //   const { data, error, isLoading } = useAuthState(auth);
   //   const { user } = useUser();
   const { DBDetails, FBaseDetails } = useAppStore();
+  const router = useRouter();
 
   return (
     <div className="flex flex-row gap-3 items-center justify-between p-1 px-8 bg-shade-300 text-white w-full text-sm">
@@ -70,7 +72,10 @@ export default function InfoBar() {
                 </span>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem 
+              onClick={() => router.push('/dashboard')}
+              
+              >Dashboard</DropdownMenuItem>
               <DropdownMenuItem>Billing</DropdownMenuItem>
               <DropdownMenuItem>Team</DropdownMenuItem>
               <DropdownMenuItem

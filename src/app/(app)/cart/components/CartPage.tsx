@@ -1,19 +1,15 @@
-"use client";
-import useCart from "@/lib/hooks/useCart";
-import CartCard from "./components/CartCard";
-import { CartItem } from "@/lib/types/cart";
-import CartSummary from "./components/CartSummary";
-import { Button } from "@/components/ui/button";
+"use client"
+import React from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
-import CardCartSkeleton from "./components/CartCardSkeleton";
-import FetchingState from "@/components/FetchingState";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
+import useCart from "@/lib/hooks/useCart";
+import CartCard from "./CartCard";
+import CartSummary from "./CartSummary";
 
-function Page() {
+function CartPage() {
   const router = useRouter();
 
-  // Function to handle going back to the previous page
+  // Function to handle going back to the previous CartPage
   const goBack = () => {
     router.back();
   };
@@ -22,14 +18,14 @@ function Page() {
     <div className="w-full flex-col gap-2 px-5 lg:px-10">
       <div className="grid grid-cols-1 lg:grid-cols-7 w-full lg:gap-x-5 ">
         <div className="flex flex-col items-start gap-1 lg:col-start-2 lg:col-span-4">
-          <Button
+          <button
             onClick={goBack}
             variant={"ghost"}
             size={"lg"}
             className="!px-2">
             <MdKeyboardArrowLeft className="mr-2" />
             Back{" "}
-          </Button>
+          </button>
           <p className="text-xl font-semibold">My Cart</p>
         </div>
       </div>
@@ -51,4 +47,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default CartPage;

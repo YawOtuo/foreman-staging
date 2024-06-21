@@ -79,10 +79,7 @@ function Page() {
                 <span>Register</span>
             </Button>
             <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1">
-                    <input type="checkbox" />
-                    <label>Remember me</label>
-                </div>
+             
                 <a href="#" className="text-slate-500">Forgot Password?</a>
             </div>
 
@@ -97,8 +94,8 @@ function Page() {
                 <hr className="w-full" />
             </div>
 
-            <LoginButton icon={<PiGoogleLogo />} onClick={GoogleSignIn} type="button" name="Continue with Google" className="bg-[#DB4437]" />
-            <LoginButton icon={<PiFacebookLogoDuotone />} onClick={() => { }} type="button" name="Continue with Facebook" className="bg-[#1877F2]" />
+            <LoginButton icon={<PiGoogleLogo />} onClick={GoogleSignIn} type="button" name="Continue with Google"  />
+            <LoginButton icon={<PiFacebookLogoDuotone />} onClick={() => { }} type="button" name="Continue with Facebook"  />
         </form>
     );
 }

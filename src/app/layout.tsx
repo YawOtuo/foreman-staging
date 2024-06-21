@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import React from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -10,8 +9,6 @@ import "swiper/css/scrollbar";
 import "swiper/css/effect-fade";
 import Providers from "@/lib/utils/provider";
 import { Toaster } from "@/components/ui/toaster";
-
-import InfoBar from "@/components/InfoBar/infobar";
 import MobileMenuWrapper from "@/components/MobileMenuWrapper";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { Suspense } from "react";
@@ -36,12 +33,7 @@ export default function RootLayout({
           <Suspense fallback={null}>
             <div className="w-full max-w-[1750px] flex flex-col items-center bg-white">
               <MobileMenuWrapper>
-                <InfoBar />
-                <Navbar />
                 <div className="w-full"> {children}</div>
-                <div className="">
-                  <Footer />
-                </div>
                 <Toaster />
               </MobileMenuWrapper>
             </div>

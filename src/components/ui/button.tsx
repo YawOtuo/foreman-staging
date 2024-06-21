@@ -52,6 +52,7 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  className_animated?: string
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -64,6 +65,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       fontSize,
       animated,
       asChild = false,
+      className_animated,
       ...props
     },
     ref
@@ -78,7 +80,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}>
         {animated === "slide" && (
           <>
-            <span className="relative z-10 group-hover/slide:text-white transition-all duration-500">
+            <span className={`flex items-center relative z-10 group-hover/slide:text-white transition-all duration-500 ${className_animated}`}>
               {props.children}
             </span>
             <div className="absolute inset-0 bg-black w-0 group-hover/slide:w-full transition-all duration-500"></div>

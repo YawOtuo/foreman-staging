@@ -1,17 +1,16 @@
 "use client";
 import Link from "next/link";
-import FormInput from "../components/FormInput";
-import FormWrapper from "../components/FormWrapper";
-import LoginButton from "../components/LoginButton";
 import { PiFacebookLogoDuotone, PiGoogleLogo, PiSignInDuotone } from "react-icons/pi";
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from "@/app/firebase";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import FormInput from "../../components/FormInput";
+import LoginButton from "../../components/LoginButton";
 
 
-function Page() {
+function LoginComponent() {
 
   const { toast } = useToast();
   const router = useRouter();
@@ -83,10 +82,7 @@ function Page() {
     </Button>
 
     <div className="flex items-center justify-between">
-      <div className="flex items-center gap-1">
-        <input type="checkbox" />
-        <label>Remember me</label>
-      </div>
+      
       <a href="#" className="text-slate-500">Forgot Password?</a>
     </div>
 
@@ -101,10 +97,10 @@ function Page() {
       <hr className="w-full" />
     </div>
 
-    <LoginButton icon={<PiGoogleLogo />} onClick={GoogleSignIn} type="button" name="Continue with Google" className="bg-[#DB4437]" />
-    <LoginButton icon={<PiFacebookLogoDuotone />} onClick={() => { }} type="button" name="Continue with Facebook" className="bg-[#1877F2]" />
+    <LoginButton icon={<PiGoogleLogo />} onClick={GoogleSignIn} type="button" name="Continue with Google"  />
+    <LoginButton icon={<PiFacebookLogoDuotone />} onClick={() => { }} type="button" name="Continue with Facebook"  />
   </form>
   );
 }
 
-export default Page;
+export default LoginComponent;

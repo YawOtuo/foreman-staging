@@ -9,10 +9,16 @@ import { FaShoppingCart } from "react-icons/fa";
 import { IoArrowRedo } from "react-icons/io5";
 import useCart from "@/lib/hooks/useCart";
 import { CartItem } from "@/lib/types/cart";
+import CheckoutButton from "./components/CheckoutButton/CheckoutButton";
+import usePayStack from "./components/CheckoutButton/usePaystack";
+import { useAppStore } from "@/lib/store/useAppStore";
+import { Modal } from "@/components/ui/dialog";
+import LoginComponent from "../(auth)/login/components/LoginComponent";
+import AuthLayout from "../(auth)/layout";
 
 export default function CheckOutPage() {
   const { cart, removeItemFromCart, updateItemQuantity } = useCart();
-
+  const { startPayment } = usePayStack();
   const [address, setAddress] = useState({
     city: "",
     suburb: "",
@@ -21,7 +27,7 @@ export default function CheckOutPage() {
   });
 
   const [deliveryCharge, setDeliveryCharge] = useState(50.0);
-
+  const { DBDetails } = useAppStore();
   const updateAddress = (field: string, value: string) => {
     setAddress({ ...address, [field]: value });
   };
@@ -90,10 +96,23 @@ export default function CheckOutPage() {
         <div className="w-full sm:w-1/2 h-full flex flex-col mt-10 sm:mt-0">
           <Summary subTotal={cart.totalCost} deliveryCharge={deliveryCharge} />
           <div className="flex w-full justify-end">
-            <button className="mt-4 w-1/2 p-4 bg-primary text-white rounded-md hover:scale-[1.02] hover:border-[1px] hover:border-primary transition-all duration-300 ease-in flex justify-center items-center">
-              <IoArrowRedo className="mr-2 text-2xl" />
-              Buy Now
-            </button>
+            {DBDetails.email ? (
+              <CheckoutButton onClick={() => startPayment(1)} />
+            ) : (
+              <Modal
+                size={"5xl"}
+                className="h-[90vh] max-h-[500px] overflow-y-scroll"
+                trigger={<CheckoutButton />}
+                body={
+                  <div>
+                    <AuthLayout>
+                      <LoginComponent />
+                    </AuthLayout>
+                  </div>
+                }
+                // header={<div></div>}
+              />
+            )}{" "}
           </div>
           <Link
             href="/warehousing"
