@@ -13,7 +13,7 @@ export default function useAuthState(auth: any) {
     const unsubscribe = onAuthStateChanged(
       auth,
       async (userAuth: any) => {
-        console.log('userAuth', userAuth)
+        console.log('userAuth', userAuth.providerData?.[0]?.email)
         try {
           if (userAuth) {
             // Set Firebase details
@@ -22,7 +22,7 @@ export default function useAuthState(auth: any) {
             // Fetch or create user by UID
             const userData :any = await fetchOrCreateUserByUid({
               username: userAuth?.displayName || "User",
-              email: userAuth?.email,
+              email: userAuth?.email || userAuth?.providerData?.[0]?.email,
               uid: userAuth?.uid,
             });
 
