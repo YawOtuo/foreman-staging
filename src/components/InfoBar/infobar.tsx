@@ -45,8 +45,8 @@ export default function InfoBar() {
       </div>
       <div className="flex gap-3 items-center">
         {Object.keys(FBaseDetails).length > 0 ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+          <DropdownMenu >
+            <DropdownMenuTrigger asChild className="hidden lg:block">
               <Avatar>
                 {FBaseDetails?.photoURL ? (
                   <AvatarImage src={FBaseDetails?.photoURL} />

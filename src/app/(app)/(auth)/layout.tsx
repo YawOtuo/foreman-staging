@@ -6,15 +6,15 @@ export default function AuthLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const pathname = usePathname();
   return (
-    <div className={`flex w-full justify-between `}>
+    <div className={`flex flex-col lg:flex-row w-full justify-between `}>
       <div
-        className={`left  bg-top bg-no-repeat w-[30%] ${
+        className={`left  bg-top bg-no-repeat w-full  lg:w-[30%] h-[50vh] lg:h-screen ${
           pathname == "/login"
             ? "bg-[url('/login2.jpg')]"
             : "bg-[url('/login1.jpg')]"
         }   `}></div>
       <div className="right w-[70%] min-h-screen px-5 lg:px-20">
-        <div className="flex flex-col gap-4 h-full w-full items-start justify-center">
+        <div className="flex flex-col gap-4 h-full w-full items-start justify-center py-5 lg:py-0">
           <div>
             <div className="text-base lg:text-3xl">
               <h2 className="text-primary-100 font-bold ">Shop.</h2>

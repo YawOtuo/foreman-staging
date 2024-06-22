@@ -1,7 +1,15 @@
 "use client";
 import Link from "next/link";
-import { PiFacebookLogoDuotone, PiGoogleLogo, PiSignInDuotone } from "react-icons/pi";
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {
+  PiFacebookLogoDuotone,
+  PiGoogleLogo,
+  PiSignInDuotone,
+} from "react-icons/pi";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth } from "@/app/firebase";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
@@ -9,9 +17,7 @@ import { useRouter } from "next/navigation";
 import FormInput from "../../components/FormInput";
 import LoginButton from "../../components/LoginButton";
 
-
 function LoginComponent() {
-
   const { toast } = useToast();
   const router = useRouter();
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -22,26 +28,28 @@ function LoginComponent() {
     console.log({ email, password });
 
     // sign In with firebase email and password
-    signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-      // Signed in
-      const user = userCredential.user
-      console.log(user);
-      toast({
-        title: `Welcome`,
-        description: `You have successfully logged in with ${email}`,
-        variant: "success"
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        toast({
+          title: `Welcome`,
+          description: `You have successfully logged in with ${email}`,
+          variant: "success",
+        });
+        router.push("/");
       })
-      router.push("/");
-    }).catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      toast({
-        title: `Error ${errorCode}`,
-        description: errorMessage,
-        variant: "destructive"
-      })
-      console.log({ errorCode, errorMessage });
-    });
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        toast({
+          title: `Error ${errorCode}`,
+          description: errorMessage,
+          variant: "destructive",
+        });
+        console.log({ errorCode, errorMessage });
+      });
 
     // rest form
     e.currentTarget.reset();
@@ -50,56 +58,90 @@ function LoginComponent() {
   function GoogleSignIn() {
     // Sign in with Google
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider).then((result) => {
-      // The signed-in user info.
-      const user = result.user;
-      console.log(user);
-      toast({
-        title: `Welcome ${user.displayName}`,
-        description: `You have successfully logged in with Google`,
-        variant: "success"
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // The signed-in user info.
+        const user = result.user;
+        console.log(user);
+        toast({
+          title: `Welcome ${user.displayName}`,
+          description: `You have successfully logged in with Google`,
+          variant: "success",
+        });
+        router.push("/");
       })
-      router.push("/");
-    }).catch((error) => {
-      // Handle Errors here.
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      toast({
-        title: `Error ${errorCode}`,
-        description: errorMessage,
-        variant: "destructive"
-      })
-    });
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        toast({
+          title: `Error ${errorCode}`,
+          description: errorMessage,
+          variant: "destructive",
+        });
+      });
   }
 
+  return (
+    <form
+      onSubmit={handleSubmit}
+      className="self-start flex flex-col gap-4 pt-4">
+      <FormInput
+        required
+        label="Email"
+        type=""
+        placeholder="Enter your email"
+        value=""
+        name="email"
+      />
+      <FormInput
+        required
+        label="Password"
+        type="password"
+        placeholder="Enter your password"
+        value=""
+        name="password"
+      />
+      <Button
+        variant={"default"}
+        type="submit"
+        className="bg-primary-100 text-white w-full p-3 flex items-center justify-center gap-2">
+        <PiSignInDuotone />
+        <span>Sign In</span>
+      </Button>
 
-  return (<form onSubmit={handleSubmit} className="self-start flex flex-col gap-4 pt-4">
-    <FormInput required label="Email" type="" placeholder="Enter your email" value="" name="email" />
-    <FormInput required label="Password" type="password" placeholder="Enter your password" value="" name="password" />
-    <Button variant={"default"} type="submit" className="bg-primary-100 text-white w-full p-3 flex items-center justify-center gap-2">
-      <PiSignInDuotone />
-      <span>Sign In</span>
-    </Button>
+      <div className="flex items-center justify-between">
+        <a href="#" className="text-slate-500">
+          Forgot Password?
+        </a>
+      </div>
 
-    <div className="flex items-center justify-between">
-      
-      <a href="#" className="text-slate-500">Forgot Password?</a>
-    </div>
+      <div className="flex items-center gap-1 text-center">
+        <label>Don&apos;t have an account?</label>
+        <Link href="/signup" className="text-slate-500">
+          Sign up
+        </Link>
+      </div>
 
-    <div className="flex items-center gap-1 text-center">
-      <label>Don&apos;t have an account?</label>
-      <Link href="/signup" className="text-slate-500">Sign up</Link>
-    </div>
+      <div className="flex flex-row gap-3 items-center">
+        <hr className="w-full" />
+        <span className="text-center">Or</span>
+        <hr className="w-full" />
+      </div>
 
-    <div className="flex flex-row gap-3 items-center">
-      <hr className="w-full" />
-      <span className="text-center">Or</span>
-      <hr className="w-full" />
-    </div>
-
-    <LoginButton icon={<PiGoogleLogo />} onClick={GoogleSignIn} type="button" name="Continue with Google"  />
-    <LoginButton icon={<PiFacebookLogoDuotone />} onClick={() => { }} type="button" name="Continue with Facebook"  />
-  </form>
+      <LoginButton
+        icon={<PiGoogleLogo />}
+        onClick={GoogleSignIn}
+        type="button"
+        name="Continue with Google"
+      />
+      <LoginButton
+        icon={<PiFacebookLogoDuotone />}
+        onClick={() => {}}
+        type="button"
+        name="Continue with Facebook"
+      />
+    </form>
   );
 }
 
