@@ -1,3 +1,4 @@
+"use client";
 import {
   Select,
   SelectContent,
@@ -5,19 +6,24 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useCurrency } from "@/context/CurrencyContext";
 import React from "react";
 
 const CurrencyConv = () => {
+  const { currency, setCurrency } = useCurrency();
+
+  const handleCurrency = (val: string) => setCurrency(val);
+
   return (
     <>
-      <Select value="ghs">
+      <Select value={currency} onValueChange={handleCurrency}>
         <SelectTrigger className="text-black p-4 py-0">
           <SelectValue placeholder="Select Currency" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="ghs">GHS</SelectItem>
-          <SelectItem value="ngn">NGN</SelectItem>
-          <SelectItem value="usd">USD</SelectItem>
+          <SelectItem value="GHS">GHS</SelectItem>
+          <SelectItem value="NGN">NGN</SelectItem>
+          <SelectItem value="USD">USD</SelectItem>
         </SelectContent>
       </Select>
     </>

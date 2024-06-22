@@ -1,154 +1,84 @@
-"use client";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  FetchCart,
-  DeleteFromCart,
-  AddToCart,
-  IncrementQuantity,
-  DecrementQuantity,
-} from "../api/cart";
-import { useToast } from "@/components/ui/use-toast";
-import { Cart } from "../types/cart";
-import { useAppStore } from "../store/useAppStore";
+// hooks/useCart.ts
 
-interface AddToCartArgs {
-  product_id: number;
-}
+import { useLocalStorage } from "@uidotdev/usehooks";
+import { useEffect } from "react";
+import { Cart, CartItem } from "../types/cart";
 
-interface DeleteFromCartArgs {
-  product_id: number;
-}
+const initialCart: Cart = {
+  items: [],
+  totalQuantity: 0,
+  totalCost: 0,
+};
 
-interface UpdateQuantityArgs {
-  product_id: number;
-}
+const useCart = () => {
+  let cart: Cart = initialCart; // Initialize cart with initialCart
+  let setCart: (cart: Cart) => void;
 
-function useCart() {
-  const queryClient = useQueryClient();
-  const { toast } = useToast();
-  const { DBDetails, FBaseDetails } = useAppStore();
+  if (typeof window !== "undefined") {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    [cart, setCart] = useLocalStorage<Cart>("foreman-cart", initialCart);
+  }
 
-  const cart_id = DBDetails?.cart_id;
-  const {
-    data: cartData,
-    isLoading: isCartLoading,
-    error: cartError,
-  } = useQuery<Cart[]>({
-    queryKey: ["cart"],
-    queryFn: () => FetchCart(cart_id),
-    enabled: !!cart_id,
-  });
+  useEffect(() => {
+    const calculateTotals = () => {
+      const totalQuantity = cart.items.reduce(
+        (sum, item) => sum + item.quantity,
+        0
+      );
+      const totalCost = cart.items.reduce(
+        (sum, item) => sum + item.totalCost,
+        0
+      );
+      setCart({ ...cart, totalQuantity, totalCost });
+    };
+    calculateTotals();
+  }, [cart.items]);
 
-  const addToCartMutation = useMutation({
-    mutationFn: ({ product_id }: AddToCartArgs) =>
-      AddToCart(cart_id, product_id),
-    onSuccess: (data) => {
-      toast({
-        title: "Success",
-        description: data.message, // Assuming the response body contains a 'message' field
-        variant: "success",
+  const AddToCart = (item: CartItem) => {
+    const existingItem = cart.items.find((cartItem) => cartItem.id === item.id);
+
+    if (existingItem) {
+      existingItem.quantity += item.quantity;
+      existingItem.totalCost =
+        existingItem.quantity * existingItem.product.price;
+    } else {
+      cart.items.push({
+        ...item,
+        totalCost: item.quantity * item.product.price,
       });
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
-    },
-    onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
-    },
-  });
+    }
 
-  const deleteFromCartMutation = useMutation({
-    mutationFn: ({ product_id }: DeleteFromCartArgs) =>
-      DeleteFromCart(cart_id, product_id),
-    onSuccess: () => {
-      toast({
-        title: "Success",
-        description: "Item removed from cart",
-        variant: "success",
-      });
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
-    },
-    onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
-    },
-  });
+    setCart({ ...cart });
+  };
 
-  const incrementQuantityMutation = useMutation({
-    mutationFn: ({ product_id }: UpdateQuantityArgs) =>
-      IncrementQuantity(cart_id, product_id),
-    onSuccess: (data) => {
-      toast({
-        title: "Success",
-        description: data.message,
-        variant: "success",
-      });
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
-    },
-    onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
-    },
-  });
+  const updateItemQuantity = (itemId: string | number, quantity: number) => {
+    const item = cart.items.find((cartItem) => cartItem.id === itemId);
 
-  const decrementQuantityMutation = useMutation({
-    mutationFn: ({ product_id }: UpdateQuantityArgs) =>
-      DecrementQuantity(cart_id, product_id),
-    onSuccess: (data) => {
-      toast({
-        title: "Success",
-        description: data.message,
-        variant: "success",
-      });
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
-    },
-    onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
-    },
-  });
-
-  const handleAddToCart = async (product_id: number) => {
-    try {
-      toast({
-        title: "Loading",
-        // description: data.message, // Assuming the response body contains a 'message' field
-        variant: "success",
-      });
-      await addToCartMutation.mutateAsync({ product_id });
-    } catch (error) {
-      console.error(error);
+    if (item) {
+      item.quantity = quantity;
+      item.totalCost = item.quantity * item.product.price;
+      setCart({ ...cart });
     }
   };
 
-  const handleDeleteFromCart = async (product_id: number) => {
-    try {
-      await deleteFromCartMutation.mutateAsync({ product_id });
-    } catch (error) {
-      console.error(error);
-    }
+  const removeItemFromCart = (itemId: string | number) => {
+    const updatedItems = cart.items.filter(
+      (cartItem) => cartItem.id !== itemId
+    );
+    setCart({ ...cart, items: updatedItems });
   };
 
-  const handleIncrementQuantity = async (product_id: number) => {
-    try {
-      await incrementQuantityMutation.mutateAsync({ product_id });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleDecrementQuantity = async (product_id: number) => {
-    try {
-      await decrementQuantityMutation.mutateAsync({ product_id });
-    } catch (error) {
-      console.error(error);
-    }
+  const clearCart = () => {
+    setCart(initialCart);
   };
 
   return {
-    cartData,
-    isCartLoading,
-    cartError,
-    handleAddToCart,
-    handleDeleteFromCart,
-    handleIncrementQuantity,
-    handleDecrementQuantity,
+    cart,
+    AddToCart,
+    updateItemQuantity,
+    removeItemFromCart,
+    clearCart,
   };
-}
+};
 
 export default useCart;

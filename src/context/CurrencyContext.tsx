@@ -18,7 +18,7 @@ const CurrencyContext = createContext<CurrencyContextType | undefined>(
 );
 
 export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
-  const [currency, setCurrency] = useState("USD");
+  const [currency, setCurrency] = useState("GHS");
   const [exchangeRates, setExchangeRates] = useState<Record<string, number>>(
     {}
   );

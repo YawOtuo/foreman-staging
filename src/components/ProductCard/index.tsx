@@ -12,14 +12,24 @@ import { IoHeart } from "react-icons/io5";
 import useFavourites from "@/lib/hooks/useFavourites";
 
 import { TiTick } from "react-icons/ti";
+import { useCurrency } from "@/context/CurrencyContext";
+import { convertPrice } from "@/lib/utils/convertPrice";
 
 type Props = {
   product: Product;
 };
 function ProductCard({ product }: Props) {
-  const { handleAddToCart } = useCart();
+  const { AddToCart } = useCart();
   const { play, setPlay } = useLottie();
   const { handleAddToFavourites } = useFavourites();
+  const { currency, exchangeRates } = useCurrency();
+  const convertedPrice = convertPrice(
+    product.price,
+    "GHS",
+    currency,
+    exchangeRates
+  );
+
   return (
     <div className="group flex flex-col items-start justify-center border-[1px]  hover:scale-[1.02] transition-all cursor-pointer">
       <div className="relative w-full aspect-[3/2] min-w-[200px] ">
@@ -54,6 +64,7 @@ function ProductCard({ product }: Props) {
           </button>
         </div>
       </div>
+      {/* TODO: do currency conversion here */}
       <div className="flex flex-col gap-5 px-3 py-3 w-full">
         <div className="flex items-start justify-between w-full gap-1">
           <div className="flex flex-col gap-0 w-full">
@@ -70,15 +81,22 @@ function ProductCard({ product }: Props) {
         </div>
 
         <div className="flex items-center gap-5 justify-between w-full">
-          <p className=" font-semibold text-lg transition-all duration-500 whi">
-            GHS {product?.price}
+          <p className=" font-semibold text-lg transition-all duration-500 bg-white">
+            {currency} {Number(convertedPrice)?.toFixed(2)}
           </p>
 
           <Button
             variant={"secondary"}
             fontSize={"sm"}
-            className="z text-black"
-            onClick={() => handleAddToCart(product?.id)}
+            className="bg-primary-200 text-black"
+            onClick={() =>
+              AddToCart({
+                id: product?.id,
+                product: product,
+                quantity: 1,
+                totalCost: parseFloat(convertedPrice?.toFixed(2)),
+              })
+            }
           >
             <IoCartSharp className="mr-2" />
             Add to Cart

@@ -18,9 +18,9 @@ const WhatsAppIcon = () => {
       <Link
         href="#"
         onClick={handleWhatsAppClick}
-        className="fixed bottom-[20%] left-[90%] md:left-[95%] text-green-600 shadow-lg shadow-gray-500 bg-white rounded-full p-2 border-[2px] border-green-600 hover:scale-110 transition-transform duration-300 ease-in z-50"
+        className="fixed bottom-[20%] left-[82%] sm:left-[90%] md:left-[95%] text-green-600 shadow-sm shadow-gray-500 bg-white rounded-full p-2 border-[2px] border-green-600 hover:scale-110 transition-transform duration-300 ease-in z-50"
       >
-        <RiWhatsappFill className="" size={40} />
+        <RiWhatsappFill className="text-3xl sm:text-4xl" />
       </Link>
     </>
   );

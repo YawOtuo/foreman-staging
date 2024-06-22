@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { IoCartSharp } from "react-icons/io5";
 import animationData from "@/lotties/like1.json";
-import useCart from "@/lib/hooks/useCart";
+import useCart from "@/lib/hooks/useCartOutdated";
 import { Favourite } from "@/lib/types/favourite";
 import { Button } from "@/components/ui/button";
 import { MdDeleteOutline } from "react-icons/md";

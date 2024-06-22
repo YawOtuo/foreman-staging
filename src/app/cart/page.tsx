@@ -17,7 +17,7 @@ function Page() {
   const goBack = () => {
     router.back();
   };
-  const { isCartLoading, cartError, cartData } = useCart();
+  const { cart } = useCart();
   return (
     <div className="w-full flex-col gap-2 px-5 lg:px-10">
       <div className="grid grid-cols-1 lg:grid-cols-7 w-full lg:gap-x-5 ">
@@ -37,28 +37,14 @@ function Page() {
       <div className="grid grid-cols-1  lg:grid-cols-7 pt-5 gap-x-5  min-h-screen gap-y-5 ">
         <div className="lg:col-span-1 "></div>
         <div className="lg:col-span-4 flex flex-col gap-5">
-          <FetchingState
-            className={"flex flex-col gap-2"}
-            success={cartData?.[1]?.["cart_items"]?.map((r: CartItem) => (
-              <div className="" key={r?.id}>
-                <CartCard data={r} />
-              </div>
-            ))}
-            skeletonCount={4}
-            loading={
-              <div className="mb-5">
-                <CardCartSkeleton />
-              </div>
-            }
-            isLoading={isCartLoading}
-            isError={cartError}
-            error={<p>Sorry no items in cart</p>}
-          />
+          {cart?.items?.map((r: CartItem) => (
+            <div className="" key={r?.id}>
+              <CartCard data={r} />
+            </div>
+          ))}
         </div>
         <div className="lg:col-span-2">
-          {cartData && (
-            <CartSummary navigation={() => router.push("/checkout")} />
-          )}
+          {cart && <CartSummary navigation={() => router.push("/checkout")} />}
         </div>{" "}
       </div>
     </div>

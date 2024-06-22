@@ -3,19 +3,19 @@ import IntlTelInput from "react-intl-tel-input";
 import "react-intl-tel-input/dist/main.css";
 
 interface PhoneInputProps {
-  onPhoneNumberChange: (phone: string) => void;
+  // onPhoneNumberChange: (phone: string) => void;
 }
 
-const PhoneInput: React.FC<PhoneInputProps> = ({ onPhoneNumberChange }) => {
+const PhoneInput: React.FC<PhoneInputProps> = ({}) => {
   return (
     <IntlTelInput
       preferredCountries={["gh", "us"]}
       containerClassName="intl-tel-input"
-      inputClassName="form-control focus:outline-none focus:ring-0"
+      inputClassName="form-control focus:outline-none focus:ring-0 w-full"
       formatOnInit={true}
-      onPhoneNumberChange={(isValid, value, countryData, number, id) => {
-        onPhoneNumberChange(value);
-      }}
+      // onPhoneNumberChange={(isValid, value, countryData, number, id) => {
+      //   onPhoneNumberChange(value);
+      // }}
     />
   );
 };
