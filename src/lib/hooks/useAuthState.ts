@@ -21,7 +21,7 @@ export default function useAuthState(auth: any) {
 
             // Fetch or create user by UID
             const userData :any = await fetchOrCreateUserByUid({
-              username: userAuth?.displayName,
+              username: userAuth?.displayName || "User",
               email: userAuth?.email,
               uid: userAuth?.uid,
             });

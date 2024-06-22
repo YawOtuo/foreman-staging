@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useRouter } from "next/navigation";
@@ -7,6 +7,7 @@ import CartCard from "./CartCard";
 import CartSummary from "./CartSummary";
 import { Button } from "@/components/ui/button";
 import { CartItem } from "@/lib/types/cart";
+import Link from "next/link";
 
 function CartPage() {
   const router = useRouter();
@@ -39,6 +40,14 @@ function CartPage() {
               <CartCard data={r} />
             </div>
           ))}
+          {cart?.items?.length < 1 && (
+            <div className="flex flex-col gap-5">
+              No Items in cart
+              <Link href="/store">
+                <Button variant={"outline"}>Start Shopping</Button>
+              </Link>
+            </div>
+          )}
         </div>
         <div className="w-full basis">
           {cart && <CartSummary navigation={() => router.push("/checkout")} />}

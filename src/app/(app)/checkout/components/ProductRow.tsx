@@ -23,7 +23,7 @@ const ProductRow: React.FC<ProductRowProps> = ({ cart_item }) => {
   // };
 
   return (
-    <div className="flex items-center flex-row justify-between text-sm sm:text-base border-y-[1px] border-gray-500 py-5 pr-3 ">
+    <div className="flex items-center flex-row justify-between text-sm sm:text-base border-y-[1px]  py-5 pr-3 ">
       <div className="flex flex-row text-center justify-start relative   sm:w-[50%] w-1/3 gap-3 items-center">
         <div className="sm:ml-3 absolute sm:relative sm:top-0 sm:left-0 -top-6 left-0 hover:cursor-pointer ml-2 hover:bg-gray-300 transition-all rounded-full duration-300 ease-in p-[2px]">
           <MdCancel

@@ -1,11 +1,14 @@
 import useOrders from "@/lib/hooks/useOrder";
 import usePayStack from "./components/CheckoutButton/usePaystack";
 import useCart from "@/lib/hooks/useCart";
+import { useRouter } from "next/navigation";
 
 function useCheckout() {
   const { startPayment } = usePayStack();
   const { handleCreateOrder, handleUpdateOrder } = useOrders();
   const { cart } = useCart();
+  const router = useRouter();
+  const { clearCart } = useCart();
 
   const checkout = async () => {
     const orderItems = cart.items.map((item) => ({
@@ -25,14 +28,15 @@ function useCheckout() {
         startPayment(cart?.totalCost, () => {
           handleUpdateOrder({
             order_id: result.id,
-            orderData: { is_paid: true }
+            orderData: { is_paid: true },
+          }).then((res) => {
+            router.push("/checkout-success")
+            clearCart()
           });
         });
       } else {
         console.error("Unexpected result or status:", result);
-      
       }
-
     } catch (error) {
       console.error("Failed to create order:", error);
       // Handle error or show error message to the user
@@ -44,4 +48,4 @@ function useCheckout() {
   };
 }
 
-export default useCheckout
+export default useCheckout;
