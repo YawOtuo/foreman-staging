@@ -9,50 +9,25 @@ import CheckProduct from "./components/CheckProduct";
 import CheckSummary from "./components/CheckSummary";
 import { Button } from "@/components/ui/button";
 import DeliveryAddressForm from "./components/DeliveryAddress";
-import {
-  Controller,
-  FormProvider,
-  SubmitHandler,
-  useForm,
-} from "react-hook-form";
-import { IoCheckbox } from "react-icons/io5";
-import { AddressProps } from "@/lib/types/form";
-import { METHODS } from "http";
-
-interface FormFields {
-  payment: string;
-  address: AddressProps;
-  checkbox: boolean;
-}
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import { FormFields } from "@/lib/types/form";
 
 export default function CheckOutPage() {
   const { cart, removeItemFromCart, updateItemQuantity } = useCart();
 
   const methods = useForm<FormFields>({
     defaultValues: {
-      checkbox: false,
+      agreement: false,
     },
   });
 
   const {
-    handleSubmit,
     register,
     setError,
     formState: { errors, isSubmitting },
   } = methods;
 
-  const [address, setAddress] = useState({
-    city: "",
-    suburb: "",
-    name: "",
-    phone: "",
-  });
-
   const [deliveryCharge, setDeliveryCharge] = useState(50.0);
-
-  const updateAddress = (field: string, value: string) => {
-    setAddress({ ...address, [field]: value });
-  };
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -111,27 +86,29 @@ export default function CheckOutPage() {
               subTotal={cart.totalCost}
             />
             <div className="mt-6 w-full flex flex-col items-center gap-5 justify-center sm:w-3/5 md:w-4/5 ">
-              <DeliveryAddressForm
-                address={address}
-                // updateAddress={updateAddress}
-              />
+              <DeliveryAddressForm />
               <label className="text-xs sm:text-base">
                 <input
                   type="checkbox"
-                  {...register("checkbox", {
+                  {...register("agreement", {
                     required: "field is required *",
                   })}
                 />{" "}
                 I accept any price chages within 24 hours of placing this order.{" "}
-                {errors.checkbox && (
-                  <div className="text-red-600">{errors.checkbox.message}</div>
+                {errors.agreement && (
+                  <div className="text-red-600">{errors.agreement.message}</div>
                 )}
               </label>
             </div>
             <div className="mt-5 w-full flex justify-center">
-              <Button className="w-1/2 uppercase bg-orange-300 hover:bg-white hover:text-orange-400 hover:border-[1px] border-orange-400">
-                Place Order
-              </Button>
+              {
+                <Button
+                  className="w-1/2 uppercase bg-orange-300 hover:bg-white hover:text-orange-400 hover:border-[1px] border-orange-400 disabled:bg-opacity-80 disabled:pointer-events-none"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Placing Order..." : "Place Order"}
+                </Button>
+              }
             </div>
           </form>
         </FormProvider>

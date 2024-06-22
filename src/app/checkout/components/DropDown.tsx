@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   accraMetroAblCen,
   accraMetroAblNor,
@@ -39,16 +39,22 @@ import {
   district_constituency,
 } from "../data";
 import { useFormContext } from "react-hook-form";
+import { FormFields } from "@/lib/types/form";
 
-interface DropDownProps {
-  address: { city: string; suburb: string };
-}
-
-const DropDown: React.FC<DropDownProps> = ({ address }) => {
+const DropDown = () => {
   const {
     register,
+    watch,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<FormFields>();
+
+  const [suburbs, setSuburbs] = useState<string[]>([]);
+
+  const selectedCity = watch("address.city");
+
+  useEffect(() => {
+    setSuburbs(getSuburbs(selectedCity));
+  }, [selectedCity]);
 
   const getSuburbs = (city: string) => {
     switch (city) {
@@ -131,34 +137,41 @@ const DropDown: React.FC<DropDownProps> = ({ address }) => {
 
   return (
     <>
-      <select
-        {...register("city", { required: "Please select a city" })}
-        className="border rounded p-2 md:w-1/2"
-      >
-        <option value="">District / Constituency</option>
-        {district_constituency.map((item, index) => (
-          <option key={index} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-      {typeof errors.city?.message === "string" && (
-        <p className="text-red-500">{errors.city.message}</p>
-      )}
-      <select
-        // {...register("suburb", { required: "Please select a suburb" })}
-        className="border rounded p-2 md:w-1/2"
-      >
-        <option value="">Area</option>
-        {getSuburbs(address.city).map((item, index) => (
-          <option key={index} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-      {/* {typeof errors.suburb?.message === "string" && (
-        <p className="text-red-500">{errors.suburb.message}</p>
-      )} */}
+      <div className="flex-col flex md:w-1/2">
+        <select
+          {...register("address.city", { required: "Please select a city" })}
+          className="border rounded p-2 w-full h-10"
+        >
+          <option value="">District / Constituency</option>
+          {district_constituency.map((item, index) => (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+        {errors.address?.city && (
+          <p className="text-red-500">{errors.address?.city.message}</p>
+        )}
+      </div>
+
+      <div className="flex-col flex md:w-1/2 ">
+        <select
+          {...register("address.suburb", {
+            required: "Please select a suburb",
+          })}
+          className="border rounded p-2  h-10"
+        >
+          <option value="">Area</option>
+          {suburbs.map((item, index) => (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+        {errors.address?.suburb && (
+          <p className="text-red-500 mt-2">{errors.address?.suburb.message}</p>
+        )}
+      </div>
     </>
   );
 };
