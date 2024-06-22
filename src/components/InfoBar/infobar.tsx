@@ -30,7 +30,7 @@ export default function InfoBar() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-row gap-3 items-center justify-between p-1 px-8 bg-shade-300 text-white w-full text-xs lg:text-sm">
+    <div className="flex flex-row gap-3 items-center justify-between p-1 px-5 lg:px-8 bg-shade-300 text-white w-full text-xs lg:text-sm">
       <div className="flex flex-col lg:flex-row items-start lg:items-center gap-1 lg:gap-3 ">
         <a className="flex items-center gap-2" href="tel:+23354012483">
           <PhoneCallIcon size={18} />
