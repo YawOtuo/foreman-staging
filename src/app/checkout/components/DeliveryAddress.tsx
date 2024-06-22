@@ -11,10 +11,12 @@ const DeliveryAddressForm = () => {
 
   return (
     <div className="border-[1px] border-gray-500 p-4 rounded-md space-y-4 w-[300px]  sm:w-full flex flex-col">
-      <p>Delivery Address</p>
-      <p className="text-red-600 text-sm sm:text-base">
-        now delivering within Greater Accra and the Kasoa area
-      </p>
+      <div>
+        <p>Delivery Address</p>
+        <p className="text-yellow-600 text-sm sm:text-base">
+          now delivering within Greater Accra and the Kasoa area
+        </p>
+      </div>
       <div className="flex flex-col space-y-5">
         <div className="flex flex-col md:flex-row gap-5 w-full">
           <DropDown />
@@ -41,7 +43,7 @@ const DeliveryAddressForm = () => {
               <PhoneInput />
             </div>
             {errors.address?.phone && (
-              <p className="text-red-600 mt-2 text-center">
+              <p className="text-red-600 mt-2 md:text-center">
                 {" "}
                 {errors.address.phone.message}{" "}
               </p>
