@@ -21,15 +21,17 @@ import { signOut } from "firebase/auth";
 import { auth } from "@/app/firebase";
 import Link from "next/link";
 import { useAppStore } from "@/lib/store/useAppStore";
+import { useRouter } from "next/navigation";
 
 export default function InfoBar() {
   //   const { data, error, isLoading } = useAuthState(auth);
   //   const { user } = useUser();
-  const { DBDetails, FBaseDetails } = useAppStore();
+  const { DBDetails, FBaseDetails, setDBDetails,setFBaseDetails } = useAppStore();
+  const router = useRouter();
 
   return (
-    <div className="flex flex-row gap-3 items-center justify-between p-1 px-8 bg-shade-300 text-white w-full text-sm">
-      <div className="flex gap-3 items-center">
+    <div className="flex flex-row gap-3 items-center justify-between p-1 px-5 lg:px-8 bg-shade-300 text-white w-full text-xs lg:text-sm">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center gap-1 lg:gap-3 ">
         <a className="flex items-center gap-2" href="tel:+23354012483">
           <PhoneCallIcon size={18} />
           (233) 540-124-83
@@ -70,12 +72,18 @@ export default function InfoBar() {
                 </span>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => router.push("/dashboard")}>
+                Dashboard
+              </DropdownMenuItem>
               <DropdownMenuItem>Billing</DropdownMenuItem>
               <DropdownMenuItem>Team</DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() => {
                   signOut(auth);
+                  router.push("/login");
+                  setDBDetails({});
+                  setFBaseDetails({});
+
                 }}>
                 Logout
               </DropdownMenuItem>

@@ -17,6 +17,14 @@ export const MobileMenuDetails = (props: any) => {
       url: "/store",
     },
     {
+      name: "cart",
+      url: "/cart",
+    },
+    {
+      name: "dashboard",
+      url: "/dashboard",
+    },
+    {
       name: "warehousing",
       url: "/warehousing",
     },

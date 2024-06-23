@@ -73,7 +73,7 @@ function ProductCard({ product }: Props) {
             GHS {product?.price}
           </p>
 
-          <Button
+          <Button 
             variant={"secondary"}
             fontSize={"sm"}
             className="bg-primary-200 text-black"

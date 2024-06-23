@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button";
 import useFavourites from "@/lib/hooks/useFavourites";
 import { Favourite } from "@/lib/types/favourite";
 import { MdKeyboardArrowLeft } from "react-icons/md";
+import FavouriteCard from "./components/FavouriteCard";
+import CardCartSkeleton from "../../(app)/cart/components/CartCardSkeleton";
 import PCSkeleton from "@/components/ProductCard/PCSkeleton";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
-import FavouriteCard from "../dashboard/favourites/components/FavouriteCard";
 
 function Page() {
   const { favouritesData, isFavouritesLoading, favouritesError } =
@@ -46,6 +48,18 @@ function Page() {
             <div className=" mb-5">
               <PCSkeleton />
             </div>
+          }
+          nullComponent={
+            favouritesData &&
+            favouritesData?.length < 1 && (
+              <div className=" flex flex-col gap-5 items-start">
+                <p>Sorry no favourite items yet</p>
+
+                <Button variant={"outline"}>
+                  Start Shopping
+                </Button>
+              </div>
+            )
           }
           isLoading={isFavouritesLoading}
           isError={favouritesError}
