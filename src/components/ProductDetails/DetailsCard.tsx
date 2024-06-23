@@ -96,14 +96,7 @@ export default function ProductDetailsCard({ product }: { product: Product }) {
         </div>
         <Separator className="my-2" />
         <div className="flex items-center justify-between gap-4">
-            <Button onClick={() => {
-                AddToCart({
-                    id: product?.id,
-                    product: product,
-                    quantity: quantity,
-                    totalCost: product?.price * quantity
-                })
-            }} variant={"secondary"} className="w-full">Add to Cart</Button>
+            <Button onClick={handleAddToCart} variant={"secondary"} className="w-full">Add to Cart</Button>
             <Button className="w-full">Buy Now</Button>
         </div>
     </Card>
