@@ -85,7 +85,7 @@ function LoginComponent() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="self-start flex flex-col gap-4 pt-4">
+      className="w-full max-w-[600px] self-start flex flex-col gap-4 pt-4">
       <FormInput
         required
         label="Email"
@@ -105,7 +105,7 @@ function LoginComponent() {
       <Button
         variant={"default"}
         type="submit"
-        className="bg-primary-100 text-white w-full p-3 flex items-center justify-center gap-2">
+        className="bg-primary-100  text-white w-full p-3 flex items-center justify-center gap-2">
         <PiSignInDuotone />
         <span>Sign In</span>
       </Button>
