@@ -46,7 +46,7 @@ function Navbar() {
           </Link>
         ))}
         <Link className="" href={"/cart"}>
-          <IoCartOutline size={20} />
+          <IoCartOutline size={25} className="text-primary"/>
         </Link>
         {/* {!data?.user ? (
           <div>
