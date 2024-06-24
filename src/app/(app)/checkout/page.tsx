@@ -54,14 +54,14 @@ export default function CheckOutPage() {
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
-      <div className="md:w-[90%] flex-1 ">
+      <div className="md:w-[90%]   ">
         <div className=" w-full flex-1 py-6 px-4">
           <div className="flex justify-between items-center flex-row w-full ">
             <h6 className="font-semibold text-3xl ">Checkout</h6>
             <div className="flex flex-row w-1/3 sm:w-1/6 md:w-[10%]  items-center justify-evenly text-gray-400"></div>
           </div>
         </div>
-        <div className="flex flex-col md:flex-row px-4">
+        <div className="flex flex-col  px-4  lg:flex-row items-start lg:items-start justify-start lg:justify-center">
           <div className=" md:w-[60%]">
             <div className="w-full sm:py-4 ">
               <h6 className="font-bold text-lg text-primary/80">My Orders</h6>
@@ -109,7 +109,7 @@ export default function CheckOutPage() {
 
           <FormProvider {...methods}>
             <form
-              className="flex flex-col sm:justify-center items-center flex-1 mt-6 md:mt-24"
+              className="flex flex-col sm:justify-centeritems-start lg:items-center flex-1 mt-6 "
               onSubmit={methods.handleSubmit(onSubmit)}>
               <CheckSummary
                 deliveryCharge={deliveryCharge}
