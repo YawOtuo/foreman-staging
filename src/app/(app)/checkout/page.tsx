@@ -62,7 +62,7 @@ export default function CheckOutPage() {
           </div>
         </div>
         <div className="flex flex-col  px-4  lg:flex-row items-start lg:items-start justify-start lg:justify-center">
-          <div className=" md:w-[60%]">
+          <div className="w-full md:w-[60%]">
             <div className="w-full sm:py-4 ">
               <h6 className="font-bold text-lg text-primary/80">My Orders</h6>
             </div>

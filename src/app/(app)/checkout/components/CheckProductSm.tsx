@@ -46,7 +46,7 @@ const CheckProductSm: React.FC<CheckProductSmRowProps> = ({ cart_item }) => {
         <div className="sm:ml-1"><span className="">Quantity:</span> {cart_item.quantity}</div>
         <div className="w-full flex justify-end">
           <p className="sm:ml-1 font-semibold">
-            Total Cost:
+            Total Cost: &nbsp;
             <span className="text-primary lg:text-black text-xl">
               {currency}{" "}
               {(Number(convertedPrice) * cart_item.quantity)?.toFixed(2)}{" "}
