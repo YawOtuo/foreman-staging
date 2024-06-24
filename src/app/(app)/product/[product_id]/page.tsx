@@ -51,7 +51,7 @@ export default function ProductDetailPage({
       <section className=" flex pt-8 gap-8 flex-wrap md:flex-nowrap p-4">
         <div className=" w-full md:w-[50%]">
           <Swiper
-            className="w-full h-full rounded-lg overflow-hidden"
+            className="w-full h-full rounded-lg overflow-hidden border-2"
             spaceBetween={5}>
             {product?.images.map((image) => (
               <SwiperSlide key={image.id} className="">
@@ -65,10 +65,10 @@ export default function ProductDetailPage({
           </Swiper>
         </div>
         <div className="w-full md:w-[40%]">
-          <h2 className="text-3xl font-semibold text-gray-800 capitalize">
+          <h2 className="text-2xl lg:text-4xl font-semibold text-gray-800 capitalize">
             {product?.name}
           </h2>
-          <p className="text-lg text-gray-600 py-2">
+          <p className="text-base  text-gray-600 py-2">
             {product?.description.length == 0
               ? "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum, blanditiis non. Assumenda sequi nihil obcaecati, voluptas suscipit libero consequatur quas sint quos maxime! Fuga, voluptatibus non vero sequi debitis qui!"
               : product?.description}
@@ -78,7 +78,7 @@ export default function ProductDetailPage({
         </div>
       </section>
       <section className="flex flex-col gap-4 p-4">
-        <h2 className="text-2xl font-semibold">Related Products</h2>
+        <h2 className="text-base lg:text-2xl font-semibold">Related Products</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {relatedProducts?.map((product) => (
             <ProductCard key={product.id} product={product} />
