@@ -50,12 +50,12 @@ function Page() {
   return (
     <main className="flex flex-col items-center ">
       <header className="bg-gray-300 w-full p-6">
-        <h6 className="font-semibold text-2xl">Feedback</h6>
+        <h6 className="font-semibold text-2xl">Contact Us</h6>
       </header>
       <div className="w-full mt-10 p-6">
         <p className="text-xl font-semibold">We love to hear from you!</p>
       </div>
-      <section className="mt-6 w-4/5 flex flex-col justify-between md:flex-row md:mt-10 md:h-72">
+      <section className="mt-6 w-4/5 flex flex-col justify-between md:flex-row md:mt-10 md:h-72 mb-24">
         <div className="">
           {contactInfo.map((item, index) => (
             <Info
