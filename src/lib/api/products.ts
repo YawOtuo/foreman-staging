@@ -15,7 +15,7 @@ export const fetchProducts = async (filter?: {
 };
 
 export const fetchOneProduct = async (id: number): Promise<Product> => {
-  const response = await fetch(`${url}api/products/${id}`);
+  const response = await fetch(`${url}api/products/${id}/`);
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
