@@ -3,15 +3,18 @@ import usePayStack from "./usePaystack";
 
 type Props = {
   onClick?: any;
+  disabled?: boolean;
 };
-function CheckoutButton({ onClick }: Props) {
+function CheckoutButton({ onClick, disabled }: Props) {
   return (
-      <button
-        onClick={onClick}
-        className="mt-4 w-1/2 p-4 bg-primary text-white rounded-md hover:scale-[1.02] hover:border-[1px] hover:border-primary transition-all duration-300 ease-in flex justify-center items-center">
-        <IoArrowRedo className="mr-2 text-2xl" />
-        Buy Now
-      </button>
+    <button
+      disabled={disabled}
+      type="submit"
+      onClick={onClick}
+      className="mt-4 w-full p-4 bg-primary text-white rounded-md hover:scale-[1.02] hover:border-[1px] hover:border-primary transition-all duration-300 ease-in flex justify-center items-center">
+      <IoArrowRedo className="mr-2 text-2xl" />
+      Buy Now
+    </button>
   );
 }
 

@@ -28,8 +28,15 @@ function CartCard({ data }: Props) {
     exchangeRates
   );
 
+  const convertedTotalPrice = convertPrice(
+    data.totalCost,
+    "GHS",
+    currency,
+    exchangeRates
+  );
+
   return (
-    <div className="group flex flex-col gap-5 w-full border px-5 py-3 capitalize hover:scale-[1.01] transition-all cursor-pointer">
+    <div className="group flex flex-col gap-5 w-full border px-5 py-3 capitalize hover:scale-[1.01] duration-300 transition-all cursor-pointer">
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-center w-full gap-5">
         <div className="relative w-full aspect-[3/2] lg:max-w-[150px] ">
           <Image
@@ -48,9 +55,12 @@ function CartCard({ data }: Props) {
           </div>
           <p className="text-shade-200 text-sm">{data.product.description}</p>
         </div>{" "}
-        <div className="flex items-start lg:items-center gap-1">
+        <div className="flex flex-col gao-2 items-start lg:items-end gap-1">
           <p className="whitespace-nowrap font-bold text-2xl group-hover:text-primary-100 transition-all">
-            {currency} {Number(convertedPrice).toFixed(2)}
+            {currency} {Number(convertedTotalPrice).toFixed(2)}
+          </p>
+          <p className="whitespace-nowrap text-sm">
+            Unit Price: {currency} {Number(convertedPrice).toFixed(2)}
           </p>
         </div>{" "}
       </div>
@@ -61,17 +71,15 @@ function CartCard({ data }: Props) {
             className="text-primary-100"
             variant={"ghost"}
             size={"sm"}
-            fontSize={"xs"}
-          >
+            fontSize={"sm"}>
             <MdDeleteOutline size={20} className="mr-1" />
             Remove
           </Button>
           <Button
             variant={"ghost"}
             size={"sm"}
-            fontSize={"xs"}
-            onClick={() => handleAddToFavourites(data.product.id)}
-          >
+            fontSize={"sm"}
+            onClick={() => handleAddToFavourites(data.product.id)}>
             <FaRegHeart className="mr-2" />
             Move To Favourites
           </Button>

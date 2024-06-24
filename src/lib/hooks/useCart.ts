@@ -4,6 +4,7 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 import { useEffect } from "react";
 import { Cart, CartItem } from "../types/cart";
 import { useToast } from "@/components/ui/use-toast";
+import { useAppStore } from "../store/useAppStore";
 
 const initialCart: Cart = {
   items: [],
@@ -15,11 +16,12 @@ const useCart = () => {
   let cart: Cart = initialCart; // Initialize cart with initialCart
   let setCart: (cart: Cart) => void;
   const { toast } = useToast();
+  const {DBDetails} = useAppStore()
 
 
   if (typeof window !== "undefined") {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    [cart, setCart] = useLocalStorage<Cart>("foreman-cart", initialCart);
+    [cart, setCart] = useLocalStorage<Cart>(`foreman-cart`, initialCart);
   }
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const useCart = () => {
     calculateTotals();
   }, [cart.items]);
 
-  const AddToCart = (item: CartItem) => {
+  const AddToCart = (item: Omit<CartItem, 'totalCost'>) => {
     const existingItem = cart.items.find((cartItem) => cartItem.id === item.id);
 
     if (existingItem) {

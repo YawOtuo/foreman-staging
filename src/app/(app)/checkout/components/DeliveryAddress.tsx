@@ -10,7 +10,7 @@ const DeliveryAddressForm = () => {
   } = useFormContext<FormFields>();
 
   return (
-    <div className="border-[1px] border-gray-500 p-4 rounded-md space-y-4 w-[300px]  sm:w-full flex flex-col">
+    <div className="border-2   p-4 rounded-md space-y-4 w-full    flex flex-col">
       <div>
         <p>Delivery Address</p>
         <p className="text-yellow-600 text-sm sm:text-base">

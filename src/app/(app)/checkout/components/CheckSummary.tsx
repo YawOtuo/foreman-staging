@@ -1,7 +1,9 @@
 import { useCurrency } from "@/context/CurrencyContext";
 import { convertPrice } from "@/lib/utils/convertPrice";
+import Link from "next/link";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { FaShoppingCart } from "react-icons/fa";
 
 interface CheckSummaryProps {
   subTotal: number;
@@ -41,7 +43,7 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
 
   return (
     <>
-      <div className=" flex flex-col w-11/12 sm:w-3/5 md:w-4/5 bg-gray-300 p-5 h-[400px] md:mt-8 justify-center rounded-md">
+      <div className=" flex flex-col w-full  sm:w-3/5 md:w-4/5 border-2 bg-secondary p-5 h-[400px] justify-center rounded-md">
         {/* Summary side */}
         <div className="h-1/2 flex flex-col justify-center">
           <div className="space-y-3">
@@ -62,16 +64,17 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
             </div>
             <div className="flex justify-between w-full border-y-[1px] border-white py-4">
               <p>Total</p>
-              <p className="font-semibold">
+              <p className="font-bold text-3xl text-primary">
                 {currency} <span>{Number(TotalConvertedPrice).toFixed(2)}</span>
               </p>
             </div>
           </div>
         </div>
+
         {/* Payment options side */}
         <div className="h-1/2 flex flex-col justify-evenly">
           <h6 className="font-semibold text-base">Payment Options</h6>
-
+          {/* 
           <label>
             <input
               type="radio"
@@ -80,24 +83,28 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
                 required: "Please select a payment method",
               })}
             />{" "}
-            Card Payment (Visa/ Mastercard/ Verve)
-          </label>
+            
+          </label> */}
 
           <label>
             <input
               type="radio"
-              value="mobile_money"
+              value="pay_now"
               {...register("payment", {
                 required: "Please select a payment method",
               })}
             />{" "}
-            Mobile Money (MTN/ AirtelTigo/ Voda)
+            Pay Now{" "}
+            <span className="text-gray-800">
+              (Card Payment -Visa/ Mastercard) (Mobile Money -MTN/ AirtelTigo/
+              Voda)
+            </span>
           </label>
 
           <label>
             <input
               type="radio"
-              value="delivery_pay"
+              value="pay_delivery"
               {...register("payment", {
                 required: "Please select a payment method",
               })}
