@@ -48,7 +48,7 @@ export default function ProductDetailPage({
 
   return (
     <main>
-      <section className=" flex pt-8 gap-8 flex-wrap md:flex-nowrap p-4">
+      <section className=" flex pt-8 lg:pt-12 gap-8 flex-wrap md:flex-nowrap p-4 px-5 lg:px-10">
         <div className=" w-full md:w-[50%]">
           <Swiper
             className="w-full h-full rounded-lg overflow-hidden border-2"

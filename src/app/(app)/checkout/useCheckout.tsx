@@ -33,12 +33,12 @@ function useCheckout() {
               order_id: result.id,
               orderData: { is_paid: true },
             }).then((res) => {
-              router.push("/checkout-success");
+              router.push(`/checkout-success/${result.id}`);
               clearCart();
             });
           });
         } else {
-          router.push("/checkout-success");
+          router.push(`/checkout-success/${result.id}`);
           clearCart();
         }
       } else {

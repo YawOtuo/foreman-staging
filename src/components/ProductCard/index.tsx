@@ -33,7 +33,9 @@ function ProductCard({ product }: Props) {
 
   return (
     <div className="group flex flex-col items-start justify-center border-[1px]  hover:scale-[1.02] duration-300 rounded-sm transition-all cursor-pointer">
-      <div className="relative w-full aspect-[3/2] min-w-[200px] ">
+      <Link
+        href={`/product/${product.id}`}
+        className="relative w-full aspect-[3/2] min-w-[200px] ">
         <Image
           src={`https://res.cloudinary.com/daurieb51/${product?.images[0]?.image}`}
           alt={product.description}
@@ -52,8 +54,7 @@ function ProductCard({ product }: Props) {
           onClick={() => {
             console.log(play);
             setPlay(true);
-          }}
-        >
+          }}>
           {/* <FaRegHeart color="red"/> */}
           <button onClick={() => handleAddToFavourites(product.id)}>
             <IoHeart
@@ -64,7 +65,7 @@ function ProductCard({ product }: Props) {
             />
           </button>
         </div>
-      </div>
+      </Link>
       {/* TODO: do currency conversion here */}
       <div className="flex flex-col gap-5 px-3 py-3 w-full">
         <div className="flex items-start justify-between w-full gap-1">
@@ -88,7 +89,7 @@ function ProductCard({ product }: Props) {
             {currency} {Number(convertedPrice)?.toFixed(2)}
           </p>
 
-          <Button 
+          <Button
             variant={"secondary"}
             fontSize={"sm"}
             className="bg-primary-200 text-black"
@@ -98,8 +99,7 @@ function ProductCard({ product }: Props) {
                 product: product,
                 quantity: 1,
               })
-            }
-          >
+            }>
             <IoCartSharp className="mr-2" />
             Add to Cart
           </Button>

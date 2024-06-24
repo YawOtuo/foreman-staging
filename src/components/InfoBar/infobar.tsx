@@ -70,8 +70,8 @@ export default function InfoBar() {
               <DropdownMenuItem onClick={() => router.push("/dashboard")}>
                 Dashboard
               </DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Team</DropdownMenuItem>
+              {/* <DropdownMenuItem>Billing</DropdownMenuItem>
+              <DropdownMenuItem>Team</DropdownMenuItem> */}
               <DropdownMenuItem
                 onClick={() => {
                   signOut(auth);
