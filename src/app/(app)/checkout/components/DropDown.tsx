@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   accraMetroAblCen,
   accraMetroAblNor,
@@ -37,253 +37,141 @@ import {
   TemaWest,
   KponeKatamanso,
   district_constituency,
-} from "./data";
+} from "../data";
+import { useFormContext } from "react-hook-form";
+import { FormFields } from "@/lib/types/form";
 
-interface DropDownProps {
-  address: { city: string; suburb: string };
-  onAddress: (field: string, value: string) => void;
-}
+const DropDown = () => {
+  const {
+    register,
+    watch,
+    formState: { errors },
+  } = useFormContext<FormFields>();
 
-const DropDown: React.FC<DropDownProps> = ({ address, onAddress }) => {
+  const [suburbs, setSuburbs] = useState<string[]>([]);
+
+  const selectedCity = watch("address.city");
+
+  useEffect(() => {
+    setSuburbs(getSuburbs(selectedCity));
+  }, [selectedCity]);
+
+  const getSuburbs = (city: string) => {
+    switch (city) {
+      case "Accra Metropolitan / ABLEKUMA CENTRAL":
+        return accraMetroAblCen;
+      case "Accra Metropolitan / ABLEKUMA NORTH":
+        return accraMetroAblNor;
+      case "Accra Metropolitan / ABLEKUMA SOUTH":
+        return accraMetroAblSou;
+      case "Accra Metropolitan / ABLEKUMA WEST":
+        return accraMetroAblWes;
+      case "Accra Metropolitan / AYAWASO EAST":
+        return accraMetroAyawaEast;
+      case "Accra Metropolitan / KLOTTEY KORLEY":
+        return accraMetroKlotteyKo;
+      case "Accra Metropolitan / ODODODIODIOO":
+        return accraMetroOdodio;
+      case "Accra Metropolitan / OKAIKWEI CENTRAL":
+        return accraMetroOkaikweiCen;
+      case "Accra Metropolitan / OKAIKWEI SOUTH":
+        return accraMetroOkaikweiSou;
+      case "Ablekuma West Municipal / ABLEKUMA WEST":
+        return ablekWestMun;
+      case "Ayawaso Central Municipal / AYAWASO CENTRAL":
+        return ayawasoCenMun;
+      case "Ayawaso North Municipal / AYAWASO NORTH":
+        return ayawasoNorMun;
+      case "Ayawaso West Municipal / AYAWASO WEST WUOGON":
+        return ayawasoWesWuogon;
+      case "Okaikwei North Municipal / OKAIKWEI NORTH":
+        return okaikweiNor;
+      case "Ada West District / SEGE":
+        return adaWstSege;
+      case "Ada East District / ADA":
+        return adaEstAda;
+      case "Adentan Municipal / ADENTAN":
+        return adentanMun;
+      case "Ashaiman Municipal / ASHAIMAN":
+        return ashaimanMun;
+      case "Ga Central Municipal / ANYAA SOWUTUOM":
+        return gaCenAnyaSowu;
+      case "Ga South Municipal / NGLESHI AMANFRO":
+        return gaSouNgleshi;
+      case "Ga South Municipal / NGLESHI WEIJA GBAWE":
+        return gaSouWeija;
+      case "Ga South Municipal / DOMEABRA OBOM":
+        return gaSouDomeAbra;
+      case "Ga East Municipal / DOME KWABENYA":
+        return gaEastDomeKwabenya;
+      case "Ga West Municipal / TROBU":
+        return gaWestTrobu;
+      case "Ga West Municipal / AMASAMAN":
+        return gaWestAmasaman;
+      case "La Dade Kotopon Municipal / DADE KOTOPON":
+        return LaDadeKotopon;
+      case "La Nkwantanang Madina Municipal / MADINA":
+        return LaNkwanMadina;
+      case "Ledzekuku Municipal / LEDZOKUKU":
+        return LedzeZokuku;
+      case "Ledzekuku Municipal / KROWOR":
+        return LedzeKrowor;
+      case "Krowor Municipal /  KROWOR":
+        return KrowoKrowo;
+      case "Ningo Prampram District / NINGO PRAMPRAM":
+        return ningoPrampram;
+      case "Shai Osudoku District / SHAI OSUDOKU":
+        return shaiOsudoku;
+      case "Tema Metropolitan / TEMA CENTRAL":
+        return TemaCentral;
+      case "Tema Metropolitan / TEMA EAST":
+        return TemaEast;
+      case "Tema West Municipal / TEMA WEST":
+        return TemaWest;
+      case "Kpone Katamanso Municipal / KPONE KATAMANSO":
+        return KponeKatamanso;
+      default:
+        return [];
+    }
+  };
+
   return (
     <>
-      <select
-        value={address.city}
-        onChange={(e) => onAddress("city", e.target.value)}
-        className="border rounded p-2 md:w-1/2"
-      >
-        <option value="">District / Constituency</option>
-        {district_constituency.map((item, index) => (
-          <option key={index} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
-      <select
-        value={address.suburb}
-        onChange={(e) => onAddress("suburb", e.target.value)}
-        className="border rounded p-2 md:w-1/2"
-      >
-        <option value="">Area</option>
-        {address.city === "Accra Metropolitan / ABLEKUMA CENTRAL"
-          ? accraMetroAblCen.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Accra Metropolitan / ABLEKUMA NORTH"
-          ? accraMetroAblNor.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Accra Metropolitan / ABLEKUMA SOUTH"
-          ? accraMetroAblSou.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Accra Metropolitan / ABLEKUMA WEST"
-          ? accraMetroAblWes.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Accra Metropolitan / AYAWASO EAST"
-          ? accraMetroAyawaEast.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Accra Metropolitan / KLOTTEY KORLEY"
-          ? accraMetroKlotteyKo.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Accra Metropolitan / ODODODIODIOO"
-          ? accraMetroOdodio.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Accra Metropolitan / OKAIKWEI CENTRAL"
-          ? accraMetroOkaikweiCen.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Accra Metropolitan / OKAIKWEI SOUTH"
-          ? accraMetroOkaikweiSou.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ablekuma West Municipal / ABLEKUMA WEST"
-          ? ablekWestMun.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ayawaso Central Municipal / AYAWASO CENTRAL"
-          ? ayawasoCenMun.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ayawaso North Municipal / AYAWASO NORTH"
-          ? ayawasoNorMun.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ayawaso West Municipal / AYAWASO WEST WUOGON"
-          ? ayawasoWesWuogon.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Okaikwei North Municipal / OKAIKWEI NORTH"
-          ? okaikweiNor.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ada West District / SEGE"
-          ? adaWstSege.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ada East District / ADA"
-          ? adaEstAda.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Adentan Municipal / ADENTAN"
-          ? adentanMun.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ashaiman Municipal / ASHAIMAN"
-          ? ashaimanMun.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ga Central Municipal / ANYAA SOWUTUOM"
-          ? gaCenAnyaSowu.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ga South Municipal / NGLESHI AMANFRO"
-          ? gaSouNgleshi.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ga South Municipal / NGLESHI WEIJA GBAWE"
-          ? gaSouWeija.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ga South Municipal / DOMEABRA OBOM"
-          ? gaSouDomeAbra.map((item, index) => (
-              <option key={index} value={item}>
-                {" "}
-                {item}{" "}
-              </option>
-            ))
-          : address.city === "Ga East Municipal / DOME KWABENYA"
-          ? gaEastDomeKwabenya.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ga West Municipal / TROBU"
-          ? gaWestTrobu.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ga West Municipal / AMASAMAN"
-          ? gaWestAmasaman.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "La Dade Kotopon Municipal / DADE KOTOPON"
-          ? LaDadeKotopon.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "La Nkwantanang Madina Municipal / MADINA"
-          ? LaNkwanMadina.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ledzekuku Municipal / LEDZOKUKU"
-          ? LedzeZokuku.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ledzekuku Municipal / KROWOR"
-          ? LedzeKrowor.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Krowor Municipal /  KROWOR"
-          ? KrowoKrowo.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Ningo Prampram District / NINGO PRAMPRAM"
-          ? ningoPrampram.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Shai Osudoku District / SHAI OSUDOKU"
-          ? shaiOsudoku.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Tema Metropolitan / TEMA CENTRAL"
-          ? TemaCentral.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Tema Metropolitan / TEMA EAST"
-          ? TemaEast.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Tema West Municipal / TEMA WEST"
-          ? TemaWest.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : address.city === "Kpone Katamanso Municipal / KPONE KATAMANSO"
-          ? KponeKatamanso.map((item, index) => (
-              <option key={index} value={item}>
-                {item}
-              </option>
-            ))
-          : null}
-      </select>
+      <div className="flex-col flex md:w-1/2">
+        <select
+          {...register("address.city", { required: "Please select a city" })}
+          className="border rounded p-2 w-full h-10"
+        >
+          <option value="">District / Constituency</option>
+          {district_constituency.map((item, index) => (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+        {errors.address?.city && (
+          <p className="text-red-500">{errors.address?.city.message}</p>
+        )}
+      </div>
+
+      <div className="flex-col flex md:w-1/2 ">
+        <select
+          {...register("address.suburb", {
+            required: "Please select a suburb",
+          })}
+          className="border rounded p-2  h-10"
+        >
+          <option value="">Area</option>
+          {suburbs.map((item, index) => (
+            <option key={index} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+        {errors.address?.suburb && (
+          <p className="text-red-500 mt-2">{errors.address?.suburb.message}</p>
+        )}
+      </div>
     </>
   );
 };
