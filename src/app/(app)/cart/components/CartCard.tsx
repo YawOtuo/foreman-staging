@@ -47,7 +47,7 @@ function CartCard({ data }: Props) {
           />
         </div>
         <div className="flex flex-col items-start justify-start w-full">
-          <div className="flex items-center justify-between w-full">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-center lg:justify-between w-full gap-3">
             <h4 className="font-semibold">{data.product.name}</h4>
             <div className="lg:hidden">
               <CardQuantityControls quantity={data.quantity} cart_item={data} />
