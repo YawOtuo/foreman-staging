@@ -135,12 +135,12 @@ function LoginComponent() {
         type="button"
         name="Continue with Google"
       />
-      <LoginButton
+      {/* <LoginButton
         icon={<PiFacebookLogoDuotone />}
         onClick={() => {}}
         type="button"
         name="Continue with Facebook"
-      />
+      /> */}
     </form>
   );
 }

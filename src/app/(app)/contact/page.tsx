@@ -53,7 +53,7 @@ function Page() {
         <h6 className="font-semibold text-2xl">Feedback</h6>
       </header>
       <div className="w-full mt-10 p-6">
-        <p className="text-xl font-semibold">We love hear from you!</p>
+        <p className="text-xl font-semibold">We love to hear from you!</p>
       </div>
       <section className="mt-6 w-4/5 flex flex-col justify-between md:flex-row md:mt-10 md:h-72">
         <div className="">

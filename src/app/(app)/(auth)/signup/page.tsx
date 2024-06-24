@@ -95,7 +95,7 @@ function Page() {
             </div>
 
             <LoginButton icon={<PiGoogleLogo />} onClick={GoogleSignIn} type="button" name="Continue with Google"  />
-            <LoginButton icon={<PiFacebookLogoDuotone />} onClick={() => { }} type="button" name="Continue with Facebook"  />
+            {/* <LoginButton icon={<PiFacebookLogoDuotone />} onClick={() => { }} type="button" name="Continue with Facebook"  /> */}
         </form>
     );
 }
