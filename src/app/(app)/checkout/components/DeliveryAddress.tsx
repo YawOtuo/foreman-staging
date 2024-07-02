@@ -28,7 +28,7 @@ const DeliveryAddressForm = () => {
                 required: "Enter your name",
               })}
               type="text"
-              placeholder="Name"
+              placeholder="Name of Contact"
               className="border rounded p-2 w-full h-10"
             />
             {errors.address?.name && (
