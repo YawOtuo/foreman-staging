@@ -2,6 +2,7 @@ import PhoneInput from "./PhoneNo";
 import DropDown from "./DropDown";
 import { useFormContext } from "react-hook-form";
 import { FormFields } from "@/lib/types/form";
+import PhoneNoInput from "./PhoneNo";
 
 const DeliveryAddressForm = () => {
   const {
@@ -40,7 +41,8 @@ const DeliveryAddressForm = () => {
           </div>
           <div className="w-full md:w-1/2 flex flex-col">
             <div className="border rounded p-2 h-10">
-              <PhoneInput />
+              {/* <PhoneInput /> */}
+              <PhoneNoInput />
             </div>
             {errors.address?.phone && (
               <p className="text-red-600 mt-2 md:text-center">

@@ -42,14 +42,16 @@ export default function CheckOutPage() {
   const [deliveryCharge, setDeliveryCharge] = useState(50.0);
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    const formValues = getValues();
-    const selectedPaymentMethod = formValues.payment;
+    // const formValues = getValues();
+    // const selectedPaymentMethod = formValues.payment;
 
-    if (selectedPaymentMethod === "pay_delivery") {
-      checkout("delivery");
-    } else if (selectedPaymentMethod === "pay_now") {
-      checkout("now");
-    }
+    // if (selectedPaymentMethod === "pay_delivery") {
+    //   checkout("delivery");
+    // } else if (selectedPaymentMethod === "pay_now") {
+    //   checkout("now");
+    // }
+
+    console.log(data);
   };
 
   return (
@@ -81,14 +83,14 @@ export default function CheckOutPage() {
             {cart?.items?.length > 0 ? (
               <div className="mt-4 flex flex-col gap-5 md;gap-0">
                 {cart?.items?.map((cart_item: CartItem, index) => (
-                <div className="w-full" key={index} >
+                  <div className="w-full" key={index}>
                     <div className="lg:hidden w-full">
-                      <CheckProductSm cart_item={cart_item}  />
+                      <CheckProductSm cart_item={cart_item} />
                     </div>
-                     <div className="hidden lg:flex w-full">
-                     <CheckProduct cart_item={cart_item} />
-                   </div>
-                </div>
+                    <div className="hidden lg:flex w-full">
+                      <CheckProduct cart_item={cart_item} />
+                    </div>
+                  </div>
                 ))}
               </div>
             ) : (
@@ -110,7 +112,8 @@ export default function CheckOutPage() {
           <FormProvider {...methods}>
             <form
               className="flex flex-col sm:justify-centeritems-start lg:items-center flex-1 mt-6 "
-              onSubmit={methods.handleSubmit(onSubmit)}>
+              onSubmit={methods.handleSubmit(onSubmit)}
+            >
               <CheckSummary
                 deliveryCharge={deliveryCharge}
                 subTotal={cart.totalCost}
@@ -155,7 +158,8 @@ export default function CheckOutPage() {
                 )}{" "}
                 <Link
                   href="/warehousing"
-                  className="text-shade-300 uppercase text-right mt-6 underline">
+                  className="text-shade-300 uppercase text-right mt-6 underline"
+                >
                   Try warehousing
                 </Link>
               </div>
