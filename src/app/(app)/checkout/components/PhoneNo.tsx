@@ -17,7 +17,8 @@ const PhoneNoInput = () => {
           control={control as unknown as Control}
           rules={{
             required: "Enter phone number",
-            validate: (value: string) => isPossiblePhoneNumber(value),
+            validate: (value: string) =>
+              isPossiblePhoneNumber(value) || "Invalid phone number",
           }}
           defaultCountry="GH"
           international
