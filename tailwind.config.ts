@@ -7,6 +7,7 @@ const config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    "./node_modules/@nextui-org/theme/dist/components/popover.js",
   ],
   prefix: "",
   theme: {
@@ -27,11 +28,10 @@ const config = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
-          50:"#F5B42A",
+          50: "#F5B42A",
           100: "#E3B34B",
           200: "#e3b34b3b",
           300: "#e4c27a",
-
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",

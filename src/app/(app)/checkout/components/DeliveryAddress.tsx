@@ -3,6 +3,7 @@ import DropDown from "./DropDown";
 import { useFormContext } from "react-hook-form";
 import { FormFields } from "@/lib/types/form";
 import PhoneNoInput from "./PhoneNo";
+import Tip from "@/components/Tooltip";
 
 const DeliveryAddressForm = () => {
   const {
@@ -24,14 +25,16 @@ const DeliveryAddressForm = () => {
         </div>
         <div className="flex flex-col md:flex-row gap-5">
           <div className="w-full md:w-1/2 flex flex-col">
-            <input
-              {...register("address.name", {
-                required: "Enter your name",
-              })}
-              type="text"
-              placeholder="Name of Contact"
-              className="border rounded p-2 w-full h-10"
-            />
+            <Tip content="Please give us the name of the person who will be receiving the order">
+              <input
+                {...register("address.name", {
+                  required: "Enter your name",
+                })}
+                type="text"
+                placeholder="Name of Contact"
+                className="border rounded p-2 w-full h-10"
+              />
+            </Tip>
             {errors.address?.name && (
               <div className="text-red-600 mt-2">
                 {" "}
@@ -41,7 +44,6 @@ const DeliveryAddressForm = () => {
           </div>
           <div className="w-full md:w-1/2 flex flex-col">
             <div className="border rounded p-2 h-10">
-              {/* <PhoneInput /> */}
               <PhoneNoInput />
             </div>
             {errors.address?.phone && (
