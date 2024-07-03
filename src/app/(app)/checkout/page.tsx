@@ -39,22 +39,18 @@ export default function CheckOutPage() {
     formState: { errors, isSubmitting, isValid },
   } = methods;
 
-  useEffect(() => {
-    console.log("Submit val:", isSubmitting);
-  }, [isSubmitting]);
-
   const [deliveryCharge, setDeliveryCharge] = useState(50.0);
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    const formValues = getValues();
-    const selectedPaymentMethod = formValues.payment;
+    // const formValues = getValues();
+    // const selectedPaymentMethod = formValues.payment;
 
-    if (selectedPaymentMethod === "pay_delivery") {
-      checkout("delivery");
-    } else if (selectedPaymentMethod === "pay_now") {
-      checkout("now");
-    }
-    // console.log(data);
+    // if (selectedPaymentMethod === "pay_delivery") {
+    //   checkout("delivery");
+    // } else if (selectedPaymentMethod === "pay_now") {
+    //   checkout("now");
+    // }
+    console.log(data);
   };
 
   return (
