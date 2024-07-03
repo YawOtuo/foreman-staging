@@ -54,6 +54,24 @@ const DeliveryAddressForm = () => {
             )}
           </div>
         </div>
+        <div>
+          <Tip content="Enter delivery location">
+            <input
+              {...register("address.location", {
+                required: "Enter delivery location",
+              })}
+              type="text"
+              placeholder="Delivery Location (eg., street address, landmarks)"
+              className="border h-10 w-full p-2 rounded-sm"
+            />
+          </Tip>
+          {errors.address?.location && (
+            <p className="text-red-600 mt-2 md:text-center">
+              {" "}
+              {errors.address.location.message}{" "}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

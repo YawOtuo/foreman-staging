@@ -16,12 +16,12 @@ const PhoneNoInput = () => {
           name="address.phone"
           control={control as unknown as Control}
           rules={{
-            required: true,
+            required: "Enter phone number",
             validate: (value: string) => isPossiblePhoneNumber(value),
           }}
           defaultCountry="GH"
           international
-          countryCallingCodeEditable={false}
+          // countryCallingCodeEditable={false}
           placeholder="Enter phone number"
         />
       </Tip>

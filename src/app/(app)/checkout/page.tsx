@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineRight } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "@/lib/hooks/useCart";
@@ -39,19 +39,22 @@ export default function CheckOutPage() {
     formState: { errors, isSubmitting, isValid },
   } = methods;
 
+  useEffect(() => {
+    console.log("Submit val:", isSubmitting);
+  }, [isSubmitting]);
+
   const [deliveryCharge, setDeliveryCharge] = useState(50.0);
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    // const formValues = getValues();
-    // const selectedPaymentMethod = formValues.payment;
+    const formValues = getValues();
+    const selectedPaymentMethod = formValues.payment;
 
-    // if (selectedPaymentMethod === "pay_delivery") {
-    //   checkout("delivery");
-    // } else if (selectedPaymentMethod === "pay_now") {
-    //   checkout("now");
-    // }
-
-    console.log(data);
+    if (selectedPaymentMethod === "pay_delivery") {
+      checkout("delivery");
+    } else if (selectedPaymentMethod === "pay_now") {
+      checkout("now");
+    }
+    // console.log(data);
   };
 
   return (
@@ -158,7 +161,7 @@ export default function CheckOutPage() {
                 )}{" "}
                 <Link
                   href="/warehousing"
-                  className="text-shade-300 uppercase text-right mt-6 underline"
+                  className="text-shade-300 uppercase text-right mt-6 underline pb-10"
                 >
                   Try warehousing
                 </Link>
