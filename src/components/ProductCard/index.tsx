@@ -35,7 +35,8 @@ function ProductCard({ product }: Props) {
     <div className="group flex flex-col items-start justify-center border-[1px]  hover:scale-[1.02] duration-300 rounded-sm transition-all cursor-pointer">
       <Link
         href={`/product/${product.id}`}
-        className="relative w-full aspect-[3/2] min-w-[200px] ">
+        className="relative w-full aspect-[3/2] min-w-[200px] "
+      >
         <Image
           src={`https://res.cloudinary.com/daurieb51/${product?.images[0]?.image}`}
           alt={product.description}
@@ -54,7 +55,8 @@ function ProductCard({ product }: Props) {
           onClick={() => {
             console.log(play);
             setPlay(true);
-          }}>
+          }}
+        >
           {/* <FaRegHeart color="red"/> */}
           <button onClick={() => handleAddToFavourites(product.id)}>
             <IoHeart
@@ -99,7 +101,8 @@ function ProductCard({ product }: Props) {
                 product: product,
                 quantity: 1,
               })
-            }>
+            }
+          >
             <IoCartSharp className="mr-2" />
             Add to Cart
           </Button>

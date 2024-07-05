@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, LoadScript } from "@react-google-maps/api";
 import { useFormContext } from "react-hook-form";
 import usePlacesAutocomplete, {
   getGeocode,
@@ -20,11 +20,11 @@ const containerStyle = {
 };
 
 const center = {
-  // This is the longitude and latitude for Accra
   lat: 5.6037,
   lng: -0.187,
 };
 
+// Define libraries outside the component to avoid reloading
 const libraries: "places"[] = ["places"];
 
 const MapPicker: React.FC = () => {
@@ -32,6 +32,7 @@ const MapPicker: React.FC = () => {
   const [markerPosition, setMarkerPosition] = useState(center);
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const [geocoder, setGeocoder] = useState<google.maps.Geocoder | null>(null);
+  const [marker, setMarker] = useState<any>(null); // Use any type for flexibility
 
   useEffect(() => {
     if (window.google) {
@@ -61,12 +62,35 @@ const MapPicker: React.FC = () => {
 
   const onMapLoad = (map: google.maps.Map) => {
     setMap(map);
+    if (
+      window.google &&
+      google.maps.marker &&
+      google.maps.marker.AdvancedMarkerElement
+    ) {
+      const newMarker = new google.maps.marker.AdvancedMarkerElement({
+        map,
+        position: markerPosition,
+      });
+      setMarker(newMarker);
+    } else {
+      console.error(
+        "AdvancedMarkerElement is not available in google.maps.marker."
+      );
+    }
   };
+
+  useEffect(() => {
+    if (marker) {
+      marker.position = markerPosition;
+      marker.map = map;
+    }
+  }, [markerPosition, marker, map]);
 
   return (
     <LoadScript
       googleMapsApiKey="AIzaSyBVujVNppIhzZptI8sSig-8GDH2CrQcAbY"
       libraries={libraries}
+      loadingElement={<div>Loading...</div>}
     >
       <div className="relative">
         <div className="absolute top-2 left-2 right-2 z-10">
@@ -83,7 +107,7 @@ const MapPicker: React.FC = () => {
           onClick={onMapClick}
           onLoad={onMapLoad}
         >
-          <Marker position={markerPosition} />
+          {/* Marker is now managed via useEffect */}
         </GoogleMap>
       </div>
     </LoadScript>
@@ -130,6 +154,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       const newPosition = { lat, lng };
       setMarkerPosition({ lat, lng });
       updateLocationValue(newPosition);
+      setValue("address.location", `${lat}, ${lng}`);
       map?.panTo({ lat, lng });
     } catch (error) {
       console.log("Error:", error);
