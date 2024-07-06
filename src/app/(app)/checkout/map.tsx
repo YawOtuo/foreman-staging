@@ -5,7 +5,11 @@ import { Loader } from "@googlemaps/js-api-loader";
 const Map: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const { setValue, register } = useFormContext();
+  const {
+    setValue,
+    register,
+    formState: { errors },
+  } = useFormContext();
   const [coordinates, setCoordinates] = useState<string>("");
 
   useEffect(() => {
@@ -111,7 +115,7 @@ const Map: React.FC = () => {
         }}
       />
       <div ref={mapRef} style={{ width: "100%", height: "400px" }}></div>
-      <input
+      {/* <input
         type="text"
         value={coordinates}
         readOnly
@@ -121,7 +125,7 @@ const Map: React.FC = () => {
           width: "100%",
           padding: "5px",
         }}
-      />
+      /> */}
       <input
         type="text"
         readOnly
@@ -131,7 +135,9 @@ const Map: React.FC = () => {
           width: "100%",
           padding: "5px",
         }}
-        {...register("address.location")}
+        {...register("address.location", {
+          required: "Search for a location on the map",
+        })}
       />
     </div>
   );

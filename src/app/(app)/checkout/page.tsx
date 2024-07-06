@@ -42,15 +42,15 @@ export default function CheckOutPage() {
   const [deliveryCharge, setDeliveryCharge] = useState(50.0);
 
   const onSubmit: SubmitHandler<FormFields> = async (data) => {
-    // const formValues = getValues();
-    // const selectedPaymentMethod = formValues.payment;
+    const formValues = getValues();
+    const selectedPaymentMethod = formValues.payment;
 
-    // if (selectedPaymentMethod === "pay_delivery") {
-    //   checkout("delivery");
-    // } else if (selectedPaymentMethod === "pay_now") {
-    //   checkout("now");
-    // }
-    console.log(data);
+    if (selectedPaymentMethod === "pay_delivery") {
+      checkout("delivery");
+    } else if (selectedPaymentMethod === "pay_now") {
+      checkout("now");
+    }
+    // console.log(data);
   };
 
   return (
@@ -138,6 +138,7 @@ export default function CheckOutPage() {
               <div className="mt-5 w-full sm:w-4/5 flex flex-col gap-3 justify-center items-center">
                 {DBDetails.email ? (
                   <CheckoutButton
+                    onClick={() => onSubmit}
                     disabled={isSubmitting} // Disable button if form is not valid
                   />
                 ) : (
