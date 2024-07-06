@@ -12,7 +12,7 @@ function Warehousing() {
         </header>
         <div className="flex flex-col md:flex-row w-full py-10 px-6 md:gap-6">
           <div className="md:w-1/2">
-            <Link href={"#"} className="space-y-3 hover:underline">
+            <div className="space-y-3">
               <p>
                 Make your dream home or project a reality with the Foreman
                 Warehousing option. The best preparation for tomorrow is doing
@@ -26,9 +26,12 @@ function Warehousing() {
               </p>
               <p>
                 We will store them for you until you are ready to build. It's
-                that simple and convenient. You can build it…. Start today!{" "}
+                that simple and convenient. You can build it….
+                <Link href={"#"} className="text-yellow-400 hover:underline">
+                  Start today!
+                </Link>
               </p>
-            </Link>
+            </div>
           </div>
           <div className="flex justify-center items-center mt-6 md:mt-0">
             <Image

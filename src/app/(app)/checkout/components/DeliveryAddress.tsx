@@ -4,7 +4,7 @@ import { useFormContext } from "react-hook-form";
 import { FormFields } from "@/lib/types/form";
 import PhoneNoInput from "./PhoneNo";
 import Tip from "@/components/Tooltip";
-import MapPicker from "./MapPicker";
+import Map from "../map";
 
 const DeliveryAddressForm = () => {
   const {
@@ -57,21 +57,7 @@ const DeliveryAddressForm = () => {
         </div>
         <div>
           <div className="w-full flex flex-col">
-            <MapPicker />
-            <input
-              {...register("address.location", {
-                required: "Please select a delivery location on the map",
-              })}
-              type="text"
-              readOnly
-              placeholder="Selected Location"
-              className="border rounded p-2 w-full h-10 mt-2"
-            />
-            {errors.address?.location && (
-              <div className="text-red-600 mt-2">
-                {errors.address.location.message}
-              </div>
-            )}
+            <Map />
           </div>
         </div>
       </div>
