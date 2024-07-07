@@ -2,6 +2,9 @@ import PhoneInput from "./PhoneNo";
 import DropDown from "./DropDown";
 import { useFormContext } from "react-hook-form";
 import { FormFields } from "@/lib/types/form";
+import PhoneNoInput from "./PhoneNo";
+import Tip from "@/components/Tooltip";
+import Map from "../map";
 
 const DeliveryAddressForm = () => {
   const {
@@ -23,14 +26,16 @@ const DeliveryAddressForm = () => {
         </div>
         <div className="flex flex-col md:flex-row gap-5">
           <div className="w-full md:w-1/2 flex flex-col">
-            <input
-              {...register("address.name", {
-                required: "Enter your name",
-              })}
-              type="text"
-              placeholder="Name"
-              className="border rounded p-2 w-full h-10"
-            />
+            <Tip content="Please give us the name of the person who will be receiving the order">
+              <input
+                {...register("address.name", {
+                  required: "Enter your name",
+                })}
+                type="text"
+                placeholder="Name of Contact"
+                className="border rounded p-2 w-full h-10"
+              />
+            </Tip>
             {errors.address?.name && (
               <div className="text-red-600 mt-2">
                 {" "}
@@ -40,12 +45,22 @@ const DeliveryAddressForm = () => {
           </div>
           <div className="w-full md:w-1/2 flex flex-col">
             <div className="border rounded p-2 h-10">
-              <PhoneInput />
+              <PhoneNoInput />
             </div>
             {errors.address?.phone && (
               <p className="text-red-600 mt-2 md:text-center">
                 {" "}
                 {errors.address.phone.message}{" "}
+              </p>
+            )}
+          </div>
+        </div>
+        <div>
+          <div className="w-full flex flex-col">
+            <Map />
+            {errors.address?.location && (
+              <p className="text-red-600 mt-2 md:text-center">
+                {errors.address.location.message}
               </p>
             )}
           </div>

@@ -19,18 +19,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-      <section
-        className={`${mont.className} bg-slate-50 flex flex-col justify-center items-center`}>
-        <div className="w-full max-w-[1750px] flex flex-col items-center bg-white">
-          <MobileMenuWrapper>
-            <InfoBar />
-            <Navbar />
-            <div className="w-full"> {children}</div>
-            <div className="">
-              <Footer />
-            </div>
-          </MobileMenuWrapper>
-        </div>
-      </section>
+    <section
+      className={`${mont.className} bg-slate-50 flex flex-col justify-center items-center`}
+    >
+      <div className="w-full max-w-[1750px] flex flex-col items-center bg-white">
+        <MobileMenuWrapper>
+          <InfoBar />
+          <Navbar />
+          <div className="w-full"> {children}</div>
+          <div className="">
+            <Footer />
+          </div>
+        </MobileMenuWrapper>
+      </div>
+    </section>
   );
 }

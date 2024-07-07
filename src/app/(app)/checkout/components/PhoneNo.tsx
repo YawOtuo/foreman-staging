@@ -1,47 +1,33 @@
-import { FormFields } from "@/lib/types/form";
 import React from "react";
-import { Controller, useFormContext } from "react-hook-form";
-import IntlTelInput from "react-intl-tel-input";
-import "react-intl-tel-input/dist/main.css";
+import "react-phone-number-input/style.css";
+import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
+import { useFormContext, Control } from "react-hook-form";
+import { isPossiblePhoneNumber } from "react-phone-number-input";
+import "./phoneInput.css";
+import Tip from "@/components/Tooltip";
 
-const PhoneInput = () => {
-  const {
-    control,
-    formState: { errors },
-  } = useFormContext<FormFields>();
+const PhoneNoInput = () => {
+  const { control } = useFormContext();
 
   return (
-    <>
-      <Controller
-        name="address.phone"
-        control={control}
-        rules={{
-          required: "Phone number is required",
-          validate: (value) => {
-            return (value && value.length >= 10) || "Invalid phone number";
-          },
-        }}
-        render={({ field: { onChange, value } }) => (
-          <IntlTelInput
-            value={value}
-            onPhoneNumberChange={(
-              isValid,
-              value,
-              selectedCountryData,
-              fullNumber,
-              extension
-            ) => {
-              onChange(fullNumber);
-            }}
-            preferredCountries={["gh", "us"]}
-            containerClassName="intl-tel-input"
-            inputClassName="form-control focus:outline-none focus:ring-0 w-full"
-            formatOnInit={true}
-          />
-        )}
-      />
-    </>
+    <div className="phone-input-container">
+      <Tip content="Enter phone number of recipient">
+        <PhoneInputWithCountry
+          name="address.phone"
+          control={control as unknown as Control}
+          rules={{
+            required: "Enter phone number",
+            validate: (value: string) =>
+              isPossiblePhoneNumber(value) || "Invalid phone number",
+          }}
+          defaultCountry="GH"
+          international
+          // countryCallingCodeEditable={false}
+          placeholder="Enter phone number"
+        />
+      </Tip>
+    </div>
   );
 };
 
-export default PhoneInput;
+export default PhoneNoInput;

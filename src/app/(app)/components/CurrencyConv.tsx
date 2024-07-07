@@ -22,8 +22,9 @@ const CurrencyConv = () => {
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="GHS">GHS</SelectItem>
-          <SelectItem value="NGN">NGN</SelectItem>
+          <SelectItem value="GBP">GBP</SelectItem>
           <SelectItem value="USD">USD</SelectItem>
+          <SelectItem value="EUR">EUR</SelectItem>
         </SelectContent>
       </Select>
     </>

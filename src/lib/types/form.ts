@@ -3,6 +3,7 @@ export type AddressProps = {
   suburb: string;
   name: string;
   phone: string;
+  location: string;
 };
 
 export interface FormFields {

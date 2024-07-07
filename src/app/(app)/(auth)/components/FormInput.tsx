@@ -15,7 +15,7 @@ export default function FormInput({ label, type, placeholder, value, name, requi
 
 
     return (
-        <div className="w-full max-w-[600px] flex flex-col items-start gap-1">
+        <div className="flex flex-col items-start gap-1">
             <label htmlFor={label}>{label}</label>
             <input
                 type={type}

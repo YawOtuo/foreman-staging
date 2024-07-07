@@ -71,7 +71,8 @@ function CartCard({ data }: Props) {
             className="text-primary-100"
             variant={"ghost"}
             size={"sm"}
-            fontSize={"sm"}>
+            fontSize={"sm"}
+          >
             <MdDeleteOutline size={20} className="mr-1" />
             Remove
           </Button>
@@ -79,7 +80,8 @@ function CartCard({ data }: Props) {
             variant={"ghost"}
             size={"sm"}
             fontSize={"sm"}
-            onClick={() => handleAddToFavourites(data.product.id)}>
+            onClick={() => handleAddToFavourites(data.product.id)}
+          >
             <FaRegHeart className="mr-2" />
             Move To Favourites
           </Button>

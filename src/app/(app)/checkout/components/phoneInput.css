@@ -1,0 +1,4 @@
+/* PhoneNoInput.css */
+.phone-input-container .PhoneInputInput:focus {
+  outline: none;
+}
