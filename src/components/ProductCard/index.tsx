@@ -3,7 +3,6 @@ import Image from "next/image";
 import { IoCartSharp } from "react-icons/io5";
 import LottieFileBuilder from "../LottieFileBuilder";
 import animationData from "@/lotties/like1.json";
-import useCart from "@/lib/hooks/useCart";
 import { Product } from "@/lib/types/product";
 import { Button } from "../ui/button";
 import useLottie from "@/lib/hooks/useLottie";
@@ -15,6 +14,7 @@ import { TiTick } from "react-icons/ti";
 import { useCurrency } from "@/context/CurrencyContext";
 import { convertPrice } from "@/lib/utils/convertPrice";
 import Link from "next/link";
+import useCart from "@/lib/hooks/useCart";
 
 type Props = {
   product: Product;

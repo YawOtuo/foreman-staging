@@ -2,9 +2,12 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { UserIcon } from "lucide-react";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { useDashboardMobileStore } from "./DashboardMobileNavbar/components/useDashboardMobileNavStore";
 
 function DashboardHorizonalMenu() {
   const { FBaseDetails, DBDetails } = useAppStore();
+  const {setDashboardMobileMenu } = useDashboardMobileStore()
   return (
     <div className=" flex items-center justify-between px-4 gap-5 border-b-2 py-1 text-sm">
       <div>
@@ -30,6 +33,12 @@ function DashboardHorizonalMenu() {
           {DBDetails?.name}
           {DBDetails?.email}
         </div>
+      </div>
+
+      <div className="lg:hidden flex items-center">
+        <button onClick={() => setDashboardMobileMenu(true)}>
+          <GiHamburgerMenu size={30} />
+        </button>
       </div>
     </div>
   );

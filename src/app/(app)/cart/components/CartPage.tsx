@@ -2,12 +2,12 @@
 import React from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import useCart from "@/lib/hooks/useCart";
 import CartCard from "./CartCard";
 import CartSummary from "./CartSummary";
 import { Button } from "@/components/ui/button";
 import { CartItem } from "@/lib/types/cart";
 import Link from "next/link";
+import useCart from "@/lib/hooks/useCart";
 
 function CartPage() {
   const router = useRouter();

@@ -46,7 +46,7 @@ function Navbar() {
           </Link>
         ))}
         <Link className="" href={"/cart"}>
-          <IoCartOutline size={20} />
+          <IoCartOutline size={25} className="text-primary" />
         </Link>
         {/* {!data?.user ? (
           <div>
@@ -60,7 +60,10 @@ function Navbar() {
         )} */}
       </div>
 
-      <div className="lg:hidden flex items-center">
+      <div className="lg:hidden flex gap-4 items-center">
+        <Link  href={"/cart"}>
+          <IoCartOutline size={25} className="text-primary" />
+        </Link>
         <button onClick={() => setMobileMenuStore(true)}>
           <GiHamburgerMenu size={30} />
         </button>

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Cart, CartItem } from "../types/cart";
 import { useToast } from "@/components/ui/use-toast";
 import { useAppStore } from "../store/useAppStore";
+import Link from "next/link";
 
 const initialCart: Cart = {
   items: [],
@@ -12,12 +13,17 @@ const initialCart: Cart = {
   totalCost: 0,
 };
 
+// const ToastDesc = () => {
+//   return (
+//     <div><div>
+//   )
+// }
+
 const useCart = () => {
   let cart: Cart = initialCart; // Initialize cart with initialCart
   let setCart: (cart: Cart) => void;
   const { toast } = useToast();
-  const {DBDetails} = useAppStore()
-
+  const { DBDetails } = useAppStore();
 
   if (typeof window !== "undefined") {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -39,7 +45,7 @@ const useCart = () => {
     calculateTotals();
   }, [cart.items]);
 
-  const AddToCart = (item: Omit<CartItem, 'totalCost'>) => {
+  const AddToCart = (item: Omit<CartItem, "totalCost">) => {
     const existingItem = cart.items.find((cartItem) => cartItem.id === item.id);
 
     if (existingItem) {
@@ -56,7 +62,12 @@ const useCart = () => {
     setCart({ ...cart });
     toast({
       title: "Success",
-      description: "Item added to Cart",
+      description: (
+        <div className="flex flex-col gap-0 items-start">
+          <p>Item added to cart Successfully</p>
+          <Link href={'/cart'} className="uppercase font-bold">View Cart</Link>
+        </div>
+      ),
       variant: "success",
     });
   };
