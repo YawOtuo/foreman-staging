@@ -40,7 +40,7 @@ function CartCard({ data }: Props) {
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-center w-full gap-5">
         <div className="relative w-full aspect-[3/2] lg:max-w-[150px] ">
           <Image
-            src={`https://res.cloudinary.com/daurieb51/${data.product?.images[0]?.image}`}
+            src={`https://res.cloudinary.com/dajli9sqa/${data.product?.images[0]?.image}`}
             alt={data.product.description}
             fill
             objectFit="cover"
