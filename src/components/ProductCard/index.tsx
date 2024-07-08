@@ -38,7 +38,7 @@ function ProductCard({ product }: Props) {
         className="relative w-full aspect-[3/2] min-w-[200px] "
       >
         <Image
-          src={`https://res.cloudinary.com/daurieb51/${product?.images[0]?.image}`}
+          src={`https://res.cloudinary.com/dajli9sqa/${product?.images[0]?.image}`}
           alt={product.description}
           fill
           objectFit="cover"

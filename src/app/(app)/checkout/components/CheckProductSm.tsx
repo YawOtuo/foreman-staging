@@ -22,7 +22,7 @@ const CheckProductSm: React.FC<CheckProductSmRowProps> = ({ cart_item }) => {
     <div className="flex  flex-col  items-start justify-between text-sm sm:text-base border-2 py-0  px-0  rounded-xl overflow-hidden">
       <div className="flex flex-col  justify-start relative l w-full items-start  gap-2 lg:gap-5">
         <OptimizedImage
-          src={`https://res.cloudinary.com/daurieb51/${cart_item.product?.images[0]?.image}`}
+          src={`https://res.cloudinary.com/dajli9sqa/${cart_item.product?.images[0]?.image}`}
           alt={cart_item.product.description}
           className="aspect-[3/2]  lg:max-w-[150px] lg:aspect-[4/3] "
         />

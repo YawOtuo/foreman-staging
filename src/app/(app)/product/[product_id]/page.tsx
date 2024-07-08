@@ -56,7 +56,7 @@ export default function ProductDetailPage({
             {product?.images.map((image) => (
               <SwiperSlide key={image.id} className="">
                 <OptimizedImage
-                  src={`https://res.cloudinary.com/daurieb51/${image.image}`}
+                  src={`https://res.cloudinary.com/dajli9sqa/${image.image}`}
                   alt={product?.name}
                   className="w-full  aspect-[4/3] bg-cover rounded-lg overflow-hidden"
                 />

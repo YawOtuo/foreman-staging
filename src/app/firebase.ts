@@ -6,22 +6,14 @@ import { getAuth } from "firebase/auth";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// const firebaseConfig = {
-//     apiKey: "AIzaSyDjC671J7lxzjV4JBjbpBGUzsDpKKH6DVA",
-//     authDomain: "foreman-cbd1a.firebaseapp.com",
-//     projectId: "foreman-cbd1a",
-//     storageBucket: "foreman-cbd1a.appspot.com",
-//     messagingSenderId: "197439938160",
-//     appId: "1:197439938160:web:04848d891008f80b9a5eb5"
-// };
 const firebaseConfig = {
-  apiKey: "AIzaSyAx4UwWnB3Fb4v5Pl_zW1LQlk-Sh6XrWJc",
-  authDomain: "an-inventory.firebaseapp.com",
-  projectId: "an-inventory",
-  storageBucket: "an-inventory.appspot.com",
-  messagingSenderId: "1010216538288",
-  appId: "1:1010216538288:web:e2b56237af605cd26aeb75",
-  measurementId: "G-YNNE3JY74S",
+  apiKey: "AIzaSyCyrMG6ik7QhufU89tHGxqqresu2TxkTUc",
+  authDomain: "foreman-f3e68.firebaseapp.com",
+  projectId: "foreman-f3e68",
+  storageBucket: "foreman-f3e68.appspot.com",
+  messagingSenderId: "138274873973",
+  appId: "1:138274873973:web:6d9db6716c2bfbd5ee4e3c",
+  measurementId: "G-ZR27E4C091",
 };
 
 // Initialize Firebase
