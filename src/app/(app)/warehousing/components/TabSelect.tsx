@@ -19,7 +19,6 @@ const TabSelect = ({ isClicked, handleClick }: TabSelectProps) => {
         onClick={() => handleClick("just buy")}
       >
         <IoDiamondOutline
-          //   size={60}
           className={`${
             isClicked === "just buy" ? "text-red-500" : "text-gray-500 "
           } sm:text-6xl text-5xl`}
@@ -38,7 +37,6 @@ const TabSelect = ({ isClicked, handleClick }: TabSelectProps) => {
         onClick={() => handleClick("project")}
       >
         <FaRegCircleCheck
-          //   size={60}
           className={`${
             isClicked === "project" ? "text-red-500" : "text-gray-300"
           } sm:text-6xl text-5xl`}
