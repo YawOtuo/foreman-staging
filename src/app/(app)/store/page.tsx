@@ -22,7 +22,7 @@ function StoreContent() {
   }, [searchParams]);
 
   return (
-    <div className="flex flex-col  w-full ">
+    <div className="flex flex-col  w-full pb-10 ">
       <div className="w-full flex items-start pt-5 justify-center min-h-[100vh]">
         <div className="flex flex-col gap-5 justify-center items-start   px-7 w-full lg:max-w-[70vw]">
           <p className="text-2xl font-semibold">Store</p>
@@ -37,7 +37,7 @@ function StoreContent() {
             success={allProducts?.map((r: Product) => (
               <ProductCard key={r?.id} product={r} />
             ))}
-            skeletonCount={6}
+            skeletonCount={10}
             loading={<PCSkeleton />}
             isLoading={allProductsLoading}
             isError={allProductsError}

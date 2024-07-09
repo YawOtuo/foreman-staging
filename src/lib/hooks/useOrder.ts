@@ -7,11 +7,12 @@ import { useAppStore } from "../store/useAppStore";
 import {
   CreateOrder,
   DeleteOrder,
+  FetchOrderDetails,
   FetchOrders,
   UpdateOrder,
 } from "../api/orders";
 
-function useOrders() {
+function useOrders(orderNumber?: number) {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const { DBDetails, FBaseDetails } = useAppStore();
@@ -26,6 +27,7 @@ function useOrders() {
     queryFn: () => FetchOrders(user_id),
     enabled: !!DBDetails?.id,
   });
+
 
   const createOrderMutation = useMutation({
     mutationFn: (orderData: CreateOrderArgs) => CreateOrder(user_id, orderData),
@@ -43,8 +45,7 @@ function useOrders() {
   });
 
   const updateOrderMutation = useMutation({
-    mutationFn: ( orderData : UpdateOrderArgs) =>
-      UpdateOrder( user_id, orderData),
+    mutationFn: (orderData: UpdateOrderArgs) => UpdateOrder(user_id, orderData),
     onSuccess: (data) => {
       toast({
         title: "Success",
@@ -106,6 +107,7 @@ function useOrders() {
   };
 
   return {
+   
     orderData,
     isOrderLoading,
     orderError,

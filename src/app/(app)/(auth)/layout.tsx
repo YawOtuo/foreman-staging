@@ -1,9 +1,11 @@
 "use client";
+import useIsLoggedInReRoute from "@/lib/hooks/useIsLoggedInReRoute";
 import { usePathname } from "next/navigation";
 
 export default function AuthLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  useIsLoggedInReRoute(true, '/dashboard')
   const pathname = usePathname();
   return (
     <div className={`flex flex-col lg:flex-row w-full justify-between `}>

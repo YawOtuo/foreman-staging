@@ -1,8 +1,11 @@
+"use client"
+import useIsLoggedInReRoute from "@/lib/hooks/useIsLoggedInReRoute";
 import DashboardHorizonalMenu from "./components/DashboardHorizontalMenu";
 import DashboardMobileMenuWrapper from "./components/DashboardMobileNavbar/DashboardMobileMenuWrapper";
 import DashboardSideMenu from "./components/DashboardSideMenu";
 
 function Layout({ children }: { children: React.ReactNode }) {
+  useIsLoggedInReRoute(false, "/login")
   return (
    <DashboardMobileMenuWrapper>
      <div className="flex flex-col">
