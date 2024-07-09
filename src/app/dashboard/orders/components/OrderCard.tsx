@@ -32,8 +32,8 @@ function OrderCard({ order }: Props) {
           <span className="font-semibold">{order.total_cost}</span>
         </p>
       </div>
-      <p>{order.total_quantity}</p>
-      <p>{order.total_cost}</p>
+      <p className="hidden lg:flex">{order.total_quantity}</p>
+      <p className="hidden lg:flex">{order.total_cost}</p>
     </div>
   );
 }
