@@ -10,7 +10,7 @@ import Link from "next/link";
 function Orders() {
   const { orderData, isOrderLoading, orderError } = useOrders();
   return (
-    <div className="flex flex-col gap-5 px-5 min-h-[500px]">
+    <div className="flex flex-col gap-5 px-5 ">
       <p className="text-xl font-semibold">My Orders</p>
 
       <div className="hidden lg:grid grid-cols-6 gap-x-5 text-sm text-primary font-semibold capitalize items-center px-5">

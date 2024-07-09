@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${mont.className} bg-slate-50 flex flex-col justify-center items-center`}
+        className={`${mont.className} flex flex-col justify-center items-center`}
       >
         <Providers>
           <Suspense fallback={null}>

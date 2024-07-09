@@ -12,7 +12,7 @@ function Layout({ children }: { children: React.ReactNode }) {
       <DashboardHorizonalMenu />
         <div className="bg-white grid grid-cols-5">
           <DashboardSideMenu />
-          <div className="col-span-5 w-full lg:col-span-4"> {children}</div>
+          <div className="col-span-5 w-full lg:col-span-4 "> {children}</div>
         </div>
      </div>
    </DashboardMobileMenuWrapper>
