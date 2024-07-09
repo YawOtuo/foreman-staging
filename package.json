@@ -26,6 +26,7 @@
     "@tanstack/react-query-devtools": "^5.40.1",
     "@types/google.maps": "^3.55.11",
     "@uidotdev/usehooks": "^2.4.1",
+    "axios": "^1.7.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.1.3",
