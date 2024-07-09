@@ -85,7 +85,7 @@ function LoginComponent() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="self-start flex flex-col gap-4 pt-4">
+      className="self-start flex flex-col gap-4 pt-4 lg:min-w-[400px]">
       <FormInput
         required
         label="Email"

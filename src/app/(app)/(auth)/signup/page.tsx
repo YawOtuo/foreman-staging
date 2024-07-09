@@ -71,7 +71,7 @@ function Page() {
 
     return (
 
-        <form onSubmit={handleSubmit} className="self-start flex flex-col gap-4 pt-4">
+        <form onSubmit={handleSubmit} className="self-start flex flex-col gap-4 pt-4 lg:min-w-[400px]">
             <FormInput required label="Email" type="" placeholder="Enter your email" value="" name="email" />
             <FormInput required label="Password" type="password" placeholder="Enter your password" value="" name="password" />
             <Button variant={"default"} type="submit" className="bg-primary-100 text-white w-full p-3 flex items-center justify-center gap-2">
