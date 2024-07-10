@@ -29,17 +29,17 @@ function StoreSearch() {
   const { setFilter, setAscendingOrDescending, clearFilter } = useStoreStore();
   return (
     <div className="flex flex-col gap-5">
-      <div className="flex items-center w-full    border-[1px]">
+      <div className="flex items-center w-full rounded-md  border-[1px]">
         <input
           onChange={(e) => setFilter({ search: e.target.value })}
           type="
               search"
-          className="w-full  px-5 py-2"
+          className="w-full focus:outline-primary   px-5 py-3"
         />
-        <button className="group px-5 lg:px-10 py-2 bg-primary-200 h-full ">
+        <button className="group px-5 rounded-r-md lg:px-10 py-3 bg-primary h-full ">
           <FaSearch
-            size={30}
-            className="text-shade-200 group-hover:text-black"
+            size={24}
+            className="text-white "
           />
         </button>
       </div>
