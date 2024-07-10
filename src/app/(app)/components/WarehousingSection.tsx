@@ -3,7 +3,7 @@ import { GrLike } from "react-icons/gr";
 
 export default function WarehousingSection() {
     return (
-        <section className="lg:mt-20 w-full grid grid-cols-1 lg:grid-cols-2 gap-14  items-center justify-center ">
+        <section className="lg:mt-20 w-full md:w-[90%] pb-10 grid grid-cols-1 lg:grid-cols-2 gap-14  items-center justify-center ">
             <div className="w-full relative aspect-square order-2 lg:order-1">
                 <Image src={"/WarehousingSection.png"} fill alt="An Illustration displayng warehousing " />
             </div>
