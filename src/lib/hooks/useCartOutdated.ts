@@ -51,7 +51,7 @@ function useCart() {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
+      toast({ title: "Error", description: error.message, variant: "destructive" });
     },
   });
 
@@ -67,7 +67,7 @@ function useCart() {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
+      toast({ title: "Error", description: error.message, variant: "destructive" });
     },
   });
 
@@ -83,7 +83,7 @@ function useCart() {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
+      toast({ title: "Error", description: error.message, variant: "destructive" });
     },
   });
 
@@ -99,7 +99,7 @@ function useCart() {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
+      toast({ title: "Error", description: error.message, variant: "destructive" });
     },
   });
 

@@ -40,7 +40,7 @@ function useOrders(orderNumber?: number) {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
+      toast({ title: "Error", description: error.message, variant: "destructive" });
     },
   });
 
@@ -55,7 +55,7 @@ function useOrders(orderNumber?: number) {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
+      toast({ title: "Error", description: error.message, variant: "destructive" });
     },
   });
 
@@ -70,7 +70,7 @@ function useOrders(orderNumber?: number) {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
+      toast({ title: "Error", description: error.message, variant: "destructive" });
     },
   });
   const handleCreateOrder = async (orderData: CreateOrderArgs) => {

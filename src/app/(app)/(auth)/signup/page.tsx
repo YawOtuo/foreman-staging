@@ -36,7 +36,7 @@ function Page() {
             toast({
                 title: `Error ${errorCode}`,
                 description: errorMessage,
-                variant: "error"
+                variant: "destructive"
             })
             console.log({ errorCode, errorMessage });
         });
