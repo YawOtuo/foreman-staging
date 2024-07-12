@@ -13,7 +13,6 @@ export default function useAuthState(auth: any) {
     const unsubscribe = onAuthStateChanged(
       auth,
       async (userAuth: any) => {
-        console.log('userAuth', userAuth.providerData?.[0]?.email)
         try {
           if (userAuth) {
             // Set Firebase details
