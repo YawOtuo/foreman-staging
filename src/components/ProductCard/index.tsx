@@ -32,13 +32,13 @@ function ProductCard({ product }: Props) {
   );
 
   return (
-    <div className="group flex flex-col items-start justify-center border-[1px]  hover:scale-[1.02] duration-300 rounded-sm transition-all cursor-pointer">
+    <div className="group flex flex-col items-start justify-center border-[1px]  hover:scale-[1.02] duration-300 rounded-lg overflow-hidden transition-all cursor-pointer">
       <Link
         href={`/product/${product.id}`}
         className="relative w-full aspect-[3/2] min-w-[200px] "
       >
         <Image
-          src={`https://res.cloudinary.com/daurieb51/${product?.images[0]?.image}`}
+          src={`https://res.cloudinary.com/dajli9sqa/${product?.images[0]?.image}`}
           alt={product.description}
           fill
           objectFit="cover"

@@ -17,8 +17,7 @@ function HeroSection() {
       <div className="flex flex-col gap-6 transition-all ">
         <div className="flex flex-col gap-3">
           <p className="text-3xl lg:text-5xl font-bold">
-            High-Quality
-            <br className="hidden 2xl:block" />
+            High-Quality <br className="hidden 2xl:block" />
             Construction Materials for Every Project
           </p>
           <p className="text-base">
@@ -33,9 +32,11 @@ function HeroSection() {
               Start Shopping
             </Button>{" "}
           </Link>
-          <Button size={"md"} className="px-7" variant="outline">
-            Discover
-          </Button>
+          <Link href={"/warehousing"}>
+            <Button size={"md"} className="px-7" variant="outline">
+              Try Warehousing
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="hidden lg:flex h-full items-center w-full  transition-all">

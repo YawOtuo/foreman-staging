@@ -5,14 +5,15 @@ import OrderCard from "./components/OrderCard";
 import { Button } from "@/components/ui/button";
 import OrderCardSkeleton from "./components/OrderCardSkeleton";
 import { Order } from "@/lib/types/order";
+import Link from "next/link";
 
 function Orders() {
   const { orderData, isOrderLoading, orderError } = useOrders();
   return (
-    <div className="flex flex-col gap-5 px-5">
+    <div className="flex flex-col gap-5 px-5 ">
       <p className="text-xl font-semibold">My Orders</p>
 
-      <div className="grid grid-cols-6 gap-x-5 text-sm text-primary font-semibold capitalize items-center px-5">
+      <div className="hidden lg:grid grid-cols-6 gap-x-5 text-sm text-primary font-semibold capitalize items-center px-5">
         <p>id</p>
         <p className="col-span-2">Date Created</p>
         <p>paid</p>
@@ -21,25 +22,25 @@ function Orders() {
       </div>
       <div className="w-full">
         <FetchingState
-          className={"w-full flex flex-col gap-2"}
+          className={"w-full flex flex-col gap-5"}
           success={orderData?.map((r: Order) => (
-            <div className="" key={r?.id}>
+            <Link href={`/dashboard/orders/${r?.id}`} className="" key={r?.id}>
               <OrderCard order={r} />
-            </div>
+            </Link>
           ))}
           skeletonCount={6}
           loading={
-            <div className=" mb-5">
+            <div className=" mb-1">
               <OrderCardSkeleton />
             </div>
           }
           nullComponent={
             orderData &&
             orderData?.length < 1 && (
-              <div className=" flex flex-col gap-5 items-start">
-                <p>No orders yet</p>
+              <div className=" flex flex-col gap-2 justify-center h-[70vh] items-center bg-slate-50">
+                <p className="text-lg">You have no orders yet</p>
 
-                <Button variant={"outline"}>Start Shopping</Button>
+                {/* <Button>Continue Shopping</Button> */}
               </div>
             )
           }

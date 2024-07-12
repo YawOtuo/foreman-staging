@@ -95,9 +95,9 @@ export default function ProductDetailPage({ params }: { params: { product_id: st
             {product?.images.map((image) => (
               <SwiperSlide key={image.id}>
                 <OptimizedImage
-                  src={`https://res.cloudinary.com/daurieb51/${image.image}`}
-                  alt={product.name}
-                  className="w-full aspect-[4/3] object-cover"
+                  src={`https://res.cloudinary.com/dajli9sqa/${image.image}`}
+                  alt={product?.name}
+                  className="w-full  aspect-[4/3] bg-cover rounded-lg overflow-hidden"
                 />
               </SwiperSlide>
             ))}
