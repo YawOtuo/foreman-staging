@@ -41,7 +41,7 @@ function useFavourites() {
       });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
+      toast({ title: "Error", description: error.message, variant: "destructive" });
     },
   });
 
@@ -57,7 +57,7 @@ function useFavourites() {
       queryClient.invalidateQueries({ queryKey: ["favourites"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
+      toast({ title: "Error", description: error.message, variant: "destructive" });
     },
   });
 

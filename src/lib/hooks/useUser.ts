@@ -57,7 +57,7 @@
 //     toast({
 //       title: "User Fetch Error",
 //       description: userError.message,
-//       variant: "error",
+//       variant: "destructive",
 //       duration: 5000,
 //       // isClosable: true,
 //     });

@@ -50,7 +50,7 @@ export default function useAuthState(auth: any) {
       toast({
         title: "Authentication Error",
         description: error.message,
-        variant: "error",
+        variant: "destructive",
         duration: 5000,
         // isClosable: true,
       });
