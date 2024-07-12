@@ -4,9 +4,7 @@ import * as React from "react"
 import * as ToastPrimitives from "@radix-ui/react-toast"
 import { cva, type VariantProps } from "class-variance-authority"
 import { X } from "lucide-react"
-
 import { cn } from "@/lib/utils"
-
 const ToastProvider = ToastPrimitives.Provider
 
 const ToastViewport = React.forwardRef<
@@ -16,9 +14,9 @@ const ToastViewport = React.forwardRef<
   <ToastPrimitives.Viewport
     ref={ref}
     className={cn(
-      "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
+      "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 left-0 sm:left-auto sm:right-0  sm:top-auto sm:flex-col md:max-w-[420px]",
       className
-    )}
+    )} 
     {...props}
   />
 ))
@@ -32,8 +30,8 @@ const toastVariants = cva(
         default: "border bg-primary text-foreground",
         destructive:
           "destructive group border-destructive bg-destructive text-destructive-foreground",
-        success: " bg-green-500 text-white font-bold",
-        error: "border bg-secondary text-black"
+        success: " bg-[#327D25] text-white ",
+        loading: "border bg-secondary text-black"
       },
     },
     defaultVariants: {

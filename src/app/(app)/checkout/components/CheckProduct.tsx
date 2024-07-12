@@ -22,7 +22,7 @@ const CheckProduct: React.FC<CheckProductRowProps> = ({ cart_item }) => {
       <div className="flex flex-row justify-start relative sm:w-[50%] w-1/2 items-center gap-5">
         <div>
           <Image
-            src={`https://res.cloudinary.com/daurieb51/${cart_item.product?.images[0]?.image}`}
+            src={`https://res.cloudinary.com/dajli9sqa/${cart_item.product?.images[0]?.image}`}
             alt={cart_item.product.description}
             objectFit="cover"
             width={150}

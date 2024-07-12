@@ -7,11 +7,12 @@ import { useAppStore } from "../store/useAppStore";
 import {
   CreateOrder,
   DeleteOrder,
+  FetchOrderDetails,
   FetchOrders,
   UpdateOrder,
 } from "../api/orders";
 
-function useOrders() {
+function useOrders(orderNumber?: number) {
   const queryClient = useQueryClient();
   const { toast } = useToast();
   const { DBDetails, FBaseDetails } = useAppStore();
@@ -27,6 +28,7 @@ function useOrders() {
     enabled: !!DBDetails?.id,
   });
 
+
   const createOrderMutation = useMutation({
     mutationFn: (orderData: CreateOrderArgs) => CreateOrder(user_id, orderData),
     onSuccess: (data) => {
@@ -38,13 +40,12 @@ function useOrders() {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
+      toast({ title: "Error", description: error.message, variant: "destructive" });
     },
   });
 
   const updateOrderMutation = useMutation({
-    mutationFn: ( orderData : UpdateOrderArgs) =>
-      UpdateOrder( user_id, orderData),
+    mutationFn: (orderData: UpdateOrderArgs) => UpdateOrder(user_id, orderData),
     onSuccess: (data) => {
       toast({
         title: "Success",
@@ -54,7 +55,7 @@ function useOrders() {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
+      toast({ title: "Error", description: error.message, variant: "destructive" });
     },
   });
 
@@ -69,7 +70,7 @@ function useOrders() {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "error" });
+      toast({ title: "Error", description: error.message, variant: "destructive" });
     },
   });
   const handleCreateOrder = async (orderData: CreateOrderArgs) => {
@@ -106,6 +107,7 @@ function useOrders() {
   };
 
   return {
+   
     orderData,
     isOrderLoading,
     orderError,

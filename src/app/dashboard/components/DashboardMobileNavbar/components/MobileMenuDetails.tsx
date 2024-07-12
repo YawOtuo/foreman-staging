@@ -4,7 +4,6 @@ import { useDashboardMobileStore } from "./useDashboardMobileNavStore";
 import { dashboardMenuMobilelinks } from "./content";
 
 export const MobileMenuDetails = (props: any) => {
-  
   // const { setToggle } = useMenuStore();
   const { setDashboardMobileMenu } = useDashboardMobileStore();
 
@@ -25,9 +24,11 @@ export const MobileMenuDetails = (props: any) => {
           <Link
             href={`${link.url}`}
             key={index}
-            className="border-2 rounded-lg border-white px-4 py-2"
+            className="border-2 rounded-lg border-white text-white px-4 py-3 flex gap-4 items-center"
             onClick={() => setDashboardMobileMenu(false)}>
-            <p className={"text-base !font-semibold capitalize text-[#fff]"}>
+            {link?.icon}
+
+            <p className={"text-base !font-semibold capitalize "}>
               {link.name}
             </p>
           </Link>
