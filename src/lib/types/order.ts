@@ -6,6 +6,8 @@ export interface Order {
   is_paid?: boolean;
   total_cost?: number;
   total_quantity?: number;
+  items?: any[];
+  status?: string;
 }
 
 export interface CreateOrderArgs {
@@ -19,9 +21,9 @@ export interface CreateOrderArgs {
 }
 
 export interface UpdateOrderArgs {
-    order_id: string | number;
-    orderData: {
-      is_paid?: boolean; // Specify the correct type here for is_paid
-      // Add other fields as needed for updating the order
-    };
-  }
+  order_id: string | number;
+  orderData: {
+    is_paid?: boolean; // Specify the correct type here for is_paid
+    // Add other fields as needed for updating the order
+  };
+}
