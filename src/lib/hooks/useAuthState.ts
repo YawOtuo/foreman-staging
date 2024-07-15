@@ -4,7 +4,11 @@ import { useAppStore } from "../store/useAppStore";
 import { useToast } from "@/components/ui/use-toast";
 import { FetchOrCreateResponse, fetchOrCreateUserByUid } from "../api/users";
 import useEmail from "./useEmail";
-import { fromEmail, templateIds } from "../utils/emailTemplateIds";
+import {
+  fromEmail,
+  generalEmailReceipients,
+  templateIds,
+} from "../utils/emailTemplateIds";
 import { User } from "../types/user";
 
 export default function useAuthState(auth: any) {
@@ -32,7 +36,10 @@ export default function useAuthState(auth: any) {
 
             if (userData?.message == "User already exists") {
               sendEmail({
-                to: userAuth?.email,
+                to: [
+                  ...(generalEmailReceipients["signup"] || []),
+                  userAuth?.email,
+                ],
                 from: fromEmail,
                 templateId: templateIds["signup"],
                 templateData: {

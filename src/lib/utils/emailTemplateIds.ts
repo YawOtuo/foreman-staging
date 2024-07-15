@@ -4,7 +4,7 @@ export const templateIds: any = {
 };
 
 export const generalEmailReceipients = {
-  signup: ["yotuo2003@gmail.com", "foreman.developers@gmail.com"],
+  signup: ["yotuo2003@gmail.com", "foreman.developers@gmail.com", "william.dadzierhule@gmail.com"],
 };
 
 export const fromEmail = "charles@foremangh.com"
