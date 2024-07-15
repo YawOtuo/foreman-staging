@@ -1,8 +1,22 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import TabSelect from "./components/TabSelect";
+import { TbCircleNumber1 } from "react-icons/tb";
 
 /* eslint-disable react/no-unescaped-entities */
 function Warehousing() {
+  const [isClicked, setIsClicked] = useState<string>("just buy");
+
+  const handleClick = (tab: string) => {
+    if (tab === "just buy") {
+      setIsClicked("just buy");
+    } else {
+      setIsClicked("project");
+    }
+  };
+
   return (
     <main>
       <section className="pb-10">
@@ -43,6 +57,42 @@ function Warehousing() {
               className="rounded-md"
             />
           </div>
+        </div>
+      </section>
+      <section className="w-full flex flex-col p-6 pb-20">
+        <>
+          <TabSelect isClicked={isClicked} handleClick={handleClick} />
+        </>
+        <div className="mt-10 w-full flex justify-center">
+          {isClicked === "just buy" && (
+            <div className="w-[85%] ">
+              <div className="flex space-x-3">
+                <div className="w-1/6 hidden sm:block">
+                  <TbCircleNumber1 size={50} />
+                </div>
+                <div>
+                  <h2 className="text-base font-semibold pb-4">
+                    Deposite Funds & Buy
+                  </h2>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Similique, corporis voluptas, ducimus accusantium quo fuga
+                    hic ratione assumenda sit tenetur libero fugiat non officiis
+                    quis earum nemo porro minima totam? Lorem ipsum dolor sit
+                    amet consectetur adipisicing elit. Consectetur doloremque
+                    earum vero accusantium iure, nostrum adipisci assumenda
+                    quidem voluptas aliquid voluptatum qui suscipit dignissimos
+                    id a sapiente? Doloribus, sed minima.
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+          {isClicked === "project" && (
+            <div className="w-4/5">
+              <p>Buy for a project content will be here</p>
+            </div>
+          )}
         </div>
       </section>
     </main>
