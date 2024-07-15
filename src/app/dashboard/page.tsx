@@ -111,7 +111,7 @@ const Dashboard = () => {
           <CardTitle>Recommended Products</CardTitle>
         </CardHeader>
         <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-          {allProducts?.map((product, index) => (
+          {allProducts?.slice(0, 6).map((product, index) => (
             <ProductCard key={index} product={product} />
           ))}
         </CardContent>

@@ -5,7 +5,7 @@ const MetricCard = ({ title, value }: { title: any; value: any }) => (
       <CardTitle className="text-sm font-medium">{title}</CardTitle>
     </CardHeader>
     <CardContent>
-      <div className="text-2xl font-bold">{value}</div>
+      <div className="text-2xl font-bold text-primary lg:text-black">{value}</div>
     </CardContent>
   </Card>
 );

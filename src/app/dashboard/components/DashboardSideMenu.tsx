@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { IoHomeOutline } from "react-icons/io5";
+import { IoArrowBack, IoHomeOutline } from "react-icons/io5";
 import { IoCartOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { RiAlignItemBottomLine } from "react-icons/ri";
@@ -8,7 +8,7 @@ import { MdOutlineAccountCircle } from "react-icons/md";
 const links = [
   {
     name: "Home",
-    url: "/",
+    url: "/dashboard",
     icon: <IoHomeOutline />,
   },
   {
@@ -31,10 +31,15 @@ const links = [
     url: "/dashboard",
     icon: <MdOutlineAccountCircle />,
   },
+  // {
+  //   name: "Logout",
+  //   url: "/dashboard",
+  //   icon: <IoHomeOutline />,
+  // },
   {
-    name: "Logout",
-    url: "/dashboard",
-    icon: <IoHomeOutline />,
+    name: "Back to site",
+    url: "/",
+    icon: <IoArrowBack />,
   },
 ];
 function DashboardSideMenu() {

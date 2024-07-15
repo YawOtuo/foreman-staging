@@ -54,7 +54,6 @@ export default function ProductDetailPage({ params }: { params: { product_id: st
 
   const handleAddToCart = () => {
     if (selectedVariant && product) {
-      console.log(`Adding ${quantity} of ${selectedVariant.name} to cart`);
       AddToCart({
         id: selectedVariant.id,
         product: {
