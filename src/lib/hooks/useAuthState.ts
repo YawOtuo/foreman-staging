@@ -34,7 +34,7 @@ export default function useAuthState(auth: any) {
                 uid: userAuth?.uid,
               });
 
-            if (userData?.message == "User already exists") {
+            if (userData?.message == "User created successfully") {
               sendEmail({
                 to: [
                   ...(generalEmailReceipients["signup"] || []),

@@ -1,174 +1,91 @@
 "use client";
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { Product } from '@/lib/types/product';
-import ProductCard from '@/components/ProductCard';
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+import { Product } from "@/lib/types/product";
+import ProductCard from "@/components/ProductCard";
+import { useProducts } from "@/lib/hooks/useProducts";
+import useCart from "@/lib/hooks/useCart";
+import { useQuery } from "@tanstack/react-query";
+import { FetchDashboardDetails } from "@/lib/api/dashboard";
+import { useAppStore } from "@/lib/store/useAppStore";
+import { DashboardData } from "@/lib/types/dashboardData";
+import MetricCard from "./components/MetricCard";
 
-// Mock data
-const userMetrics = {
-  totalOrders: 150,
-  completedOrders: 145,
-  totalAmountSpent: 12500,
-  itemsInCart: 3,
+const getMonthName = (monthNumber: number) => {
+  const date = new Date(Date.UTC(2000, monthNumber - 1, 1)); // Date in the year 2000, monthNumber is 1-based
+  return date.toLocaleString("default", { month: "short" });
 };
 
-const recommendedProducts: Product[] = [
-  {
-    id: 1,
-    name: 'Product 1',
-    price: 50,
-    description: 'Product 1 description',
-    category: {
-      id: 1,
-      name: 'Category 1',
-      image: 'https://via.placeholder.com/150',
-      units_of_measurement: [
-        {
-          unit: 'unit',
-          description: 'unit description',
-        },
-      ],
-    },
-    availability: 'In stock',
-    variants: [],
-    images: [],
-  },
-  {
-    id: 2,
-    name: 'Product 2',
-    price: 75,
-    description: 'Product 2 description',
-    category: {
-      id: 2,
-      name: 'Category 2',
-      image: 'https://via.placeholder.com/150',
-      units_of_measurement: [
-        {
-          unit: 'unit',
-          description: 'unit description',
-        },
-      ],
-    },
-    availability: 'In stock',
-    variants: [],
-    images: [],
-  },
-  {
-    id: 3,
-    name: 'Product 3',
-    price: 100,
-    description: 'Product 3 description',
-    category: {
-      id: 3,
-      name: 'Category 3',
-      image: 'https://via.placeholder.com/150',
-      units_of_measurement: [
-        {
-          unit: 'unit',
-          description: 'unit description',
-        },
-      ],
-    },
-    availability: 'In stock',
-    variants: [],
-    images: [],
-  },
-  {
-    id: 4,
-    name: 'Product 4',
-    price: 125,
-    description: 'Product 4 description',
-    category: {
-      id: 4,
-      name: 'Category 4',
-      image: 'https://via.placeholder.com/150',
-      units_of_measurement: [
-        {
-          unit: 'unit',
-          description: 'unit description',
-        },
-      ],
-    },
-    availability: 'In stock',
-    variants: [],
-    images: [],
-  },
-  {
-    id: 5,
-    name: 'Product 5',
-    price: 150,
-    description: 'Product 5 description',
-    category: {
-      id: 5,
-      name: 'Category 5',
-      image: 'https://via.placeholder.com/150',
-      units_of_measurement: [
-        {
-          unit: 'unit',
-          description: 'unit description',
-        },
-      ],
-    },
-    availability: 'In stock',
-    variants: [],
-    images: [],
-  },
-  {
-    id: 6,
-    name: 'Product 6',
-    price: 175,
-    description: 'Product 6 description',
-    category: {
-      id: 6,
-      name: 'Category 6',
-      image: 'https://via.placeholder.com/150',
-      units_of_measurement: [
-        {
-          unit: 'unit',
-          description: 'unit description',
-        },
-      ],
-    },
-    availability: 'In stock',
-    variants: [],
-    images: [],
-  },
-];
-
 const orderData = [
-  { month: 'Jan', orders: 10 },
-  { month: 'Feb', orders: 15 },
-  { month: 'Mar', orders: 20 },
-  { month: 'Apr', orders: 25 },
-  { month: 'May', orders: 30 },
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
-
-const MetricCard = ({ title, value }: {
-    title: any,
-    value: any
-}) => (
-  <Card>
-    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-      <CardTitle className="text-sm font-medium">
-        {title}
-      </CardTitle>
-    </CardHeader>
-    <CardContent>
-      <div className="text-2xl font-bold">{value}</div>
-    </CardContent>
-  </Card>
-);
 
 const Dashboard = () => {
+  const { allProducts } = useProducts();
+  const { cart } = useCart();
+  const { DBDetails } = useAppStore();
+  const {
+    data: dashboardData,
+    isLoading: isDashboardDataLoading,
+    error: isDashboardDataError,
+  } = useQuery<DashboardData>({
+    queryKey: ["dashboard-details"],
+    queryFn: () => FetchDashboardDetails(DBDetails?.id),
+    enabled: !!DBDetails?.id,
+  });
+
+  const userMetrics = {
+    totalOrders: dashboardData?.total_orders,
+    completedOrders: dashboardData?.total_completed_orders,
+    totalAmountSpent: dashboardData?.total_cost_spent,
+    itemsInCart: cart.items.length,
+  };
+
+  const allMonths = Array.from({ length: 12 }, (_, index) => index + 1);
+
+  const transformedData = allMonths.map((monthNumber) => {
+    const foundMonth = dashboardData?.orders_by_month.find(
+      (item) => item.month === monthNumber
+    );
+    return {
+      month: getMonthName(monthNumber),
+      orders: foundMonth ? foundMonth.total_orders : 0,
+    };
+  });
   return (
     <div className="p-4 space-y-4">
       <h1 className="text-2xl font-bold mb-4">Foreman Dashboard</h1>
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard title="Total Orders" value={userMetrics.totalOrders} />
-        <MetricCard title="Completed Orders" value={userMetrics.completedOrders} />
-        <MetricCard title="Total Amount Spent" value={`$${userMetrics.totalAmountSpent.toFixed(2)}`} />
+        <MetricCard
+          title="Completed Orders"
+          value={userMetrics.completedOrders}
+        />
+        <MetricCard
+          title="Total Amount Spent"
+          value={`GHS ${userMetrics.totalAmountSpent?.toFixed(2)}`}
+        />
         <MetricCard title="Items in Cart" value={userMetrics.itemsInCart} />
       </div>
 
@@ -178,7 +95,7 @@ const Dashboard = () => {
         </CardHeader>
         <CardContent>
           <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={orderData}>
+            <BarChart data={transformedData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="month" />
               <YAxis />
@@ -193,10 +110,10 @@ const Dashboard = () => {
         <CardHeader>
           <CardTitle>Recommended Products</CardTitle>
         </CardHeader>
-        <CardContent className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full'>
-            {recommendedProducts.map((product, index) => (
-              <ProductCard key={index} product={product} />
-            ))}
+        <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+          {allProducts?.map((product, index) => (
+            <ProductCard key={index} product={product} />
+          ))}
         </CardContent>
       </Card>
     </div>
