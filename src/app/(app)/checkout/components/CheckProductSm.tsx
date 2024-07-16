@@ -13,7 +13,7 @@ interface CheckProductSmRowProps {
 const CheckProductSm: React.FC<CheckProductSmRowProps> = ({ cart_item }) => {
   const { currency, exchangeRates } = useCurrency();
   const convertedPrice = convertPrice(
-    cart_item.product?.price,
+    Number(cart_item.product_variant?.price),
     "GHS",
     currency,
     exchangeRates
@@ -22,12 +22,12 @@ const CheckProductSm: React.FC<CheckProductSmRowProps> = ({ cart_item }) => {
     <div className="flex  flex-col  items-start justify-between text-sm sm:text-base border-2 py-0  px-0  rounded-xl overflow-hidden">
       <div className="flex flex-col  justify-start relative l w-full items-start  gap-2 lg:gap-5">
         <OptimizedImage
-          src={`https://res.cloudinary.com/dajli9sqa/${cart_item.product?.images[0]?.image}`}
-          alt={cart_item.product.description}
+          src={`https://res.cloudinary.com/dajli9sqa/${cart_item.product_variant?.images[0]?.image}`}
+          alt={cart_item.product_variant.name}
           className="aspect-[3/2]  lg:max-w-[150px] lg:aspect-[4/3] "
         />
         <div className="px-5 pt-1 ">
-          <p className="text-xl e font-semibold"> {cart_item.product.name} </p>
+          <p className="text-xl e font-semibold"> {cart_item.product_variant.name} </p>
           {/* <p className="text-gray-500"> {cart_item.product.size} {cart_item.product.unit} </p> */}
 
           {/* placeholder for the size and units of products */}
