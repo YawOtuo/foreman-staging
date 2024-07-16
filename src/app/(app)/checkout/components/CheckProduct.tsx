@@ -22,15 +22,15 @@ const CheckProduct: React.FC<CheckProductRowProps> = ({ cart_item }) => {
       <div className="flex flex-row justify-start relative sm:w-[50%] w-1/2 items-center gap-5">
         <div>
           <Image
-            src={`https://res.cloudinary.com/dajli9sqa/${cart_item.product?.images[0]?.image}`}
-            alt={cart_item.product.description}
+            src={`https://res.cloudinary.com/dajli9sqa/${cart_item.product_variant?.images[0]?.image}`}
+            alt={cart_item.product_variant.name}
             objectFit="cover"
             width={150}
             height={150}
           />
         </div>
         <div>
-          <p className="font-semibold"> {cart_item.product.name} </p>
+          <p className="font-semibold"> {cart_item.product_variant.name} </p>
           {/* <p className="text-gray-500"> {cart_item.product.size} {cart_item.product.unit} </p> */}
 
           {/* placeholder for the size and units of products */}
