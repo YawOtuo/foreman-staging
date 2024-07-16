@@ -12,7 +12,7 @@ function useCheckout() {
 
   const checkout = async (option: "delivery" | "now") => {
     const orderItems = cart.items.map((item) => ({
-      product_id: item.product.id, // Assuming 'id' is the product ID
+      product_id: item.product_variant.id, // Assuming 'id' is the product ID
       quantity: item.quantity,
       totalCost: item.totalCost,
     }));

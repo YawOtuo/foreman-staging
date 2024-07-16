@@ -11,6 +11,7 @@ import { Input } from "../ui/input";
 import { useToast } from "../ui/use-toast";
 import { convertPrice } from "@/lib/utils/convertPrice";
 import { useCurrency } from "@/context/CurrencyContext";
+import Link from "next/link";
 
 export default function ProductDetailsCard({ product }: { product: Product }) {
   const { toast } = useToast();
@@ -100,18 +101,20 @@ export default function ProductDetailsCard({ product }: { product: Product }) {
           className=" w-full">
           Add to Favourites
         </Button>{" "}
-        <Button
-          onClick={() => {
-            AddToCart({
-              id: product?.id,
-              product: product,
-              quantity: quantity,
-              //the total cost will be update in the AddtoCart function
-            });
-          }}
-          className="w-full">
-          Add to Cart
-        </Button>
+        <Link href={`product/${product.id}`}>
+          <Button
+            // onClick={() => {
+            //   AddToCart({
+            //     id: product?.id,
+            //     product_variant: product.,
+            //     quantity: quantity,
+            //     //the total cost will be update in the AddtoCart function
+            //   });
+            // }}
+            className="w-full">
+            View
+          </Button>
+        </Link>
       </div>
     </Card>
   );
