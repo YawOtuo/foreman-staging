@@ -13,8 +13,8 @@ const OrderDetailCard = ({ item, currency }: DetailProps) => {
       <div className="hidden md:flex w-full items-center">
         <div className="flex items-center  w-1/2 gap-5 ">
           <Image
-            src={`https://res.cloudinary.com/dajli9sqa/${item?.product_variant.images[0].image}`}
-            alt=""
+            src={`https://res.cloudinary.com/dajli9sqa/${item?.product_variant.images?.[0]?.image}`}
+            alt={item?.product_variant.name}
             width={125}
             height={125}
             objectFit="cover"
@@ -33,7 +33,7 @@ const OrderDetailCard = ({ item, currency }: DetailProps) => {
         <div className="flex flex-col items-start gap-3 w-full ">
           <div className="relative w-full aspect-[3/2] overflow-hidden rounded-md">
             <Image
-              src={`https://res.cloudinary.com/dajli9sqa/${item?.product_variant.images[0].image}`}
+              src={`https://res.cloudinary.com/dajli9sqa/${item?.product_variant.images?.[0]?.image}`}
               alt=""
               fill
               objectFit="cover"

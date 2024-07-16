@@ -22,7 +22,7 @@ function CartCard({ data }: Props) {
   const { currency, exchangeRates } = useCurrency();
 
   const convertedPrice = convertPrice(
-    data.product.price,
+    Number(data.product_variant.price)  ,
     "GHS",
     currency,
     exchangeRates
@@ -40,20 +40,20 @@ function CartCard({ data }: Props) {
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-center w-full gap-5">
         <div className="relative w-full aspect-[3/2] lg:max-w-[150px] ">
           <Image
-            src={`https://res.cloudinary.com/dajli9sqa/${data.product?.images[0]?.image}`}
-            alt={data.product.description}
+            src={`https://res.cloudinary.com/dajli9sqa/${data.product_variant?.images[0]?.image}`}
+            alt={data.product_variant.name}
             fill
             objectFit="cover"
           />
         </div>
         <div className="flex flex-col items-start justify-start w-full">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-center lg:justify-between w-full gap-3">
-            <h4 className="font-semibold">{data.product.name}</h4>
+            <h4 className="font-semibold">{data.product_variant.name}</h4>
             <div className="lg:hidden">
               <CardQuantityControls quantity={data.quantity} cart_item={data} />
             </div>{" "}
           </div>
-          <p className="text-shade-200 text-sm">{data.product.description}</p>
+          <p className="text-shade-200 text-sm">{data.product_variant.brief_description}</p>
         </div>{" "}
         <div className="flex flex-col gao-2 items-start lg:items-end gap-1">
           <p className="whitespace-nowrap font-bold text-2xl group-hover:text-primary-100 transition-all">
@@ -80,7 +80,7 @@ function CartCard({ data }: Props) {
             variant={"ghost"}
             size={"sm"}
             fontSize={"sm"}
-            onClick={() => handleAddToFavourites(data.product.id)}
+            onClick={() => handleAddToFavourites(data.product_variant.id)}
           >
             <FaRegHeart className="mr-2" />
             Move To Favourites

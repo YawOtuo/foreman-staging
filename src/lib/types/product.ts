@@ -1,7 +1,18 @@
+import { Category } from "./category";
+
 export interface Image {
   id: number;
   image: string;
   is_main: boolean;
+}
+
+export interface CartProductVariant {
+  id: number;
+  name: string;
+  price: string;
+  brief_description: string;
+  availability: string;
+  images: Image[];
 }
 
 export interface ProductVariant {
@@ -39,15 +50,7 @@ export interface RelatedProduct {
   availability: string;
 }
 
-export interface Category {
-  id: number;
-  name: string;
-  image: string;
-  units_of_measurement: {
-    unit: string;
-    description: string;
-  }[];
-}
+
 
 export interface Product {
   price: number;
