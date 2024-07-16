@@ -5,7 +5,7 @@ import { IoMdHeartEmpty } from "react-icons/io";
 import { RiAlignItemBottomLine } from "react-icons/ri";
 import { MdOutlineAccountCircle } from "react-icons/md";
 
-const links = [
+export const dashboardMenuLinks = [
   {
     name: "Home",
     url: "/dashboard",
@@ -46,7 +46,7 @@ function DashboardSideMenu() {
   return (
     <div>
       <div className="hidden lg:flex flex-col gap-3 bg-primary-200 min-h-screen sticky top-0 py-10 transition-all px-3">
-        {links?.map((r) => (
+        {dashboardMenuLinks?.map((r) => (
           <Link
             className="hover:font-semibold hover:border-primary transition-all  ease-in-out border-2 border-transparent rounded-md px-7 duration-[250ms]  py-2 flex items-center gap-3"
             href={r?.url}

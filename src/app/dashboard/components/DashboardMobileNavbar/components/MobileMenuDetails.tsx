@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "../../../../../components/ui/button";
 import { useDashboardMobileStore } from "./useDashboardMobileNavStore";
-import { dashboardMenuMobilelinks } from "./content";
+import { dashboardMenuLinks } from "../../DashboardSideMenu";
 
 export const MobileMenuDetails = (props: any) => {
   // const { setToggle } = useMenuStore();
@@ -20,7 +20,7 @@ export const MobileMenuDetails = (props: any) => {
       </Link> */}
 
       <div className="flex flex-col gap-5">
-        {dashboardMenuMobilelinks?.map((link: any, index: number) => (
+        {dashboardMenuLinks?.map((link: any, index: number) => (
           <Link
             href={`${link.url}`}
             key={index}
