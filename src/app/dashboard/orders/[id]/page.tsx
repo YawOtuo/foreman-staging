@@ -50,11 +50,11 @@ function Page({ params }: { params: { id: string | number } }) {
             </div>
             <section className="mt-12">
               <header className="text-base font-semibold mb-4">
-                Item ordered
+                Items ordered
               </header>
               {order?.items?.map((item, index) => (
                 <div
-                  className="flex  w-full rounded-md border mt-3 items-center justify-start p-3"
+                  className="flex  w-full  mt-3 items-center justify-start"
                   key={index}
                 >
                   <OrderDetailCard currency={currency} item={item} />

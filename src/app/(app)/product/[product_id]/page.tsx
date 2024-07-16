@@ -12,14 +12,14 @@ import ProductCard from '@/components/ProductCard';
 import OptimizedImage from '@/components/ui/OptimizedImage';
 import ProductLoadingSkeleton from './ProductLoadingSkeleton';
 import { fetchOneProduct } from '@/lib/api/products';
-import { Product, Variant, RelatedProduct } from '@/lib/types/product';
+import { Product, ProductVariant, RelatedProduct } from '@/lib/types/product';
 import { Plus, Minus } from 'lucide-react';
 import useCart from '@/lib/hooks/useCart';
 import { useCurrency } from '@/context/CurrencyContext';
 import { convertPrice } from '@/lib/utils/convertPrice';
 
 export default function ProductDetailPage({ params }: { params: { product_id: string } }) {
-  const [selectedVariant, setSelectedVariant] = useState<Variant | null>(null);
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
   const [quantity, setQuantity] = useState(1);
 
   const { exchangeRates, currency } = useCurrency();

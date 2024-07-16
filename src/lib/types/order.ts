@@ -1,12 +1,19 @@
 import { CartItem } from "./cart";
+import { ProductVariant } from "./product";
 
+export interface OrderItem{
+  product_variant: ProductVariant
+  quantity: number 
+  total_cost: number 
+  
+}
 export interface Order {
   id: number;
   created_at?: Date;
   is_paid?: boolean;
   total_cost?: number;
   total_quantity?: number;
-  items?: any[];
+  items?: OrderItem[];
   status?: string;
 }
 

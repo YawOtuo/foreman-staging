@@ -4,7 +4,7 @@ export interface Image {
   is_main: boolean;
 }
 
-export interface Variant {
+export interface ProductVariant {
   id: number;
   sku: string;
   name: string;
@@ -56,6 +56,6 @@ export interface Product {
   description: string;
   category: Category;
   availability: string;
-  variants: Variant[];
+  variants: ProductVariant[];
   images: Image[];
 }

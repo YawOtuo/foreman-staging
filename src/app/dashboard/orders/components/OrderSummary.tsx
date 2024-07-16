@@ -26,7 +26,7 @@ const OrderSummary = ({ order, currency }: Props) => {
         </div>
         <div className="w-full flex justify-between">
           <p className="font-semibold">Total</p>
-          <p className="text-[#F5B42A] font-bold">
+          <p className="text-[#F5B42A] text-2xl font-bold">
             {currency} {order?.total_cost}
           </p>
         </div>
