@@ -12,7 +12,7 @@ interface CheckProductRowProps {
 const CheckProduct: React.FC<CheckProductRowProps> = ({ cart_item }) => {
   const { currency, exchangeRates } = useCurrency();
   const convertedPrice = convertPrice(
-    cart_item.product?.price,
+    Number(cart_item.product_variant?.price),
     "GHS",
     currency,
     exchangeRates
