@@ -2,31 +2,53 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useAppStore } from "../store/useAppStore";
 import { useToast } from "@/components/ui/use-toast";
-import { fetchOrCreateUserByUid } from "../api/users";
+import { FetchOrCreateResponse, fetchOrCreateUserByUid } from "../api/users";
+import useEmail from "./useEmail";
+import {
+  fromEmail,
+  generalEmailReceipients,
+  templateIds,
+} from "../utils/emailTemplateIds";
+import { User } from "../types/user";
 
 export default function useAuthState(auth: any) {
   const { toast } = useToast();
   const { setDBDetails, setFBaseDetails, error, setError, setIsLoading } =
     useAppStore();
-
+  const { sendEmail } = useEmail();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(
       auth,
       async (userAuth: any) => {
-        console.log('userAuth', userAuth.providerData?.[0]?.email)
+
         try {
           if (userAuth) {
             // Set Firebase details
             setFBaseDetails(userAuth);
 
             // Fetch or create user by UID
-            const userData :any = await fetchOrCreateUserByUid({
-              username: userAuth?.displayName || "User",
-              email: userAuth?.email || userAuth?.providerData?.[0]?.email,
-              uid: userAuth?.uid,
-            });
+            const userData: FetchOrCreateResponse =
+              await fetchOrCreateUserByUid({
+                username: userAuth?.displayName || "User",
+                email: userAuth?.email || userAuth?.providerData?.[0]?.email,
+                uid: userAuth?.uid,
+              });
 
-            // Set database details
+            if (userData?.message == "User created successfully") {
+              sendEmail({
+                to: [
+                  ...(generalEmailReceipients["signup"] || []),
+                  userAuth?.email,
+                ],
+                from: fromEmail,
+                templateId: templateIds["signup"],
+                templateData: {
+                  username: userAuth?.displayName || "User",
+                },
+              });
+              console.log("emailing...");
+            }
+            console.log("not emailing...");
             setDBDetails(userData?.user);
           }
           setIsLoading(false);
@@ -56,5 +78,4 @@ export default function useAuthState(auth: any) {
       });
     }
   }, [error, toast]);
-
 }

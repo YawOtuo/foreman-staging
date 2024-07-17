@@ -1,4 +1,5 @@
-import { Product } from "./product";
+import { Category } from "./category";
+import { CartProductVariant, Product, ProductVariant } from "./product";
 
 export interface Cart {
   id?: number;
@@ -11,8 +12,9 @@ export interface Cart {
 export interface CartItem {
   id: number;
   quantity: number;
+  product_category: Category; // Add this line to include the category separately
 
-  product: Product;
+  product_variant: CartProductVariant;
   totalCost: number;
   // add other fields as necessary
 }

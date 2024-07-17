@@ -51,21 +51,26 @@ const useCart = () => {
     if (existingItem) {
       existingItem.quantity += item.quantity;
       existingItem.totalCost =
-        existingItem.quantity * existingItem.product.price;
+        existingItem.quantity * Number(existingItem.product_variant.price);
     } else {
       cart.items.push({
         ...item,
-        totalCost: item.quantity * item.product.price,
+        totalCost: item.quantity * Number(item.product_variant.price),
       });
     }
 
     setCart({ ...cart });
-    toast({
+    const { dismiss } = toast({
       title: "Success",
       description: (
         <div className="flex flex-col gap-0 items-start">
-          <p>Item added to cart Successfully</p>
-          <Link href={'/cart'} className="uppercase font-bold">View Cart</Link>
+          <p>{item?.product_variant.name} added to cart Successfully</p>
+          <Link
+            href="/cart"
+            className="uppercase font-bold"
+            onClick={() => dismiss()}>
+            View Cart
+          </Link>
         </div>
       ),
       variant: "success",
@@ -77,7 +82,7 @@ const useCart = () => {
 
     if (item) {
       item.quantity = quantity;
-      item.totalCost = item.quantity * item.product.price;
+      item.totalCost = item.quantity * Number(item.product_variant.price);
       setCart({ ...cart });
     }
     toast({
