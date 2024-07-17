@@ -34,14 +34,14 @@ function useFavourites() {
     mutationFn: ({ product_id }: AddToFavouritesArgs) =>
       AddToFavourites(user_id, product_id),
     onSuccess: (data) => {
-      toast({
+      toast({ 
         title: "Success",
         description: "Item added to favourites", // Assuming the response body contains a 'message' field
         variant: "success",
       });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({ title: "Info", description: "Please login before proceeding", variant: "loading" });
     },
   });
 
