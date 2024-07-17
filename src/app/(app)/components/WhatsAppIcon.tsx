@@ -4,7 +4,7 @@ import React from "react";
 import { RiWhatsappFill } from "react-icons/ri";
 
 const WhatsAppIcon = () => {
-  const phoneNumber = "+23354012483";
+  const phoneNumber = "+233249911264";
   const message = "Hello, I have a question";
 
   const handleWhatsAppClick = () => {
