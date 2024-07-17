@@ -1,18 +1,64 @@
 import { Category } from "./category";
 
-export interface Product {
+export interface Image {
+  id: number;
+  image: string;
+  is_main: boolean;
+}
+
+export interface CartProductVariant {
   id: number;
   name: string;
-  price: number;
-  description: string
-  category: Category
-  images: ProductImages[]
-  availability: string
+  price: string;
+  brief_description: string;
+  availability: string;
+  images: Image[];
+}
+
+export interface ProductVariant {
+  id: number;
+  sku: string;
+  name: string;
+  images: Image[];
+  brief_description: string;
+  detailed_description: string;
+  size: string | null;
+  length: number | null;
+  width: number | null;
+  price: string;
+  availability: string;
+  created_at: string;
+  updated_at: string;
+  product: number;
+  related_products: RelatedProduct[];
+}
+
+export interface RelatedProduct {
+  id: number;
+  name: string;
+  images: Image[];
+  category: {
+    id: number;
+    name: string;
+    image: string;
+    units_of_measurement: {
+      unit: string;
+      description: string;
+    }[];
+  };
+  description: string;
+  availability: string;
 }
 
 
-interface ProductImages {
-  id: number
-  image: string 
-  is_main: boolean
+
+export interface Product {
+  price: number;
+  id: number;
+  name: string;
+  description: string;
+  category: Category;
+  availability: string;
+  variants: ProductVariant[];
+  images: Image[];
 }

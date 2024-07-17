@@ -17,7 +17,7 @@ function FavouriteCard({ data }: Props) {
     <div className="group flex flex-col items-start justify-center border-[1px]  hover:scale-[1.02] transition-all cursor-pointer ">
       <div className="relative w-full aspect-[3/2] min-w-[200px] ">
         <Image
-          src={`https://res.cloudinary.com/daurieb51/${data?.product?.images[0]?.image}`}
+          src={`https://res.cloudinary.com/dajli9sqa/${data?.product?.images[0]?.image}`}
           alt={data.product.description}
           fill
           objectFit="cover"

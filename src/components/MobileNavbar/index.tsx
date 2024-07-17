@@ -47,7 +47,8 @@ export default function MobileNavBar(props: any) {
           // display: 'none',
           opacity: 0,
         },
-      }}>
+      }}
+    >
       <div className="mt-16">
         <MobileMenuArea />
       </div>{" "}

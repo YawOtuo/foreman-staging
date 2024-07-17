@@ -8,6 +8,8 @@ import { IoMdAdd } from "react-icons/io";
 import useCart from "@/lib/hooks/useCart";
 import CardQuantityControls from "./CardQuantityControls";
 import useFavourites from "@/lib/hooks/useFavourites";
+import { useCurrency } from "@/context/CurrencyContext";
+import { convertPrice } from "@/lib/utils/convertPrice";
 
 type Props = {
   data: CartItem;
@@ -16,29 +18,49 @@ type Props = {
 function CartCard({ data }: Props) {
   const { removeItemFromCart } = useCart();
   const { handleAddToFavourites } = useFavourites();
+
+  const { currency, exchangeRates } = useCurrency();
+
+  const convertedPrice = convertPrice(
+    Number(data.product_variant.price)  ,
+    "GHS",
+    currency,
+    exchangeRates
+  );
+
+  const convertedTotalPrice = convertPrice(
+    data.totalCost,
+    "GHS",
+    currency,
+    exchangeRates
+  );
+
   return (
-    <div className="group flex flex-col gap-5 w-full border px-5 py-3 capitalize hover:scale-[1.01] transition-all cursor-pointer">
+    <div className="group flex flex-col gap-5 w-full border px-5 py-3 capitalize hover:scale-[1.01] duration-300 transition-all cursor-pointer">
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-center w-full gap-5">
         <div className="relative w-full aspect-[3/2] lg:max-w-[150px] ">
           <Image
-            src={`https://res.cloudinary.com/daurieb51/${data.product?.images[0]?.image}`}
-            alt={data.product.description}
+            src={`https://res.cloudinary.com/dajli9sqa/${data.product_variant?.images[0]?.image}`}
+            alt={data.product_variant.name}
             fill
             objectFit="cover"
           />
         </div>
         <div className="flex flex-col items-start justify-start w-full">
-          <div className="flex items-center justify-between w-full">
-            <h4 className="font-semibold">{data.product.name}</h4>
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-center lg:justify-between w-full gap-3">
+            <h4 className="font-semibold">{data.product_variant.name}</h4>
             <div className="lg:hidden">
               <CardQuantityControls quantity={data.quantity} cart_item={data} />
             </div>{" "}
           </div>
-          <p className="text-shade-200 text-sm">{data.product.description}</p>
+          <p className="text-shade-200 text-sm">{data.product_variant.brief_description}</p>
         </div>{" "}
-        <div className="flex items-start lg:items-center gap-1">
+        <div className="flex flex-col gao-2 items-start lg:items-end gap-1">
           <p className="whitespace-nowrap font-bold text-2xl group-hover:text-primary-100 transition-all">
-            GHS {data.product.price}
+            {currency} {Number(convertedTotalPrice).toFixed(2)}
+          </p>
+          <p className="whitespace-nowrap text-sm">
+            Unit Price: {currency} {Number(convertedPrice).toFixed(2)}
           </p>
         </div>{" "}
       </div>
@@ -49,15 +71,17 @@ function CartCard({ data }: Props) {
             className="text-primary-100"
             variant={"ghost"}
             size={"sm"}
-            fontSize={"xs"}>
+            fontSize={"sm"}
+          >
             <MdDeleteOutline size={20} className="mr-1" />
             Remove
           </Button>
           <Button
             variant={"ghost"}
             size={"sm"}
-            fontSize={"xs"}
-            onClick={() => handleAddToFavourites(data.product.id)}>
+            fontSize={"sm"}
+            onClick={() => handleAddToFavourites(data.product_variant.id)}
+          >
             <FaRegHeart className="mr-2" />
             Move To Favourites
           </Button>

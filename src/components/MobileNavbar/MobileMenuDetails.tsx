@@ -43,7 +43,7 @@ export const MobileMenuDetails = (props: any) => {
     // },
     {
       name: "contact us",
-      url: "/contact-us",
+      url: "/contact",
     },
   ];
   // const { setToggle } = useMenuStore();

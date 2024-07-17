@@ -36,7 +36,7 @@ function Page() {
             toast({
                 title: `Error ${errorCode}`,
                 description: errorMessage,
-                variant: "error"
+                variant: "destructive"
             })
             console.log({ errorCode, errorMessage });
         });
@@ -71,7 +71,7 @@ function Page() {
 
     return (
 
-        <form onSubmit={handleSubmit} className="self-start flex flex-col gap-4 pt-4">
+        <form onSubmit={handleSubmit} className="self-start flex flex-col gap-4 pt-4 lg:min-w-[400px]">
             <FormInput required label="Email" type="" placeholder="Enter your email" value="" name="email" />
             <FormInput required label="Password" type="password" placeholder="Enter your password" value="" name="password" />
             <Button variant={"default"} type="submit" className="bg-primary-100 text-white w-full p-3 flex items-center justify-center gap-2">
@@ -95,7 +95,7 @@ function Page() {
             </div>
 
             <LoginButton icon={<PiGoogleLogo />} onClick={GoogleSignIn} type="button" name="Continue with Google"  />
-            <LoginButton icon={<PiFacebookLogoDuotone />} onClick={() => { }} type="button" name="Continue with Facebook"  />
+            {/* <LoginButton icon={<PiFacebookLogoDuotone />} onClick={() => { }} type="button" name="Continue with Facebook"  /> */}
         </form>
     );
 }

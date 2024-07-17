@@ -18,7 +18,7 @@ function CategoryCard({ category }: Props) {
       >
       <div className="relative w-full aspect-[3/2] ">
         <Image
-          src={`https://res.cloudinary.com/daurieb51/${category?.image}`}
+          src={`https://res.cloudinary.com/dajli9sqa/${category?.image}`}
           alt="Logo"
           fill
           objectFit="cover"

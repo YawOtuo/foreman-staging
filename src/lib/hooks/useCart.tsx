@@ -4,6 +4,8 @@ import { useLocalStorage } from "@uidotdev/usehooks";
 import { useEffect } from "react";
 import { Cart, CartItem } from "../types/cart";
 import { useToast } from "@/components/ui/use-toast";
+import { useAppStore } from "../store/useAppStore";
+import Link from "next/link";
 
 const initialCart: Cart = {
   items: [],
@@ -11,15 +13,21 @@ const initialCart: Cart = {
   totalCost: 0,
 };
 
+// const ToastDesc = () => {
+//   return (
+//     <div><div>
+//   )
+// }
+
 const useCart = () => {
   let cart: Cart = initialCart; // Initialize cart with initialCart
   let setCart: (cart: Cart) => void;
   const { toast } = useToast();
-
+  const { DBDetails } = useAppStore();
 
   if (typeof window !== "undefined") {
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    [cart, setCart] = useLocalStorage<Cart>("foreman-cart", initialCart);
+    [cart, setCart] = useLocalStorage<Cart>(`foreman-cart`, initialCart);
   }
 
   useEffect(() => {
@@ -37,24 +45,34 @@ const useCart = () => {
     calculateTotals();
   }, [cart.items]);
 
-  const AddToCart = (item: CartItem) => {
+  const AddToCart = (item: Omit<CartItem, "totalCost">) => {
     const existingItem = cart.items.find((cartItem) => cartItem.id === item.id);
 
     if (existingItem) {
       existingItem.quantity += item.quantity;
       existingItem.totalCost =
-        existingItem.quantity * existingItem.product.price;
+        existingItem.quantity * Number(existingItem.product_variant.price);
     } else {
       cart.items.push({
         ...item,
-        totalCost: item.quantity * item.product.price,
+        totalCost: item.quantity * Number(item.product_variant.price),
       });
     }
 
     setCart({ ...cart });
-    toast({
+    const { dismiss } = toast({
       title: "Success",
-      description: "Item added to Cart",
+      description: (
+        <div className="flex flex-col gap-0 items-start">
+          <p>{item?.product_variant.name} added to cart Successfully</p>
+          <Link
+            href="/cart"
+            className="uppercase font-bold"
+            onClick={() => dismiss()}>
+            View Cart
+          </Link>
+        </div>
+      ),
       variant: "success",
     });
   };
@@ -64,7 +82,7 @@ const useCart = () => {
 
     if (item) {
       item.quantity = quantity;
-      item.totalCost = item.quantity * item.product.price;
+      item.totalCost = item.quantity * Number(item.product_variant.price);
       setCart({ ...cart });
     }
     toast({

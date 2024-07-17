@@ -8,64 +8,23 @@ import { Product } from "@/lib/types/product";
 import Link from "next/link";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useStoreStore } from "../store/components/useStoreStore";
-
-const mockProducts = [
-  {
-    name: "Concrete Blocks",
-    price: 45.99,
-    image: "/concrete_blocks.jpeg",
-    description:
-      "High-quality concrete blocks for various construction projects.",
-    category: "Building Materials",
-    material: "Concrete",
-    dimensions: "8x8x16 inches",
-  },
-  {
-    name: "Brick Pavers",
-    price: 32.99,
-    image: "/brick_pavers.jpeg",
-    description: "Beautiful brick pavers for landscaping and outdoor projects.",
-    category: "Landscaping",
-    material: "Clay",
-    dimensions: "4x8 inches",
-  },
-  {
-    name: "Lumber",
-    price: 59.99,
-    image: "/lumber.jpeg",
-    description: "High-quality lumber for framing and structural support.",
-    category: "Building Materials",
-    material: "Wood",
-    dimensions: "2x4 inches, 8 feet long",
-  },
-  {
-    name: "Roof Shingles",
-    price: 89.99,
-    image: "/roof_shingles.jpeg",
-    description:
-      "Durable roof shingles for residential and commercial roofing projects.",
-    category: "Roofing",
-    material: "Asphalt",
-    dimensions: "12x12 inches",
-  },
-  {
-    name: "Cement Mixer",
-    price: 349.99,
-    image: "/cement_mixer.jpeg",
-    description: "Powerful cement mixer for efficient mixing of concrete.",
-    category: "Construction Equipment",
-    material: "Metal",
-    dimensions: "20 gallon capacity",
-  },
-];
+import { useToast } from "@/components/ui/use-toast";
 
 function FeaturedProducts() {
-  
+  const { toast } = useToast();
 
   const { allProductsError, allProductsLoading, allProducts } = useProducts();
   return (
     <div className="group/root w-full flex flex-col gap-5 justify-center items-start  lg:max-w-[70%] ">
       <p className="text-2xl font-semibold">Our Popular Products</p>
+
+      {/* <button
+        onClick={() => toast({
+          title: "He",
+          variant: "default",
+        })}>
+        Toest
+      </button> */}
 
       <FetchingState
         className={

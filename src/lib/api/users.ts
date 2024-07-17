@@ -22,9 +22,15 @@ export const fetchOneUser = async (id: number): Promise<User> => {
   return response.json();
 };
 
+export type FetchOrCreateResponse = {
+  message: string;
+  user: User;
+  status: string | number;
+};
+
 export const fetchOrCreateUserByUid = async (
   body: Partial<User>
-): Promise<User> => {
+): Promise<FetchOrCreateResponse> => {
   const response = await fetch(`${url}api/users/get-or-create-user-by-uid/`, {
     method: "POST",
     body: JSON.stringify(body),

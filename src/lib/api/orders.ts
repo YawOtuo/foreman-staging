@@ -14,7 +14,7 @@ export const FetchOrders = async (
 
 // Fetch details of a specific order by order ID
 export const FetchOrderDetails = async (
-  order_id: string | number,
+  order_id:  number,
   user_id: string | number
 ): Promise<Order> => {
   const response = await fetch(

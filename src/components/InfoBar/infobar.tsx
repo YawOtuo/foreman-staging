@@ -1,11 +1,4 @@
 "use client";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { MailIcon, PhoneCallIcon, UserIcon } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -22,6 +15,7 @@ import { auth } from "@/app/firebase";
 import Link from "next/link";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { useRouter } from "next/navigation";
+import CurrencyConv from "@/app/(app)/components/CurrencyConv";
 
 export default function InfoBar() {
   //   const { data, error, isLoading } = useAuthState(auth);
@@ -38,15 +32,16 @@ export default function InfoBar() {
         </a>
         <a
           className="flex items-center gap-2"
-          href="mailto:myforemangh@gmail.com">
+          href="mailto:myforemangh@gmail.com"
+        >
           <MailIcon size={18} />
           myforemangh@gmail.com
         </a>
       </div>
       <div className="flex gap-3 items-center">
         {Object.keys(FBaseDetails).length > 0 ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+          <DropdownMenu >
+            <DropdownMenuTrigger asChild className="">
               <Avatar>
                 {FBaseDetails?.photoURL ? (
                   <AvatarImage src={FBaseDetails?.photoURL} />
@@ -75,8 +70,8 @@ export default function InfoBar() {
               <DropdownMenuItem onClick={() => router.push("/dashboard")}>
                 Dashboard
               </DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Team</DropdownMenuItem>
+              {/* <DropdownMenuItem>Billing</DropdownMenuItem>
+              <DropdownMenuItem>Team</DropdownMenuItem> */}
               <DropdownMenuItem
                 onClick={() => {
                   signOut(auth);
@@ -95,16 +90,7 @@ export default function InfoBar() {
           </Link>
         )}
 
-        <Select value="ghs">
-          <SelectTrigger className="text-black p-4 py-0">
-            <SelectValue placeholder="Select Currency" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="ghs">GHS</SelectItem>
-            <SelectItem value="ngn">NGN</SelectItem>
-            <SelectItem value="usd">USD</SelectItem>
-          </SelectContent>
-        </Select>
+        <CurrencyConv />
       </div>
     </div>
   );

@@ -2,12 +2,12 @@
 import React from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import useCart from "@/lib/hooks/useCart";
 import CartCard from "./CartCard";
 import CartSummary from "./CartSummary";
 import { Button } from "@/components/ui/button";
 import { CartItem } from "@/lib/types/cart";
 import Link from "next/link";
+import useCart from "@/lib/hooks/useCart";
 
 function CartPage() {
   const router = useRouter();
@@ -33,7 +33,7 @@ function CartPage() {
         </div>
       </div>
 
-      <div className="flex items-start justify-center w-full pt-5 gap-x-5  min-h-screen gap-y-5 ">
+      <div className="flex flex-col lg:flex-row items-start justify-center w-full pt-5 gap-x-5  min-h-screen gap-y-5 ">
         <div className="w-full flex flex-col gap-5 basis-[70%] shrink-0">
           {cart?.items?.map((r: CartItem) => (
             <div className="" key={r?.id}>
