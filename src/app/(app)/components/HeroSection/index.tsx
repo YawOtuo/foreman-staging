@@ -13,13 +13,13 @@ function HeroSection() {
 
   return (
     <div
-      className={`w-full grid grid-cols-1 lg:grid-cols-2 items-center justify-center gap-10 h-[70vh] lg:h-screen max-h-[500px] lg:max-h-[900px] px-5 lg:px-14  py-5 transition-all ${styles.heroSlideshowContainer} max-w-[1600px]`}>
-      <div className="flex flex-col gap-6 transition-all ">
-        <div className="flex flex-col gap-3">
+      className={`w-full grid grid-cols-1 lg:grid-cols-5 items-center justify-center gap-10  lg:min-h-[50vh]  px-5 lg:px-14  py-5 transition-all ${styles.heroSlideshowContainer} max-w-[1600px]`}>
+      <div className="order-2 lg:order-1 col-span-2 flex flex-col gap-6 transition-all justify-center h-full">
+        <div className="flex flex-col gap-3 ">
           <p className="text-3xl lg:text-5xl font-bold">
-            High-Quality <br className="hidden 2xl:block" />
-            Construction Materials for Every Project
-          </p>
+            <span className="text-prifmary">High-Quality</span> <br className="hidden 2xl:block" />
+            <span className="text-primary">Construction</span> Materials for <span className="">Every Project</span> 
+          </p> 
           <p className="text-base">
             Supplying builders with premium materials for over 20 years. Quality
             you can trust, prices you&apos;ll love.
@@ -39,7 +39,7 @@ function HeroSection() {
           </Link>
         </div>
       </div>
-      <div className="hidden lg:flex h-full items-center w-full  transition-all">
+      <div className="order-1  lg:max-h-full lg:order-2 col-span-3  h-full items-center w-full  transition-all ">
         <HeroSlider />
       </div>{" "}
     </div>
