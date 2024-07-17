@@ -16,7 +16,7 @@ import { convertPrice } from "@/lib/utils/convertPrice";
 import Link from "next/link";
 import useCart from "@/lib/hooks/useCart";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade } from "swiper/modules";
+import { Autoplay, EffectFade } from "swiper/modules";
 
 type Props = {
   product: Product;
@@ -38,7 +38,14 @@ function ProductCard({ product }: Props) {
       <Link
         href={`/product/${product.id}`}
         className="relative w-full aspect-[3/2] min-w-[200px] ">
-        <Swiper className="w-full h-full" modules={[EffectFade]}>
+        <Swiper
+        effect="fade"
+          className="w-full h-full"
+          autoplay={{
+            delay: 3500,
+            disableOnInteraction: false,
+          }}
+          modules={[Autoplay, EffectFade]}>
           {product?.images?.map((image, index) => (
             <SwiperSlide key={index}>
               <Image
@@ -105,7 +112,7 @@ function ProductCard({ product }: Props) {
 
           <Link
             href={`/product/${product?.id}`}
-            className="flex items-center justify-center gap-2 text-xs">
+            className="flex items-center justify-center gap-2 ">
             View
             <FaLongArrowAltRight className="text-primary" />
           </Link>

@@ -23,6 +23,7 @@ import { Plus, Minus } from "lucide-react";
 import useCart from "@/lib/hooks/useCart";
 import { useCurrency } from "@/context/CurrencyContext";
 import { convertPrice } from "@/lib/utils/convertPrice";
+import { Autoplay, EffectFlip } from "swiper/modules";
 
 export default function ProductDetailPage({
   params,
@@ -72,7 +73,7 @@ export default function ProductDetailPage({
           // ...product_variant,
           id: selectedVariant.id,
           // variants: [selectedVariant],
-          
+
           price: selectedVariant.price,
           name: selectedVariant.name,
           brief_description: selectedVariant.brief_description,
@@ -106,6 +107,11 @@ export default function ProductDetailPage({
       <section className="flex flex-wrap md:flex-nowrap gap-8">
         <div className="w-full md:w-1/2">
           <Swiper
+            modules={[Autoplay, EffectFlip]}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
             className="w-full rounded-lg overflow-hidden border-2 transition-all duration-300"
             spaceBetween={5}>
             {selectedVariant?.images.map((image) => (
