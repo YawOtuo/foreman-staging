@@ -60,12 +60,17 @@ const useCart = () => {
     }
 
     setCart({ ...cart });
-    toast({
+    const { dismiss } = toast({
       title: "Success",
       description: (
         <div className="flex flex-col gap-0 items-start">
           <p>{item?.product_variant.name} added to cart Successfully</p>
-          <Link href={'/cart'} className="uppercase font-bold">View Cart</Link>
+          <Link
+            href="/cart"
+            className="uppercase font-bold"
+            onClick={() => dismiss()}>
+            View Cart
+          </Link>
         </div>
       ),
       variant: "success",
