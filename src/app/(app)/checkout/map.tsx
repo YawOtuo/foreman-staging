@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { Loader } from "@googlemaps/js-api-loader";
 
 const Map: React.FC = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const [mapInstance, setMapInstance] = useState<google.maps.Map | null>(null);
+  const [marker, setMarker] =
+    useState<google.maps.marker.AdvancedMarkerElement | null>(null);
   const {
     setValue,
     register,
@@ -13,97 +15,124 @@ const Map: React.FC = () => {
   const [coordinates, setCoordinates] = useState<string>("");
 
   useEffect(() => {
-    const loader = new Loader({
-      apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY || "",
-      version: "weekly",
-      libraries: ["places", "marker"],
+    const loadGoogleMaps = () => {
+      const script = document.createElement("script");
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&libraries=places,marker&v=beta`;
+      script.async = true;
+      script.defer = true;
+      script.onload = initMap;
+      script.onerror = () => console.error("Failed to load Google Maps API");
+      document.head.appendChild(script);
+
+      return () => {
+        document.head.removeChild(script);
+      };
+    };
+
+    const cleanup = loadGoogleMaps();
+    return cleanup;
+  }, []);
+
+  const initMap = () => {
+    if (!mapRef.current || !window.google) return;
+
+    const map = new window.google.maps.Map(mapRef.current, {
+      center: { lat: 5.6037, lng: -0.187 },
+      zoom: 17,
+      mapId: process.env.NEXT_PUBLIC_GOOGLE_MAPS_ID,
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: false,
     });
 
-    loader.load().then(() => {
-      if (!mapRef.current) return;
+    const newMarker = new window.google.maps.marker.AdvancedMarkerElement({
+      map,
+      position: map.getCenter(),
+    });
 
-      const map = new google.maps.Map(mapRef.current, {
-        center: { lat: 5.6037, lng: -0.187 },
-        zoom: 17,
-        mapId: "MAP_ID_1234",
-        mapTypeControl: false,
-        streetViewControl: false,
-        fullscreenControl: false,
-      });
+    setMapInstance(map);
+    setMarker(newMarker);
 
-      const marker = new google.maps.marker.AdvancedMarkerElement({
-        map,
-        position: map.getCenter(),
-      });
+    if (searchInputRef.current) {
+      initSearchBox(map, newMarker);
+    }
 
-      if (!searchInputRef.current) return;
+    map.addListener("click", (e: google.maps.MapMouseEvent) => {
+      if (e.latLng) {
+        newMarker.position = e.latLng;
+        updateCoordinatesAndAddress(e.latLng);
+      }
+    });
+  };
 
-      const searchBox = new google.maps.places.SearchBox(
-        searchInputRef.current
-      );
-      map.controls[google.maps.ControlPosition.TOP_CENTER].push(
-        searchInputRef.current
-      );
+  const initSearchBox = (
+    map: google.maps.Map,
+    marker: google.maps.marker.AdvancedMarkerElement
+  ) => {
+    if (!searchInputRef.current) return;
 
-      map.addListener("bounds_changed", () => {
-        searchBox.setBounds(map.getBounds() as google.maps.LatLngBounds);
-      });
+    const searchBox = new window.google.maps.places.SearchBox(
+      searchInputRef.current
+    );
+    map.controls[window.google.maps.ControlPosition.TOP_CENTER].push(
+      searchInputRef.current
+    );
 
-      searchBox.addListener("places_changed", () => {
-        const places = searchBox.getPlaces();
-        if (places?.length === 0) return;
+    map.addListener("bounds_changed", () => {
+      searchBox.setBounds(map.getBounds() as google.maps.LatLngBounds);
+    });
 
-        const bounds = new google.maps.LatLngBounds();
-        places?.forEach((place) => {
-          if (!place.geometry || !place.geometry.location) return;
+    searchBox.addListener("places_changed", () => {
+      const places = searchBox.getPlaces();
+      if (places?.length === 0) return;
 
-          marker.position = place.geometry.location;
-          updateCoordinatesAndAddress(place.geometry.location);
+      const bounds = new window.google.maps.LatLngBounds();
+      places?.forEach((place) => {
+        if (!place.geometry || !place.geometry.location) return;
 
-          if (place.geometry.viewport) {
-            bounds.union(place.geometry.viewport);
-          } else {
-            bounds.extend(place.geometry.location);
-          }
-        });
+        marker.position = place.geometry.location;
+        updateCoordinatesAndAddress(place.geometry.location);
 
-        map.fitBounds(bounds);
-      });
-
-      map.addListener("click", (e: google.maps.MapMouseEvent) => {
-        if (e.latLng) {
-          marker.position = e.latLng;
-          updateCoordinatesAndAddress(e.latLng);
+        if (place.geometry.viewport) {
+          bounds.union(place.geometry.viewport);
+        } else {
+          bounds.extend(place.geometry.location);
         }
       });
 
-      const geocoder = new google.maps.Geocoder();
-
-      const updateCoordinatesAndAddress = (location: google.maps.LatLng) => {
-        setCoordinates(`${location.lat()}, ${location.lng()}`);
-        geocoder.geocode({ location }, (results, status) => {
-          if (status === "OK" && results && results[0]) {
-            setValue("address.location", results[0].formatted_address);
-          } else {
-            setValue(
-              "address.location",
-              status === "OK"
-                ? "No address found"
-                : `Geocoder failed: ${status}`
-            );
-          }
-        });
-      };
+      map.fitBounds(bounds);
     });
-  }, [setValue]);
+  };
+
+  const updateCoordinatesAndAddress = (location: google.maps.LatLng) => {
+    setCoordinates(`${location.lat()}, ${location.lng()}`);
+    const geocoder = new window.google.maps.Geocoder();
+    geocoder.geocode({ location }, (results, status) => {
+      if (status === "OK" && results && results[0]) {
+        setValue("address.location", results[0].formatted_address, {
+          shouldValidate: true,
+        });
+      } else {
+        setValue(
+          "address.location",
+          status === "OK" ? "No address found" : `Geocoder failed: ${status}`,
+          { shouldValidate: true }
+        );
+      }
+    });
+  };
 
   return (
     <div>
+      <label htmlFor="map-search" className="sr-only">
+        Search for a location
+      </label>
       <input
+        id="map-search"
         ref={searchInputRef}
         className="controls"
         type="text"
-        placeholder="Search Box"
+        placeholder="Search for a location"
         style={{
           marginTop: "10px",
           width: "90%",
@@ -114,19 +143,15 @@ const Map: React.FC = () => {
           fontSize: "14px",
         }}
       />
-      <div ref={mapRef} style={{ width: "100%", height: "400px" }}></div>
-      {/* <input
-        type="text"
-        value={coordinates}
-        readOnly
-        placeholder="Coordinates will appear here"
-        style={{
-          margin: "10px 0",
-          width: "100%",
-          padding: "5px",
-        }}
-      /> */}
+      <div
+        ref={mapRef}
+        style={{ width: "100%", height: "50vh", minHeight: "400px" }}
+      ></div>
+      <label htmlFor="address-display" className="sr-only">
+        Selected address
+      </label>
       <input
+        id="address-display"
         type="text"
         readOnly
         placeholder="Address will appear here"
@@ -139,6 +164,9 @@ const Map: React.FC = () => {
           required: "Search for a location on the map",
         })}
       />
+      {/* {errors.address?.location && (
+        <p style={{ color: "red" }}>{errors.address.location.message}</p>
+      )} */}
     </div>
   );
 };
