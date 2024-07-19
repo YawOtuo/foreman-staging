@@ -17,7 +17,17 @@ function Page() {
         const formData = new FormData(e.currentTarget);
         const email = formData.get("email") as string;
         const password = formData.get("password") as string;
-        console.log({ email, name, password });
+        const confirmPassword = formData.get("confirmPassword") as string;
+        const name = `${formData.get("firstName")} ${formData.get("lastName")}` as string;
+
+        if (password !== confirmPassword) {
+            toast({
+                title: `Error`,
+                description: `Passwords do not match`,
+                variant: "destructive"
+            })
+            return;
+        }
 
         // sign Up with firebase email, name and password 
         createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
@@ -72,8 +82,11 @@ function Page() {
     return (
 
         <form onSubmit={handleSubmit} className="self-start flex flex-col gap-4 pt-4 lg:min-w-[400px]">
+            <FormInput required label="Name" type="" placeholder="Enter First Name" value="" name="firstName" />
+            <FormInput required label="Last Name" type="" placeholder="Enter Last Name" value="" name="lastName" />
             <FormInput required label="Email" type="" placeholder="Enter your email" value="" name="email" />
             <FormInput required label="Password" type="password" placeholder="Enter your password" value="" name="password" />
+            <FormInput required label="Confirm Password" type="password" placeholder="Confirm your password" value="" name="confirmPassword" />
             <Button variant={"default"} type="submit" className="bg-primary-100 text-white w-full p-3 flex items-center justify-center gap-2">
                 <PiSignInDuotone />
                 <span>Register</span>
