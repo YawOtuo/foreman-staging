@@ -33,7 +33,12 @@ export default function ProductDetailPage({
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     null
   );
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(() => {
+    const minQuantity = selectedVariant?.min_order_quantity;
+    return minQuantity ? parseInt(minQuantity, 10) : 1;
+  });
+
+  console.log("Quantity of Product:", quantity);
 
   const { exchangeRates, currency } = useCurrency();
   const { AddToCart } = useCart();
@@ -51,18 +56,22 @@ export default function ProductDetailPage({
   }, [product]);
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = parseInt(e.target.value);
+    const value = parseInt(e.target.value, 10);
     if (!isNaN(value) && value > 0) {
       setQuantity(value);
     }
   };
 
   const incrementQuantity = () => {
-    setQuantity((prev) => prev + 1);
+    setQuantity((prev) => (prev ? prev + 1 : 1));
   };
 
   const decrementQuantity = () => {
-    setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+    setQuantity((prev) =>
+      prev && prev > Number(selectedVariant?.min_order_quantity)
+        ? prev - 1
+        : Number(selectedVariant?.min_order_quantity)
+    );
   };
 
   const handleAddToCart = () => {
@@ -91,7 +100,11 @@ export default function ProductDetailPage({
     const newVariant =
       product?.variants.find((v) => v.id.toString() === value) || null;
     setSelectedVariant(newVariant);
-    setQuantity(1); // Reset quantity when changing variants
+    setQuantity(
+      newVariant?.min_order_quantity
+        ? parseInt(newVariant.min_order_quantity, 10)
+        : 1
+    ); // Reset quantity when changing variants
   };
 
   if (isLoading) {
@@ -113,7 +126,8 @@ export default function ProductDetailPage({
               disableOnInteraction: false,
             }}
             className="w-full rounded-lg overflow-hidden border-2 transition-all duration-300"
-            spaceBetween={5}>
+            spaceBetween={5}
+          >
             {selectedVariant?.images.map((image) => (
               <SwiperSlide key={image.id}>
                 <OptimizedImage
@@ -169,13 +183,18 @@ export default function ProductDetailPage({
                         onClick={decrementQuantity}
                         variant="outline"
                         size="icon"
-                        className="h-10 w-10">
+                        className="h-10 w-10"
+                      >
                         <Minus className="h-4 w-4" />
                       </Button>
                       <Input
                         id="quantity"
                         type="number"
-                        min="1"
+                        min={
+                          selectedVariant?.min_order_quantity
+                            ? parseInt(selectedVariant.min_order_quantity, 10)
+                            : 1
+                        }
                         value={quantity}
                         onChange={handleQuantityChange}
                         className="w-16 mx-2 text-center"
@@ -184,14 +203,16 @@ export default function ProductDetailPage({
                         onClick={incrementQuantity}
                         variant="outline"
                         size="icon"
-                        className="h-10 w-10">
+                        className="h-10 w-10"
+                      >
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
                   </div>
                   <Button
                     onClick={handleAddToCart}
-                    className="mt-4 rounded-sm px-5">
+                    className="mt-4 rounded-sm px-5"
+                  >
                     Add to Cart
                   </Button>
                 </div>
