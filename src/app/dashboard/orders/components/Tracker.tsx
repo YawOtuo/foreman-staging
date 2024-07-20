@@ -22,8 +22,10 @@ const Tracker = ({ orderConfirmed }: TrackerProps) => {
             className={`${
               orderConfirmed === "pending"
                 ? "text-gray-500"
-                : orderConfirmed === "confirmed" || orderConfirmed === "shipped"
-                ? "text-primary"
+                : orderConfirmed === "confirmed" ||
+                  orderConfirmed === "shipped" ||
+                  orderConfirmed == "delivered"
+                ? "text-green-600"
                 : "text-red-600"
             }`}
             size={30}
@@ -34,10 +36,10 @@ const Tracker = ({ orderConfirmed }: TrackerProps) => {
         <div className="flex flex-1 items-center">
           <TbCircleNumber2Filled
             className={`${
-              orderConfirmed === "pending"
+              orderConfirmed === "pending" || orderConfirmed === "confirmed"
                 ? "text-gray-500"
                 : orderConfirmed === "shipped" || orderConfirmed === "delivered"
-                ? "text-primary"
+                ? "text-green-600"
                 : "text-red-600"
             }`}
             size={30}
@@ -47,10 +49,12 @@ const Tracker = ({ orderConfirmed }: TrackerProps) => {
         <div className="flex items-center ">
           <TbCircleNumber3Filled
             className={`${
-              orderConfirmed === "pending"
+              orderConfirmed === "pending" ||
+              orderConfirmed === "shipped" ||
+              orderConfirmed === "confirmed"
                 ? "text-gray-500"
                 : orderConfirmed === "delivered"
-                ? "text-primary"
+                ? "text-green-600"
                 : "text-red-600"
             }`}
             size={30}
@@ -70,7 +74,7 @@ const Tracker = ({ orderConfirmed }: TrackerProps) => {
         </div>
         <div className="">
           <p className="uppercase md:text-base font-medium sm:text-sm text-xs text-pretty">
-            To deliver
+            delivered
           </p>
         </div>
       </div>
