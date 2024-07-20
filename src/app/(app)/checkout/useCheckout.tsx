@@ -2,6 +2,13 @@ import useOrders from "@/lib/hooks/useOrder";
 import usePayStack from "./components/CheckoutButton/usePaystack";
 import useCart from "@/lib/hooks/useCart";
 import { useRouter } from "next/navigation";
+import useEmail from "@/lib/hooks/useEmail";
+import {
+  fromEmail,
+  generalEmailReceipients,
+  templateIds,
+} from "@/lib/utils/emailTemplateIds";
+import { useAppStore } from "@/lib/store/useAppStore";
 
 function useCheckout() {
   const { startPayment } = usePayStack();
@@ -9,6 +16,8 @@ function useCheckout() {
   const { cart } = useCart();
   const router = useRouter();
   const { clearCart } = useCart();
+  const { sendEmail } = useEmail();
+  const { DBDetails } = useAppStore();
 
   const checkout = async (option: "delivery" | "now") => {
     const orderItems = cart.items.map((item) => ({
@@ -33,8 +42,22 @@ function useCheckout() {
               order_id: result.id,
               orderData: { is_paid: true },
             }).then((res) => {
+
+              sendEmail({
+
+                to: [
+                  ...(generalEmailReceipients["signup"] || []),
+                  DBDetails?.email,
+                ],
+                from: fromEmail,
+                templateId: templateIds["order"],
+                templateData: {
+                  username: DBDetails?.username,
+                },
+              });
+
               router.push(`/checkout-success/${result.id}`);
-              clearCart();
+              // clearCart();
             });
           });
         } else {

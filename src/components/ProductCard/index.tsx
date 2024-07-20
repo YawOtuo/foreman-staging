@@ -39,7 +39,7 @@ function ProductCard({ product }: Props) {
         href={`/product/${product.id}`}
         className="relative w-full aspect-[3/2] min-w-[200px] ">
         <Swiper
-        effect="fade"
+          effect="fade"
           className="w-full h-full"
           autoplay={{
             delay: 3500,
@@ -106,7 +106,10 @@ function ProductCard({ product }: Props) {
           <div className="flex items-center justify-start gap-2">
             <GrMoney size={15} className="text-primary-300" />
             <p className=" whitespace-nowrap font-semibold text-lg transition-all duration-500 bg-white">
-              {currency} {Number(convertedPrice)?.toFixed(2)}
+              {currency} {Number(convertedPrice)?.toFixed(2)}{" "}
+              {/* {product.category.units_of_measurement[0]?.unit && (
+                <p className="text-xs">per {product.category.units_of_measurement[0].unit}</p>
+              )} */}
             </p>
           </div>
 

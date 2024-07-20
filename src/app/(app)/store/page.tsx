@@ -39,7 +39,7 @@ function StoreContent() {
             ))}
             skeletonCount={10}
             loading={<PCSkeleton />}
-            isLoading={allProductsLoading}
+            isLoading={!allProducts && allProductsLoading}
             isError={allProductsError}
             nullComponent={
               allProducts &&
