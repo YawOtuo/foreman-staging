@@ -1,4 +1,5 @@
 "use client";
+import { FormFields } from "@/lib/types/form";
 import { Loader } from "@googlemaps/js-api-loader";
 import React, { useEffect, useRef, useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -16,7 +17,11 @@ const Map: React.FC = () => {
   const [mapInstance, setMapInstance] = useState<google.maps.Map | null>(null);
   const [marker, setMarker] =
     useState<google.maps.marker.AdvancedMarkerElement | null>(null);
-  const { setValue, register } = useFormContext();
+  const {
+    setValue,
+    register,
+    formState: { errors },
+  } = useFormContext<FormFields>();
 
   useEffect(() => {
     const initMap = async () => {
@@ -185,9 +190,11 @@ const Map: React.FC = () => {
           required: "Search for a location on the map",
         })}
       />
-      {/* {errors.address?.location && (
-        <p style={{ color: "red" }}>{errors.address.location.message}</p>
-      )} */}
+      {errors.address?.location && (
+        <p className="text-red-600 mt-2 md:text-center">
+          {errors.address.location.message}
+        </p>
+      )}
     </div>
   );
 };

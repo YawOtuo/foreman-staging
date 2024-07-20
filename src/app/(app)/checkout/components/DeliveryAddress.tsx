@@ -58,11 +58,6 @@ const DeliveryAddressForm = () => {
         <div>
           <div className="w-full flex flex-col">
             <Map />
-            {errors.address?.location && (
-              <p className="text-red-600 mt-2 md:text-center">
-                {errors.address.location.message}
-              </p>
-            )}
           </div>
         </div>
       </div>
