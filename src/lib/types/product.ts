@@ -31,6 +31,8 @@ export interface ProductVariant {
   updated_at: string;
   product: number;
   related_products: RelatedProduct[];
+  min_order_value: string | null;
+  min_order_quantity: string | null;
 }
 
 export interface RelatedProduct {
@@ -49,8 +51,6 @@ export interface RelatedProduct {
   description: string;
   availability: string;
 }
-
-
 
 export interface Product {
   price: number;

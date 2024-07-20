@@ -6,12 +6,10 @@ export const district_constituency = [
   "Accra Metropolitan / AYAWASO EAST",
   "Accra Metropolitan / KLOTTEY KORLEY",
   "Accra Metropolitan / ODODODIODIOO",
-  // "Accra Metropolitan / OKAIKWEI NORTH",
   "Accra Metropolitan / OKAIKWEI CENTRAL",
   "Accra Metropolitan / OKAIKWEI SOUTH",
 
   "Ablekuma West Municipal / ABLEKUMA WEST",
-  "Ablekuma West Municipal",
 
   "Ayawaso North Municipal / AYAWASO NORTH",
   "Ayawaso West Municipal / AYAWASO WEST WUOGON",
