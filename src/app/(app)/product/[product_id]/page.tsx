@@ -148,7 +148,7 @@ export default function ProductDetailPage({
           <Card className="mb-4">
             <CardContent className="p-4">
               <h2 className="text-xl font-semibold mb-2">Variants</h2>
-              <Select onValueChange={handleVariantChange}>
+              <Select onValueChange={handleVariantChange} value={selectedVariant?.id.toString()}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select a variant" />
                 </SelectTrigger>
@@ -208,6 +208,7 @@ export default function ProductDetailPage({
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
+                    <span className='ml-4 capitalize'>{product?.category.units_of_measurement[0]?.unit}</span>
                   </div>
                   <Button
                     onClick={handleAddToCart}
