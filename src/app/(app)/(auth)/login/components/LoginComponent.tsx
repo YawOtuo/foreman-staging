@@ -38,7 +38,7 @@ function LoginComponent() {
           description: `You have successfully logged in with ${email}`,
           variant: "success",
         });
-        router.push("/");
+        router.back();
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -57,8 +57,12 @@ function LoginComponent() {
 
   function GoogleSignIn() {
     // Sign in with Google
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
+    const googleProvider = new GoogleAuthProvider();
+    googleProvider.setCustomParameters({
+      prompt: "select_account",
+    });
+    // const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, googleProvider)
       .then((result) => {
         // The signed-in user info.
         const user = result.user;
@@ -68,7 +72,7 @@ function LoginComponent() {
           description: `You have successfully logged in with Google`,
           variant: "success",
         });
-        router.push("/");
+        router.back();
       })
       .catch((error) => {
         // Handle Errors here.
