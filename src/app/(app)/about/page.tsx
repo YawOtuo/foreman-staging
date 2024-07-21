@@ -33,11 +33,11 @@ const AboutUsPage = () => {
 
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>The Builders' Merchant</CardTitle>
+          <CardTitle>The Builders&apos; Merchant</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="mb-4">
-            With our strategic affiliate network of over 650 building material outlets, we supply quality building materials to trade professionals and self-builders across the nation. Wherever you're working, Foreman Gh is only a click away to provide you with a quick and convenient service to ensure you get the job done right - first time.
+            With our strategic affiliate network of over 650 building material outlets, we supply quality building materials to trade professionals and self-builders across the nation. Wherever you&apos;re working, Foreman Gh is only a click away to provide you with a quick and convenient service to ensure you get the job done right - first time.
           </p>
           <p>
             So place an order with us today and immerse yourself into a whole new exciting online shopping experience. Our team of experts are on hand to support you every step of the way.
@@ -57,7 +57,7 @@ const AboutUsPage = () => {
             Either way, we provide free storage and insurance for materials purchased under our Foreman Warehousing option. Your stored materials will be delivered to your designated delivery address at No fee, once you are ready to build.
           </p>
           <p>
-            As a trusted companion, we are ready to embark on the journey with you - create a warehouse with us today and let's help you prepare for your dream project.
+            As a trusted companion, we are ready to embark on the journey with you - create a warehouse with us today and let&apos;s help you prepare for your dream project.
           </p>
         </CardContent>
       </Card>
@@ -68,7 +68,7 @@ const AboutUsPage = () => {
         </CardHeader>
         <CardContent>
           <p className="mb-4">
-            We value our relationship with masons, steelbenders, carpenters, electricians, plumbers and all other forms of trade in the building and construction industry. Foreman's ambition is to deliver best-in-class products and service to each and every customer - from professionals in the building trade to DIY enthusiasts and retailers.
+            We value our relationship with masons, steelbenders, carpenters, electricians, plumbers and all other forms of trade in the building and construction industry. Foreman&apos;s ambition is to deliver best-in-class products and service to each and every customer - from professionals in the building trade to DIY enthusiasts and retailers.
           </p>
           <p>
             We are dedicated to building relationships with our customers and suppliers alike, so we can offer the best choice of products and expert help and advice from our knowledgeable teams - that is our promise to you.
