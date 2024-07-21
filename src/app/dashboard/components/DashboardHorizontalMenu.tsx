@@ -35,7 +35,8 @@ function DashboardHorizonalMenu() {
       </div>
       <div className="flex items-center gap-3 ">
         <div className="flex items-center gap-5">
-          <p>{DBDetails?.username}</p> <p> {DBDetails?.email}</p>
+          <p className="hidden lg:block">{DBDetails?.username}</p>
+          <p> {DBDetails?.email}</p>
           <Button
             variant={"outline"}
             onClick={() => {
