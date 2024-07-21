@@ -27,7 +27,7 @@ export default function RootLayout({
           <InfoBar />
           <Navbar />
           <div className="w-full"> {children}</div>
-          <div className="">
+          <div className="w-full">
             <Footer />
           </div>
         </MobileMenuWrapper>

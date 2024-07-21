@@ -4,10 +4,15 @@ import { useAppStore } from "@/lib/store/useAppStore";
 import { UserIcon } from "lucide-react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useDashboardMobileStore } from "./DashboardMobileNavbar/components/useDashboardMobileNavStore";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { signOut } from "firebase/auth";
+import { auth } from "@/app/firebase";
 
 function DashboardHorizonalMenu() {
   const { FBaseDetails, DBDetails } = useAppStore();
-  const {setDashboardMobileMenu } = useDashboardMobileStore()
+  const { setDashboardMobileMenu } = useDashboardMobileStore();
+  const router = useRouter();
   return (
     <div className=" flex items-center justify-between px-4 gap-5 border-b-2 py-1 text-sm">
       <div>
@@ -30,8 +35,14 @@ function DashboardHorizonalMenu() {
       </div>
       <div className="flex items-center gap-3 ">
         <div className="flex items-center gap-5">
-          {DBDetails?.name}
-          {DBDetails?.email}
+          <p>{DBDetails?.username}</p> <p> {DBDetails?.email}</p>
+          <Button
+            variant={"outline"}
+            onClick={() => {
+              signOut(auth).then(() => router.push("/login"));
+            }}>
+            Logout
+          </Button>
         </div>
       </div>
 

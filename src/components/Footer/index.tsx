@@ -2,7 +2,7 @@
 
 function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 mt-8 py-8 w-full">
+    <footer className="bg-shade-300 text-gray-300 mt-8 py-8 w-full">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">

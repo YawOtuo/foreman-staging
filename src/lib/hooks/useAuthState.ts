@@ -10,17 +10,18 @@ import {
   templateIds,
 } from "../utils/emailTemplateIds";
 import { User } from "../types/user";
+import useSignUpStore from "@/app/(app)/(auth)/signup/useSignUpStore";
 
 export default function useAuthState(auth: any) {
   const { toast } = useToast();
   const { setDBDetails, setFBaseDetails, error, setError, setIsLoading } =
     useAppStore();
   const { sendEmail } = useEmail();
+  const { username } = useSignUpStore();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(
       auth,
       async (userAuth: any) => {
-
         try {
           if (userAuth) {
             // Set Firebase details
@@ -29,7 +30,7 @@ export default function useAuthState(auth: any) {
             // Fetch or create user by UID
             const userData: FetchOrCreateResponse =
               await fetchOrCreateUserByUid({
-                username: userAuth?.displayName || "User",
+                username: userAuth?.displayName || username || "User",
                 email: userAuth?.email || userAuth?.providerData?.[0]?.email,
                 uid: userAuth?.uid,
               });
@@ -43,7 +44,7 @@ export default function useAuthState(auth: any) {
                 from: fromEmail,
                 templateId: templateIds["signup"],
                 templateData: {
-                  username: userAuth?.displayName || "User",
+                  username: userAuth?.displayName || username || "User",
                 },
               });
               console.log("emailing...");
@@ -64,7 +65,7 @@ export default function useAuthState(auth: any) {
     );
 
     return () => unsubscribe();
-  }, [auth, setFBaseDetails, setDBDetails]);
+  }, [username, auth, setFBaseDetails, setDBDetails]);
 
   // Display authentication error toast
   useEffect(() => {

@@ -19,6 +19,17 @@ function useCheckout() {
   const { sendEmail } = useEmail();
   const { DBDetails } = useAppStore();
 
+  const sendOrderEmail = (order_id: number) =>
+    sendEmail({
+      to: [...(generalEmailReceipients["signup"] || []), DBDetails?.email],
+      from: fromEmail,
+      templateId: templateIds["order"],
+      templateData: {
+        username: DBDetails?.username,
+        order_id: order_id,
+        button_url: `https://foremangh.com/dashboard/orders/${order_id}`,
+      },
+    });
   const checkout = async (option: "delivery" | "now") => {
     const orderItems = cart.items.map((item) => ({
       product_id: item.product_variant.id, // Assuming 'id' is the product ID
@@ -42,25 +53,14 @@ function useCheckout() {
               order_id: result.id,
               orderData: { is_paid: true },
             }).then((res) => {
-
-              sendEmail({
-
-                to: [
-                  ...(generalEmailReceipients["signup"] || []),
-                  DBDetails?.email,
-                ],
-                from: fromEmail,
-                templateId: templateIds["order"],
-                templateData: {
-                  username: DBDetails?.username,
-                },
-              });
-
+              sendOrderEmail(result.id);
               router.push(`/checkout-success/${result.id}`);
-              // clearCart();
+              clearCart();
             });
           });
         } else {
+          sendOrderEmail(result.id);
+
           router.push(`/checkout-success/${result.id}`);
           clearCart();
         }

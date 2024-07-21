@@ -107,7 +107,7 @@ export default function ProductDetailPage({
     ); // Reset quantity when changing variants
   };
 
-  if (isLoading) {
+  if (!product && isLoading) {
     return (
       <div className="p-8 pt-8">
         <ProductLoadingSkeleton />
