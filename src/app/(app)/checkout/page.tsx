@@ -117,7 +117,7 @@ export default function CheckOutPage() {
                 deliveryCharge={deliveryCharge}
                 subTotal={cart.totalCost}
               />
-              <div className="mt-6 w-full flex flex-col items-center gap-5 justify-center sm:w-3/5 md:w-4/5 ">
+              <div className="mt-6 w-full flex flex-col items-center gap-5 justify-center sm:w-4/5">
                 <DeliveryAddressForm />
                 <label className="text-xs sm:text-base">
                   <input

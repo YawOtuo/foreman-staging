@@ -4,12 +4,33 @@ import Link from "next/link";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import { FaShoppingCart } from "react-icons/fa";
+import { RiVisaFill } from "react-icons/ri";
+import { FaCcMastercard } from "react-icons/fa6";
+import Image from "next/image";
 
 interface CheckSummaryProps {
   subTotal: number;
   deliveryCharge: number;
   // payment: <Reco
 }
+
+const momoImages = [
+  {
+    id: 0,
+    src: "/mtn_logo.png",
+    alt: "mtn logo",
+  },
+  {
+    id: 1,
+    src: "/airtelTigo.png",
+    alt: "airtel tigo logo",
+  },
+  {
+    id: 2,
+    src: "/telecel.png",
+    alt: "telecel logo",
+  },
+];
 
 const CheckSummary: React.FC<CheckSummaryProps> = ({
   subTotal,
@@ -43,7 +64,7 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
 
   return (
     <>
-      <div className=" flex flex-col w-full  sm:w-3/5 md:w-4/5 border-2 bg-secondary p-5 h-[400px] justify-center rounded-md">
+      <div className=" flex flex-col w-full  sm:w-4/5 md:w-4/5 border-2 bg-secondary p-5 h-[400px] justify-center rounded-md">
         {/* Summary side */}
         <div className="h-1/2 flex flex-col justify-center">
           <div className="space-y-3">
@@ -86,7 +107,7 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
             
           </label> */}
 
-          <label>
+          <label className="flex space-x-2">
             <input
               type="radio"
               value="pay_now"
@@ -94,10 +115,19 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
                 required: "Please select a payment method",
               })}
             />{" "}
-            Pay Now{" "}
-            <span className="text-gray-800">
-              (Card Payment -Visa/ Mastercard) (Mobile Money -MTN/ AirtelTigo/
-              Voda)
+            <span className="text-gray-800 flex items-center space-x-2 ">
+              <p>Pay Now</p> <RiVisaFill className="text-blue-600 text-2xl" />{" "}
+              <FaCcMastercard className="text-orange-500 text-2xl" />{" "}
+              {momoImages.map((item) => (
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  objectFit="cover"
+                  width={40}
+                  height={30}
+                  key={item.id}
+                />
+              ))}
             </span>
           </label>
 
