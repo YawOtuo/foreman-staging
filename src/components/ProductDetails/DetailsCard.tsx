@@ -85,7 +85,8 @@ export default function ProductDetailsCard({ product }: { product: Product }) {
           />
           <Button
             disabled={quantity == 1}
-            onClick={() => setQuantity(quantity - 1)}>
+            onClick={() => setQuantity(quantity - 1)}
+          >
             -
           </Button>
           <Button onClick={() => setQuantity(quantity + 1)}>+</Button>
@@ -98,7 +99,8 @@ export default function ProductDetailsCard({ product }: { product: Product }) {
           onClick={() => {
             handleAddToFavourites(product.id);
           }}
-          className=" w-full">
+          className=" w-full"
+        >
           Add to Favourites
         </Button>{" "}
         <Link href={`product/${product.id}`}>
@@ -111,7 +113,8 @@ export default function ProductDetailsCard({ product }: { product: Product }) {
             //     //the total cost will be update in the AddtoCart function
             //   });
             // }}
-            className="w-full">
+            className="w-full"
+          >
             View
           </Button>
         </Link>

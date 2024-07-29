@@ -33,10 +33,7 @@ export default function ProductDetailPage({
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     null
   );
-  const [quantity, setQuantity] = useState(() => {
-    const minQuantity = selectedVariant?.min_order_quantity;
-    return minQuantity ? parseInt(minQuantity, 10) : 1;
-  });
+  const [quantity, setQuantity] = useState<number>(10);
 
   console.log("Quantity of Product:", quantity);
 
@@ -50,8 +47,14 @@ export default function ProductDetailPage({
 
   useEffect(() => {
     if (product) {
-      document.title = ProductCard.name;
-      setSelectedVariant(product.variants[0]);
+      document.title = product.name;
+      const initialVariant = product.variants[0];
+      setSelectedVariant(initialVariant);
+      setQuantity(
+        initialVariant?.min_order_quantity
+          ? parseInt(initialVariant.min_order_quantity, 10)
+          : 10
+      );
     }
   }, [product]);
 
@@ -63,14 +66,16 @@ export default function ProductDetailPage({
   };
 
   const incrementQuantity = () => {
-    setQuantity((prev) => (prev ? prev + 1 : 1));
+    setQuantity((prev) =>
+      prev ? prev + 1 : Number(selectedVariant?.min_order_quantity) || 10
+    );
   };
 
   const decrementQuantity = () => {
     setQuantity((prev) =>
       prev && prev > Number(selectedVariant?.min_order_quantity)
         ? prev - 1
-        : Number(selectedVariant?.min_order_quantity)
+        : Number(selectedVariant?.min_order_quantity) || 10
     );
   };
 
@@ -103,7 +108,7 @@ export default function ProductDetailPage({
     setQuantity(
       newVariant?.min_order_quantity
         ? parseInt(newVariant.min_order_quantity, 10)
-        : 1
+        : 10
     ); // Reset quantity when changing variants
   };
 
@@ -148,7 +153,10 @@ export default function ProductDetailPage({
           <Card className="mb-4">
             <CardContent className="p-4">
               <h2 className="text-xl font-semibold mb-2">Variants</h2>
-              <Select onValueChange={handleVariantChange} value={selectedVariant?.id.toString()}>
+              <Select
+                onValueChange={handleVariantChange}
+                value={selectedVariant?.id.toString()}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select a variant" />
                 </SelectTrigger>
@@ -189,7 +197,7 @@ export default function ProductDetailPage({
                       </Button>
                       <Input
                         id="quantity"
-                        type="number"
+                        type="text"
                         min={
                           selectedVariant?.min_order_quantity
                             ? parseInt(selectedVariant.min_order_quantity, 10)
@@ -208,7 +216,9 @@ export default function ProductDetailPage({
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
-                    <span className='ml-4 capitalize'>{product?.category.units_of_measurement[0]?.unit}</span>
+                    <span className="ml-4 capitalize">
+                      {product?.category.units_of_measurement[0]?.unit}
+                    </span>
                   </div>
                   <Button
                     onClick={handleAddToCart}

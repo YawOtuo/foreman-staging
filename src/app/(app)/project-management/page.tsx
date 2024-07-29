@@ -45,7 +45,7 @@ const ProjectManagement = () => {
         </div>
       </div>
 
-      <section className="pt-10">
+      {/* <section className="pt-10">
         <Link href={"/warehousing"}>
           <p className="pt-8">
             Try{" "}
@@ -55,7 +55,7 @@ const ProjectManagement = () => {
             today
           </p>
         </Link>
-      </section>
+      </section> */}
     </main>
   );
 };
