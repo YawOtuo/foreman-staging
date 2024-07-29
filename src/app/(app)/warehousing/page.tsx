@@ -60,10 +60,7 @@ function Warehousing() {
         </div>
       </section>
       <section className="px-6 pb-10">
-        <h1 className=" text-base sm:text-xl font-semibold pb-6">
-          The Foreman Flexi Plan
-        </h1>
-        <p className="font-medium pb-3">How it works</p>
+        <p className="font-semibold pb-3">How it works</p>
         <ol className="space-y-3">
           <li>Buy building materials from us</li>
           <li>
