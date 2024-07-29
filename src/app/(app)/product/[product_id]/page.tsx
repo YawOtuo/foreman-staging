@@ -33,6 +33,10 @@ export default function ProductDetailPage({
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     null
   );
+  const [selectedUnit, setSelectedUnit] = useState<{
+    unit: string;
+    description: string;
+  } | null>(null)
   const [quantity, setQuantity] = useState(() => {
     const minQuantity = selectedVariant?.min_order_quantity;
     return minQuantity ? parseInt(minQuantity, 10) : 1;
@@ -107,6 +111,11 @@ export default function ProductDetailPage({
     ); // Reset quantity when changing variants
   };
 
+  const handleUnitChange = (value: string) => {
+    const newUnit =
+      product?.category.units_of_measurement.find((u) => u.unit === value) || null;
+    setSelectedUnit(newUnit);
+  }
   if (!product && isLoading) {
     return (
       <div className="p-8 pt-8">
@@ -140,9 +149,6 @@ export default function ProductDetailPage({
         </div>
         <div className="w-full md:w-1/2">
           <h1 className="text-3xl font-bold mb-2">{product?.name}</h1>
-          <p className="text-gray-600 mb-4">
-            {product?.description || "No description available."}
-          </p>
 
           <Card className="mb-4">
             <CardContent className="p-4">
@@ -210,10 +216,25 @@ export default function ProductDetailPage({
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
-                    <span className="ml-4 capitalize">
-                      {product?.category.units_of_measurement[0]?.unit}
-                    </span>
+                    <Select onValueChange={handleUnitChange} value={selectedUnit?.unit}>
+                      <SelectTrigger className="w-max ml-2">
+                        <SelectValue placeholder="Select a unit" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {product?.category.units_of_measurement.map((unit) => (
+                          <SelectItem key={unit.unit} value={unit.unit}>
+                            {unit.unit}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+
                   </div>
+                  {selectedVariant.min_order_quantity && (
+                    <p className="text-sm text-gray-500">
+                      Minimum order quantity: {selectedVariant.min_order_quantity}
+                    </p>
+                  )}
                   <Button
                     onClick={handleAddToCart}
                     className="mt-4 rounded-sm px-5">
