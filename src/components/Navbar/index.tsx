@@ -8,6 +8,8 @@ import { auth } from "@/app/firebase";
 import { signOut } from "firebase/auth";
 import { useMobileNavStore } from "../MobileNavbar/useMobileNavStore";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { IoHeartSharp } from "react-icons/io5";
+import { useAppStore } from "@/lib/store/useAppStore";
 
 const links = [
   {
@@ -18,17 +20,19 @@ const links = [
     name: "Store",
     url: "/store",
   },
+
   {
     name: "Warehousing",
     url: "/warehousing",
   },
   {
-    name: "Contact",
+    name: "Contact Us",
     url: "/contact",
   },
 ];
 function Navbar() {
   const { setMobileMenuStore } = useMobileNavStore();
+  const { DBDetails } = useAppStore();
 
   return (
     <div className="flex sticky bg-white z-[50] top-0 items-center justify-between lg:justify-cebter w-full py-3 px-5 lg:px-7 border-b-2 ">
@@ -45,23 +49,22 @@ function Navbar() {
             {r.name}
           </Link>
         ))}
+        {DBDetails?.email && (
+          <Link className="" href={"/dashboard/favourites"}>
+            <IoHeartSharp className="text-lg text-red-700" />
+          </Link>
+        )}
+
         <Link className="" href={"/cart"}>
           <IoCartOutline size={25} className="text-primary" />
         </Link>
-        {/* {!data?.user ? (
-          <div>
-          <Link className="" href={"/login"}>
-            Login
-          </Link>
-          <Button onClick={() => { signOut(auth) }} >
-            Logout
-          </Button>
-        </div>
-        )} */}
       </div>
 
       <div className="lg:hidden flex gap-4 items-center">
-        <Link  href={"/cart"}>
+
+          
+
+        <Link href={"/cart"}>
           <IoCartOutline size={25} className="text-primary" />
         </Link>
         <button onClick={() => setMobileMenuStore(true)}>

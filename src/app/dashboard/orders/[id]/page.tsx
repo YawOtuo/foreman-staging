@@ -21,7 +21,7 @@ function Page({ params }: { params: { id: string | number } }) {
   } = useQuery<Order>({
     queryKey: [`orders-${params.id}`],
     queryFn: () => {
-      return FetchOrderDetails(Number(params?.id), DBDetails?.id);
+      return FetchOrderDetails(Number(params?.id), Number(DBDetails?.id));
     },
     enabled: !!DBDetails?.id && !!params.id,
   });
@@ -55,8 +55,7 @@ function Page({ params }: { params: { id: string | number } }) {
               {order?.items?.map((item, index) => (
                 <div
                   className="flex  w-full  mt-3 items-center justify-start"
-                  key={index}
-                >
+                  key={index}>
                   <OrderDetailCard currency={currency} item={item} />
                 </div>
               ))}

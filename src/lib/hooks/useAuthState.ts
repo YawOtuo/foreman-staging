@@ -47,7 +47,7 @@ export default function useAuthState(auth: any) {
                   username: userAuth?.displayName || username || "User",
                 },
               });
-              console.log("emailing...");
+              // console.log("emailing...");
             }
             console.log("not emailing...");
             setDBDetails(userData?.user);

@@ -21,7 +21,10 @@ function useCheckout() {
 
   const sendOrderEmail = (order_id: number) =>
     sendEmail({
-      to: [...(generalEmailReceipients["signup"] || []), DBDetails?.email],
+      to: [
+        ...(generalEmailReceipients["signup"] || []),
+        String(DBDetails?.email),
+      ],
       from: fromEmail,
       templateId: templateIds["order"],
       templateData: {

@@ -31,7 +31,11 @@ function CartSummary({ navigation }: CartSummaryProps) {
         <div className="flex flex-col items-end font-semibold">
           <p className="">{cart?.totalQuantity}</p>
           <p>
-            {currency} {Number(convertedPrice).toFixed(2)}
+            {currency}{" "}
+            {Number(convertedPrice).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </p>{" "}
         </div>
       </div>

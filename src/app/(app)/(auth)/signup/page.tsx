@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import FormInput from "../components/FormInput";
@@ -50,6 +50,7 @@ function Page() {
             variant: "success",
           });
           // router.push("/");
+          router.back();
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -80,8 +81,11 @@ function Page() {
   }
 
   function GoogleSignIn() {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
+    const googleProvider = new GoogleAuthProvider();
+    googleProvider.setCustomParameters({
+      prompt: "select_account",
+    });
+    signInWithPopup(auth, googleProvider)
       .then((result) => {
         const user = result.user;
         console.log(user);
@@ -90,7 +94,7 @@ function Page() {
           description: `You have successfully logged in with Google`,
           variant: "success",
         });
-        router.push("/");
+        router.back();
       })
       .catch((error) => {
         const errorCode = error.code;

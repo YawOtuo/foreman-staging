@@ -34,7 +34,7 @@ function HeroSection() {
           </Link>
           <Link href={"/warehousing"}>
             <Button size={"md"} className="px-7" variant="outline">
-              Try Warehousing
+              Try Flexi Plan
             </Button>
           </Link>
         </div>

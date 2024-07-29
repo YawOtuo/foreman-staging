@@ -24,13 +24,13 @@ function useOrders(orderNumber?: number) {
     error: orderError,
   } = useQuery<Order[]>({
     queryKey: ["orders"],
-    queryFn: () => FetchOrders(user_id),
+    queryFn: () => FetchOrders(Number(user_id)),
     enabled: !!DBDetails?.id,
   });
 
-
   const createOrderMutation = useMutation({
-    mutationFn: (orderData: CreateOrderArgs) => CreateOrder(user_id, orderData),
+    mutationFn: (orderData: CreateOrderArgs) =>
+      CreateOrder(Number(user_id), orderData),
     onSuccess: (data) => {
       toast({
         title: "Success",
@@ -40,12 +40,17 @@ function useOrders(orderNumber?: number) {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
 
   const updateOrderMutation = useMutation({
-    mutationFn: (orderData: UpdateOrderArgs) => UpdateOrder(user_id, orderData),
+    mutationFn: (orderData: UpdateOrderArgs) =>
+      UpdateOrder(Number(user_id), orderData),
     onSuccess: (data) => {
       toast({
         title: "Success",
@@ -55,12 +60,17 @@ function useOrders(orderNumber?: number) {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
 
   const deleteOrderMutation = useMutation({
-    mutationFn: (order_id: string | number) => DeleteOrder(order_id, user_id),
+    mutationFn: (order_id: string | number) =>
+      DeleteOrder(Number(order_id), Number(user_id)),
     onSuccess: () => {
       toast({
         title: "Success",
@@ -70,7 +80,11 @@ function useOrders(orderNumber?: number) {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
   const handleCreateOrder = async (orderData: CreateOrderArgs) => {
@@ -107,7 +121,6 @@ function useOrders(orderNumber?: number) {
   };
 
   return {
-   
     orderData,
     isOrderLoading,
     orderError,

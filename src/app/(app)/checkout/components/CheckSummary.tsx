@@ -52,20 +52,36 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
               <p>Sub Total</p>
               <p>
                 {currency}{" "}
-                <span>{Number(SubTotalConvertedPrice).toFixed(2)}</span>
+                <span>
+                  {Number(SubTotalConvertedPrice).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </span>
               </p>
             </div>
             <div className="flex justify-between w-full">
               <p>Delivery</p>
               <p>
                 {currency}{" "}
-                <span>{Number(DeliveryConvertedPrice).toFixed(2)}</span>
+                <span>
+                  {Number(DeliveryConvertedPrice).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </span>
               </p>
             </div>
             <div className="flex justify-between w-full border-y-[1px] border-white py-4">
               <p>Total</p>
               <p className="font-bold text-3xl text-primary">
-                {currency} <span>{Number(TotalConvertedPrice).toFixed(2)}</span>
+                {currency}{" "}
+                <span>
+                  {Number(TotalConvertedPrice).toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </span>
               </p>
             </div>
           </div>

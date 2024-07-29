@@ -6,7 +6,7 @@ interface ApiResponse<T> {
 }
 
 // Fetch cart by ID
-export const FetchCart = async (cart_id: string | number): Promise<Cart[]> => {
+export const FetchCart = async (cart_id: number): Promise<Cart[]> => {
   const response = await fetch(`${url}api/carts/${cart_id}/`);
   if (!response.ok) {
     throw new Error("Network response was not ok");
@@ -16,7 +16,7 @@ export const FetchCart = async (cart_id: string | number): Promise<Cart[]> => {
 
 // Add a product to the cart
 export const AddToCart = async (
-  cart_id: string | number,
+  cart_id:  number,
   product_id: number
 ): Promise<{ message: string }> => {
   const response = await fetch(`${url}api/carts/${cart_id}/`, {
@@ -33,7 +33,7 @@ export const AddToCart = async (
 
 // Delete a product from the cart
 export const DeleteFromCart = async (
-  cart_id: string | number,
+  cart_id:  number,
   product_id: number
 ): Promise<void> => {
   const response = await fetch(
@@ -50,7 +50,7 @@ export const DeleteFromCart = async (
 };
 
 export const IncrementQuantity = async (
-  cart_id: string | number,
+  cart_id:  number,
   product_id: number
 ): Promise<{ message: string }> => {
   const response = await fetch(
@@ -68,7 +68,7 @@ export const IncrementQuantity = async (
   return response.json();
 };
 export const DecrementQuantity = async (
-  cart_id: string | number,
+  cart_id:  number,
   product_id: number
 ): Promise<{ message: string }> => {
   const response = await fetch(

@@ -41,13 +41,24 @@ const CheckProduct: React.FC<CheckProductRowProps> = ({ cart_item }) => {
       <div className="flex items-center w-[50%] justify-around">
         <div className="text-center flex flex-col sm:flex-row text-gray-500">
           {currency}
-          <p className="sm:ml-1 ">{Number(convertedPrice)?.toFixed(2)} </p>
+          <p className="sm:ml-1 ">
+            {Number(convertedPrice)?.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}{" "}
+          </p>
         </div>
         <div className="sm:ml-1">{cart_item.quantity}</div>
         <div className="text-center flex flex-col sm:flex-row">
           <p className="sm:ml-1 font-semibold">
             {currency}{" "}
-            {(Number(convertedPrice) * cart_item.quantity)?.toFixed(2)}{" "}
+            {(Number(convertedPrice) * cart_item.quantity)?.toLocaleString(
+              undefined,
+              {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }
+            )}{" "}
           </p>
         </div>
       </div>
