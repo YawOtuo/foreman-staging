@@ -21,7 +21,7 @@ export default function SupplySection() {
           Need materials? We&apos;ve got you covered! <br /> Contact us today to
           discuss your project needs and get a free quote.
         </p>
-        <Link className="" href={'/login'} ><Button variant={"outline"} animated={"slide"} className="mt-5">Get Started</Button></Link>
+        <Link className="" href={'/project-management'} ><Button variant={"outline"} animated={"slide"} className="mt-5">Get Started</Button></Link>
       </div>
     </section>
   );

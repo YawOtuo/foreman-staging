@@ -45,7 +45,7 @@ function Navbar() {
 
       <div className=" items-center gap-5   justify-center hidden lg:flex">
         {links?.map((r, index) => (
-          <Link href={r?.url} key={index}>
+          <Link href={r?.url} key={index} className="whitespace-nowrap text-sm">
             {r.name}
           </Link>
         ))}
