@@ -1,5 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 import { GrLike } from "react-icons/gr";
 
 export default function WarehousingSection() {
@@ -57,6 +59,12 @@ export default function WarehousingSection() {
             <p>Avoid losses due to damages and petty theft.</p>
           </li>
         </ul>
+
+        <Link href={"/warehousing"}>
+          <Button variant={"outline"} animated={"slide"} className="mt-5">
+            Try Flexi Plan
+          </Button>
+        </Link>
       </div>
     </section>
   );

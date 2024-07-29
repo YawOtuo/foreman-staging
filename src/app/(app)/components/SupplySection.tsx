@@ -29,7 +29,7 @@ export default function SupplySection() {
             Contact us today for seamless project coordination and satisfaction.
           </p>
         </div>
-        <Link className="" href={"/project_management"}>
+        <Link className="" href={"/project-management"}>
           <Button variant={"outline"} animated={"slide"} className="mt-5">
             Get Started
           </Button>

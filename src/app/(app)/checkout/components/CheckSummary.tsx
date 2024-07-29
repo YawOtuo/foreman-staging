@@ -16,19 +16,29 @@ interface CheckSummaryProps {
 
 const momoImages = [
   {
-    id: 0,
-    src: "/mtn_logo.png",
-    alt: "mtn logo",
+    id: 1,
+    src: "/master-card.png",
+    alt: "master card logo",
   },
   {
-    id: 1,
+    id: 2,
+    src: "/visa.png",
+    alt: "visa card logo",
+  },
+  {
+    id: 3,
+    src: "/telecel.png",
+    alt: "telecel logo",
+  },
+  {
+    id: 4,
     src: "/airtelTigo.png",
     alt: "airtel tigo logo",
   },
   {
-    id: 2,
-    src: "/telecel.png",
-    alt: "telecel logo",
+    id: 5,
+    src: "/MTN-MoMo.png",
+    alt: "mtn logo",
   },
 ];
 
@@ -116,17 +126,17 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
               })}
             />{" "}
             <span className="text-gray-800 flex items-center space-x-2 ">
-              <p>Pay Now</p> <RiVisaFill className="text-blue-600 text-2xl" />{" "}
-              <FaCcMastercard className="text-orange-500 text-2xl" />{" "}
+              <p>Pay Now</p>
               {momoImages.map((item) => (
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  objectFit="cover"
-                  width={40}
-                  height={30}
-                  key={item.id}
-                />
+                <div key={item.id}>
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    objectFit="cover"
+                    width={40}
+                    height={30}
+                  />
+                </div>
               ))}
             </span>
           </label>

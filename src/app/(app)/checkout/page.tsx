@@ -42,7 +42,7 @@ export default function CheckOutPage() {
 
   const [deliveryCharge, setDeliveryCharge] = useState(50.0);
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+  const onSubmit: SubmitHandler<FormFields> = async () => {
     const formValues = getValues();
     const selectedPaymentMethod = formValues.payment;
 
@@ -51,7 +51,6 @@ export default function CheckOutPage() {
     } else if (selectedPaymentMethod === "pay_now") {
       checkout("now");
     }
-    // console.log(data);
   };
 
   return (

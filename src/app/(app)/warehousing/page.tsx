@@ -19,12 +19,12 @@ function Warehousing() {
 
   return (
     <main>
-      <section className="pb-10">
-        <header className="bg-gray-300 w-full p-6">
-          <h6 className="font-semibold text-2xl">Warehousing</h6>
-          <p>BUY NOW COLLECT LATER</p>
-        </header>
-        <div className="flex flex-col md:flex-row w-full py-10 px-6 md:gap-6">
+      <header className="bg-gray-300 w-full p-6">
+        <h6 className="font-semibold text-2xl">Warehousing</h6>
+        <p>BUY NOW COLLECT LATER</p>
+      </header>
+      <section className="pb-10 px-6">
+        <div className="flex flex-col md:flex-row w-full py-10  md:gap-6">
           <div className="md:w-1/2">
             <div className="space-y-3">
               <p>
@@ -59,7 +59,24 @@ function Warehousing() {
           </div>
         </div>
       </section>
-      <section className="w-full flex flex-col p-6 pb-20">
+      <section className="px-6 pb-10">
+        <h1 className=" text-base sm:text-xl font-semibold pb-6">
+          The Foreman Flexi Plan
+        </h1>
+        <p className="font-medium pb-3">How it works</p>
+        <ol className="space-y-3">
+          <li>Buy building materials from us</li>
+          <li>
+            Keep your purchased goods with us for a limited period (no extra
+            cost)
+          </li>
+          <li>Request for delivery at a later date</li>
+        </ol>
+      </section>
+      <section className="flex justify-center pb-10">
+        <p>Coming Soon</p>
+      </section>
+      {/* <section className="w-full flex flex-col p-6 pb-20">
         <>
           <TabSelect isClicked={isClicked} handleClick={handleClick} />
         </>
@@ -94,7 +111,7 @@ function Warehousing() {
             </div>
           )}
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }

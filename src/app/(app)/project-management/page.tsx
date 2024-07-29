@@ -46,45 +46,7 @@ const ProjectManagement = () => {
       </div>
 
       <section className="pt-10">
-        <h1 className=" text-base sm:text-xl font-semibold">
-          The Foreman Flexi Plan
-        </h1>
-        <p>How it works</p>
-        <ol className="space-y-3">
-          <li>Buy building materials from us</li>
-          <li>
-            Keep your purchased goods with us for a limited period (no extra
-            cost)
-          </li>
-          <li>Request for delivery at a later date</li>
-        </ol>
-
-        <div className="mt-6 space-y-3">
-          <div className=" flex items-center space-x-2">
-            <Image src={"/money.png"} alt="loss" width={30} height={30} />
-            <p>Save on storage</p>
-          </div>
-          <div className=" flex items-center space-x-2">
-            <Image
-              src={"/peace.png"}
-              alt="peace of mind"
-              width={30}
-              height={30}
-            />
-            <p>Enjoy peace of mind</p>
-          </div>
-          <div className=" flex items-center space-x-2">
-            <Image
-              src={"/warehouse.png"}
-              alt="peace of mind"
-              width={30}
-              height={30}
-            />
-            <p>Avoid losses due to damages and petty theft</p>
-          </div>
-        </div>
-
-        <Link href={"#"}>
+        <Link href={"/warehousing"}>
           <p className="pt-8">
             Try{" "}
             <span className="hover:underline text-yellow-500 font-medium">
