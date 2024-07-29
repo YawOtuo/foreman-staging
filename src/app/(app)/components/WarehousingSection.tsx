@@ -43,18 +43,18 @@ export default function WarehousingSection() {
             let’s help you prepare for your dream project.
           </p>
         </div>
-        <ul className="text-sm">
+        <ul>
           <li className="flex gap-3 items-center p-3 ">
             <GrLike className="w-5 h-5 " />
-            <p>Very Secure and Safe Warehousing Facilities</p>
+            <p>Enjoy peace of mind.</p>
           </li>
           <li className="flex gap-3 items-center p-3 ">
             <GrLike className="w-5 h-5 " />
-            <p>Climate Controlled Warehousing</p>
+            <p>Save on storage.</p>
           </li>
           <li className="flex gap-3 items-center p-3 ">
             <GrLike className="w-5 h-5 " />
-            <p>24/7 Security</p>
+            <p>Avoid losses due to damages and petty theft.</p>
           </li>
         </ul>
       </div>
