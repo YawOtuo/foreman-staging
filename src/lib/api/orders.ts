@@ -3,7 +3,7 @@ import { CreateOrderArgs, Order, UpdateOrderArgs } from "../types/order";
 
 // Fetch orders by user ID
 export const FetchOrders = async (
-  user_id: string | number
+  user_id:  number
 ): Promise<Order[]> => {
   const response = await fetch(`${url}api/orders/users/${user_id}/`);
   if (!response.ok) {
@@ -15,7 +15,7 @@ export const FetchOrders = async (
 // Fetch details of a specific order by order ID
 export const FetchOrderDetails = async (
   order_id:  number,
-  user_id: string | number
+  user_id:  number
 ): Promise<Order> => {
   const response = await fetch(
     `${url}api/orders/${order_id}/users/${user_id}/`
@@ -28,7 +28,7 @@ export const FetchOrderDetails = async (
 
 // Create a new order for the user
 export const CreateOrder = async (
-  user_id: string | number,
+  user_id:  number,
   orderData: CreateOrderArgs
 ): Promise<Order> => {
   const response = await fetch(`${url}api/orders/users/${user_id}/`, {
@@ -46,7 +46,7 @@ export const CreateOrder = async (
 // Update an order's payment status by order ID
 
 export const UpdateOrder = async (
-  user_id: string | number,
+  user_id:  number,
   updateData: UpdateOrderArgs
 ): Promise<{ message: string }> => {
   const response = await fetch(
@@ -65,7 +65,7 @@ export const UpdateOrder = async (
 };
 
 // Delete an order by order ID
-export const DeleteOrder = async (order_id: string | number, user_id: string  | number): Promise<void> => {
+export const DeleteOrder = async (order_id:  number, user_id: string  | number): Promise<void> => {
   const response = await fetch(`${url}api/orders/${order_id}/users/${user_id}/`, {
     method: "DELETE",
     mode: "cors",

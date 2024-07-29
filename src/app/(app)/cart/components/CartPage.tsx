@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { CartItem } from "@/lib/types/cart";
 import Link from "next/link";
 import useCart from "@/lib/hooks/useCart";
+import { FaShoppingCart } from "react-icons/fa";
 
 function CartPage() {
   const router = useRouter();
@@ -48,6 +49,13 @@ function CartPage() {
               </Link>
             </div>
           )}
+
+          <Link href="/store">
+            <Button variant={"black"} size={"lg"} fontSize={"sm"}>
+              <FaShoppingCart className="mr-2 text-xl" />
+              Continue Shopping
+            </Button>
+          </Link>
         </div>
         <div className="w-full basis">
           {cart && <CartSummary navigation={() => router.push("/checkout")} />}

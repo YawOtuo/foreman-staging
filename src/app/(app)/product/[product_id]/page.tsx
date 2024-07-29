@@ -126,8 +126,7 @@ export default function ProductDetailPage({
               disableOnInteraction: false,
             }}
             className="w-full rounded-lg overflow-hidden border-2 transition-all duration-300"
-            spaceBetween={5}
-          >
+            spaceBetween={5}>
             {selectedVariant?.images.map((image) => (
               <SwiperSlide key={image.id}>
                 <OptimizedImage
@@ -148,7 +147,9 @@ export default function ProductDetailPage({
           <Card className="mb-4">
             <CardContent className="p-4">
               <h2 className="text-xl font-semibold mb-2">Variants</h2>
-              <Select onValueChange={handleVariantChange} value={selectedVariant?.id.toString()}>
+              <Select
+                onValueChange={handleVariantChange}
+                value={selectedVariant?.id.toString()}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select a variant" />
                 </SelectTrigger>
@@ -170,7 +171,10 @@ export default function ProductDetailPage({
                       "GHS",
                       currency,
                       exchangeRates
-                    )?.toFixed(2)}
+                    )?.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
                   </p>
                   <p>SKU: {selectedVariant.sku}</p>
                   <p>{selectedVariant.brief_description}</p>
@@ -183,8 +187,7 @@ export default function ProductDetailPage({
                         onClick={decrementQuantity}
                         variant="outline"
                         size="icon"
-                        className="h-10 w-10"
-                      >
+                        className="h-10 w-10">
                         <Minus className="h-4 w-4" />
                       </Button>
                       <Input
@@ -203,17 +206,17 @@ export default function ProductDetailPage({
                         onClick={incrementQuantity}
                         variant="outline"
                         size="icon"
-                        className="h-10 w-10"
-                      >
+                        className="h-10 w-10">
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
-                    <span className='ml-4 capitalize'>{product?.category.units_of_measurement[0]?.unit}</span>
+                    <span className="ml-4 capitalize">
+                      {product?.category.units_of_measurement[0]?.unit}
+                    </span>
                   </div>
                   <Button
                     onClick={handleAddToCart}
-                    className="mt-4 rounded-sm px-5"
-                  >
+                    className="mt-4 rounded-sm px-5">
                     Add to Cart
                   </Button>
                 </div>

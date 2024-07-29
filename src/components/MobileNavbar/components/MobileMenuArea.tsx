@@ -1,5 +1,5 @@
 import React from "react";
-import { MobileMenuDetails } from "../MobileMenuDetails";
+import { MobileMenuDetails } from "./MobileMenuDetails";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { useMobileNavStore } from "../useMobileNavStore";
 import Link from "next/link";

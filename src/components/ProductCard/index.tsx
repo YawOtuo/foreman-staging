@@ -105,7 +105,11 @@ function ProductCard({ product }: Props) {
             <div className="flex items-center justify-start gap-2">
               <GrMoney size={15} className="text-primary-300" />
               <p className=" whitespace-nowrap font-semibold text-lg transition-all duration-500 bg-white">
-                {currency} {Number(convertedPrice)?.toFixed(2)}{" "}
+                {currency}{" "}
+                {Number(convertedPrice).toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}{" "}
                 {/* {product.category.units_of_measurement[0]?.unit && (
                 <p className="text-xs">per {product.category.units_of_measurement[0].unit}</p>
               )} */}

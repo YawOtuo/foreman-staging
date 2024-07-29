@@ -21,7 +21,7 @@ function Warehousing() {
     <main>
       <section className="pb-10">
         <header className="bg-gray-300 w-full p-6">
-          <h6 className="font-semibold text-2xl">Warehousing</h6>
+          <h6 className="font-semibold text-2xl">Flexi Plan</h6>
           <p>BUY NOW COLLECT LATER</p>
         </header>
         <div className="flex flex-col md:flex-row w-full py-10 px-6 md:gap-6">

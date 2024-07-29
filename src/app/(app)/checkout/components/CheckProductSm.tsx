@@ -27,7 +27,10 @@ const CheckProductSm: React.FC<CheckProductSmRowProps> = ({ cart_item }) => {
           className="aspect-[3/2]  lg:max-w-[150px] lg:aspect-[4/3] "
         />
         <div className="px-5 pt-1 ">
-          <p className="text-xl e font-semibold"> {cart_item.product_variant.name} </p>
+          <p className="text-xl e font-semibold">
+            {" "}
+            {cart_item.product_variant.name}{" "}
+          </p>
           {/* <p className="text-gray-500"> {cart_item.product.size} {cart_item.product.unit} </p> */}
 
           {/* placeholder for the size and units of products */}
@@ -37,19 +40,30 @@ const CheckProductSm: React.FC<CheckProductSmRowProps> = ({ cart_item }) => {
 
       <div className="flex flex-col items-start  w-full   gap-1 px-4 lg:px-0 pb-5 ">
         <div className="text-center flex flex-row whitespace-nowrap">
-        Unit Price: &nbsp; 
+          Unit Price: &nbsp;
           {currency} &nbsp;
           <p className="sm:ml-1 text-gray-500 ">
-            {Number(convertedPrice)?.toFixed(2)}{" "}
+            {Number(convertedPrice)?.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}{" "}
           </p>
         </div>
-        <div className="sm:ml-1"><span className="">Quantity:</span> {cart_item.quantity}</div>
+        <div className="sm:ml-1">
+          <span className="">Quantity:</span> {cart_item.quantity}
+        </div>
         <div className="w-full flex justify-end">
           <p className="sm:ml-1 font-semibold">
             Total Cost: &nbsp;
             <span className="text-primary lg:text-black text-xl">
               {currency}{" "}
-              {(Number(convertedPrice) * cart_item.quantity)?.toFixed(2)}{" "}
+              {(Number(convertedPrice) * cart_item.quantity)?.toLocaleString(
+                undefined,
+                {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                }
+              )}{" "}
             </span>
           </p>
         </div>

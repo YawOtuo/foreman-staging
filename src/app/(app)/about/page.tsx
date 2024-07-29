@@ -47,7 +47,7 @@ const AboutUsPage = () => {
 
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>Foreman Warehousing Option (Lay-by)</CardTitle>
+          <CardTitle>Foreman Flexi Plan Option (Lay-by)</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="mb-4">
