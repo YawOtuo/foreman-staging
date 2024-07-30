@@ -16,6 +16,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import FormInput from "../../components/FormInput";
 import LoginButton from "../../components/LoginButton";
+import { firebaseErrorMap } from "@/lib/utils/firebaseErrorMap";
 
 function LoginComponent() {
   const { toast } = useToast();
@@ -38,17 +39,16 @@ function LoginComponent() {
           description: `You have successfully logged in with ${email}`,
           variant: "success",
         });
-        router.push("/");
+        router.back();
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
+        const errorData = firebaseErrorMap[errorCode] || error.message;
         toast({
-          title: `Error ${errorCode}`,
-          description: errorMessage,
+          title: errorData.title,
+          description: errorData.msg,
           variant: "destructive",
         });
-        console.log({ errorCode, errorMessage });
       });
 
     // rest form
@@ -57,8 +57,12 @@ function LoginComponent() {
 
   function GoogleSignIn() {
     // Sign in with Google
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
+    const googleProvider = new GoogleAuthProvider();
+    googleProvider.setCustomParameters({
+      prompt: "select_account",
+    });
+    // const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, googleProvider)
       .then((result) => {
         // The signed-in user info.
         const user = result.user;
@@ -68,7 +72,7 @@ function LoginComponent() {
           description: `You have successfully logged in with Google`,
           variant: "success",
         });
-        router.push("/");
+        router.back();
       })
       .catch((error) => {
         // Handle Errors here.
@@ -83,6 +87,16 @@ function LoginComponent() {
   }
 
   return (
+    <> <div className="w-full">
+    <h2 className="text-primary-100 text-3xl lg:text-3xl font-bold ">
+      Shop.
+    </h2>
+    <p className="text-lg lg:text-xl  text-shade-300">
+      Build with Foreman today
+    </p>
+  </div>
+  <div className="w-full">
+    
     <form
       onSubmit={handleSubmit}
       className="self-start flex flex-col gap-4 pt-4 lg:min-w-[400px]">
@@ -142,6 +156,7 @@ function LoginComponent() {
         name="Continue with Facebook"
       /> */}
     </form>
+  </div>{" "}</>
   );
 }
 

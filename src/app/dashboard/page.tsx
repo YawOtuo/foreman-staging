@@ -50,7 +50,7 @@ const Dashboard = () => {
     error: isDashboardDataError,
   } = useQuery<DashboardData>({
     queryKey: ["dashboard-details"],
-    queryFn: () => FetchDashboardDetails(DBDetails?.id),
+    queryFn: () => FetchDashboardDetails(Number(DBDetails?.id)),
     enabled: !!DBDetails?.id,
   });
 
@@ -84,7 +84,13 @@ const Dashboard = () => {
         />
         <MetricCard
           title="Total Amount Spent"
-          value={`GHS ${userMetrics.totalAmountSpent?.toFixed(2)}`}
+          value={`GHS ${userMetrics.totalAmountSpent?.toLocaleString(
+            undefined,
+            {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            }
+          )}`}
         />
         <MetricCard title="Items in Cart" value={userMetrics.itemsInCart} />
       </div>

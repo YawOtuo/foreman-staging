@@ -1,8 +1,12 @@
-"use client"
+"use client";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useToast } from "@/components/ui/use-toast";
 import { Favourite } from "../types/favourite";
-import { FetchFavourites, DeleteFromFavourites, AddToFavourites } from "../api/favourites";
+import {
+  FetchFavourites,
+  DeleteFromFavourites,
+  AddToFavourites,
+} from "../api/favourites";
 import { useAppStore } from "../store/useAppStore";
 
 interface AddToFavouritesArgs {
@@ -18,36 +22,39 @@ function useFavourites() {
   const { toast } = useToast();
   const { DBDetails, FBaseDetails } = useAppStore();
 
-  const user_id = DBDetails?.id
+  const user_id = DBDetails?.id;
   const {
     data: favouritesData,
     isLoading: isFavouritesLoading,
     error: favouritesError,
   } = useQuery<Favourite[]>({
     queryKey: ["favourites"],
-    queryFn: () => FetchFavourites(user_id),
-    enabled: !!user_id
-
+    queryFn: () => FetchFavourites(Number(user_id)),
+    enabled: !!user_id,
   });
 
   const addToFavouritesMutation = useMutation({
     mutationFn: ({ product_id }: AddToFavouritesArgs) =>
-      AddToFavourites(user_id, product_id),
+      AddToFavourites(Number(user_id), product_id),
     onSuccess: (data) => {
-      toast({ 
+      toast({
         title: "Success",
         description: "Item added to favourites", // Assuming the response body contains a 'message' field
         variant: "success",
       });
     },
     onError: (error: Error) => {
-      toast({ title: "Info", description: "Please login before proceeding", variant: "loading" });
+      toast({
+        title: "Info",
+        description: "Please login before proceeding",
+        variant: "loading",
+      });
     },
   });
 
   const deleteFromFavouritesMutation = useMutation({
     mutationFn: ({ product_id }: DeleteFromFavouritesArgs) =>
-      DeleteFromFavourites(user_id, product_id),
+      DeleteFromFavourites(Number(user_id), product_id),
     onSuccess: () => {
       toast({
         title: "Success",
@@ -57,7 +64,11 @@ function useFavourites() {
       queryClient.invalidateQueries({ queryKey: ["favourites"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
 

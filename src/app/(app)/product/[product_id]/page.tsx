@@ -112,6 +112,12 @@ export default function ProductDetailPage({
     ); // Reset quantity when changing variants
   };
 
+  const handleUnitChange = (value: string) => {
+    const newUnit =
+      product?.category.units_of_measurement.find((u) => u.unit === value) ||
+      null;
+    setSelectedUnit(newUnit);
+  };
   if (!product && isLoading) {
     return (
       <div className="p-8 pt-8">
@@ -146,9 +152,6 @@ export default function ProductDetailPage({
         </div>
         <div className="w-full md:w-1/2">
           <h1 className="text-3xl font-bold mb-2">{product?.name}</h1>
-          <p className="text-gray-600 mb-4">
-            {product?.description || "No description available."}
-          </p>
 
           <Card className="mb-4">
             <CardContent className="p-4">
@@ -178,7 +181,10 @@ export default function ProductDetailPage({
                       "GHS",
                       currency,
                       exchangeRates
-                    )?.toFixed(2)}
+                    )?.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
                   </p>
                   <p>SKU: {selectedVariant.sku}</p>
                   <p>{selectedVariant.brief_description}</p>
@@ -220,6 +226,12 @@ export default function ProductDetailPage({
                       {product?.category.units_of_measurement[0]?.unit}
                     </span>
                   </div>
+                  {selectedVariant.min_order_quantity && (
+                    <p className="text-sm text-gray-500">
+                      Minimum order quantity:{" "}
+                      {selectedVariant.min_order_quantity}
+                    </p>
+                  )}
                   <Button
                     onClick={handleAddToCart}
                     className="mt-4 rounded-sm px-5"

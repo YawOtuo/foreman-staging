@@ -35,13 +35,13 @@ function useCart() {
     error: cartError,
   } = useQuery<Cart[]>({
     queryKey: ["cart"],
-    queryFn: () => FetchCart(cart_id),
+    queryFn: () => FetchCart(Number(cart_id)),
     enabled: !!cart_id,
   });
 
   const addToCartMutation = useMutation({
     mutationFn: ({ product_id }: AddToCartArgs) =>
-      AddToCart(cart_id, product_id),
+      AddToCart(Number(cart_id), product_id),
     onSuccess: (data) => {
       toast({
         title: "Success",
@@ -51,13 +51,17 @@ function useCart() {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
 
   const deleteFromCartMutation = useMutation({
     mutationFn: ({ product_id }: DeleteFromCartArgs) =>
-      DeleteFromCart(cart_id, product_id),
+      DeleteFromCart(Number(cart_id), product_id),
     onSuccess: () => {
       toast({
         title: "Success",
@@ -67,13 +71,17 @@ function useCart() {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
 
   const incrementQuantityMutation = useMutation({
     mutationFn: ({ product_id }: UpdateQuantityArgs) =>
-      IncrementQuantity(cart_id, product_id),
+      IncrementQuantity(Number(cart_id), product_id),
     onSuccess: (data) => {
       toast({
         title: "Success",
@@ -83,13 +91,17 @@ function useCart() {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
 
   const decrementQuantityMutation = useMutation({
     mutationFn: ({ product_id }: UpdateQuantityArgs) =>
-      DecrementQuantity(cart_id, product_id),
+      DecrementQuantity(Number(cart_id), product_id),
     onSuccess: (data) => {
       toast({
         title: "Success",
@@ -99,7 +111,11 @@ function useCart() {
       queryClient.invalidateQueries({ queryKey: ["cart"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
 

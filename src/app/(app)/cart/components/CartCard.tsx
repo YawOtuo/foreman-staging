@@ -22,7 +22,7 @@ function CartCard({ data }: Props) {
   const { currency, exchangeRates } = useCurrency();
 
   const convertedPrice = convertPrice(
-    Number(data.product_variant.price)  ,
+    Number(data.product_variant.price),
     "GHS",
     currency,
     exchangeRates
@@ -53,14 +53,24 @@ function CartCard({ data }: Props) {
               <CardQuantityControls quantity={data.quantity} cart_item={data} />
             </div>{" "}
           </div>
-          <p className="text-shade-200 text-sm">{data.product_variant.brief_description}</p>
+          <p className="text-shade-200 text-sm">
+            {data.product_variant.brief_description}
+          </p>
         </div>{" "}
         <div className="flex flex-col gao-2 items-start lg:items-end gap-1">
           <p className="whitespace-nowrap font-bold text-2xl group-hover:text-primary-100 transition-all">
-            {currency} {Number(convertedTotalPrice).toFixed(2)}
+            {currency}{" "}
+            {Number(convertedTotalPrice).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </p>
           <p className="whitespace-nowrap text-sm">
-            Unit Price: {currency} {Number(convertedPrice).toFixed(2)}
+            Unit Price: {currency}{" "}
+            {Number(convertedPrice).toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}
           </p>
         </div>{" "}
       </div>
@@ -71,8 +81,7 @@ function CartCard({ data }: Props) {
             className="text-primary-100"
             variant={"ghost"}
             size={"sm"}
-            fontSize={"sm"}
-          >
+            fontSize={"sm"}>
             <MdDeleteOutline size={20} className="mr-1" />
             Remove
           </Button>
@@ -80,8 +89,7 @@ function CartCard({ data }: Props) {
             variant={"ghost"}
             size={"sm"}
             fontSize={"sm"}
-            onClick={() => handleAddToFavourites(data.product_variant.id)}
-          >
+            onClick={() => handleAddToFavourites(data.product_variant.id)}>
             <FaRegHeart className="mr-2" />
             Move To Favourites
           </Button>

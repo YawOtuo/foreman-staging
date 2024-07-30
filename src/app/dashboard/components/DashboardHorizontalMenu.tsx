@@ -16,11 +16,15 @@ function DashboardHorizonalMenu() {
   return (
     <div className=" flex items-center justify-between px-4 gap-5 border-b-2 py-1 text-sm">
       <div>
-        <Avatar>
+        <Avatar  >
           {FBaseDetails?.photoURL ? (
-            <AvatarImage src={FBaseDetails?.photoURL} />
+            <AvatarImage
+              src={FBaseDetails?.photoURL}
+              
+            />
           ) : (
             <AvatarImage
+              
               src={
                 `https://api.dicebear.com/8.x/adventurer/svg?seed=$` +
                 DBDetails?.email +
@@ -29,16 +33,17 @@ function DashboardHorizonalMenu() {
             />
           )}
           <AvatarFallback>
-            {<UserIcon size={15} color="black" />}
+            {<UserIcon  color="black" />}
           </AvatarFallback>
         </Avatar>
       </div>
-      <div className="flex items-center gap-3 ">
+      <div className="flex items-center gap-3 text-xs md:text-base">
         <div className="flex items-center gap-5">
           <p className="hidden lg:block">{DBDetails?.username}</p>
           <p> {DBDetails?.email}</p>
           <Button
             variant={"outline"}
+            className="text-xs"
             onClick={() => {
               signOut(auth).then(() => router.push("/login"));
             }}>

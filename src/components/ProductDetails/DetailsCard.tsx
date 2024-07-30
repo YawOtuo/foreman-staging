@@ -34,7 +34,11 @@ export default function ProductDetailsCard({ product }: { product: Product }) {
     <Card className="w-full p-2">
       <div className="flex items-center justify-between">
         <p className="text-lg font-semibold text-gray-800">
-          Price: {currency} {Number(convertedPrice)?.toFixed(2)}
+          Price: {currency}{" "}
+          {Number(convertedPrice)?.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
         </p>
       </div>
       <Separator className="my-2" />

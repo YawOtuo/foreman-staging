@@ -16,7 +16,7 @@ function HeroSlider() {
         autoplay={{
           delay: 2500,  
           disableOnInteraction: false,
-        }}>
+        }}>PNi
         {images.map((image, index) => (
           <SwiperSlide key={index} className="w-full h-full">
             <div className="relative w-full aspect-square">

@@ -13,7 +13,7 @@ function usePayStack() {
 
   const baseConfig = {
     reference: new Date().getTime().toString(),
-    email: DBDetails.email,
+    email: String(DBDetails?.email),
     publicKey: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY!,
   };
 

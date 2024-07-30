@@ -76,7 +76,7 @@ export default function InfoBar() {
                 onClick={() => {
                   signOut(auth);
                   router.push("/login");
-                  setDBDetails({});
+                  setDBDetails(null)
                   setFBaseDetails({});
 
                 }}>

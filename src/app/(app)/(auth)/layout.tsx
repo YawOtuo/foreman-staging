@@ -18,15 +18,7 @@ export default function AuthLayout({
       <div className="flex items-center right w-full lg:w-[70%] py-20 lg:py-0 lg:min-h-screen px-5 lg:px-20">
         <div className="flex flex-col gap-4 h-full w-full items-start justify-center py-5 lg:py-0">
           <div className="w-full md:w-fit flex flex-col gap-3">
-            <div className="w-full">
-              <h2 className="text-primary-100 text-3xl lg:text-3xl font-bold ">
-                Shop.
-              </h2>
-              <p className="text-lg lg:text-xl  text-shade-300">
-                Build with Foreman today
-              </p>
-            </div>
-            <div className="w-full">{children}</div>{" "}
+          {children}
           </div>
         </div>
       </div>

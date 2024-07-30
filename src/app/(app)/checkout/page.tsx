@@ -147,7 +147,7 @@ export default function CheckOutPage() {
                 </label>
               </div>
               <div className="mt-5 w-full sm:w-4/5 flex flex-col gap-3 justify-center items-center">
-                {DBDetails.email ? (
+                {DBDetails?.email ? (
                   <CheckoutButton
                     onClick={() => onSubmit}
                     disabled={isSubmitting} // Disable button if form is not valid
@@ -171,7 +171,7 @@ export default function CheckOutPage() {
                   href="/warehousing"
                   className="text-shade-300 uppercase text-right mt-6 underline pb-10"
                 >
-                  Try warehousing
+                  Try Flexi Plan
                 </Link>
               </div>
             </form>
