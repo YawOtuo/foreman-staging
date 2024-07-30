@@ -9,6 +9,7 @@ import {
   templateIds,
 } from "@/lib/utils/emailTemplateIds";
 import { useAppStore } from "@/lib/store/useAppStore";
+import { FormFields } from "@/lib/types/form";
 
 function useCheckout() {
   const { startPayment } = usePayStack();
@@ -30,7 +31,11 @@ function useCheckout() {
         button_url: `https://foremangh.com/dashboard/orders/${order_id}`,
       },
     });
-  const checkout = async (option: "delivery" | "now") => {
+
+  const checkout = async (
+    option: "delivery" | "now",
+    formValues: FormFields
+  ) => {
     const orderItems = cart.items.map((item) => ({
       product_id: item.product_variant.id, // Assuming 'id' is the product ID
       quantity: item.quantity,
@@ -44,6 +49,12 @@ function useCheckout() {
         total_order_cost: totatTotalCost,
         total_order_quantity: cart.totalQuantity,
         order_items: orderItems,
+        shipping_details: {
+          payment_option: formValues.payment,
+          address: formValues.address,
+          custom_location: formValues.nearestLandmark,
+          order_condition_accept: formValues.agreement,
+        },
       });
 
       if (result && result.id) {

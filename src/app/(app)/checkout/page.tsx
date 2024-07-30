@@ -19,6 +19,7 @@ import { Modal } from "@/components/ui/dialog";
 import useCheckout from "./useCheckout";
 import { useAppStore } from "@/lib/store/useAppStore";
 import CheckProductSm from "./components/CheckProductSm";
+import { CreateOrder } from "@/lib/api/orders";
 
 export default function CheckOutPage() {
   const { cart, removeItemFromCart, updateItemQuantity } = useCart();
@@ -47,9 +48,9 @@ export default function CheckOutPage() {
     const selectedPaymentMethod = formValues.payment;
 
     if (selectedPaymentMethod === "pay_delivery") {
-      checkout("delivery");
+      checkout("delivery", formValues);
     } else if (selectedPaymentMethod === "pay_now") {
-      checkout("now");
+      checkout("now", formValues);
     }
   };
 

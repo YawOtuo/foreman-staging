@@ -14,7 +14,7 @@ export const FetchOrders = async (
 
 // Fetch details of a specific order by order ID
 export const FetchOrderDetails = async (
-  order_id:  number,
+  order_id: number,
   user_id: string | number
 ): Promise<Order> => {
   const response = await fetch(
@@ -31,12 +31,14 @@ export const CreateOrder = async (
   user_id: string | number,
   orderData: CreateOrderArgs
 ): Promise<Order> => {
+  console.log("Sending Data:", orderData);
   const response = await fetch(`${url}api/orders/users/${user_id}/`, {
     method: "POST",
     body: JSON.stringify(orderData),
     mode: "cors",
     headers: new Headers({ "content-type": "application/json" }),
   });
+
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
@@ -65,12 +67,18 @@ export const UpdateOrder = async (
 };
 
 // Delete an order by order ID
-export const DeleteOrder = async (order_id: string | number, user_id: string  | number): Promise<void> => {
-  const response = await fetch(`${url}api/orders/${order_id}/users/${user_id}/`, {
-    method: "DELETE",
-    mode: "cors",
-    headers: new Headers({ "content-type": "application/json" }),
-  });
+export const DeleteOrder = async (
+  order_id: string | number,
+  user_id: string | number
+): Promise<void> => {
+  const response = await fetch(
+    `${url}api/orders/${order_id}/users/${user_id}/`,
+    {
+      method: "DELETE",
+      mode: "cors",
+      headers: new Headers({ "content-type": "application/json" }),
+    }
+  );
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }

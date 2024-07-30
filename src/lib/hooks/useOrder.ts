@@ -28,7 +28,6 @@ function useOrders(orderNumber?: number) {
     enabled: !!DBDetails?.id,
   });
 
-
   const createOrderMutation = useMutation({
     mutationFn: (orderData: CreateOrderArgs) => CreateOrder(user_id, orderData),
     onSuccess: (data) => {
@@ -40,7 +39,11 @@ function useOrders(orderNumber?: number) {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
 
@@ -55,7 +58,11 @@ function useOrders(orderNumber?: number) {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
 
@@ -70,7 +77,11 @@ function useOrders(orderNumber?: number) {
       queryClient.invalidateQueries({ queryKey: ["orders"] });
     },
     onError: (error: Error) => {
-      toast({ title: "Error", description: error.message, variant: "destructive" });
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
     },
   });
   const handleCreateOrder = async (orderData: CreateOrderArgs) => {
@@ -107,7 +118,6 @@ function useOrders(orderNumber?: number) {
   };
 
   return {
-   
     orderData,
     isOrderLoading,
     orderError,
