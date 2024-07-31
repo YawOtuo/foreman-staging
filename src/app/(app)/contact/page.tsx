@@ -7,6 +7,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { FiPhone } from "react-icons/fi";
 import PhoneInput from "../checkout/components/PhoneNo";
 import { SubmitHandler, useForm } from "react-hook-form";
+import emailjs from '@emailjs/browser';
 
 interface SendForm {
   name: string;
@@ -28,7 +29,7 @@ const contactInfo = [
   },
   {
     info_type: "Phone Number",
-    info: "(233) 540-124783",
+    info: "(+233) 540-124783",
     icon: FiPhone,
   },
 ];
@@ -43,8 +44,17 @@ function Page() {
   const { DBDetails } = useAppStore();
 
   const onSubmit: SubmitHandler<SendForm> = async (data) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(data);
+    emailjs.send('service_koj8xcl', 'contact-us', {
+      from_name: data.name ,
+      from_phone : data.phone, 
+      from_email : data.email,
+      message: data.message
+    }, '3QqTSi4xLwu5MMz5c')
+    .then((response) => {
+      console.log('SUCCESS!', response.status, response.text);
+    }, (err) => {
+      console.log('FAILED...', err);
+    });
   };
 
   return (
