@@ -10,6 +10,8 @@ import { useMobileNavStore } from "../MobileNavbar/useMobileNavStore";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoHeartSharp } from "react-icons/io5";
 import { useAppStore } from "@/lib/store/useAppStore";
+import useCart from "@/lib/hooks/useCart";
+import CaCartIcon from "./CaCartIcon";
 
 const links = [
   {
@@ -55,18 +57,11 @@ function Navbar() {
           </Link>
         )}
 
-        <Link className="" href={"/cart"}>
-          <IoCartOutline size={25} className="text-primary" />
-        </Link>
+        <CaCartIcon />
       </div>
 
       <div className="lg:hidden flex gap-4 items-center">
-
-          
-
-        <Link href={"/cart"}>
-          <IoCartOutline size={25} className="text-primary" />
-        </Link>
+        <CaCartIcon />
         <button onClick={() => setMobileMenuStore(true)}>
           <GiHamburgerMenu size={30} />
         </button>
