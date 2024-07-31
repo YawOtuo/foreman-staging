@@ -10,4 +10,5 @@ export interface FormFields {
   payment: string;
   address: AddressProps;
   agreement: boolean;
+  nearestLandmark?: string;
 }

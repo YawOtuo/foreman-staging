@@ -1,6 +1,6 @@
-"use client"
-import create from 'zustand';
-import { User } from '../types/user';
+"use client";
+import create from "zustand";
+import { User } from "../types/user";
 
 type AppStore = {
   category: string;
@@ -16,7 +16,7 @@ type AppStore = {
 };
 
 export const useAppStore = create<AppStore>((set) => ({
-  category: '',
+  category: "",
   setCategory: (val) => set({ category: val }),
   FBaseDetails: {},
   setFBaseDetails: (details) => set({ FBaseDetails: details }),
