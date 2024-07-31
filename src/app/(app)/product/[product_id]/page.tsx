@@ -112,12 +112,12 @@ export default function ProductDetailPage({
     ); // Reset quantity when changing variants
   };
 
-  const handleUnitChange = (value: string) => {
-    const newUnit =
-      product?.category.units_of_measurement.find((u) => u.unit === value) ||
-      null;
-    setSelectedUnit(newUnit);
-  };
+  // const handleUnitChange = (value: string) => {
+  //   const newUnit =
+  //     product?.category.units_of_measurement.find((u) => u.unit === value) ||
+  //     null;
+  //   setSelectedUnit(newUnit);
+  // };
   if (!product && isLoading) {
     return (
       <div className="p-8 pt-8">

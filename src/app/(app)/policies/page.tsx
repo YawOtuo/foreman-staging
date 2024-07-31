@@ -1,6 +1,6 @@
 import React from "react";
-import Refund from "../components/Refund";
-import Delivery from "../components/Delivery";
+import Refund from "../terms_conditions/components/Refund";
+import Delivery from "../terms_conditions/components/Delivery";
 
 const Policies = () => {
   return (
