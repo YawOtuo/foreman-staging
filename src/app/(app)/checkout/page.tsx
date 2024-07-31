@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -18,6 +19,7 @@ import { Modal } from "@/components/ui/dialog";
 import useCheckout from "./useCheckout";
 import { useAppStore } from "@/lib/store/useAppStore";
 import CheckProductSm from "./components/CheckProductSm";
+import { CreateOrder } from "@/lib/api/orders";
 
 export default function CheckOutPage() {
   const { cart, removeItemFromCart, updateItemQuantity } = useCart();
@@ -41,16 +43,15 @@ export default function CheckOutPage() {
 
   const [deliveryCharge, setDeliveryCharge] = useState(50.0);
 
-  const onSubmit: SubmitHandler<FormFields> = async (data) => {
+  const onSubmit: SubmitHandler<FormFields> = async () => {
     const formValues = getValues();
     const selectedPaymentMethod = formValues.payment;
 
     if (selectedPaymentMethod === "pay_delivery") {
-      checkout("delivery");
+      checkout("delivery", formValues);
     } else if (selectedPaymentMethod === "pay_now") {
-      checkout("now");
+      checkout("now", formValues);
     }
-    // console.log(data);
   };
 
   return (
@@ -117,8 +118,18 @@ export default function CheckOutPage() {
                 deliveryCharge={deliveryCharge}
                 subTotal={cart.totalCost}
               />
-              <div className="mt-6 w-full flex flex-col items-center gap-5 justify-center sm:w-3/5 md:w-4/5 ">
+              <div className="mt-6 w-full flex flex-col items-center gap-5 justify-center sm:w-4/5">
                 <DeliveryAddressForm />
+                <label className="space-y-1">
+                  Can't find location? Please enter location with closest
+                  landmark
+                  <input
+                    type="text"
+                    placeholder="Please enter location with closest landmark"
+                    className="border rounded p-2 w-full h-10"
+                    {...register("nearestLandmark")}
+                  />
+                </label>
                 <label className="text-xs sm:text-base">
                   <input
                     type="checkbox"

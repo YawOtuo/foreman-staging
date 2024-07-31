@@ -33,14 +33,7 @@ export default function ProductDetailPage({
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     null
   );
-  const [selectedUnit, setSelectedUnit] = useState<{
-    unit: string;
-    description: string;
-  } | null>(null)
-  const [quantity, setQuantity] = useState(() => {
-    const minQuantity = selectedVariant?.min_order_quantity;
-    return minQuantity ? parseInt(minQuantity, 10) : 1;
-  });
+  const [quantity, setQuantity] = useState<number>(10);
 
   console.log("Quantity of Product:", quantity);
 
@@ -54,8 +47,14 @@ export default function ProductDetailPage({
 
   useEffect(() => {
     if (product) {
-      document.title = ProductCard.name;
-      setSelectedVariant(product.variants[0]);
+      document.title = product.name;
+      const initialVariant = product.variants[0];
+      setSelectedVariant(initialVariant);
+      setQuantity(
+        initialVariant?.min_order_quantity
+          ? parseInt(initialVariant.min_order_quantity, 10)
+          : 10
+      );
     }
   }, [product]);
 
@@ -67,14 +66,16 @@ export default function ProductDetailPage({
   };
 
   const incrementQuantity = () => {
-    setQuantity((prev) => (prev ? prev + 1 : 1));
+    setQuantity((prev) =>
+      prev ? prev + 1 : Number(selectedVariant?.min_order_quantity) || 10
+    );
   };
 
   const decrementQuantity = () => {
     setQuantity((prev) =>
       prev && prev > Number(selectedVariant?.min_order_quantity)
         ? prev - 1
-        : Number(selectedVariant?.min_order_quantity)
+        : Number(selectedVariant?.min_order_quantity) || 10
     );
   };
 
@@ -107,15 +108,16 @@ export default function ProductDetailPage({
     setQuantity(
       newVariant?.min_order_quantity
         ? parseInt(newVariant.min_order_quantity, 10)
-        : 1
+        : 10
     ); // Reset quantity when changing variants
   };
 
   const handleUnitChange = (value: string) => {
     const newUnit =
-      product?.category.units_of_measurement.find((u) => u.unit === value) || null;
+      product?.category.units_of_measurement.find((u) => u.unit === value) ||
+      null;
     setSelectedUnit(newUnit);
-  }
+  };
   if (!product && isLoading) {
     return (
       <div className="p-8 pt-8">
@@ -135,7 +137,8 @@ export default function ProductDetailPage({
               disableOnInteraction: false,
             }}
             className="w-full rounded-lg overflow-hidden border-2 transition-all duration-300"
-            spaceBetween={5}>
+            spaceBetween={5}
+          >
             {selectedVariant?.images.map((image) => (
               <SwiperSlide key={image.id}>
                 <OptimizedImage
@@ -155,7 +158,8 @@ export default function ProductDetailPage({
               <h2 className="text-xl font-semibold mb-2">Variants</h2>
               <Select
                 onValueChange={handleVariantChange}
-                value={selectedVariant?.id.toString()}>
+                value={selectedVariant?.id.toString()}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select a variant" />
                 </SelectTrigger>
@@ -193,12 +197,13 @@ export default function ProductDetailPage({
                         onClick={decrementQuantity}
                         variant="outline"
                         size="icon"
-                        className="h-10 w-10">
+                        className="h-10 w-10"
+                      >
                         <Minus className="h-4 w-4" />
                       </Button>
                       <Input
                         id="quantity"
-                        type="number"
+                        type="text"
                         min={
                           selectedVariant?.min_order_quantity
                             ? parseInt(selectedVariant.min_order_quantity, 10)
@@ -212,32 +217,25 @@ export default function ProductDetailPage({
                         onClick={incrementQuantity}
                         variant="outline"
                         size="icon"
-                        className="h-10 w-10">
+                        className="h-10 w-10"
+                      >
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
-                    <Select onValueChange={handleUnitChange} value={selectedUnit?.unit}>
-                      <SelectTrigger className="w-max ml-2">
-                        <SelectValue placeholder="Select a unit" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {product?.category.units_of_measurement.map((unit) => (
-                          <SelectItem key={unit.unit} value={unit.unit}>
-                            {unit.unit}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-
+                    <span className="ml-4 capitalize">
+                      {product?.category.units_of_measurement[0]?.unit}
+                    </span>
                   </div>
                   {selectedVariant.min_order_quantity && (
                     <p className="text-sm text-gray-500">
-                      Minimum order quantity: {selectedVariant.min_order_quantity}
+                      Minimum order quantity:{" "}
+                      {selectedVariant.min_order_quantity}
                     </p>
                   )}
                   <Button
                     onClick={handleAddToCart}
-                    className="mt-4 rounded-sm px-5">
+                    className="mt-4 rounded-sm px-5"
+                  >
                     Add to Cart
                   </Button>
                 </div>

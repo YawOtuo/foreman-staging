@@ -1,11 +1,11 @@
 import { CartItem } from "./cart";
+import { AddressProps } from "./form";
 import { ProductVariant } from "./product";
 
-export interface OrderItem{
-  product_variant: ProductVariant
-  quantity: number 
-  total_cost: number 
-  
+export interface OrderItem {
+  product_variant: ProductVariant;
+  quantity: number;
+  total_cost: number;
 }
 export interface Order {
   id: number;
@@ -25,6 +25,12 @@ export interface CreateOrderArgs {
     quantity: number;
     totalCost: number;
   }[];
+  shipping_details: {
+    payment_option: string;
+    address: AddressProps;
+    custom_location?: string | null;
+    order_condition_accept: boolean;
+  };
 }
 
 export interface UpdateOrderArgs {
