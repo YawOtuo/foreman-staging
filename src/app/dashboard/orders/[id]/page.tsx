@@ -10,6 +10,7 @@ import { useCurrency } from "@/context/CurrencyContext";
 import OrderSummary from "../components/OrderSummary";
 import OrderDetailCard from "../components/OrderDetailCard";
 import OrderDetailCardSkeleton from "../components/DetailSkeleton";
+import OrderShippingDetailSummary from "../components/OrderShippingDetailSummary";
 
 function Page({ params }: { params: { id: string | number } }) {
   const { DBDetails, FBaseDetails } = useAppStore();
@@ -36,7 +37,7 @@ function Page({ params }: { params: { id: string | number } }) {
       </div>
       <p> {order?.created_at ? order.created_at.toString() : "No date"}</p>
 
-      {isLoading ? (
+      {!order && isLoading ? (
         <div className="flex flex-col ">
           {[...Array(3)].map((_, index) => (
             <OrderDetailCardSkeleton key={index} />
@@ -61,7 +62,8 @@ function Page({ params }: { params: { id: string | number } }) {
               ))}
             </section>
           </div>
-          <section className="w-full flex justify-end mt-4">
+          <section className="w-full flex justify-between flex-col md:flex-row mt-4 gap-5">
+            <OrderShippingDetailSummary order={order}/>
             <OrderSummary currency={currency} order={order} />
           </section>
         </>

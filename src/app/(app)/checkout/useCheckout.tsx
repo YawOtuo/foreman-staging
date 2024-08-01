@@ -52,11 +52,13 @@ function useCheckout() {
         total_order_cost: totatTotalCost,
         total_order_quantity: cart.totalQuantity,
         order_items: orderItems,
-        shipping_details: {
-          payment_option: formValues.payment,
-          address: formValues.address,
-          custom_location: formValues.nearestLandmark,
-          order_condition_accept: formValues.agreement,
+        shipping_address: {
+          nearest_landmark: formValues.nearestLandmark,
+          recipient_name: formValues.address.name,
+          recipient_phone: formValues.address.phone,
+          constituency: formValues.address.city,
+          area: formValues.address.suburb,
+          location: formValues.address.location
         },
       });
 
