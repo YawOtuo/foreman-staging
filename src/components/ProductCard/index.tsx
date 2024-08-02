@@ -3,7 +3,7 @@ import Image from "next/image";
 import { IoCartSharp } from "react-icons/io5";
 import LottieFileBuilder from "../LottieFileBuilder";
 import { FaLongArrowAltRight } from "react-icons/fa";
-import { Product } from "@/lib/types/product";
+import { Product, RelatedProduct } from "@/lib/types/product";
 import { Button } from "../ui/button";
 import useLottie from "@/lib/hooks/useLottie";
 import { FaRegHeart } from "react-icons/fa6";
@@ -19,7 +19,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 
 type Props = {
-  product: Product;
+  product: Product | RelatedProduct;
 };
 function ProductCard({ product }: Props) {
   const { AddToCart } = useCart();

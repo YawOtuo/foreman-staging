@@ -10,7 +10,7 @@ export default function AuthLayout({
   return (
     <div className={`flex flex-col lg:flex-row w-full justify-between `}>
       <div
-        className={`left  bg-top bg-no-repeat w-full  lg:w-[30%] lg:h-screen ${
+        className={`left  bg-top bg-no-repeat w-full  lg:w-[30%] lg:min-h-screen ${
           pathname == "/login"
             ? "bg-[url('/login2.jpg')]"
             : "bg-[url('/login1.jpg')]"

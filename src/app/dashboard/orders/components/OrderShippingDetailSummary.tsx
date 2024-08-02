@@ -21,12 +21,12 @@ function OrderShippingDetailSummary({ order }: Props) {
       </div>
 
       <div>
-      <div className="flex items-center gap-2">
-            <MdLocationCity className="text-lg" />
-            <p>Constituency: {order?.shipping_address.constituency}</p>
-      </div>
         <div className="flex items-center gap-2">
-          <FaCity className="text-lg"/>
+          {/* <MdLocationCity className="text-lg" /> */}
+          <p>Constituency: {order?.shipping_address.constituency}</p>
+        </div>
+        <div className="flex items-center gap-2">
+          {/* <FaCity className="text-lg"/> */}
 
           <p>City: {order?.shipping_address.area}</p>
         </div>
@@ -45,15 +45,13 @@ function OrderShippingDetailSummary({ order }: Props) {
         </div>
       )}
 
-      <div>
-        <div className="flex items-center gap-2">
-          <MdOutlinePermIdentity className="text-2xl" />
-          <p>Recipient Name: {order?.shipping_address.recipient_name}</p>
-        </div>
-        <div className="flex items-center gap-2">
-          <FaPhoneAlt className="text-xl" />
-          <p>Recipient Phone: {order?.shipping_address.recipient_phone}</p>
-        </div>
+      <div className="flex items-center gap-2">
+        <MdOutlinePermIdentity className="text-2xl" />
+        <p>Recipient Name: {order?.shipping_address.recipient_name}</p>
+      </div>
+      <div className="flex items-center gap-2">
+        <FaPhoneAlt className="text-xl" />
+        <p>Recipient Phone: {order?.shipping_address.recipient_phone}</p>
       </div>
     </div>
   );

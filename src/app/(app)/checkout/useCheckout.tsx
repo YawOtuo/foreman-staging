@@ -43,6 +43,7 @@ function useCheckout() {
       product_id: item.product_variant.id, // Assuming 'id' is the product ID
       quantity: item.quantity,
       totalCost: item.totalCost,
+      unit_of_measurement: item.product_variant.unit_of_measurement?.id
     }));
 
     const totatTotalCost = cart.totalCost + 50;

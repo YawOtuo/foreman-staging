@@ -39,7 +39,7 @@ function Page({ params }: { params: { id: string | number } }) {
 
       {!order && isLoading ? (
         <div className="flex flex-col ">
-          {[...Array(3)].map((_, index) => (
+          {[...Array(4)].map((_, index) => (
             <OrderDetailCardSkeleton key={index} />
           ))}
         </div>

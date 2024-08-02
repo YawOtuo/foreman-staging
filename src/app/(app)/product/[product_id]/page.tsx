@@ -24,6 +24,7 @@ import useCart from "@/lib/hooks/useCart";
 import { useCurrency } from "@/context/CurrencyContext";
 import { convertPrice } from "@/lib/utils/convertPrice";
 import { Autoplay, EffectFlip } from "swiper/modules";
+import { UnitOfMeasurement } from "@/lib/types/unit_of_measurement";
 
 export default function ProductDetailPage({
   params,
@@ -45,11 +46,17 @@ export default function ProductDetailPage({
     queryFn: async () => fetchOneProduct(Number(params.product_id)),
   });
 
+  const [selectedUnit, setSelectedUnit] = useState<UnitOfMeasurement | null>(
+    null
+  );
+
   useEffect(() => {
     if (product) {
       document.title = product.name;
       const initialVariant = product.variants[0];
+      const initialUnitOfMeasurement = product.category.units_of_measurement[0];
       setSelectedVariant(initialVariant);
+      setSelectedUnit(initialUnitOfMeasurement);
       setQuantity(
         initialVariant?.min_order_quantity
           ? parseInt(initialVariant.min_order_quantity, 10)
@@ -93,6 +100,7 @@ export default function ProductDetailPage({
           brief_description: selectedVariant.brief_description,
           availability: selectedVariant.availability,
           images: selectedVariant.images,
+          unit_of_measurement: selectedUnit,
         },
         product_category: product.category,
 
@@ -112,12 +120,12 @@ export default function ProductDetailPage({
     ); // Reset quantity when changing variants
   };
 
-  // const handleUnitChange = (value: string) => {
-  //   const newUnit =
-  //     product?.category.units_of_measurement.find((u) => u.unit === value) ||
-  //     null;
-  //   setSelectedUnit(newUnit);
-  // };
+  const handleUnitChange = (value: string) => {
+    const newUnit =
+      product?.category.units_of_measurement.find((u) => u.unit === value) ||
+      null;
+    setSelectedUnit(newUnit);
+  };
   if (!product && isLoading) {
     return (
       <div className="p-8 pt-8">
@@ -137,8 +145,7 @@ export default function ProductDetailPage({
               disableOnInteraction: false,
             }}
             className="w-full rounded-lg overflow-hidden border-2 transition-all duration-300"
-            spaceBetween={5}
-          >
+            spaceBetween={5}>
             {selectedVariant?.images.map((image) => (
               <SwiperSlide key={image.id}>
                 <OptimizedImage
@@ -158,8 +165,7 @@ export default function ProductDetailPage({
               <h2 className="text-xl font-semibold mb-2">Variants</h2>
               <Select
                 onValueChange={handleVariantChange}
-                value={selectedVariant?.id.toString()}
-              >
+                value={selectedVariant?.id.toString()}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select a variant" />
                 </SelectTrigger>
@@ -197,8 +203,7 @@ export default function ProductDetailPage({
                         onClick={decrementQuantity}
                         variant="outline"
                         size="icon"
-                        className="h-10 w-10"
-                      >
+                        className="h-10 w-10">
                         <Minus className="h-4 w-4" />
                       </Button>
                       <Input
@@ -217,14 +222,24 @@ export default function ProductDetailPage({
                         onClick={incrementQuantity}
                         variant="outline"
                         size="icon"
-                        className="h-10 w-10"
-                      >
+                        className="h-10 w-10">
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
-                    <span className="ml-4 capitalize">
-                      {product?.category.units_of_measurement[0]?.unit}
-                    </span>
+                    <Select
+                      onValueChange={handleUnitChange}
+                      value={selectedUnit?.unit}>
+                      <SelectTrigger className="w-max ml-2">
+                        <SelectValue placeholder="Select a unit" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {product?.category.units_of_measurement.map((unit) => (
+                          <SelectItem key={unit.unit} value={unit.unit}>
+                            {unit.unit}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                   </div>
                   {selectedVariant.min_order_quantity && (
                     <p className="text-sm text-gray-500">
@@ -234,8 +249,7 @@ export default function ProductDetailPage({
                   )}
                   <Button
                     onClick={handleAddToCart}
-                    className="mt-4 rounded-sm px-5"
-                  >
+                    className="mt-4 rounded-sm px-5">
                     Add to Cart
                   </Button>
                 </div>
@@ -269,14 +283,7 @@ export default function ProductDetailPage({
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {selectedVariant.related_products.map(
               (relatedProduct: RelatedProduct) => (
-                <ProductCard
-                  key={relatedProduct.id}
-                  product={{
-                    variants: [],
-                    price: 0, // TODO: the price should be fetched from the API too
-                    ...relatedProduct,
-                  }}
-                />
+                <ProductCard key={relatedProduct.id} product={relatedProduct} />
               )
             )}
           </div>

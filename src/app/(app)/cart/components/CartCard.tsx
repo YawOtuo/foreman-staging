@@ -53,7 +53,7 @@ function CartCard({ data }: Props) {
               <CardQuantityControls quantity={data.quantity} cart_item={data} />
             </div>{" "}
           </div>
-          <p className="text-shade-200 text-sm">
+          <p className="text-shade-200 text-xs">
             {data.product_variant.brief_description}
           </p>
         </div>{" "}
@@ -91,7 +91,7 @@ function CartCard({ data }: Props) {
             fontSize={"sm"}
             onClick={() => handleAddToFavourites(data.product_variant.id)}>
             <FaRegHeart className="mr-2" />
-            Move To Favourites
+            Add To Favourites
           </Button>
         </div>
         <div className="hidden lg:flex">

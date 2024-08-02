@@ -2,11 +2,13 @@ import { CartItem } from "./cart";
 import { AddressProps } from "./form";
 import { ProductVariant } from "./product";
 import { ShippingAddress } from "./shippingDetails";
+import { UnitOfMeasurement } from "./unit_of_measurement";
 
 export interface OrderItem {
   product_variant: ProductVariant;
   quantity: number;
   total_cost: number;
+  unit_of_measurement: UnitOfMeasurement;
 }
 export interface Order {
   id: number;
@@ -16,8 +18,7 @@ export interface Order {
   total_quantity?: number;
   items?: OrderItem[];
   status?: string;
-  shipping_address : ShippingAddress
-
+  shipping_address: ShippingAddress;
 }
 
 export interface CreateOrderArgs {
@@ -28,7 +29,7 @@ export interface CreateOrderArgs {
     quantity: number;
     totalCost: number;
   }[];
-  shipping_address : ShippingAddress
+  shipping_address: ShippingAddress;
 }
 
 export interface UpdateOrderArgs {
