@@ -16,7 +16,7 @@ export default function WarehousingSection() {
         />
       </div>
       <div className="order-1 lg:order-2">
-        <h2 className="text-4xl lg:text-6xl font-bold mb-3 text-primary">
+        <h2 className="mb-3 landing-page-section-title">
           Innovative
           <br />
           Lay-By Model

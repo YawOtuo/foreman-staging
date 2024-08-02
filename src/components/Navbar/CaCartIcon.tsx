@@ -6,9 +6,12 @@ function CaCartIcon() {
   const { cart } = useCart();
 
   return (
-    <Link href={"/cart"} className="relative">
-      <IoCartOutline size={25} className="text-primary" />
-      <p className="absolute text-[10px] font-bold bottom-0 right-0 text-white bg-black rounded-full aspect-square w-[11px] flex items-center justify-center">{cart.totalQuantity}</p>
+    <Link
+      href={"/cart"}
+      className="relative flex items-center gap-1 bg-primary text-white font-semibold rounded-md px-1 text-base">
+      <IoCartOutline size={24} className="text-white" />
+
+      {cart.totalQuantity}
     </Link>
   );
 }

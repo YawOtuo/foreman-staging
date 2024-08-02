@@ -9,12 +9,12 @@ import React from "react";
 export default function SupplySection() {
   return (
     <section className="flex flex-col lg:flex-row  2xl:py-5 items-start lg:items-center justify-center gap-10 lg:gap-20 w-full">
-      <div className="w-full order-2 lg:order-1 lg:basis-[40%] grow-1">
+      <div className="w-full order-2 lg:order-1 lg:w-[40%] grow-1">
         <LottieFileBuilder animationData={animationData} width={"100%"} />
       </div>
 
-      <div className="flex flex-col gap-5 items-start justify-center order-1 lg:order-2 ">
-        <h2 className="text-4xl lg:text-6xl text-primary font-bold">
+      <div className="w-full lg:w-[50%] flex flex-col gap-5 items-start justify-center order-1 lg:order-2 ">
+        <h2 className="landing-page-section-title">
           Project Management. <br /> Let's Build For You
         </h2>
         <div className=" text-base lg:max-w-[70%] space-y-2">

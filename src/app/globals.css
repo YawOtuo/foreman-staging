@@ -82,3 +82,7 @@ ol {
   list-style-type: decimal;
   margin-left: 20px;
 }
+
+.landing-page-section-title{
+  @apply text-3xl lg:text-5xl 2xl:text-6xl text-primary font-bold
+}

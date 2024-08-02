@@ -24,7 +24,7 @@ const links = [
   },
 
   {
-    name: "Warehousing",
+    name: "Flexi-Plan",
     url: "/warehousing",
   },
   {
