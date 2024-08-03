@@ -52,7 +52,7 @@ function Warehousing() {
               <p>
                 We will store them for you until you are ready to build. It's
                 that simple and convenient. You can build it….
-                <Link href={"#"} className="text-yellow-400 hover:underline">
+                <Link href={"/contact"} className="text-yellow-400 hover:underline">
                   Start today!
                 </Link>
               </p>
