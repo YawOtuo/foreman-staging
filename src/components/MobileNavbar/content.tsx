@@ -33,7 +33,7 @@ export const links: { name: string; url: string; icon: React.ReactNode }[] = [
     icon: <IoMdHeartEmpty />,
   },
   {
-    name: "warehousing",
+    name: "flexi Plan",
     url: "/warehousing",
     icon: <MdOutlineWarehouse />,
   },

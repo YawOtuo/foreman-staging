@@ -16,6 +16,7 @@ export const MobileMenuDetails = (props: any) => {
       <Link href={"/store"}>
         {" "}
         <Button
+          onClick={() => setMobileMenuStore(false)}
           size={"md"}
           className="w-fit font-semibold px-8 bg-transparent text-white rounded-sm border-primary border-2 text-lg py-5">
           <IoCartOutline className="mr-2" />
