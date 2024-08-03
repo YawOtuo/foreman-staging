@@ -28,6 +28,10 @@ const links = [
     url: "/warehousing",
   },
   {
+    name: "Abous Us",
+    url: "/about",
+  },
+  {
     name: "Contact Us",
     url: "/contact",
   },
