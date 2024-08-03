@@ -20,7 +20,7 @@ function Warehousing() {
   return (
     <main>
       <header className="bg-gray-300 w-full p-6">
-        <h6 className="font-semibold text-2xl">Warehousing</h6>
+        <h6 className="font-semibold text-2xl">Flexi Plan</h6>
         <p>BUY NOW COLLECT LATER</p>
       </header>
       <section className=" px-6">
@@ -40,7 +40,7 @@ function Warehousing() {
             <div className="space-y-3">
               <p>
                 Make your dream home or project a reality with the Foreman
-                Warehousing option. The best preparation for tomorrow is doing
+                Flexi Plan option. The best preparation for tomorrow is doing
                 your best today.
               </p>
               <p>
