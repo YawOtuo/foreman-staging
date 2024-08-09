@@ -28,7 +28,7 @@ const links = [
     url: "/warehousing",
   },
   {
-    name: "Abous Us",
+    name: "About Us",
     url: "/about",
   },
   {

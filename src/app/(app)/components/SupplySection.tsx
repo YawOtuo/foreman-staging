@@ -14,9 +14,13 @@ export default function SupplySection() {
       </div>
 
       <div className="w-full lg:w-[50%] flex flex-col gap-5 items-start justify-center order-1 lg:order-2 ">
-        <h2 className="landing-page-section-title">
-          Project Management. <br /> Let's Build For You
-        </h2>
+        <div className="space-y-2">
+          <p className="landing-page-section-title">Project Management</p>
+          <p className="text-xl lg:text-3xl text-gray-500 font-medium">
+            Let's Build For You
+          </p>
+        </div>
+
         <div className=" text-base lg:max-w-[70%] space-y-2">
           <p className="font-medium">Leave construction to the experts!</p>
           <p>
@@ -30,7 +34,11 @@ export default function SupplySection() {
           </p>
         </div>
         <Link className="" href={"/project-management"}>
-          <Button variant={"outline"} animated={"slide"} className="mt-5">
+          <Button
+            // variant={"outline"}
+            // animated={"slide"}
+            className="mt-5 bg-yellow-500 text-white"
+          >
             Get Started
           </Button>
         </Link>
