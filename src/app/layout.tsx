@@ -14,6 +14,7 @@ import MobileMenuWrapper from "@/components/MobileMenuWrapper";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { Suspense } from "react";
 import WhatsAppIcon from "./(app)/components/WhatsAppIcon";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const mont = Montserrat({ subsets: ["latin"] });
 
@@ -30,8 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${mont.className} flex flex-col justify-center items-center`}
-      >
+        className={`${mont.className} flex flex-col justify-center items-center`}>
         <Providers>
           <Suspense fallback={null}>
             <div className="w-full max-w-[1750px] flex flex-col items-center bg-white">
@@ -42,6 +42,7 @@ export default function RootLayout({
                 <Toaster />
               </MobileMenuWrapper>
             </div>
+            <ScrollToTop />
             <LoadingIndicator />
           </Suspense>
         </Providers>
