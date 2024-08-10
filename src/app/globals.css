@@ -65,10 +65,12 @@
     --ring: 212.7 26.8% 83.9%;
   }
 }
+
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -77,3 +79,17 @@
 html {
   scroll-behavior: smooth;
 }
+
+ol {
+  list-style-type: decimal;
+  margin-left: 20px;
+}
+
+.landing-page-section-title {
+  @apply text-3xl lg:text-5xl 2xl:text-6xl text-primary font-bold
+}
+
+
+  .category-slider-button {
+    @apply absolute -translate-y-1/2 md:translate-y-0 top-1/2 md:static border-2 border-primary rounded-full p-2 md:p-4 hover:bg-primary hover:text-white font-bold text-primary transition-all z-50;
+  }

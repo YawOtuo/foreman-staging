@@ -40,6 +40,10 @@ function CardQuantityControls({
         fontSize={"xs"}>
         <IoMdAdd />
       </Button>
+      
+      <div>
+        <p>{cart_item.product_variant.unit_of_measurement?.unit}</p>
+      </div>
     </div>
   );
 }

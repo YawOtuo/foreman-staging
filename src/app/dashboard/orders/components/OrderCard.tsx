@@ -1,4 +1,5 @@
 import { Order } from "@/lib/types/order";
+import moment from 'moment'
 
 type Props = {
   order: Order;
@@ -13,7 +14,7 @@ function OrderCard({ order }: Props) {
         #{order.id}
       </p>{" "}
       <p className="text-sm col-span-2">
-        {order.created_at ? order.created_at.toString() : "No date"}
+        {moment(order.created_at).format("Do MMMM YYYY hh:mm")}
       </p>
       <div className="font-semibold text-sm uppercase border-2  w-fit rounded-md text-white">
         {order.is_paid ? (

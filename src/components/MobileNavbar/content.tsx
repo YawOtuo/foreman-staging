@@ -6,6 +6,7 @@ import { MdOutlineAccountCircle } from "react-icons/md";
 import { AiOutlineLogin } from "react-icons/ai";
 import { MdOutlineWarehouse } from "react-icons/md";
 import { GrContact } from "react-icons/gr";
+import { TbTextCaption } from "react-icons/tb";
 
 import { MdOutlineDashboard } from "react-icons/md";
 
@@ -32,17 +33,18 @@ export const links: { name: string; url: string; icon: React.ReactNode }[] = [
     icon: <IoMdHeartEmpty />,
   },
   {
-    name: "warehousing",
+    name: "flexi Plan",
     url: "/warehousing",
     icon: <MdOutlineWarehouse />,
   },
-  // {
-  //   name: "Project Management",
-  //   url: "/",
-  // },
+  {
+    name: "About Us",
+    url: "/about",
+    icon: <TbTextCaption />,
+  },
 
   // {
-//   name: "workers",
+  //   name: "workers",
   //   url: "/",
   // },
   // {

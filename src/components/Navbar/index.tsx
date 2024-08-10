@@ -10,6 +10,8 @@ import { useMobileNavStore } from "../MobileNavbar/useMobileNavStore";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoHeartSharp } from "react-icons/io5";
 import { useAppStore } from "@/lib/store/useAppStore";
+import useCart from "@/lib/hooks/useCart";
+import CaCartIcon from "./CaCartIcon";
 
 const links = [
   {
@@ -22,8 +24,12 @@ const links = [
   },
 
   {
-    name: "Warehousing",
+    name: "Flexi-Plan",
     url: "/warehousing",
+  },
+  {
+    name: "About Us",
+    url: "/about",
   },
   {
     name: "Contact Us",
@@ -45,7 +51,7 @@ function Navbar() {
 
       <div className=" items-center gap-5   justify-center hidden lg:flex">
         {links?.map((r, index) => (
-          <Link href={r?.url} key={index}>
+          <Link href={r?.url} key={index} className="whitespace-nowrap text-sm">
             {r.name}
           </Link>
         ))}
@@ -55,18 +61,11 @@ function Navbar() {
           </Link>
         )}
 
-        <Link className="" href={"/cart"}>
-          <IoCartOutline size={25} className="text-primary" />
-        </Link>
+        <CaCartIcon />
       </div>
 
       <div className="lg:hidden flex gap-4 items-center">
-
-          
-
-        <Link href={"/cart"}>
-          <IoCartOutline size={25} className="text-primary" />
-        </Link>
+        <CaCartIcon />
         <button onClick={() => setMobileMenuStore(true)}>
           <GiHamburgerMenu size={30} />
         </button>

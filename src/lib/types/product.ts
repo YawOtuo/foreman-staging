@@ -1,4 +1,5 @@
 import { Category } from "./category";
+import { UnitOfMeasurement } from "./unit_of_measurement";
 
 export interface Image {
   id: number;
@@ -13,6 +14,7 @@ export interface CartProductVariant {
   brief_description: string;
   availability: string;
   images: Image[];
+  unit_of_measurement: UnitOfMeasurement | null;
 }
 
 export interface ProductVariant {
@@ -43,11 +45,9 @@ export interface RelatedProduct {
     id: number;
     name: string;
     image: string;
-    units_of_measurement: {
-      unit: string;
-      description: string;
-    }[];
+    // units_of_measurement: UnitOfMeasurement[];
   };
+  price: number;
   description: string;
   availability: string;
 }

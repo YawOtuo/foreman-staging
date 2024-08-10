@@ -19,17 +19,28 @@ function Warehousing() {
 
   return (
     <main>
-      <section className="pb-10">
-        <header className="bg-gray-300 w-full p-6">
-          <h6 className="font-semibold text-2xl">Flexi Plan</h6>
-          <p>BUY NOW COLLECT LATER</p>
-        </header>
-        <div className="flex flex-col md:flex-row w-full py-10 px-6 md:gap-6">
-          <div className="md:w-1/2">
+      <header className="bg-gray-300 w-full p-6">
+        <h6 className="font-semibold text-2xl">Flexi Plan</h6>
+        <p>BUY NOW COLLECT LATER</p>
+      </header>
+      <section className=" px-6">
+        <div className="flex flex-col md:flex-row w-full py-5 md:pt-10  md:gap-10">
+          <div className="flex justify-center items-center mt-6 md:mt-0 w-full">
+            <div className="relative w-full h-full">
+              <Image
+                src={"/warehousePic.jpg"}
+                alt={"couple"}
+                objectFit="cover"
+                fill
+                className="rounded-md"
+              />
+            </div>
+          </div>
+          <div className="w-full">
             <div className="space-y-3">
               <p>
                 Make your dream home or project a reality with the Foreman
-                Warehousing option. The best preparation for tomorrow is doing
+                Flexi Plan option. The best preparation for tomorrow is doing
                 your best today.
               </p>
               <p>
@@ -41,25 +52,31 @@ function Warehousing() {
               <p>
                 We will store them for you until you are ready to build. It's
                 that simple and convenient. You can build it….
-                <Link href={"#"} className="text-yellow-400 hover:underline">
+                <Link href={"/contact"} className="text-yellow-400 hover:underline">
                   Start today!
                 </Link>
               </p>
             </div>
-          </div>
-          <div className="flex justify-center items-center mt-6 md:mt-0">
-            <Image
-              src={"/warehousePic.jpg"}
-              alt={"couple"}
-              objectFit="contain"
-              width={600}
-              height={600}
-              className="rounded-md"
-            />
+            <section className="py-10">
+              <p className="font-semibold pb-3">How it works</p>
+              <ol className="space-y-3">
+                <li>Buy building materials from us</li>
+                <li>
+                  Keep your purchased goods with us for a limited period (no
+                  extra cost)
+                </li>
+                <li>Request for delivery at a later date</li>
+              </ol>
+            </section>
+
+            <section className="flex justify-start pb-10">
+              <p className="font-bold text-3xl text-primary">Coming Soon</p>
+            </section>
           </div>
         </div>
       </section>
-      <section className="w-full flex flex-col p-6 pb-20">
+
+      {/* <section className="w-full flex flex-col p-6 pb-20">
         <>
           <TabSelect isClicked={isClicked} handleClick={handleClick} />
         </>
@@ -94,7 +111,7 @@ function Warehousing() {
             </div>
           )}
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }

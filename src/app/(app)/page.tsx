@@ -14,7 +14,7 @@ export default function Home() {
         <FeaturedProducts />
         <SupplySection />
 
-        <DiscoverSection />
+        {/* <DiscoverSection /> */}
         <CategoriesOfProducts />
 
         <WarehousingSection />

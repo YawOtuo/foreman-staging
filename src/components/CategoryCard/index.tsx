@@ -14,9 +14,9 @@ function CategoryCard({ category }: Props) {
   const router = useRouter();
   return (
     <Link href={`/store/?category=${category?.name}`}
-      className=" relative flex flex-col items-start justify-center border-[1px] rounded-md hover:scale-[1.02] transition-all cursor-pointer"
+      className=" relative flex flex-col items-start justify-center border-[1px] rounded-md hover:scale-[1.02] transition-all cursor-pointer overflow-hidden"
       >
-      <div className="relative w-full aspect-[3/2] ">
+      <div className="relative w-full max-h-[300px] md:max-h-fit aspect-[3/4] ">
         <Image
           src={`https://res.cloudinary.com/dajli9sqa/${category?.image}`}
           alt="Logo"

@@ -19,6 +19,8 @@ import { FetchDashboardDetails } from "@/lib/api/dashboard";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { DashboardData } from "@/lib/types/dashboardData";
 import MetricCard from "./components/MetricCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade } from "swiper/modules";
 
 const getMonthName = (monthNumber: number) => {
   const date = new Date(Date.UTC(2000, monthNumber - 1, 1)); // Date in the year 2000, monthNumber is 1-based
@@ -112,16 +114,29 @@ const Dashboard = () => {
         </CardContent>
       </Card>
 
-      <Card className="mt-4 w-full">
-        <CardHeader>
-          <CardTitle>Recommended Products</CardTitle>
-        </CardHeader>
-        <CardContent className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-          {allProducts?.slice(0, 6).map((product, index) => (
-            <ProductCard key={index} product={product} />
-          ))}
-        </CardContent>
-      </Card>
+      <div className="mt-4 w-full flex flex-col gap-3">
+        <div>
+          <p className="font-semibold text-2xl">Recommended Products</p>
+        </div>
+        <div className=" gap-4 w-full">
+          <Swiper
+            className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 "
+            loop={true}
+            spaceBetween={25}
+            slidesPerView={"auto"}
+            modules={[ Autoplay]}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}>
+            {allProducts?.slice(0, 6).map((product, index) => (
+              <SwiperSlide key={index}>
+                <ProductCard product={product} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      </div>
     </div>
   );
 };

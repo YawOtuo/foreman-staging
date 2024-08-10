@@ -14,7 +14,7 @@ const Terms = () => {
         <div className="flex-1 p-5">
           <Terms_Cond />
           <Link
-            href="terms_policies/policies"
+            href="/policies"
             className="text-center hover:text-red-500 underline"
           >
             View Company Policies

@@ -17,17 +17,9 @@ function Footer() {
               <a href="tel:+233249911264">+233 249 911 264</a>
             </div>
             <div className="flex space-x-4">
-              <Link href="https://x.com/foreman_gh" >
-                <Twitter className="cursor-pointer hover:text-white" size={20} />
-              </Link>
-              <Link href="https://www.instagram.com/foreman_ghana?igsh=amIxYnNqeXBieGll">
-                <Instagram className="cursor-pointer hover:text-white" size={20} />
-              </Link>
-              <Link href="https://web.facebook.com/Myforeman" >
-                <Facebook className="cursor-pointer hover:text-white" size={20} />
-              </Link>
-              
-              {/* <Youtube className="cursor-pointer hover:text-white" size={20} /> */}
+              <Link href={"https://x.com/foreman_gh"}><Twitter className="cursor-pointer hover:text-white" size={20} /></Link>
+              <Link href={"https://www.instagram.com/foreman_ghana?igsh=amIxYnNqeXBieGll"}><Instagram className="cursor-pointer hover:text-white" size={20} /></Link>
+              <Link href={"https://web.facebook.com/Myforeman"} ><Facebook className="cursor-pointer hover:text-white" size={20} /></Link>
             </div>
           </div>
 
@@ -35,8 +27,8 @@ function Footer() {
             <h3 className="text-lg font-semibold mb-4">Services</h3>
             <ul className="space-y-2">
               <li><a href="/shop" className="hover:text-white">Building Materials</a></li>
-              {/* <li><a href="/shop" className="hover:text-white">Equipment & Tool Rental</a></li> */}
-              <li><a href="/" className="hover:text-white">Project Management</a></li>
+              <li><a href="/equipment-rental" className="hover:text-white">Equipment & Tool Rental</a></li>
+              <li><a href="/project-management" className="hover:text-white">Project Management</a></li>
             </ul>
           </div>
 
@@ -44,8 +36,8 @@ function Footer() {
             <h3 className="text-lg font-semibold mb-4">Information</h3>
             <ul className="space-y-2">
               <li><a href="/about" className="hover:text-white">About Us</a></li>
-              <li><a href="/terms_policies" className="hover:text-white">Terms & Conditions</a></li>
-              <li><a href="/terms_policies/policies" className="hover:text-white">Privacy Policy</a></li>
+              <li><a href="/terms_conditions" className="hover:text-white">Terms & Conditions</a></li>
+              <li><a href="/policies" className="hover:text-white">Privacy Policy</a></li>
             </ul>
           </div>
 

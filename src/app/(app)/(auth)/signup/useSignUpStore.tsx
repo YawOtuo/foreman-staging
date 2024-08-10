@@ -1,5 +1,5 @@
 // useSignUpStore.ts
-import create from 'zustand';
+import {create} from 'zustand';
 
 // Define the state and actions types
 interface SignUpState {
