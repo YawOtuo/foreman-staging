@@ -46,13 +46,7 @@ export default function InfoBar() {
                 {FBaseDetails?.photoURL ? (
                   <AvatarImage src={FBaseDetails?.photoURL} />
                 ) : (
-                  <AvatarImage
-                    src={
-                      `https://api.dicebear.com/8.x/adventurer/svg?seed=$` +
-                      DBDetails?.email +
-                      `&backgroundType=gradientLinear&backgroundColor=b6e3f4,c0aede,ffd5dc,ffdfbf,d1d4f9`
-                    }
-                  />
+                  <UserIcon size={24} color="black" />
                 )}
                 <AvatarFallback>
                   {<UserIcon size={24} color="black" />}
