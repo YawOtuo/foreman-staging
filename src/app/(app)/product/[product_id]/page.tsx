@@ -24,6 +24,7 @@ import useCart from "@/lib/hooks/useCart";
 import { useCurrency } from "@/context/CurrencyContext";
 import { convertPrice } from "@/lib/utils/convertPrice";
 import { Autoplay, EffectFlip } from "swiper/modules";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function ProductDetailPage({
   params,
@@ -46,7 +47,7 @@ export default function ProductDetailPage({
 
   const { exchangeRates, currency } = useCurrency();
   const { AddToCart } = useCart();
-
+  const {toast} = useToast();
   const { data: product, isLoading } = useQuery({
     queryKey: ["product", params.product_id],
     queryFn: async () => fetchOneProduct(Number(params.product_id)),
@@ -72,13 +73,21 @@ export default function ProductDetailPage({
 
   const decrementQuantity = () => {
     setQuantity((prev) =>
-      prev && prev > Number(selectedVariant?.min_order_quantity)
-        ? prev - 1
-        : Number(selectedVariant?.min_order_quantity)
+      prev ? prev - 1 : 1
     );
   };
 
   const handleAddToCart = () => {
+
+    if (quantity < Number(selectedVariant?.min_order_quantity)) {
+      toast({
+        title: "Minimum Order Quantity",
+        description: `The minimum order quantity for this product is ${selectedVariant?.min_order_quantity?.split(".")[0]}`,
+        duration: 5000,
+      });
+      return;
+    }
+
     if (selectedVariant && product) {
       AddToCart({
         id: selectedVariant.id,
@@ -152,21 +161,25 @@ export default function ProductDetailPage({
 
           <Card className="mb-4">
             <CardContent className="p-4">
-              <h2 className="text-xl font-semibold mb-2">Variants</h2>
-              <Select
-                onValueChange={handleVariantChange}
-                value={selectedVariant?.id.toString()}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a variant" />
-                </SelectTrigger>
-                <SelectContent>
-                  {product?.variants.map((variant) => (
-                    <SelectItem key={variant.id} value={variant.id.toString()}>
-                      {variant.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <h2 className="text-xl font-semibold mb-2">Variant</h2>
+              {product?.variants.length > 1 ? (
+                <Select
+                  onValueChange={handleVariantChange}
+                  value={selectedVariant?.id.toString()}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a variant" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {product?.variants.map((variant) => (
+                      <SelectItem key={variant.id} value={variant.id.toString()}>
+                        {variant.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              ) : (
+                <p>{selectedVariant?.name}</p>
+              )}
 
               {selectedVariant && (
                 <div className="mt-4">
@@ -216,23 +229,28 @@ export default function ProductDetailPage({
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
-                    <Select onValueChange={handleUnitChange} value={selectedUnit?.unit}>
-                      <SelectTrigger className="w-max ml-2">
-                        <SelectValue placeholder="Select a unit" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {product?.category.units_of_measurement.map((unit) => (
-                          <SelectItem key={unit.unit} value={unit.unit}>
-                            {unit.unit}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-
+                    {product?.category.units_of_measurement?.length > 1 ? (
+                      <Select
+                        onValueChange={handleUnitChange}
+                        value={selectedUnit?.unit}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select a unit" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {product?.category.units_of_measurement.map((unit) => (
+                            <SelectItem key={unit.unit} value={unit.unit}>
+                              {unit.unit}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    ) : (
+                      <p className="ml-4">{selectedUnit?.unit}</p>
+                    )}
                   </div>
                   {selectedVariant.min_order_quantity && (
                     <p className="text-sm text-gray-500">
-                      Minimum order quantity: {selectedVariant.min_order_quantity}
+                      Minimum order quantity: {`${selectedVariant.min_order_quantity}`.split(".")[0]}
                     </p>
                   )}
                   <Button
