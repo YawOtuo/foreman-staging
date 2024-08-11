@@ -172,7 +172,7 @@ export default function ProductDetailPage({
           <Card className="mb-4">
             <CardContent className="p-4">
               <h2 className="text-xl font-semibold mb-2">Variant</h2>
-              {product?.variants.length > 1 ? (
+              {(product?.variants.length ?? 0) > 1 ? (
                 <Select
                   onValueChange={handleVariantChange}
                   value={selectedVariant?.id.toString()}>
@@ -239,7 +239,7 @@ export default function ProductDetailPage({
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
-                    {product?.category.units_of_measurement?.length > 1 ? (
+                    {(product?.category.units_of_measurement?.length ?? 0) > 1 ? (
                       <Select
                         onValueChange={handleUnitChange}
                         value={selectedUnit?.unit}>
