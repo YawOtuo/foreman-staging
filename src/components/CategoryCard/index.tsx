@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { FaArrowRightLong } from "react-icons/fa6";
 
 type Props = {
@@ -11,7 +10,6 @@ type Props = {
 };
 
 function CategoryCard({ category }: Props) {
-  const router = useRouter();
   return (
     <Link href={`/store/?category=${category?.name}`}
       className=" relative flex flex-col items-start justify-center border-[1px] rounded-md hover:scale-[1.02] transition-all cursor-pointer overflow-hidden"
