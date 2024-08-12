@@ -50,6 +50,7 @@ export default function ProductDetailPage({
   const [selectedUnit, setSelectedUnit] = useState<UnitOfMeasurement | null>(
     null
   );
+  const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
 
   useEffect(() => {
     if (product) {
@@ -66,6 +67,16 @@ export default function ProductDetailPage({
       );
     }
   }, [product]);
+
+  useEffect(() => {
+    if (selectedVariant && selectedUnit) {
+      // Find the price for the selected unit
+      const priceEntry = selectedVariant.price.find(
+        (price) => price.unit_of_measurement.unit === selectedUnit.unit
+      );
+      setSelectedPrice(priceEntry?.price);
+    }
+  }, [selectedVariant, selectedUnit]);
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value, 10);
@@ -142,7 +153,10 @@ export default function ProductDetailPage({
   };
 
   const handleUnitChange = (value: string) => {
-    const selectedPrice = selectedVariant?.price.find((u) => u.unit_of_measurement.unit === value) || null;
+    const selectedPrice =
+      selectedVariant?.price.find(
+        (u) => u.unit_of_measurement.unit === value
+      ) || null;
     setSelectedUnit(selectedPrice ? selectedPrice.unit_of_measurement : null);
   };
   if (!product && isLoading) {
@@ -205,21 +219,23 @@ export default function ProductDetailPage({
 
               {selectedVariant && (
                 <div className="mt-4">
-                  <p className="font-semibold">
-                    Price: {currency}{" "}
-                    {convertPrice(
-                      +selectedVariant.price,
-                      "GHS",
-                      currency,
-                      exchangeRates
-                    )?.toLocaleString(undefined, {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
-                  </p>
+                  {selectedPrice && (
+                    <p className="font-semibold">
+                      Price: {currency}{" "}
+                      {convertPrice(
+                        +selectedPrice,
+                        "GHS",
+                        currency,
+                        exchangeRates
+                      )?.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </p>
+                  )}
                   <p>SKU: {selectedVariant.sku}</p>
                   <p>{selectedVariant.brief_description}</p>
-                  <div className="flex items-center mt-4">
+                  <div className="flex items-center gap-2 mt-4">
                     <label htmlFor="quantity" className="mr-2">
                       Quantity:
                     </label>
@@ -251,22 +267,21 @@ export default function ProductDetailPage({
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
-                    {(product?.category.units_of_measurement?.length ?? 0) >
-                    1 ? (
+                    {(selectedVariant?.price?.length ?? 0) > 1 ? (
                       <Select
                         onValueChange={handleUnitChange}
                         value={selectedUnit?.unit}>
-                        <SelectTrigger>
+                        <SelectTrigger className="w-fit">
                           <SelectValue placeholder="Select a unit" />
                         </SelectTrigger>
                         <SelectContent>
-                          {product?.category.units_of_measurement.map(
-                            (unit) => (
-                              <SelectItem key={unit.unit} value={unit.unit}>
-                                {unit.unit}
-                              </SelectItem>
-                            )
-                          )}
+                          {selectedVariant?.price.map((priceEntry) => (
+                            <SelectItem
+                              key={priceEntry.unit_of_measurement.unit}
+                              value={priceEntry.unit_of_measurement.unit}>
+                              {priceEntry.unit_of_measurement.unit}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     ) : (
@@ -300,10 +315,21 @@ export default function ProductDetailPage({
             <TabsContent value="details">
               <p>Category: {product?.category.name}</p>
               <p>Availability: {product?.availability}</p>
-              <p>
+              <div>
                 Unit of Measurement:{" "}
-                {product?.category.units_of_measurement[0]?.unit}
-              </p>
+                <div>
+                  {(selectedVariant?.price.length ?? 0) > 0 ? (
+                    selectedVariant?.price.map((priceEntry, index) => (
+                      <div key={index}>
+                        {priceEntry.unit_of_measurement?.unit ||
+                          "No unit available"}
+                      </div>
+                    ))
+                  ) : (
+                    <p>No units of measurement available</p>
+                  )}
+                </div>{" "}
+              </div>
             </TabsContent>
           </Tabs>
         </div>
