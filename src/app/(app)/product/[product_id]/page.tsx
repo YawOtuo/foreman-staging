@@ -41,7 +41,7 @@ export default function ProductDetailPage({
 
   const { exchangeRates, currency } = useCurrency();
   const { AddToCart } = useCart();
-  const {toast} = useToast();
+  const { toast } = useToast();
   const { data: product, isLoading } = useQuery({
     queryKey: ["product", params.product_id],
     queryFn: async () => fetchOneProduct(Number(params.product_id)),
@@ -55,7 +55,8 @@ export default function ProductDetailPage({
     if (product) {
       document.title = product.name;
       const initialVariant = product.variants[0];
-      const initialUnitOfMeasurement = product.category.units_of_measurement[0];
+      const initialUnitOfMeasurement =
+        initialVariant?.price[0].unit_of_measurement;
       setSelectedVariant(initialVariant);
       setSelectedUnit(initialUnitOfMeasurement);
       setQuantity(
@@ -80,23 +81,34 @@ export default function ProductDetailPage({
   };
 
   const decrementQuantity = () => {
-    setQuantity((prev) =>
-      prev ? prev - 1 : 1
-    );
+    setQuantity((prev) => (prev ? prev - 1 : 1));
   };
 
   const handleAddToCart = () => {
-
     if (quantity < Number(selectedVariant?.min_order_quantity)) {
       toast({
         title: "Minimum Order Quantity",
-        description: `The minimum order quantity for this product is ${selectedVariant?.min_order_quantity?.split(".")[0]}`,
+        description: `The minimum order quantity for this product is ${
+          selectedVariant?.min_order_quantity?.split(".")[0]
+        }`,
         duration: 5000,
       });
       return;
     }
 
     if (selectedVariant && product) {
+      const selectedPrice = selectedVariant.price.find(
+        (p) => p.unit_of_measurement === selectedUnit
+      );
+
+      if (!selectedPrice) {
+        toast({
+          title: "Price Error",
+          description: "Selected unit of measurement is not available.",
+          duration: 5000,
+        });
+        return;
+      }
       AddToCart({
         id: selectedVariant.id,
         product_variant: {
@@ -104,7 +116,7 @@ export default function ProductDetailPage({
           id: selectedVariant.id,
           // variants: [selectedVariant],
 
-          price: selectedVariant.price,
+          price: selectedPrice.price,
           name: selectedVariant.name,
           brief_description: selectedVariant.brief_description,
           availability: selectedVariant.availability,
@@ -130,10 +142,8 @@ export default function ProductDetailPage({
   };
 
   const handleUnitChange = (value: string) => {
-    const newUnit =
-      product?.category.units_of_measurement.find((u) => u.unit === value) ||
-      null;
-    setSelectedUnit(newUnit);
+    const selectedPrice = selectedVariant?.price.find((u) => u.unit_of_measurement.unit === value) || null;
+    setSelectedUnit(selectedPrice ? selectedPrice.unit_of_measurement : null);
   };
   if (!product && isLoading) {
     return (
@@ -181,7 +191,9 @@ export default function ProductDetailPage({
                   </SelectTrigger>
                   <SelectContent>
                     {product?.variants.map((variant) => (
-                      <SelectItem key={variant.id} value={variant.id.toString()}>
+                      <SelectItem
+                        key={variant.id}
+                        value={variant.id.toString()}>
                         {variant.name}
                       </SelectItem>
                     ))}
@@ -239,7 +251,8 @@ export default function ProductDetailPage({
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
-                    {(product?.category.units_of_measurement?.length ?? 0) > 1 ? (
+                    {(product?.category.units_of_measurement?.length ?? 0) >
+                    1 ? (
                       <Select
                         onValueChange={handleUnitChange}
                         value={selectedUnit?.unit}>
@@ -247,11 +260,13 @@ export default function ProductDetailPage({
                           <SelectValue placeholder="Select a unit" />
                         </SelectTrigger>
                         <SelectContent>
-                          {product?.category.units_of_measurement.map((unit) => (
-                            <SelectItem key={unit.unit} value={unit.unit}>
-                              {unit.unit}
-                            </SelectItem>
-                          ))}
+                          {product?.category.units_of_measurement.map(
+                            (unit) => (
+                              <SelectItem key={unit.unit} value={unit.unit}>
+                                {unit.unit}
+                              </SelectItem>
+                            )
+                          )}
                         </SelectContent>
                       </Select>
                     ) : (
@@ -260,7 +275,8 @@ export default function ProductDetailPage({
                   </div>
                   {selectedVariant.min_order_quantity && (
                     <p className="text-sm text-gray-500">
-                      Minimum order quantity: {`${selectedVariant.min_order_quantity}`.split(".")[0]}
+                      Minimum order quantity:{" "}
+                      {`${selectedVariant.min_order_quantity}`.split(".")[0]}
                     </p>
                   )}
                   <Button

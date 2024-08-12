@@ -10,7 +10,7 @@ export interface Image {
 export interface CartProductVariant {
   id: number;
   name: string;
-  price: string;
+  price: number;
   brief_description: string;
   availability: string;
   images: Image[];
@@ -27,7 +27,7 @@ export interface ProductVariant {
   size: string | null;
   length: number | null;
   width: number | null;
-  price: string;
+  price: { unit_of_measurement: UnitOfMeasurement; price: number }[];
   availability: string;
   created_at: string;
   updated_at: string;
