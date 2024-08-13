@@ -24,9 +24,9 @@ function ProductDetailTabs({ product_variant, category }: Props) {
           <span className="text-shade-300">Availability:</span>{" "}
           {product_variant?.availability}
         </p>
-        <div className="flex items-center gap-5">
+        <div className="flex flex-col md:flex-row items-start gap-5">
           <span className="text-shade-300">Unit of Measurement: </span>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col md:flex-row items-start gap-3">
             {(product_variant?.price.length ?? 0) > 0 ? (
               product_variant?.price.map((priceEntry, index) => (
                 <div key={index}>
