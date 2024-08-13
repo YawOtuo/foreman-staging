@@ -1,5 +1,5 @@
 "use client";
-import create from "zustand";
+import { create } from "zustand";
 import { User } from "../types/user";
 
 type AppStore = {
