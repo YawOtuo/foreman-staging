@@ -26,6 +26,7 @@ import { convertPrice } from "@/lib/utils/convertPrice";
 import { Autoplay, EffectFlip } from "swiper/modules";
 import { useToast } from "@/components/ui/use-toast";
 import { UnitOfMeasurement } from "@/lib/types/unit_of_measurement";
+import ProductDetailTabs from "./components/ProductDetailTabs";
 
 export default function ProductDetailPage({
   params,
@@ -57,7 +58,7 @@ export default function ProductDetailPage({
       document.title = product.name;
       const initialVariant = product.variants[0];
       const initialUnitOfMeasurement =
-        initialVariant?.price[0].unit_of_measurement;
+        initialVariant?.price[0]?.unit_of_measurement;
       setSelectedVariant(initialVariant);
       setSelectedUnit(initialUnitOfMeasurement);
       setQuantity(
@@ -304,34 +305,7 @@ export default function ProductDetailPage({
             </CardContent>
           </Card>
 
-          <Tabs defaultValue="description">
-            <TabsList>
-              <TabsTrigger value="description">Description</TabsTrigger>
-              <TabsTrigger value="details">Details</TabsTrigger>
-            </TabsList>
-            <TabsContent value="description">
-              <p>{selectedVariant?.detailed_description}</p>
-            </TabsContent>
-            <TabsContent value="details">
-              <p>Category: {product?.category.name}</p>
-              <p>Availability: {product?.availability}</p>
-              <div>
-                Unit of Measurement:{" "}
-                <div>
-                  {(selectedVariant?.price.length ?? 0) > 0 ? (
-                    selectedVariant?.price.map((priceEntry, index) => (
-                      <div key={index}>
-                        {priceEntry.unit_of_measurement?.unit ||
-                          "No unit available"}
-                      </div>
-                    ))
-                  ) : (
-                    <p>No units of measurement available</p>
-                  )}
-                </div>{" "}
-              </div>
-            </TabsContent>
-          </Tabs>
+          <ProductDetailTabs product_variant={selectedVariant} category={product?.category.name} />
         </div>
       </section>
 
