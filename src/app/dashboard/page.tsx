@@ -20,7 +20,7 @@ import { useAppStore } from "@/lib/store/useAppStore";
 import { DashboardData } from "@/lib/types/dashboardData";
 import MetricCard from "./components/MetricCard";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules";
+import { Autoplay, EffectFade, FreeMode } from "swiper/modules";
 
 const getMonthName = (monthNumber: number) => {
   const date = new Date(Date.UTC(2000, monthNumber - 1, 1)); // Date in the year 2000, monthNumber is 1-based
@@ -120,11 +120,11 @@ const Dashboard = () => {
         </div>
         <div className=" gap-4 w-full">
           <Swiper
-            className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 "
+            className="w-full !grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 "
             loop={true}
             spaceBetween={25}
             slidesPerView={"auto"}
-            modules={[ Autoplay]}
+            modules={[Autoplay, FreeMode]}
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
