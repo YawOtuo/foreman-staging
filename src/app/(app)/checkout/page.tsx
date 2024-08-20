@@ -112,8 +112,7 @@ export default function CheckOutPage() {
           <FormProvider {...methods}>
             <form
               className="flex flex-col sm:justify-centeritems-start lg:items-center flex-1 mt-6 "
-              onSubmit={methods.handleSubmit(onSubmit)}
-            >
+              onSubmit={methods.handleSubmit(onSubmit)}>
               <CheckSummary
                 deliveryCharge={deliveryCharge}
                 subTotal={cart.totalCost}
@@ -160,7 +159,7 @@ export default function CheckOutPage() {
                     body={
                       <div>
                         <AuthLayout>
-                          <LoginComponent />
+                          <LoginComponent redirect="checkout" />
                         </AuthLayout>
                       </div>
                     }
@@ -169,8 +168,7 @@ export default function CheckOutPage() {
                 )}{" "}
                 <Link
                   href="/warehousing"
-                  className="text-shade-300 uppercase text-right mt-6 underline pb-10"
-                >
+                  className="text-shade-300 uppercase text-right mt-6 underline pb-10">
                   Try Flexi Plan
                 </Link>
               </div>
