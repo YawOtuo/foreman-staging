@@ -43,11 +43,7 @@ export default function InfoBar() {
           <DropdownMenu >
             <DropdownMenuTrigger asChild className="">
               <Avatar>
-                {FBaseDetails?.photoURL ? (
                   <AvatarImage src={FBaseDetails?.photoURL} />
-                ) : (
-                  <UserIcon size={24} color="black" />
-                )}
                 <AvatarFallback>
                   {<UserIcon size={24} color="black" />}
                 </AvatarFallback>

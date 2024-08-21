@@ -57,6 +57,7 @@ export default function ProductDetailPage({
     if (product) {
       document.title = ProductCard.name;
       setSelectedVariant(product.variants[0]);
+      setSelectedUnit(product.category.units_of_measurement[0]);
     }
   }, [product]);
 
@@ -64,6 +65,8 @@ export default function ProductDetailPage({
     const value = parseInt(e.target.value, 10);
     if (!isNaN(value) && value > 0) {
       setQuantity(value);
+    } else {
+      setQuantity(0);
     }
   };
 
@@ -162,7 +165,7 @@ export default function ProductDetailPage({
           <Card className="mb-4">
             <CardContent className="p-4">
               <h2 className="text-xl font-semibold mb-2">Variant</h2>
-              {product?.variants.length > 1 ? (
+              {Number(product?.variants.length) > 1 ? (
                 <Select
                   onValueChange={handleVariantChange}
                   value={selectedVariant?.id.toString()}>
@@ -213,10 +216,11 @@ export default function ProductDetailPage({
                         id="quantity"
                         type="number"
                         min={
-                          selectedVariant?.min_order_quantity
-                            ? parseInt(selectedVariant.min_order_quantity, 10)
-                            : 1
+                          0
                         }
+                        defaultValue={selectedVariant?.min_order_quantity
+                          ? parseInt(selectedVariant.min_order_quantity, 10)
+                          : 1}
                         value={quantity}
                         onChange={handleQuantityChange}
                         className="w-16 mx-2 text-center"
@@ -229,7 +233,7 @@ export default function ProductDetailPage({
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
-                    {product?.category.units_of_measurement?.length > 1 ? (
+                    {Number(product?.category.units_of_measurement?.length) > 1 ||  selectedUnit === null ? (
                       <Select
                         onValueChange={handleUnitChange}
                         value={selectedUnit?.unit}>
@@ -249,7 +253,7 @@ export default function ProductDetailPage({
                     )}
                   </div>
                   {selectedVariant.min_order_quantity && (
-                    <p className="text-sm text-gray-500">
+                    <p className="text-[0.7rem] text-gray-500">
                       Minimum order quantity: {`${selectedVariant.min_order_quantity}`.split(".")[0]}
                     </p>
                   )}
