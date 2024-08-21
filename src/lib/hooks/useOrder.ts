@@ -89,6 +89,7 @@ function useOrders(orderNumber?: number) {
   });
   const handleCreateOrder = async (orderData: CreateOrderArgs) => {
     try {
+      console.log("Sending Data:");
       toast({
         title: "Loading",
         description: "Checking Out",

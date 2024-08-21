@@ -25,6 +25,7 @@ import { useCurrency } from "@/context/CurrencyContext";
 import { convertPrice } from "@/lib/utils/convertPrice";
 import { Autoplay, EffectFlip } from "swiper/modules";
 import { useToast } from "@/components/ui/use-toast";
+import { UnitOfMeasurement } from "@/lib/types/unit_of_measurement";
 
 export default function ProductDetailPage({
   params,
@@ -34,14 +35,7 @@ export default function ProductDetailPage({
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     null
   );
-  const [selectedUnit, setSelectedUnit] = useState<{
-    unit: string;
-    description: string;
-  } | null>(null)
-  const [quantity, setQuantity] = useState(() => {
-    const minQuantity = selectedVariant?.min_order_quantity;
-    return minQuantity ? parseInt(minQuantity, 10) : 1;
-  });
+  const [quantity, setQuantity] = useState<number>(10);
 
   console.log("Quantity of Product:", quantity);
 
@@ -53,11 +47,22 @@ export default function ProductDetailPage({
     queryFn: async () => fetchOneProduct(Number(params.product_id)),
   });
 
+  const [selectedUnit, setSelectedUnit] = useState<UnitOfMeasurement | null>(
+    null
+  );
+
   useEffect(() => {
     if (product) {
-      document.title = ProductCard.name;
-      setSelectedVariant(product.variants[0]);
-      setSelectedUnit(product.category.units_of_measurement[0]);
+      document.title = product.name;
+      const initialVariant = product.variants[0];
+      const initialUnitOfMeasurement = product.category.units_of_measurement[0];
+      setSelectedVariant(initialVariant);
+      setSelectedUnit(initialUnitOfMeasurement);
+      setQuantity(
+        initialVariant?.min_order_quantity
+          ? parseInt(initialVariant.min_order_quantity, 10)
+          : 10
+      );
     }
   }, [product]);
 
@@ -71,7 +76,9 @@ export default function ProductDetailPage({
   };
 
   const incrementQuantity = () => {
-    setQuantity((prev) => (prev ? prev + 1 : 1));
+    setQuantity((prev) =>
+      prev ? prev + 1 : Number(selectedVariant?.min_order_quantity) || 10
+    );
   };
 
   const decrementQuantity = () => {
@@ -104,6 +111,7 @@ export default function ProductDetailPage({
           brief_description: selectedVariant.brief_description,
           availability: selectedVariant.availability,
           images: selectedVariant.images,
+          unit_of_measurement: selectedUnit,
         },
         product_category: product.category,
 
@@ -119,15 +127,16 @@ export default function ProductDetailPage({
     setQuantity(
       newVariant?.min_order_quantity
         ? parseInt(newVariant.min_order_quantity, 10)
-        : 1
+        : 10
     ); // Reset quantity when changing variants
   };
 
   const handleUnitChange = (value: string) => {
     const newUnit =
-      product?.category.units_of_measurement.find((u) => u.unit === value) || null;
+      product?.category.units_of_measurement.find((u) => u.unit === value) ||
+      null;
     setSelectedUnit(newUnit);
-  }
+  };
   if (!product && isLoading) {
     return (
       <div className="p-8 pt-8">
@@ -214,7 +223,7 @@ export default function ProductDetailPage({
                       </Button>
                       <Input
                         id="quantity"
-                        type="number"
+                        type="text"
                         min={
                           0
                         }
@@ -293,14 +302,7 @@ export default function ProductDetailPage({
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {selectedVariant.related_products.map(
               (relatedProduct: RelatedProduct) => (
-                <ProductCard
-                  key={relatedProduct.id}
-                  product={{
-                    variants: [],
-                    price: 0, // TODO: the price should be fetched from the API too
-                    ...relatedProduct,
-                  }}
-                />
+                <ProductCard key={relatedProduct.id} product={relatedProduct} />
               )
             )}
           </div>

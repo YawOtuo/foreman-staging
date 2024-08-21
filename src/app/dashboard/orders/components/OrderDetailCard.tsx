@@ -23,7 +23,7 @@ const OrderDetailCard = ({ item, currency }: DetailProps) => {
           <p className="text-base font-semibold">{item.product_variant.name}</p>
         </div>
         <div className="w-1/2 flex justify-evenly">
-          <p>{item.quantity}</p>
+          <p>{item.quantity} {item?.unit_of_measurement?.unit}</p>
           <p className="font-bold">
             {currency} {item.total_cost}
           </p>
@@ -40,10 +40,14 @@ const OrderDetailCard = ({ item, currency }: DetailProps) => {
               className=""
             />
           </div>
-          <p className="text-base font-semibold px-3 pt-2">{item.product_variant.name}</p>
+          <p className="text-base font-semibold px-3 pt-2">
+            {item.product_variant.name}
+          </p>
         </div>
         <div className="w-full flex flex-wrap items-start gap-5 px-3 pb-3">
-          <p>Quantity: {item.quantity}</p>
+          <p>
+            Quantity: {item.quantity} {item?.unit_of_measurement?.unit}
+          </p>
           <p>
             {currency} {item.total_cost}
           </p>

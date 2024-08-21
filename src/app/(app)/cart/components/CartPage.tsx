@@ -50,12 +50,14 @@ function CartPage() {
             </div>
           )}
 
-          <Link href="/store">
-            <Button variant={"black"} size={"lg"} fontSize={"sm"}>
-              <FaShoppingCart className="mr-2 text-xl" />
-              Continue Shopping
-            </Button>
-          </Link>
+          {cart?.items?.length > 1 && (
+            <Link href="/store">
+              <Button variant={"black"} size={"lg"} fontSize={"sm"}>
+                <FaShoppingCart className="mr-2 text-xl" />
+                Continue Shopping
+              </Button>
+            </Link>
+          )}
         </div>
         <div className="w-full basis">
           {cart && <CartSummary navigation={() => router.push("/checkout")} />}

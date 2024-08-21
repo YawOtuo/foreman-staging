@@ -9,6 +9,7 @@ import {
   templateIds,
 } from "@/lib/utils/emailTemplateIds";
 import { useAppStore } from "@/lib/store/useAppStore";
+import { FormFields } from "@/lib/types/form";
 
 function useCheckout() {
   const { startPayment } = usePayStack();
@@ -33,11 +34,16 @@ function useCheckout() {
         button_url: `https://foremangh.com/dashboard/orders/${order_id}`,
       },
     });
-  const checkout = async (option: "delivery" | "now") => {
+
+  const checkout = async (
+    option: "delivery" | "now",
+    formValues: FormFields
+  ) => {
     const orderItems = cart.items.map((item) => ({
       product_id: item.product_variant.id, // Assuming 'id' is the product ID
       quantity: item.quantity,
       totalCost: item.totalCost,
+      unit_of_measurement: item.product_variant.unit_of_measurement?.id
     }));
 
     const totatTotalCost = cart.totalCost + 50;
@@ -47,6 +53,14 @@ function useCheckout() {
         total_order_cost: totatTotalCost,
         total_order_quantity: cart.totalQuantity,
         order_items: orderItems,
+        shipping_address: {
+          nearest_landmark: formValues.nearestLandmark,
+          recipient_name: formValues.address.name,
+          recipient_phone: formValues.address.phone,
+          constituency: formValues.address.city,
+          area: formValues.address.suburb,
+          location: formValues.address.location
+        },
       });
 
       if (result && result.id) {
