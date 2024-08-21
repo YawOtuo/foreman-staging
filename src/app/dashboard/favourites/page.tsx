@@ -37,7 +37,7 @@ function Page() {
 
       <div className="flex flex-col w-full pt-5 gap-x-5  min-h-screen gap-y-5 ">
         <FetchingState
-          className={"grid grid-cols-1 lg:grid-cols-4 w-full gap-5"}
+          className={"grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 w-full gap-5"}
           success={favouritesData?.map((r: Favourite) => (
             <div className="" key={r?.id}>
               <FavouriteCard data={r} />

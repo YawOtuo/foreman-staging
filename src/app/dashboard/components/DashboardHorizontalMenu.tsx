@@ -8,23 +8,20 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
 import { auth } from "@/app/firebase";
+import useLogout from "@/app/(app)/(auth)/login/components/useLogout";
 
 function DashboardHorizonalMenu() {
   const { FBaseDetails, DBDetails } = useAppStore();
   const { setDashboardMobileMenu } = useDashboardMobileStore();
-  const router = useRouter();
+  const { logout } = useLogout();
   return (
     <div className=" flex items-center justify-between px-4 gap-5 border-b-2 py-1 text-sm">
       <div>
-        <Avatar  >
+        <Avatar>
           {FBaseDetails?.photoURL ? (
-            <AvatarImage
-              src={FBaseDetails?.photoURL}
-              
-            />
+            <AvatarImage src={FBaseDetails?.photoURL} />
           ) : (
             <AvatarImage
-              
               src={
                 `https://api.dicebear.com/8.x/adventurer/svg?seed=$` +
                 DBDetails?.email +
@@ -32,9 +29,7 @@ function DashboardHorizonalMenu() {
               }
             />
           )}
-          <AvatarFallback>
-            {<UserIcon  color="black" />}
-          </AvatarFallback>
+          <AvatarFallback>{<UserIcon color="black" />}</AvatarFallback>
         </Avatar>
       </div>
       <div className="flex items-center gap-3 text-xs md:text-base">
@@ -44,9 +39,7 @@ function DashboardHorizonalMenu() {
           <Button
             variant={"outline"}
             className="text-xs"
-            onClick={() => {
-              signOut(auth).then(() => router.push("/login"));
-            }}>
+            onClick={() => logout()}>
             Logout
           </Button>
         </div>

@@ -39,10 +39,9 @@ export default function WarehousingSection() {
             delivery address once you are ready to build or use them.
           </p>
           <p>
-            Enjoy peace of mind, save on storage and avoid potential losses due
-            to damages and petty theft. As a trusted companion, we are ready to
-            embark on the journey with you - opt for our Flexi plan today and
-            let’s help you prepare for your dream project.
+            As a trusted companion, we are ready to embark on the journey with
+            you - opt for our Flexi plan today and let’s help you prepare for
+            your dream project.
           </p>
         </div>
         <ul>

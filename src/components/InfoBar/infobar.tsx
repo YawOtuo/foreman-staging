@@ -16,10 +16,12 @@ import Link from "next/link";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { useRouter } from "next/navigation";
 import CurrencyConv from "@/app/(app)/components/CurrencyConv";
+import useLogout from "@/app/(app)/(auth)/login/components/useLogout";
 
 export default function InfoBar() {
   //   const { data, error, isLoading } = useAuthState(auth);
   //   const { user } = useUser();
+  const {logout} = useLogout()
   const { DBDetails, FBaseDetails, setDBDetails,setFBaseDetails } = useAppStore();
   const router = useRouter();
 
@@ -64,11 +66,7 @@ export default function InfoBar() {
               <DropdownMenuItem>Team</DropdownMenuItem> */}
               <DropdownMenuItem
                 onClick={() => {
-                  signOut(auth);
-                  router.push("/login");
-                  setDBDetails(null)
-                  setFBaseDetails({});
-
+                 logout()
                 }}>
                 Logout
               </DropdownMenuItem>
