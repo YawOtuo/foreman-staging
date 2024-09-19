@@ -4,6 +4,7 @@ import useCart from "@/lib/hooks/useCart";
 import Link from "next/link";
 import { useCurrency } from "@/context/CurrencyContext";
 import { convertPrice } from "@/lib/utils/convertPrice";
+import { useAppStore } from "@/lib/store/useAppStore";
 
 type CartSummaryProps = {
   navigation: () => void;
@@ -11,6 +12,7 @@ type CartSummaryProps = {
 
 function CartSummary({ navigation }: CartSummaryProps) {
   const { cart } = useCart();
+  const { DBDetails } = useAppStore();
   const { currency, exchangeRates } = useCurrency();
   const convertedPrice = convertPrice(
     cart?.totalCost,
@@ -39,7 +41,9 @@ function CartSummary({ navigation }: CartSummaryProps) {
           </p>{" "}
         </div>
       </div>
-      <Link href={"/checkout"} className="w-full">
+      <Link
+        href={`${DBDetails?.email ? "/checkout" : "/login?redirect-url=checkout"}`}
+        className="w-full">
         <Button className="mt-4 uppercase w-full" size={"lg"}>
           Checkout
         </Button>

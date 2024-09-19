@@ -159,7 +159,7 @@ export default function CheckOutPage() {
                     body={
                       <div>
                         <AuthLayout>
-                          <LoginComponent redirect="checkout" />
+                          <LoginComponent />
                         </AuthLayout>
                       </div>
                     }

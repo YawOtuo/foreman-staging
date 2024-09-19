@@ -7,7 +7,7 @@ const Terms_Cond = () => {
       <section className="space-y-5 mb-8" id="Introduction">
         <h1 className="font-semibold py-2 uppercase">Introduction</h1>
         <p>
-          Welcome to the Foreman.com website (the "Site"). These terms and
+          Welcome to the foremangh.com website (the "Site"). These terms and
           conditions ("Terms and Conditions") apply to the Site, and all of its
           divisions, subsidiaries, and affiliate operated Internet sites which
           reference these Terms and Conditions.
@@ -47,7 +47,7 @@ const Terms_Cond = () => {
           Content provided on this site is solely for informational purposes.
           Product representations expressed on this Site are those of the vendor
           and are not made by us. Reviews or opinions expressed on this Site are
-          those of the sectionidual posting such content and may not reflect our
+          those of the individual posting such content and may not reflect our
           opinions.
         </p>
         <p>
@@ -173,7 +173,7 @@ const Terms_Cond = () => {
         </p>
         <p>
           If you are dissatisfied with the Site or with any terms, conditions,
-          rules, policies, guidelines, or practices of Foreman.com in operating
+          rules, policies, guidelines, or practices of foremangh.com in operating
           the Site, your sole and exclusive remedy is to discontinue using the
           Site.
         </p>

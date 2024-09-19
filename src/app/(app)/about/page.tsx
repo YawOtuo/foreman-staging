@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const AboutUs: React.FC = () => {
@@ -35,9 +36,13 @@ const AboutUs: React.FC = () => {
           and self-builders across the nation. Wherever you&apos;re working,
           Foreman Gh is only a click away to provide you with a quick and
           convenient service to ensure you get the job done right - first time.
-          So place an order with us today and immerse yourself into a whole new
-          exciting online shopping experience. Our team of experts are on hand
-          to support you every step of the way.
+          So{" "}
+          <Link href={"/store"} className="text-primary font-semibold">
+            place an order
+          </Link>{" "}
+          with us today and immerse yourself into a whole new exciting online
+          shopping experience. Our team of experts are on hand to support you
+          every step of the way.
         </p>
       </section>
 
@@ -46,8 +51,11 @@ const AboutUs: React.FC = () => {
           <h2 className="text-2xl font-semibold mb-2">
             The Foreman Flexi Plan
           </h2>
-          <p className="text-lg text-sh\
-          ">Our Lay-by Product</p>
+          <p
+            className="text-lg text-sh\
+          ">
+            Our Lay-by Product
+          </p>
         </div>
         <p>
           We offer a Buy Now, Collect Later model, which allows customers to buy
@@ -59,8 +67,11 @@ const AboutUs: React.FC = () => {
           delivery address once you are ready to build or use them. Enjoy peace
           of mind, save on storage and avoid potential losses due to damages and
           petty theft. As a trusted companion, we are ready to embark on the
-          journey with you - opt for our Flexi plan today and let&apos;s help
-          you prepare for your dream project.
+          journey with you - opt for our{" "}
+          <Link href={"/warehousing"} className="font-semibold text-primary">
+            Flexi plan today
+          </Link>{" "}
+          and let&apos;s help you prepare for your dream project.
         </p>
       </section>
 
@@ -94,8 +105,9 @@ const AboutUs: React.FC = () => {
           happy to help, so you can get the job done.
         </p>
         <p className="mt-4">
-          Looking for more benefits and deals? Place an order with us today and
-          receive discounts on the products you buy the most.
+          Looking for more benefits and deals? Place an{" "}
+          <Link href={"/cart"} className="text-primary font-semibold">order with us</Link> today and receive discounts
+          on the products you buy the most.
         </p>
       </section>
     </div>

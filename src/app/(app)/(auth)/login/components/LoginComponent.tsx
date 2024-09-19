@@ -13,18 +13,17 @@ import {
 import { auth } from "@/app/firebase";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import FormInput from "../../components/FormInput";
 import LoginButton from "../../components/LoginButton";
 import { firebaseErrorMap } from "@/lib/utils/firebaseErrorMap";
 import useLogin from "./useLogin";
 
-type Props = {
-  redirect?: string;
-};
+type Props = {};
 
-function LoginComponent({ redirect }: Props) {
+function LoginComponent({}: Props) {
   const { handleSubmit, GoogleSignIn } = useLogin();
+  const searchParams = useSearchParams();
 
   return (
     <>
@@ -74,9 +73,11 @@ function LoginComponent({ redirect }: Props) {
           <div className="flex items-center gap-1 text-center">
             <label>Don&apos;t have an account?</label>
             <Link
-              href={`
-            ${redirect ? `/signup?redirect-url=${redirect}` : "/signup"}
-            `}
+              href={
+                searchParams.get("redirect-url")
+                  ? `/signup?redirect-url=${searchParams.get("redirect-url")}`
+                  : "/signup"
+              }
               className="text-slate-500">
               Sign up
             </Link>
