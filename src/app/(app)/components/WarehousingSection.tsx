@@ -7,7 +7,7 @@ import { GrLike } from "react-icons/gr";
 export default function WarehousingSection() {
   return (
     <section className="lg:mt-20 w-full sm:w-[90%] pb-10 grid grid-cols-1 lg:grid-cols-2 gap-14  items-center justify-center ">
-      <div className="w-full relative aspect-square order-2 lg:order-1">
+      <div className="w-full relative aspect-square order-1 lg:order-2">
         <Image
           src={"/warehouse.jpeg"}
           objectFit="cover"
@@ -15,7 +15,7 @@ export default function WarehousingSection() {
           alt="An Illustration displayng warehousing "
         />
       </div>
-      <div className="order-1 lg:order-2">
+      <div className="order-2 lg:order-1">
         <h2 className="mb-3 landing-page-section-title">
           Our Flexi Plan
           <br />
