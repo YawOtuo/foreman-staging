@@ -7,7 +7,7 @@ const ProjectManagement = () => {
   return (
     <main className="p-6">
       <div className="flex flex-col md:flex-row w-full justify-center items-center">
-        <section className="space-y-4 md:w-1/2 ">
+        <section className="space-y-4 md:w-1/2">
           <h1 className=" text-base sm:text-xl font-semibold">
             Project Management - Build For Me
           </h1>
@@ -30,7 +30,7 @@ const ProjectManagement = () => {
             participation and satisfaction every step of the way.
           </p>
           <Link href={"/contact"}>
-            <p className="font-medium text-yellow-500 mt-2"> Contact Us</p>
+            <p className="font-medium text-yellow-500 mt-2"> Learn More</p>
           </Link>
         </section>
         <div className="flex justify-center items-center md:w-1/2 mt-6 md:mt-0">
