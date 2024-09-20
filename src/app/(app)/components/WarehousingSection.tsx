@@ -6,7 +6,7 @@ import { GrLike } from "react-icons/gr";
 
 export default function WarehousingSection() {
   return (
-    <section className="lg:mt-20 w-full md:w-[90%] pb-10 grid grid-cols-1 lg:grid-cols-2 gap-14  items-center justify-center ">
+    <section className="lg:mt-20 w-full sm:w-[90%] pb-10 grid grid-cols-1 lg:grid-cols-2 gap-14  items-center justify-center ">
       <div className="w-full relative aspect-square order-2 lg:order-1">
         <Image
           src={"/warehouse.jpeg"}
@@ -17,9 +17,9 @@ export default function WarehousingSection() {
       </div>
       <div className="order-1 lg:order-2">
         <h2 className="mb-3 landing-page-section-title">
-          Innovative
+          Our Flexi Plan
           <br />
-          Lay-By Model
+          <span className="text-2xl">Lay-by Model</span>
         </h2>
         {/* <p className="mb-6 lg:max-w-[70%]">
           Need a place to store your materials? <br /> We offer warehousing
@@ -60,7 +60,7 @@ export default function WarehousingSection() {
         </ul>
 
         <Link href={"/warehousing"}>
-          <Button variant={"outline"} animated={"slide"} className="mt-5">
+          <Button variant={"default"} animated={"none"} className="mt-5 bg-yellow-500 text-white">
             Try Flexi Plan
           </Button>
         </Link>
