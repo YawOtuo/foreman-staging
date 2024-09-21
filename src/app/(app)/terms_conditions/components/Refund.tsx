@@ -4,7 +4,7 @@ import React from "react";
 const Refund = () => {
   return (
     <>
-      <section className="space-y-5 mb-8">
+    <section className="space-y-5 mb-8">
         <h1 className="font-semibold py-2 uppercase">
           {" "}
           Can I get a refund on a purchased item/cancel a delivery?
@@ -27,9 +27,9 @@ const Refund = () => {
         <p>
           The return of goods duly delivered to your designated delivery address
           will not be accepted except for faulty or damaged products. You can
-          request a refund on warehoused goods within 48 hours of storage. This
+          request a refund on Lay-by goods within 48 hours of storage. This
           will attract an administration fee of 5% of the refund value. There
-          are no refunds on warehoused goods beyond 48 hours of storage EXCEPT
+          are no refunds on Lay-by goods beyond 48 hours of storage EXCEPT
           in exceptional circumstance to be determined by management.
         </p>
       </section>
