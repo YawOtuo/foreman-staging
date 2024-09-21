@@ -29,7 +29,7 @@ const DeliveryAddressForm = () => {
             <Tip content="Please give us the name of the person who will be receiving the order">
               <input
                 {...register("address.name", {
-                  required: "Enter your name",
+                  required: "Enter a name",
                 })}
                 type="text"
                 placeholder="Name of Contact"
