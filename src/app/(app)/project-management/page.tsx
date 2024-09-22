@@ -5,7 +5,7 @@ import { MdOutlineStorage } from "react-icons/md";
 
 const ProjectManagement = () => {
   return (
-    <main className="p-6">
+    <main className="p-6 sm:mb-32">
       <div className="flex flex-col-reverse lg:flex-row w-full justify-center items-center">
         <section className="space-y-4 mt-6 lg:w-1/2">
           <h1 className=" text-lg sm:text-xl font-semibold">
