@@ -46,15 +46,21 @@ export default function WarehousingSection() {
         </div>
         <ul>
           <li className="flex gap-3 items-center p-3 ">
-            <GrLike className="w-5 h-5 " />
+            <div>
+            <GrLike size={30}/>
+            </div>
             <p>Enjoy peace of mind.</p>
           </li>
           <li className="flex gap-3 items-center p-3 ">
-            <GrLike className="w-5 h-5 " />
+            <div>
+            <GrLike size={30} />
+            </div>
             <p>Save on storage.</p>
           </li>
           <li className="flex gap-3 items-center p-3 ">
-            <GrLike className="w-5 h-5 " />
+            <div>  
+            <GrLike size={30} />
+            </div>
             <p>Avoid losses due to damages and petty theft.</p>
           </li>
         </ul>
