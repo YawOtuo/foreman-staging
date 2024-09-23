@@ -4,6 +4,7 @@ export type AddressProps = {
   name: string;
   phone: string;
   location: string;
+  deliveryDate:Date | null;
 };
 
 export interface FormFields {

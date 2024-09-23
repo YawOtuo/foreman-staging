@@ -1,16 +1,31 @@
 import PhoneInput from "./PhoneNo";
 import DropDown from "./DropDown";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { FormFields } from "@/lib/types/form";
 import PhoneNoInput from "./PhoneNo";
 import Tip from "@/components/Tooltip";
 import Map from "../map";
+import { useState } from "react"
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css"
 
-const DeliveryAddressForm = () => {
+const DeliveryAddressForm = () => {  
   const {
     register,
+    control,
     formState: { errors },
+    setValue
   } = useFormContext<FormFields>();
+
+  const [selectDate, setSelectDate] = useState<Date | null>(null);
+
+  // const handleDateChange = (date: Date | null) => {
+  //   setSelectDate(date);
+  //   setValue('address.deliveryDate', date);
+  // }
+
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 2)
 
   return (
     <div className="border-2   p-4 rounded-md space-y-4 w-full    flex flex-col">
@@ -55,6 +70,32 @@ const DeliveryAddressForm = () => {
             )}
           </div>
         </div>
+          {/* TO DO : date picker here */}
+          <div className="w-full md:w-1/2 flex flex-col z-10">
+          <Tip content="Please select a delivery date (starting from tomorrow)">
+          <Controller
+              name="address.deliveryDate"
+              control={control}
+              rules={{ required: "Delivery date is required" }}
+              render={({ field }) => (
+                <DatePicker
+                  selected={field.value}
+                  onChange={(date) => field.onChange(date)}
+                  minDate={tomorrow}
+                  placeholderText="Select delivery date"
+                  className="border rounded p-2 w-full h-10"
+                />
+              )}
+            />
+          </Tip>
+          {errors.address?.deliveryDate && (
+            <div className="text-red-600 mt-2">
+              {errors.address.deliveryDate.message}
+            </div>
+          )}
+        
+        </div>
+        
         <div>
           <div className="w-full flex flex-col">
             <Map />
