@@ -198,7 +198,7 @@ export default function ProductDetailPage({
 
           <Card className="mb-4">
             <CardContent className="p-4">
-              <h2 className="text-xl font-semibold mb-2">Variant</h2>
+              <h2 className="text-xl font-semibold mb-2">Types</h2>
               {Number(product?.variants.length) > 1 ? (
                 <Select
                   onValueChange={handleVariantChange}
@@ -236,8 +236,8 @@ export default function ProductDetailPage({
                       })}
                     </p>
                   )}
-                  <p>SKU: {selectedVariant.sku}</p>
-                  <p>{selectedVariant.brief_description}</p>
+                  <p className="text-sm text-gray-700s">SKU: {selectedVariant.sku}</p>
+                  {/* <p>{selectedVariant.brief_description}</p> */}
                   <div className="flex items-center gap-2 mt-4">
                     <label htmlFor="quantity" className="mr-2">
                       Quantity:
