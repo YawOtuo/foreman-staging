@@ -6,4 +6,5 @@ export interface ShippingAddress {
   constituency: string;
   // address: AddressProps;
   location?: string | null;
+  deliveryDate:Date | null;
 }

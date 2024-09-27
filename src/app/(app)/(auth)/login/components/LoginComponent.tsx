@@ -30,7 +30,7 @@ function LoginComponent({}: Props) {
       {" "}
       <div className="w-full">
         <h2 className="text-primary-100 text-3xl lg:text-3xl font-bold ">
-          Shop.
+          Sign In
         </h2>
         <p className="text-lg lg:text-xl  text-shade-300">
           Build with Foreman today

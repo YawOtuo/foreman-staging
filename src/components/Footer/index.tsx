@@ -55,15 +55,10 @@ function Footer() {
 
           <div>
             <h3 className="text-lg font-semibold mb-2">Services</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               <li>
                 <a href="/store" className="hover:text-white">
                   Building Materials
-                </a>
-              </li>
-              <li>
-                <a href="/equipment-rental" className="hover:text-white">
-                  Equipment & Tool Rental
                 </a>
               </li>
               <li>
@@ -71,12 +66,17 @@ function Footer() {
                   Project Management
                 </a>
               </li>
+              <li>
+                <a href="/equipment-rental" className="hover:text-white">
+                  Equipment & Tool Rental
+                </a>
+              </li>
             </ul>
           </div>
 
           <div>
             <h3 className="text-lg font-semibold mb-2">Information</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               <li>
                 <a href="/about" className="hover:text-white">
                   About Us
@@ -89,7 +89,7 @@ function Footer() {
               </li>
               <li>
                 <a href="/policies" className="hover:text-white">
-                  Privacy Policy
+                  Delivery and Refunds
                 </a>
               </li>
             </ul>
@@ -97,7 +97,7 @@ function Footer() {
 
           <div>
             <h3 className="text-lg font-semibold mb-2">Quick Links</h3>
-            <ul className="space-y-2">
+            <ul className="space-y-1">
               <li>
                 <a href="/dashboard" className="hover:text-white">
                   My Account

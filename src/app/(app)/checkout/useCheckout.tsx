@@ -59,7 +59,8 @@ function useCheckout() {
           recipient_phone: formValues.address.phone,
           constituency: formValues.address.city,
           area: formValues.address.suburb,
-          location: formValues.address.location
+          location: formValues.address.location,
+          deliveryDate: formValues.address.deliveryDate
         },
       });
 

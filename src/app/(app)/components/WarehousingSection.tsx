@@ -6,8 +6,8 @@ import { GrLike } from "react-icons/gr";
 
 export default function WarehousingSection() {
   return (
-    <section className="lg:mt-20 w-full md:w-[90%] pb-10 grid grid-cols-1 lg:grid-cols-2 gap-14  items-center justify-center ">
-      <div className="w-full relative aspect-square order-2 lg:order-1">
+    <section className="lg:mt-20 w-full sm:w-[90%] pb-10 grid grid-cols-1 lg:grid-cols-2 gap-14  items-center justify-center ">
+      <div className="w-full relative aspect-square order-1 lg:order-2">
         <Image
           src={"/warehouse.jpeg"}
           objectFit="cover"
@@ -15,11 +15,11 @@ export default function WarehousingSection() {
           alt="An Illustration displayng warehousing "
         />
       </div>
-      <div className="order-1 lg:order-2">
+      <div className="order-2 lg:order-1">
         <h2 className="mb-3 landing-page-section-title">
-          Innovative
+          Our Flexi Plan
           <br />
-          Lay-By Model
+          <span className="text-2xl">Lay-by Model</span>
         </h2>
         {/* <p className="mb-6 lg:max-w-[70%]">
           Need a place to store your materials? <br /> We offer warehousing
@@ -46,21 +46,27 @@ export default function WarehousingSection() {
         </div>
         <ul>
           <li className="flex gap-3 items-center p-3 ">
-            <GrLike className="w-5 h-5 " />
+            <div>
+            <GrLike size={30}/>
+            </div>
             <p>Enjoy peace of mind.</p>
           </li>
           <li className="flex gap-3 items-center p-3 ">
-            <GrLike className="w-5 h-5 " />
+            <div>
+            <GrLike size={30} />
+            </div>
             <p>Save on storage.</p>
           </li>
           <li className="flex gap-3 items-center p-3 ">
-            <GrLike className="w-5 h-5 " />
+            <div>  
+            <GrLike size={30} />
+            </div>
             <p>Avoid losses due to damages and petty theft.</p>
           </li>
         </ul>
 
         <Link href={"/warehousing"}>
-          <Button variant={"outline"} animated={"slide"} className="mt-5">
+          <Button variant={"default"} animated={"none"} className="mt-5 bg-yellow-500 text-white">
             Try Flexi Plan
           </Button>
         </Link>

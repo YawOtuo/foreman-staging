@@ -9,11 +9,11 @@ import React from "react";
 export default function SupplySection() {
   return (
     <section className="flex flex-col lg:flex-row  2xl:py-5 items-start lg:items-center justify-center gap-10 lg:gap-20 w-full">
-      <div className="w-full order-2 lg:order-1 lg:w-[40%] grow-1">
+      <div className="w-full order-1 lg:order-2 lg:w-[40%] grow-1">
         <LottieFileBuilder animationData={animationData} width={"100%"} />
       </div>
 
-      <div className="w-full lg:w-[50%] flex flex-col gap-5 items-start justify-center order-1 lg:order-2 ">
+      <div className="w-full lg:w-[50%] flex flex-col gap-5 items-start justify-center order-2 lg:order-1">
         <div className="space-y-2">
           <p className="landing-page-section-title">Project Management</p>
           <p className="text-xl lg:text-3xl text-gray-500 font-medium">
@@ -39,7 +39,7 @@ export default function SupplySection() {
             // animated={"slide"}
             className="mt-5 bg-yellow-500 text-white"
           >
-            Get Started
+            Learn More
           </Button>
         </Link>
       </div>

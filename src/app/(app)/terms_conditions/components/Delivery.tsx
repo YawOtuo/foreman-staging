@@ -30,7 +30,7 @@ const Delivery = () => {
           placed. Delivery times are estimated and commence from the date of
           payment or when you place a request. We aim to deliver within 48 hours
           for orders placed on our retail site. Delivery requests made for
-          warehoused products could take up to 5 days. Delivery times are to be
+          our Lay-by option could take up to 5 days. Delivery times are to be
           used as a guide only and are subject to the acceptance and approval of
           your payment or delivery request.
         </p>
@@ -62,15 +62,14 @@ const Delivery = () => {
           purchase to your cart, and proceed to the checkout page. Once at the
           checkout screen, delivery charges will be displayed. We normally offer
           free delivery for orders above a value threshold so check for your
-          order’s eligibility. There is no delivery cost for Foreman warehoused
-          goods
+          order’s eligibility.
         </p>
       </section>
 
       <section className="space-y-5 mb-8">
-        <h1 className="font-semibold py-2 uppercase">Delivery Costs</h1>
+        <h1 className="font-semibold py-2 uppercase">Damages</h1>
         <p>
-          If there is any damage to your order on delivery, please contact us
+        If there is any damage to your order at the point of delivery, please contact us
           immediately at{" "}
           <a href=" myforemangh@gmail.com" className="underline">
             {" "}
