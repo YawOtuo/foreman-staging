@@ -27,6 +27,7 @@ import { Autoplay, EffectFlip } from "swiper/modules";
 import { useToast } from "@/components/ui/use-toast";
 import { UnitOfMeasurement } from "@/lib/types/unit_of_measurement";
 import ProductDetailTabs from "./components/ProductDetailTabs";
+import {motion} from 'framer-motion'
 
 export default function ProductDetailPage({
   params,
@@ -193,7 +194,7 @@ export default function ProductDetailPage({
             ))}
           </Swiper>
         </div>
-        <div className="w-full md:w-1/2">
+        <motion.div layout className="w-full md:w-1/2">
           <h1 className="text-3xl font-bold mb-2">{product?.name}</h1>
 
           <Card className="mb-4">
@@ -236,7 +237,9 @@ export default function ProductDetailPage({
                       })}
                     </p>
                   )}
-                  <p className="text-sm text-gray-700s">SKU: {selectedVariant.sku}</p>
+                  <p className="text-sm text-gray-700s">
+                    SKU: {selectedVariant.sku}
+                  </p>
                   {/* <p>{selectedVariant.brief_description}</p> */}
                   <div className="flex items-center gap-2 mt-4">
                     <label htmlFor="quantity" className="mr-2">
@@ -253,12 +256,12 @@ export default function ProductDetailPage({
                       <Input
                         id="quantity"
                         type="text"
-                        min={
-                          0
+                        min={0}
+                        defaultValue={
+                          selectedVariant?.min_order_quantity
+                            ? parseInt(selectedVariant.min_order_quantity, 10)
+                            : 1
                         }
-                        defaultValue={selectedVariant?.min_order_quantity
-                          ? parseInt(selectedVariant.min_order_quantity, 10)
-                          : 1}
                         value={quantity}
                         onChange={handleQuantityChange}
                         className="w-16 mx-2 text-center"
@@ -271,7 +274,8 @@ export default function ProductDetailPage({
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
-                    {Number(product?.category.units_of_measurement?.length) > 1 ||  selectedUnit === null ? (
+                    {Number(product?.category.units_of_measurement?.length) >
+                      1 || selectedUnit === null ? (
                       <Select
                         onValueChange={handleUnitChange}
                         value={selectedUnit?.unit}>
@@ -292,11 +296,13 @@ export default function ProductDetailPage({
                       <p className="ml-4">{selectedUnit?.unit}</p>
                     )}
                   </div>
-                  {selectedVariant.min_order_quantity && (
-                    <p className="text-[0.7rem] text-gray-500">
-                      Minimum order quantity: {`${selectedVariant.min_order_quantity}`.split(".")[0]}
-                    </p>
-                  )}
+                  {selectedVariant.min_order_quantity &&
+                    quantity < Number(selectedVariant.min_order_quantity) && (
+                      <p className="text-[0.7rem] text-gray-500">
+                        Minimum order quantity:{" "}
+                        {`${selectedVariant.min_order_quantity}`.split(".")[0]}
+                      </p>
+                    )}
                   <Button
                     onClick={handleAddToCart}
                     className="mt-4 rounded-sm px-5">
@@ -307,8 +313,11 @@ export default function ProductDetailPage({
             </CardContent>
           </Card>
 
-          <ProductDetailTabs product_variant={selectedVariant} category={product?.category.name} />
-        </div>
+          <ProductDetailTabs
+            product_variant={selectedVariant}
+            category={product?.category.name}
+          />
+        </motion.div>
       </section>
 
       {selectedVariant && selectedVariant.related_products.length > 0 && (
