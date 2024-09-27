@@ -47,6 +47,7 @@ export default function CheckOutPage() {
     const formValues = getValues();
     const selectedPaymentMethod = formValues.payment;
 
+    console.log("Data:",formValues)
     if (selectedPaymentMethod === "pay_delivery") {
       checkout("delivery", formValues);
     } else if (selectedPaymentMethod === "pay_now") {
