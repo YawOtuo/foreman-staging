@@ -27,7 +27,7 @@ import { Autoplay, EffectFlip } from "swiper/modules";
 import { useToast } from "@/components/ui/use-toast";
 import { UnitOfMeasurement } from "@/lib/types/unit_of_measurement";
 import ProductDetailTabs from "./components/ProductDetailTabs";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
 
 export default function ProductDetailPage({
   params,
@@ -182,7 +182,8 @@ export default function ProductDetailPage({
               disableOnInteraction: false,
             }}
             className="w-full rounded-lg overflow-hidden border-2 transition-all duration-300"
-            spaceBetween={5}>
+            spaceBetween={5}
+          >
             {selectedVariant?.images.map((image) => (
               <SwiperSlide key={image.id}>
                 <OptimizedImage
@@ -203,7 +204,8 @@ export default function ProductDetailPage({
               {Number(product?.variants.length) > 1 ? (
                 <Select
                   onValueChange={handleVariantChange}
-                  value={selectedVariant?.id.toString()}>
+                  value={selectedVariant?.id.toString()}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Select a variant" />
                   </SelectTrigger>
@@ -211,7 +213,8 @@ export default function ProductDetailPage({
                     {product?.variants.map((variant) => (
                       <SelectItem
                         key={variant.id}
-                        value={variant.id.toString()}>
+                        value={variant.id.toString()}
+                      >
                         {variant.name}
                       </SelectItem>
                     ))}
@@ -250,7 +253,8 @@ export default function ProductDetailPage({
                         onClick={decrementQuantity}
                         variant="outline"
                         size="icon"
-                        className="h-10 w-10">
+                        className="h-10 w-10"
+                      >
                         <Minus className="h-4 w-4" />
                       </Button>
                       <Input
@@ -270,7 +274,8 @@ export default function ProductDetailPage({
                         onClick={incrementQuantity}
                         variant="outline"
                         size="icon"
-                        className="h-10 w-10">
+                        className="h-10 w-10"
+                      >
                         <Plus className="h-4 w-4" />
                       </Button>
                     </div>
@@ -278,7 +283,8 @@ export default function ProductDetailPage({
                       1 || selectedUnit === null ? (
                       <Select
                         onValueChange={handleUnitChange}
-                        value={selectedUnit?.unit}>
+                        value={selectedUnit?.unit}
+                      >
                         <SelectTrigger className="w-fit">
                           <SelectValue placeholder="Select a unit" />
                         </SelectTrigger>
@@ -286,7 +292,8 @@ export default function ProductDetailPage({
                           {selectedVariant?.price.map((priceEntry) => (
                             <SelectItem
                               key={priceEntry.unit_of_measurement.unit}
-                              value={priceEntry.unit_of_measurement.unit}>
+                              value={priceEntry.unit_of_measurement.unit}
+                            >
                               {priceEntry.unit_of_measurement.unit}
                             </SelectItem>
                           ))}
@@ -305,7 +312,8 @@ export default function ProductDetailPage({
                     )}
                   <Button
                     onClick={handleAddToCart}
-                    className="mt-4 rounded-sm px-5">
+                    className="mt-4 rounded-sm px-5"
+                  >
                     Add to Cart
                   </Button>
                 </div>

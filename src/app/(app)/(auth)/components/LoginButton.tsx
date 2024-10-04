@@ -6,6 +6,7 @@ interface LoginButtonProps {
   name: string;
   className?: string;
   icon?: React.ReactNode;
+  disabled?: boolean;
 }
 
 export default function LoginButton({
@@ -14,6 +15,7 @@ export default function LoginButton({
   name,
   className,
   icon,
+  disabled,
 }: LoginButtonProps) {
   return (
     <Button
@@ -22,9 +24,10 @@ export default function LoginButton({
       onClick={onClick}
       type={type}
       size={"lg"}
+      disabled={disabled}
       className={` w-full  ${className} text-primary border-2 border-primary gap-2 `}
-
-      className_animated={`  ${className} text-black  border-primary gap-2`}>
+      className_animated={`  ${className} text-black  border-primary gap-2`}
+    >
       {icon}
       {name}
     </Button>

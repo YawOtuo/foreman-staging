@@ -17,9 +17,11 @@ import useSignUpStore from "./useSignUpStore";
 import { firebaseErrorMap } from "@/lib/utils/firebaseErrorMap";
 import { FetchOrCreateResponse, fetchOrCreateUserByUid } from "@/lib/api/users";
 import useSignUp from "./useSignUp";
+import { Loader2 } from "lucide-react";
 
 function Page() {
-  const { handleSubmit, GoogleSignIn } = useSignUp();
+  const { handleSubmit, GoogleSignIn, isSignUpLoading, isGoogleLoading } =
+    useSignUp();
   return (
     <>
       {" "}
@@ -34,7 +36,8 @@ function Page() {
       <div className="w-full">
         <form
           onSubmit={handleSubmit}
-          className="self-start flex flex-col gap-4 pt-4 lg:min-w-[400px]">
+          className="self-start flex flex-col gap-4 pt-4 lg:min-w-[400px]"
+        >
           <FormInput
             required
             label="Name"
@@ -78,9 +81,15 @@ function Page() {
           <Button
             variant={"default"}
             type="submit"
-            className="bg-primary-100 text-white w-full p-3 flex items-center justify-center gap-2">
-            <PiSignInDuotone />
-            <span>Register</span>
+            disabled={isSignUpLoading}
+            className="bg-primary-100 text-white w-full p-3 flex items-center justify-center gap-2"
+          >
+            {isSignUpLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <PiSignInDuotone />
+            )}
+            <span>{isSignUpLoading ? "Registering..." : "Register"}</span>
           </Button>
           <div className="flex items-center justify-between">
             <a href="#" className="text-slate-500">
@@ -105,7 +114,12 @@ function Page() {
             icon={<PiGoogleLogo />}
             onClick={GoogleSignIn}
             type="button"
-            name="Continue with Google"
+            disabled={isGoogleLoading}
+            name={
+              isGoogleLoading
+                ? "Signing in with Google..."
+                : "Continue with Goodgle"
+            }
           />
         </form>
       </div>{" "}
