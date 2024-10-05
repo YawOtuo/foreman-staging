@@ -3,17 +3,21 @@ import { url } from "../../../weburl";
 
 type Props = {
   to: string[];
-  from: string;
+  from: string
   templateId: string;
   templateData: Record<string, unknown>;
 };
+
 
 function useEmail() {
   const sendEmail = async ({ to, from, templateId, templateData }: Props) => {
     try {
       const res = await axios.post(`${url}api/emails/general-email`, {
         to,
-        from,
+        from: {
+          email: from,
+          name: "ForemanGh"
+        },
         templateId,
         dynamicTemplateData: templateData,
       });
