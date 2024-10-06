@@ -6,7 +6,7 @@ import { FetchOrCreateResponse, fetchOrCreateUserByUid } from "../api/users";
 import useEmail from "./useEmail";
 import {
   fromEmail,
-  generalEmailReceipients,
+  generalEmailRecipients,
   templateIds,
 } from "../utils/emailTemplateIds";
 import { User } from "../types/user";
@@ -38,7 +38,7 @@ export default function useAuthState(auth: any) {
             if (userData?.message == "User created successfully") {
               sendEmail({
                 to: [
-                  ...(generalEmailReceipients["signup"] || []),
+                  ...(generalEmailRecipients["signup"] || []),
                   userAuth?.email,
                 ],
                 from: fromEmail,
