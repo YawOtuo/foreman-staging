@@ -8,6 +8,8 @@ import {
   AddToFavourites,
 } from "../api/favourites";
 import { useAppStore } from "../store/useAppStore";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 interface AddToFavouritesArgs {
   product_id: number;
@@ -44,11 +46,23 @@ function useFavourites() {
       });
     },
     onError: (error: Error) => {
-      toast({
-        title: "Info",
-        description: "Please login before proceeding",
+      const { dismiss } = toast({
+        description: (
+          <div className="flex py-1 flex-col items-start">
+            <p>Please log in before proceeding</p>
+            <Link href={"/login"} className="pt-1">
+              <Button size={"sm"} variant={"link"} className="font-bold">
+                Login
+              </Button>
+            </Link>
+          </div>
+        ),
         variant: "loading",
       });
+
+      setTimeout(() => {
+        dismiss();
+      }, 2000);
     },
   });
 
