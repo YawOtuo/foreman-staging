@@ -18,9 +18,9 @@ function DashboardHorizonalMenu() {
     <div className=" flex items-center justify-between px-4 gap-5 border-b-[1px] py-1 text-sm">
   
       <div className="flex items-center gap-3 text-xs md:text-base w-full">
-        <div className="w-full flex items-center gap-5 justify-end text-sm">
-          <p className="hidden lg:block">{DBDetails?.username}</p>
-          <p> {DBDetails?.email}</p>
+        <div className="w-full flex items-center gap-5 justify-end text-xs">
+          <p>{DBDetails?.username}</p>
+          <p  className="hidden lg:block" > {DBDetails?.email}</p>
           <Button
             variant={"outline"}
             className="text-xs"

@@ -14,7 +14,7 @@ function Layout({ children }: { children: React.ReactNode }) {
             <DashboardSideMenu />
           </div>{" "}
           <div className=" col-span-5 w-full lg:col-span-4 ">
-            <div className=" bg-white flex flex-col gap-5 rounded-tl-3xl">
+            <div className=" bg-white flex flex-col gap-5 lg:rounded-tl-3xl min-h-screen">
               <DashboardHorizonalMenu />
               {children}
             </div>
