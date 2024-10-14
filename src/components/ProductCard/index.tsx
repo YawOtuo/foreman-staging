@@ -1,14 +1,10 @@
 import Image from "next/image";
 
-import { IoCartSharp } from "react-icons/io5";
-import LottieFileBuilder from "../LottieFileBuilder";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { Product, RelatedProduct } from "@/lib/types/product";
-import { Button } from "../ui/button";
 import useLottie from "@/lib/hooks/useLottie";
 import { FaRegHeart } from "react-icons/fa6";
 import { IoHeart } from "react-icons/io5";
-import useFavourites from "@/lib/hooks/useFavourites";
 
 import { GrMoney } from "react-icons/gr";
 import { useCurrency } from "@/context/CurrencyContext";
@@ -17,6 +13,7 @@ import Link from "next/link";
 import useCart from "@/lib/hooks/useCart";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
+import useFavourites from "@/lib/hooks/useFavourites";
 
 type Props = {
   product: Product | RelatedProduct;
@@ -34,7 +31,7 @@ function ProductCard({ product }: Props) {
   );
 
   return (
-    <div className="group flex flex-col items-start justify-center border-[1px]  hover:scale-[1.02] duration-300 rounded-lg overflow-hidden transition-all cursor-pointer">
+    <div className="group flex flex-col items-start justify-center shadow-md  hover:scale-[1.02] duration-300 rounded-lg overflow-hidden transition-all cursor-pointer">
       <Link href={`/product/${product.id}`} className="w-full">
         <div className="relative w-full aspect-[3/2] min-w-[200px] ">
           <Swiper
@@ -93,13 +90,13 @@ function ProductCard({ product }: Props) {
                     />
                   </button>
                 </div>
-                <div className="border-shade-200/20 border-2 top-3 right-3 text-xs capitalize rounded-md z-[50] px-2 py-1">
+                <div className="border-shade-200/20 border-2 top-3 right-3 text-xs capitalize rounded-md z-[50] px-1 py-1">
                   {product?.category?.name}
                 </div>
               </div>
             </div>
             <Link href={`/product/${product.id}`}>
-              <p className="text-sm text-shade-200">
+              <p className="text-xs text-shade-200">
                 {product?.description || "No description"}
               </p>
             </Link>
