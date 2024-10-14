@@ -68,7 +68,8 @@ const useCart = () => {
           <Link
             href="/cart"
             className="uppercase font-bold"
-            onClick={() => dismiss()}>
+            onClick={() => dismiss()}
+          >
             View Cart
           </Link>
         </div>
@@ -82,14 +83,18 @@ const useCart = () => {
 
     if (item) {
       item.quantity = quantity;
-      item.totalCost = item.quantity * Number(item.product_variant.price);
-      setCart({ ...cart });
+      if (item.quantity >= Number(item.product_variant.min_order_quantity)) {
+        item.totalCost = item.quantity * Number(item.product_variant.price);
+        setCart({ ...cart });
+        console.log(item.product_variant.min_order_quantity);
+        console.log({ item });
+        toast({
+          title: "Success",
+          description: "Item quantity updated in cart",
+          variant: "success",
+        });
+      }
     }
-    toast({
-      title: "Success",
-      description: "Item quantity updated in cart",
-      variant: "success",
-    });
   };
 
   const removeItemFromCart = (itemId: number) => {

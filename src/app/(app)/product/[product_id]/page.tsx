@@ -130,7 +130,7 @@ export default function ProductDetailPage({
           // ...product_variant,
           id: selectedVariant.id,
           // variants: [selectedVariant],
-
+          min_order_quantity: selectedVariant.min_order_quantity,
           price: selectedPrice.price,
           name: selectedVariant.name,
           brief_description: selectedVariant.brief_description,

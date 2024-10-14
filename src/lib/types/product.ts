@@ -15,6 +15,7 @@ export interface CartProductVariant {
   availability: string;
   images: Image[];
   unit_of_measurement: UnitOfMeasurement | null;
+  min_order_quantity: string | null;
 }
 
 export interface ProductVariant {
