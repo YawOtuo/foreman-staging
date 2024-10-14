@@ -75,7 +75,7 @@ function LoginComponent({}: Props) {
           </Button>
 
           <div className="flex items-center justify-between">
-            <a href="#" className="text-slate-500">
+            <a href="/forgot-password" className="text-slate-500">
               Forgot Password?
             </a>
           </div>

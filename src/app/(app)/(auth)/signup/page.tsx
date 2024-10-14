@@ -4,20 +4,9 @@ import Link from "next/link";
 import FormInput from "../components/FormInput";
 import LoginButton from "../components/LoginButton";
 import { PiGoogleLogo, PiSignInDuotone } from "react-icons/pi";
-import {
-  GoogleAuthProvider,
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
-import { auth } from "@/app/firebase";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
-import { useRouter, useSearchParams } from "next/navigation";
-import useSignUpStore from "./useSignUpStore";
-import { firebaseErrorMap } from "@/lib/utils/firebaseErrorMap";
-import { FetchOrCreateResponse, fetchOrCreateUserByUid } from "@/lib/api/users";
 import useSignUp from "./useSignUp";
 import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 function Page() {
   const { handleSubmit, GoogleSignIn, isSignUpLoading, isGoogleLoading } =
@@ -91,11 +80,6 @@ function Page() {
             )}
             <span>{isSignUpLoading ? "Registering..." : "Register"}</span>
           </Button>
-          <div className="flex items-center justify-between">
-            <a href="#" className="text-slate-500">
-              Forgot Password?
-            </a>
-          </div>
 
           <div className="flex items-center gap-1 text-center">
             <label>Already have an account?</label>
