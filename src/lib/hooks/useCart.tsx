@@ -80,18 +80,25 @@ const useCart = () => {
 
   const updateItemQuantity = (itemId: number, quantity: number) => {
     const item = cart.items.find((cartItem) => cartItem.id === itemId);
-
     if (item) {
-      item.quantity = quantity;
-      if (item.quantity >= Number(item.product_variant.min_order_quantity)) {
+      const minQuantity = Number(item.product_variant.min_order_quantity);
+      if (quantity > minQuantity) {
+        const oldQuantity = item.quantity;
+        item.quantity = quantity;
         item.totalCost = item.quantity * Number(item.product_variant.price);
         setCart({ ...cart });
-        console.log(item.product_variant.min_order_quantity);
-        console.log({ item });
+        if (quantity !== oldQuantity) {
+          toast({
+            title: "Success",
+            description: "Item quantity updated in cart",
+            variant: "success",
+          });
+        }
+      } else if (quantity <= minQuantity) {
         toast({
-          title: "Success",
-          description: "Item quantity updated in cart",
-          variant: "success",
+          title: "Caution",
+          description: `Minimum order quantity is ${minQuantity}`,
+          variant: undefined,
         });
       }
     }
