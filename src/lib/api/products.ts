@@ -1,5 +1,5 @@
 import { url } from "../../../weburl";
-import { Product } from "../types/product";
+import { Product, RelatedProduct } from "../types/product";
 
 export const fetchProducts = async (filter?: {
   [key: string]: any;
@@ -16,6 +16,14 @@ export const fetchProducts = async (filter?: {
 
 export const fetchOneProduct = async (id: number): Promise<Product> => {
   const response = await fetch(`${url}api/products/${id}/`);
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return response.json();
+};
+
+export const fetchRelatedProducts = async (product_id: number): Promise<RelatedProduct[]> => {
+  const response = await fetch(`${url}api/products/${product_id}/related-products`);
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }

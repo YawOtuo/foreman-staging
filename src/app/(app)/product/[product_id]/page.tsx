@@ -4,30 +4,19 @@ import { useQuery } from "@tanstack/react-query";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import ProductCard from "@/components/ProductCard";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import ProductLoadingSkeleton from "./ProductLoadingSkeleton";
 import { fetchOneProduct } from "@/lib/api/products";
 import { Product, ProductVariant, RelatedProduct } from "@/lib/types/product";
-import { Plus, Minus } from "lucide-react";
 import useCart from "@/lib/hooks/useCart";
-import { useCurrency } from "@/context/CurrencyContext";
-import { convertPrice } from "@/lib/utils/convertPrice";
 import { Autoplay, EffectFlip } from "swiper/modules";
 import { useToast } from "@/components/ui/use-toast";
 import { UnitOfMeasurement } from "@/lib/types/unit_of_measurement";
 import ProductDetailTabs from "./components/ProductDetailTabs";
-import {motion} from 'framer-motion'
+import { motion } from "framer-motion";
+import RelatedProducts from "./components/RelatedProducts";
+import SelectVariant from "./components/SelectVariant";
+import QuantitySelection from "./components/QuantitySelection";
 
 export default function ProductDetailPage({
   params,
@@ -37,48 +26,63 @@ export default function ProductDetailPage({
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     null
   );
+
+  const { cart, AddToCart } = useCart();
   const [quantity, setQuantity] = useState<number>(10);
 
-  console.log("Quantity of Product:", quantity);
-
-  const { exchangeRates, currency } = useCurrency();
-  const { AddToCart } = useCart();
   const { toast } = useToast();
   const { data: product, isLoading } = useQuery({
     queryKey: ["product", params.product_id],
     queryFn: async () => fetchOneProduct(Number(params.product_id)),
   });
 
-  const [selectedUnit, setSelectedUnit] = useState<UnitOfMeasurement | null>(
-    null
-  );
-  const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
+  const [selectedUnitOfPricing, setselectedUnitOfPricing] = useState<{
+    unit_of_measurement: UnitOfMeasurement | null;
+    price: number;
+    min_order_quantity: number;
+    min_order_value: number;
+  } | null>(null);
+  // const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
 
   useEffect(() => {
     if (product) {
+
       document.title = product.name;
       const initialVariant = product.variants[0];
-      const initialUnitOfMeasurement =
-        initialVariant?.price[0]?.unit_of_measurement;
+      const existingItem = cart.items.find(item => item.product_variant.id === initialVariant.id);
+
+      const inititialPricingData = existingItem ? {
+        unit_of_measurement: existingItem.product_variant.unit_of_measurement,
+        price: existingItem.product_variant.price,
+        min_order_quantity: existingItem.product_variant.min_order_quantity, 
+        min_order_value: existingItem.product_variant.min_order_value
+      } : initialVariant?.price[0]
+
       setSelectedVariant(initialVariant);
-      setSelectedUnit(initialUnitOfMeasurement);
-      setQuantity(
-        initialVariant?.min_order_quantity
-          ? parseInt(initialVariant.min_order_quantity, 10)
-          : 10
-      );
+      setselectedUnitOfPricing(inititialPricingData)
+      if (existingItem) {
+        setQuantity(existingItem.quantity);
+      } else {
+        setQuantity(
+          inititialPricingData?.min_order_quantity
+            ? Math.floor(inititialPricingData.min_order_quantity)
+            : 10
+        );
+      }
     }
   }, [product]);
 
   useEffect(() => {
-    if (selectedVariant && selectedUnit) {
+    if (selectedVariant && selectedUnitOfPricing) {
       // Find the price for the selected unit
       const priceEntry = selectedVariant.price.find(
-        (price) => price.unit_of_measurement.unit === selectedUnit.unit
+        (price) =>
+          price.unit_of_measurement.unit ===
+          selectedUnitOfPricing.unit_of_measurement?.unit
       );
-      setSelectedPrice(priceEntry?.price);
+      priceEntry && setselectedUnitOfPricing(priceEntry);
     }
-  }, [selectedVariant, selectedUnit]);
+  }, [selectedVariant, selectedUnitOfPricing]);
 
   const handleQuantityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = parseInt(e.target.value, 10);
@@ -91,7 +95,7 @@ export default function ProductDetailPage({
 
   const incrementQuantity = () => {
     setQuantity((prev) =>
-      prev ? prev + 1 : Number(selectedVariant?.min_order_quantity) || 10
+      prev ? prev + 1 : Number(selectedUnitOfPricing?.min_order_quantity) || 10
     );
   };
 
@@ -100,46 +104,53 @@ export default function ProductDetailPage({
   };
 
   const handleAddToCart = () => {
-    if (quantity < Number(selectedVariant?.min_order_quantity)) {
+    // Ensure that the correct price and unit of measurement is selected
+    const priceEntry = selectedVariant?.price.find(
+      (price) =>
+        price.unit_of_measurement.unit ===
+        selectedUnitOfPricing?.unit_of_measurement?.unit
+    );
+
+    if (!priceEntry) {
       toast({
-        title: "Minimum Order Quantity",
-        description: `The minimum order quantity for this product is ${
-          selectedVariant?.min_order_quantity?.split(".")[0]
-        }`,
+        title: "Error",
+        description: "Please select a valid unit of measurement.",
         duration: 5000,
       });
       return;
     }
 
+    // Ensure that the minimum order quantity is respected
+    if (quantity < Number(priceEntry.min_order_quantity)) {
+      toast({
+        title: "Minimum Order Quantity",
+        description: `The minimum order quantity for this product is ${Math.floor(
+          Number(priceEntry.min_order_quantity)
+        )}`,
+        duration: 5000,
+      });
+      return;
+    }
+
+    // Now add to the cart using the updated pricing information
     if (selectedVariant && product) {
-      const selectedPrice = selectedVariant.price.find(
-        (p) => p.unit_of_measurement === selectedUnit
-      );
+      console.log(priceEntry.price); // Make sure that the correct price entry is logged
 
-      if (!selectedPrice) {
-        toast({
-          title: "Price Error",
-          description: "Selected unit of measurement is not available.",
-          duration: 5000,
-        });
-        return;
-      }
       AddToCart({
-        id: selectedVariant.id,
+        id: selectedVariant?.id,
         product_variant: {
-          // ...product_variant,
-          id: selectedVariant.id,
-          // variants: [selectedVariant],
-
-          price: selectedPrice.price,
+          id: selectedVariant?.id,
+          price: Number(priceEntry.price), // Use the latest price for the selected unit
           name: selectedVariant.name,
           brief_description: selectedVariant.brief_description,
           availability: selectedVariant.availability,
           images: selectedVariant.images,
-          unit_of_measurement: selectedUnit,
+          unit_of_measurement:
+            priceEntry.unit_of_measurement as UnitOfMeasurement, // Correct unit of measurement
+          min_order_quantity: Number(priceEntry.min_order_quantity),
+          min_order_value: Number(priceEntry.min_order_value),
         },
         product_category: product.category,
-
         quantity,
       });
     }
@@ -149,11 +160,11 @@ export default function ProductDetailPage({
     const newVariant =
       product?.variants.find((v) => v.id.toString() === value) || null;
     setSelectedVariant(newVariant);
-    setQuantity(
-      newVariant?.min_order_quantity
-        ? parseInt(newVariant.min_order_quantity, 10)
-        : 10
-    ); // Reset quantity when changing variants
+    // setQuantity(
+    //   newVariant?.price?.[0]?.min_order_quantity
+    //     ? newVariant?.price?.[0]?.min_order_quantity
+    //     : 10
+    // ); // Reset quantity when changing variants
   };
 
   const handleUnitChange = (value: string) => {
@@ -161,7 +172,7 @@ export default function ProductDetailPage({
       selectedVariant?.price.find(
         (u) => u.unit_of_measurement.unit === value
       ) || null;
-    setSelectedUnit(selectedPrice ? selectedPrice.unit_of_measurement : null);
+    setselectedUnitOfPricing(selectedPrice ? selectedPrice : null);
   };
   if (!product && isLoading) {
     return (
@@ -194,121 +205,31 @@ export default function ProductDetailPage({
             ))}
           </Swiper>
         </div>
-        <motion.div layout className="w-full md:w-1/2">
+        <motion.div className="w-full md:w-1/2">
           <h1 className="text-3xl font-bold mb-2">{product?.name}</h1>
 
           <Card className="mb-4">
             <CardContent className="p-4">
               <h2 className="text-xl font-semibold mb-2">Types</h2>
-              {Number(product?.variants.length) > 1 ? (
-                <Select
-                  onValueChange={handleVariantChange}
-                  value={selectedVariant?.id.toString()}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a variant" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {product?.variants.map((variant) => (
-                      <SelectItem
-                        key={variant.id}
-                        value={variant.id.toString()}>
-                        {variant.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              ) : (
-                <p>{selectedVariant?.name}</p>
-              )}
 
+              <SelectVariant
+                product={product}
+                selectedVariant={selectedVariant}
+                handleVariantChange={handleVariantChange}
+              />
               {selectedVariant && (
-                <div className="mt-4">
-                  {selectedPrice && (
-                    <p className="font-semibold">
-                      Price: {currency}{" "}
-                      {convertPrice(
-                        +selectedPrice,
-                        "GHS",
-                        currency,
-                        exchangeRates
-                      )?.toLocaleString(undefined, {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}
-                    </p>
-                  )}
-                  <p className="text-sm text-gray-700s">
-                    SKU: {selectedVariant.sku}
-                  </p>
-                  {/* <p>{selectedVariant.brief_description}</p> */}
-                  <div className="flex items-center gap-2 mt-4">
-                    <label htmlFor="quantity" className="mr-2">
-                      Quantity:
-                    </label>
-                    <div className="flex items-center">
-                      <Button
-                        onClick={decrementQuantity}
-                        variant="outline"
-                        size="icon"
-                        className="h-10 w-10">
-                        <Minus className="h-4 w-4" />
-                      </Button>
-                      <Input
-                        id="quantity"
-                        type="text"
-                        min={0}
-                        defaultValue={
-                          selectedVariant?.min_order_quantity
-                            ? parseInt(selectedVariant.min_order_quantity, 10)
-                            : 1
-                        }
-                        value={quantity}
-                        onChange={handleQuantityChange}
-                        className="w-16 mx-2 text-center"
-                      />
-                      <Button
-                        onClick={incrementQuantity}
-                        variant="outline"
-                        size="icon"
-                        className="h-10 w-10">
-                        <Plus className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    {Number(product?.category.units_of_measurement?.length) >
-                      1 || selectedUnit === null ? (
-                      <Select
-                        onValueChange={handleUnitChange}
-                        value={selectedUnit?.unit}>
-                        <SelectTrigger className="w-fit">
-                          <SelectValue placeholder="Select a unit" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {selectedVariant?.price.map((priceEntry) => (
-                            <SelectItem
-                              key={priceEntry.unit_of_measurement.unit}
-                              value={priceEntry.unit_of_measurement.unit}>
-                              {priceEntry.unit_of_measurement.unit}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    ) : (
-                      <p className="ml-4">{selectedUnit?.unit}</p>
-                    )}
-                  </div>
-                  {selectedVariant.min_order_quantity &&
-                    quantity < Number(selectedVariant.min_order_quantity) && (
-                      <p className="text-[0.7rem] text-gray-500">
-                        Minimum order quantity:{" "}
-                        {`${selectedVariant.min_order_quantity}`.split(".")[0]}
-                      </p>
-                    )}
-                  <Button
-                    onClick={handleAddToCart}
-                    className="mt-4 rounded-sm px-5">
-                    Add to Cart
-                  </Button>
-                </div>
+                <QuantitySelection
+                  product={product}
+                  selectedVariant={selectedVariant}
+                  // selectedPrice={se}
+                  selectedUnitOfPricing={selectedUnitOfPricing}
+                  decrementQuantity={decrementQuantity}
+                  incrementQuantity={incrementQuantity}
+                  handleAddToCart={handleAddToCart}
+                  handleQuantityChange={handleQuantityChange}
+                  handleUnitChange={handleUnitChange}
+                  quantity={quantity}
+                />
               )}
             </CardContent>
           </Card>
@@ -319,19 +240,7 @@ export default function ProductDetailPage({
           />
         </motion.div>
       </section>
-
-      {selectedVariant && selectedVariant.related_products.length > 0 && (
-        <section className="mt-8">
-          <h2 className="text-2xl font-semibold mb-4">Related Products</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {selectedVariant.related_products.map(
-              (relatedProduct: RelatedProduct) => (
-                <ProductCard key={relatedProduct.id} product={relatedProduct} />
-              )
-            )}
-          </div>
-        </section>
-      )}
+      <RelatedProducts product={selectedVariant} />
     </main>
   );
 }
