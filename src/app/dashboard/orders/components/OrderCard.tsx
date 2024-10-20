@@ -6,7 +6,7 @@ type Props = {
 };
 function OrderCard({ order }: Props) {
   return (
-    <div className="flex flex-col items-start lg:grid grid-cols-6 gap-x-5 lg:items-center gap-3 lg;gap-5 justify-center border-md border-[1px] cursor-pointer  border-primary lg:border-slate-100  rounded-md  transition-all hover:bg-primary-200 ease-in  py-4 px-5">
+    <div className="flex flex-col items-start lg:grid grid-cols-6 gap-x-5 lg:items-center gap-3 lg;gap-5 justify-center border-[1px] cursor-pointer  border-slate-100  rounded-md  transition-all hover:bg-primary-200 ease-in  py-4 px-5 shadow">
       <p
         className="lg:text-shade-300 font-semibold text-primary 
       text-2xl lg:text-base
@@ -16,11 +16,11 @@ function OrderCard({ order }: Props) {
       <p className="text-sm col-span-2">
         {moment(order.created_at).format("Do MMMM YYYY hh:mm")}
       </p>
-      <div className="font-semibold text-sm uppercase border-2  w-fit rounded-md text-white">
+      <div className="font-semibold  uppercase shadow-xl  w-fit rounded-lg text-white">
         {order.is_paid ? (
-          <p className="bg-green-600 px-3  w-full">Paid</p>
+          <p className="bg-green-600 px-3 text-sm  w-full">Paid</p>
         ) : (
-          <p className="bg-shade-200 px-3 w-full ">Unpaid</p>
+          <p className="bg-shade-200 px-3 text-sm w-full ">Unpaid</p>
         )}
       </div>
       <div className="flex lg:hidden flex-col gap-1">
