@@ -1,10 +1,8 @@
 "use client";
 import { FetchOrderDetails } from "@/lib/api/orders";
-import useOrders from "@/lib/hooks/useOrder";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { Order } from "@/lib/types/order";
 import { useQuery } from "@tanstack/react-query";
-import Image from "next/image";
 import Tracker from "../components/Tracker";
 import { useCurrency } from "@/context/CurrencyContext";
 import OrderSummary from "../components/OrderSummary";
@@ -12,6 +10,7 @@ import OrderDetailCard from "../components/OrderDetailCard";
 import OrderDetailCardSkeleton from "../components/DetailSkeleton";
 import OrderShippingDetailSummary from "../components/OrderShippingDetailSummary";
 import React from "react";
+
 
 function Page({ params }: { params: { id: string | number } }) {
   const { DBDetails, FBaseDetails } = useAppStore();

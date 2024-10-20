@@ -7,17 +7,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import ProductLoadingSkeleton from "./ProductLoadingSkeleton";
 import { fetchOneProduct } from "@/lib/api/products";
-import { Product, ProductVariant, RelatedProduct } from "@/lib/types/product";
+import {  ProductVariant } from "@/lib/types/product";
 import useCart from "@/lib/hooks/useCart";
 import { Autoplay, EffectFlip } from "swiper/modules";
 import { useToast } from "@/components/ui/use-toast";
 import { UnitOfMeasurement } from "@/lib/types/unit_of_measurement";
 import ProductDetailTabs from "./components/ProductDetailTabs";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 
-import RelatedProducts from "./components/RelatedProducts";
-import SelectVariant from "./components/SelectVariant";
-import QuantitySelection from "./components/QuantitySelection";
+const RelatedProducts = dynamic(() => import("./components/RelatedProducts"));
+const QuantitySelection = dynamic(() => import("./components/QuantitySelection"));
+
+const SelectVariant = dynamic(() => import("./components/SelectVariant"));
 
 export default function ProductDetailPage({
   params,
@@ -47,20 +49,24 @@ export default function ProductDetailPage({
 
   useEffect(() => {
     if (product) {
-
       document.title = product.name;
       const initialVariant = product.variants[0];
-      const existingItem = cart.items.find(item => item.product_variant.id === initialVariant.id);
+      const existingItem = cart.items.find(
+        (item) => item.product_variant.id === initialVariant.id
+      );
 
-      const inititialPricingData = existingItem ? {
-        unit_of_measurement: existingItem.product_variant.unit_of_measurement,
-        price: existingItem.product_variant.price,
-        min_order_quantity: existingItem.product_variant.min_order_quantity, 
-        min_order_value: existingItem.product_variant.min_order_value
-      } : initialVariant?.price[0]
+      const inititialPricingData = existingItem
+        ? {
+            unit_of_measurement:
+              existingItem.product_variant.unit_of_measurement,
+            price: existingItem.product_variant.price,
+            min_order_quantity: existingItem.product_variant.min_order_quantity,
+            min_order_value: existingItem.product_variant.min_order_value,
+          }
+        : initialVariant?.price[0];
 
       setSelectedVariant(initialVariant);
-      setselectedUnitOfPricing(inititialPricingData)
+      setselectedUnitOfPricing(inititialPricingData);
       if (existingItem) {
         setQuantity(existingItem.quantity);
       } else {
@@ -140,7 +146,6 @@ export default function ProductDetailPage({
       AddToCart({
         id: selectedVariant?.id,
         product_variant: {
-
           id: selectedVariant?.id,
           price: Number(priceEntry.price), // Use the latest price for the selected unit
           name: selectedVariant.name,
@@ -195,8 +200,7 @@ export default function ProductDetailPage({
               disableOnInteraction: false,
             }}
             className="w-full rounded-lg overflow-hidden border-2 transition-all duration-300"
-            spaceBetween={5}
-          >
+            spaceBetween={5}>
             {selectedVariant?.images.map((image) => (
               <SwiperSlide key={image.id}>
                 <OptimizedImage
@@ -215,14 +219,12 @@ export default function ProductDetailPage({
             <CardContent className="p-4">
               <h2 className="text-xl font-semibold mb-2">Types</h2>
 
-
               <SelectVariant
                 product={product}
                 selectedVariant={selectedVariant}
                 handleVariantChange={handleVariantChange}
               />
               {selectedVariant && (
-
                 <QuantitySelection
                   product={product}
                   selectedVariant={selectedVariant}

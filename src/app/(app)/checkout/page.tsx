@@ -2,24 +2,21 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { AiOutlineRight } from "react-icons/ai";
 import { FaShoppingCart } from "react-icons/fa";
 import useCart from "@/lib/hooks/useCart";
 import { CartItem } from "@/lib/types/cart";
 import CheckProduct from "./components/CheckProduct";
 import CheckSummary from "./components/CheckSummary";
-import { Button } from "@/components/ui/button";
-import DeliveryAddressForm from "./components/DeliveryAddress";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import { FormFields } from "@/lib/types/form";
 import CheckoutButton from "./components/CheckoutButton/CheckoutButton";
-import AuthLayout from "../(auth)/layout";
-import LoginComponent from "../(auth)/login/components/LoginComponent";
-import { Modal } from "@/components/ui/dialog";
 import useCheckout from "./useCheckout";
 import { useAppStore } from "@/lib/store/useAppStore";
 import CheckProductSm from "./components/CheckProductSm";
-import { CreateOrder } from "@/lib/api/orders";
+import dynamic from "next/dynamic";
+const DeliveryAddressForm = dynamic(
+  () => import("./components/DeliveryAddress")
+);
 
 export default function CheckOutPage() {
   const { cart, removeItemFromCart, updateItemQuantity } = useCart();
@@ -47,7 +44,7 @@ export default function CheckOutPage() {
     const formValues = getValues();
     const selectedPaymentMethod = formValues.payment;
 
-    console.log("Data:",formValues)
+    console.log("Data:", formValues);
     if (selectedPaymentMethod === "pay_delivery") {
       checkout("delivery", formValues);
     } else if (selectedPaymentMethod === "pay_now") {
@@ -147,26 +144,11 @@ export default function CheckOutPage() {
                 </label>
               </div>
               <div className="mt-5 w-full sm:w-4/5 flex flex-col gap-3 justify-center items-center">
-                {DBDetails?.email ? (
-                  <CheckoutButton
-                    onClick={() => onSubmit}
-                    disabled={isSubmitting} // Disable button if form is not valid
-                  />
-                ) : (
-                  <Modal
-                    size={"5xl"}
-                    className="h-[90vh] max-h-[500px] overflow-y-scroll"
-                    trigger={<CheckoutButton />}
-                    body={
-                      <div>
-                        <AuthLayout>
-                          <LoginComponent />
-                        </AuthLayout>
-                      </div>
-                    }
-                    // header={<div></div>}
-                  />
-                )}{" "}
+                <CheckoutButton
+                  onClick={() => onSubmit}
+                  disabled={isSubmitting} // Disable button if form is not valid
+                />
+
                 <Link
                   href="/warehousing"
                   className="text-shade-300 uppercase text-right mt-6 underline pb-10">

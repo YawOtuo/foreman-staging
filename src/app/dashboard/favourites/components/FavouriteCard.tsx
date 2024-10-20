@@ -7,6 +7,7 @@ import { Favourite } from "@/lib/types/favourite";
 import { Button } from "@/components/ui/button";
 import { MdDeleteOutline } from "react-icons/md";
 import useFavourites from "@/lib/hooks/useFavourites";
+import Link from "next/link";
 
 type Props = {
   data: Favourite;
@@ -24,14 +25,16 @@ function FavouriteCard({ data }: Props) {
         />
       </div>
       <div className="flex flex-col gap-5 px-3 py-3 w-full">
-        <div className="flex items-start justify-between w-full gap-1">
-          <div className="flex flex-col gap-0">
-            <p className="font-semibold capitalize">{data?.product.name}</p>
-            <p className="text-sm text-shade-200">
-              {data?.product?.description || "No description"}
-            </p>
+       <Link href={`/product/${data.product.id}`}>
+          <div className="flex items-start justify-between w-full gap-1">
+            <div className="flex flex-col gap-0">
+              <p className="font-semibold capitalize">{data?.product.name}</p>
+              <p className="text-sm text-shade-200">
+                {data?.product?.description || "No description"}
+              </p>
+            </div>
           </div>
-        </div>
+       </Link>
 
         <div className="flex  flex-col items-start gap-3 justify-between w-full">
           <p className="group-hover:text-primary font-semibold text-lg transition-all">GHS {data?.product?.price}</p>

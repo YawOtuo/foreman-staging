@@ -5,11 +5,12 @@ import ProductCard from "@/components/ProductCard";
 import PCSkeleton from "@/components/ProductCard/PCSkeleton";
 import { useProducts } from "@/lib/hooks/useProducts";
 import { Product } from "@/lib/types/product";
-import StoreSearch from "./components/StoreSearch";
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useStoreStore } from "./components/useStoreStore";
+import dynamic from "next/dynamic";
 
+const StoreSearch = dynamic(() => import("./components/StoreSearch"));
 function StoreContent() {
   const { filter, setFilter } = useStoreStore();
   const { allProductsError, allProductsLoading, allProducts } =

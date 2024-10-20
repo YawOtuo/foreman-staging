@@ -4,8 +4,7 @@ import FetchingState from "@/components/FetchingState";
 
 import { fetchCategories } from "@/lib/api/categories";
 import useCategories from "@/lib/hooks/useCategories";
-import { useAppStore } from "@/lib/store/useAppStore";
-import { useQuery } from "@tanstack/react-query";
+
 import { useRef } from "react";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
 import { Autoplay, FreeMode } from "swiper/modules";

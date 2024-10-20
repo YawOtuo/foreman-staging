@@ -95,8 +95,8 @@ function QuantitySelection({
           </Button>
         </div>
 
-        {Number(product?.variants?.length) > 1 ||
-        selectedUnitOfPricing === null ? (
+        {
+       selectedVariant.price.length > 1 ? (
           <Select
             onValueChange={handleUnitChange}
             value={selectedUnitOfPricing?.unit_of_measurement?.unit}>

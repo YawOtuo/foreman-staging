@@ -50,7 +50,7 @@ function DashboardSideMenu() {
 
   return (
     <div className="flex flex-col justify-start sticky top-0 h-screen">
-      <div className="px-10 py-10">
+      <div className="px-10 pt-10 pb-5">
         <p className="text-white uppercase font-bold">Foreman</p>
 
         <div className="flex items-center gap-3">
@@ -75,7 +75,7 @@ function DashboardSideMenu() {
       <div className="hidden lg:flex flex-col gap-1 text-white min-h-screen sticky top-0 py-10 transition-all px-3 font-semibold rounded-l-2xl">
         {dashboardMenuLinks?.map((r) => (
           <Link
-            className="hover:font-semibold hover:border-primary transition-all  ease-in-out border-2 border-transparent rounded-md px-7 duration-[250ms]  py-2 flex items-center gap-3"
+            className="hover:font-semibold hover:border-white transition-all  ease-in-out border-2 border-transparent rounded-md px-7 duration-[250ms]  py-2 flex items-center gap-3"
             href={r?.url}
             key={r?.name}>
             {r?.icon}
