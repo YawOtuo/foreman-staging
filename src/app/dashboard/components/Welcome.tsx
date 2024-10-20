@@ -18,7 +18,7 @@ function Welcome() {
         </p>
       </div>
 
-      <div className="flex items-center gap-5">
+      <div className="flex gap-3 lg:gap-5 flex-wrap items-start">
         <Link href={"/store"}>
           <Button variant={"secondary"} size={"sm"} className="text-sm">
             Shop
