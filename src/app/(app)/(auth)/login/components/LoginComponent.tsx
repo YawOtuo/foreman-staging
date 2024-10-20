@@ -18,11 +18,14 @@ import FormInput from "../../components/FormInput";
 import LoginButton from "../../components/LoginButton";
 import { firebaseErrorMap } from "@/lib/utils/firebaseErrorMap";
 import useLogin from "./useLogin";
+import React from "react";
+import { Loader2 } from "lucide-react";
 
 type Props = {};
 
 function LoginComponent({}: Props) {
-  const { handleSubmit, GoogleSignIn } = useLogin();
+  const { handleSubmit, GoogleSignIn, isGoogleLoading, emailIsLoading } =
+    useLogin();
   const searchParams = useSearchParams();
 
   return (
@@ -39,7 +42,8 @@ function LoginComponent({}: Props) {
       <div className="w-full">
         <form
           onSubmit={handleSubmit}
-          className="self-start flex flex-col gap-4 pt-4 lg:min-w-[400px]">
+          className="self-start flex flex-col gap-4 pt-4 lg:min-w-[400px]"
+        >
           <FormInput
             required
             label="Email"
@@ -59,13 +63,19 @@ function LoginComponent({}: Props) {
           <Button
             variant={"default"}
             type="submit"
-            className="bg-primary-100 text-white w-full p-3 flex items-center justify-center gap-2">
-            <PiSignInDuotone />
-            <span>Sign In</span>
+            disabled={emailIsLoading}
+            className="bg-primary-100 text-white w-full p-3 flex items-center justify-center gap-2"
+          >
+            {emailIsLoading ? (
+              <Loader2 className="h-4 w-4 animate-spin" />
+            ) : (
+              <PiSignInDuotone />
+            )}
+            <span>{emailIsLoading ? "Signing In..." : "Sign In"}</span>
           </Button>
 
           <div className="flex items-center justify-between">
-            <a href="#" className="text-slate-500">
+            <a href="/forgot-password" className="text-slate-500">
               Forgot Password?
             </a>
           </div>
@@ -78,7 +88,8 @@ function LoginComponent({}: Props) {
                   ? `/signup?redirect-url=${searchParams.get("redirect-url")}`
                   : "/signup"
               }
-              className="text-slate-500">
+              className="text-slate-500"
+            >
               Sign up
             </Link>
           </div>
@@ -93,7 +104,12 @@ function LoginComponent({}: Props) {
             icon={<PiGoogleLogo />}
             onClick={GoogleSignIn}
             type="button"
-            name="Continue with Google"
+            disabled={isGoogleLoading}
+            name={
+              isGoogleLoading
+                ? "Signing in with Google..."
+                : "Continue with Goodgle"
+            }
           />
           {/* <LoginButton
         icon={<PiFacebookLogoDuotone />}

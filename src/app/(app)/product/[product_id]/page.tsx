@@ -14,6 +14,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { UnitOfMeasurement } from "@/lib/types/unit_of_measurement";
 import ProductDetailTabs from "./components/ProductDetailTabs";
 import { motion } from "framer-motion";
+
 import RelatedProducts from "./components/RelatedProducts";
 import SelectVariant from "./components/SelectVariant";
 import QuantitySelection from "./components/QuantitySelection";
@@ -139,6 +140,7 @@ export default function ProductDetailPage({
       AddToCart({
         id: selectedVariant?.id,
         product_variant: {
+
           id: selectedVariant?.id,
           price: Number(priceEntry.price), // Use the latest price for the selected unit
           name: selectedVariant.name,
@@ -193,7 +195,8 @@ export default function ProductDetailPage({
               disableOnInteraction: false,
             }}
             className="w-full rounded-lg overflow-hidden border-2 transition-all duration-300"
-            spaceBetween={5}>
+            spaceBetween={5}
+          >
             {selectedVariant?.images.map((image) => (
               <SwiperSlide key={image.id}>
                 <OptimizedImage
@@ -212,12 +215,14 @@ export default function ProductDetailPage({
             <CardContent className="p-4">
               <h2 className="text-xl font-semibold mb-2">Types</h2>
 
+
               <SelectVariant
                 product={product}
                 selectedVariant={selectedVariant}
                 handleVariantChange={handleVariantChange}
               />
               {selectedVariant && (
+
                 <QuantitySelection
                   product={product}
                   selectedVariant={selectedVariant}

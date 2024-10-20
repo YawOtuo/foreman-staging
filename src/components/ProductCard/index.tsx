@@ -41,7 +41,8 @@ function ProductCard({ product }: Props) {
               delay: 3500,
               disableOnInteraction: false,
             }}
-            modules={[Autoplay, EffectFade]}>
+            modules={[Autoplay, EffectFade]}
+          >
             {product?.images?.map((image, index) => (
               <SwiperSlide key={index}>
                 <Image
@@ -77,7 +78,8 @@ function ProductCard({ product }: Props) {
                   onClick={() => {
                     console.log(play);
                     setPlay(true);
-                  }}>
+                  }}
+                >
                   {/* <FaRegHeart color="red"/> */}
                   <button onClick={() => handleAddToFavourites(product.id)}>
                     <IoHeart
@@ -103,7 +105,8 @@ function ProductCard({ product }: Props) {
 
         <Link
           href={`/product/${product.id}`}
-          className="flex items-center gap-5 justify-between w-full">
+          className="flex items-center gap-5 justify-between w-full"
+        >
           <div className="flex items-center justify-start gap-2">
             <GrMoney size={15} className="text-primary-300" />
             <p className=" whitespace-nowrap font-semibold text-lg transition-all duration-500 bg-white">
@@ -120,7 +123,8 @@ function ProductCard({ product }: Props) {
 
           <Link
             href={`/product/${product?.id}`}
-            className="flex items-center justify-center gap-2 ">
+            className="flex items-center justify-center gap-2 "
+          >
             View
             <FaLongArrowAltRight className="text-primary" />
           </Link>

@@ -11,6 +11,7 @@ import OrderSummary from "../components/OrderSummary";
 import OrderDetailCard from "../components/OrderDetailCard";
 import OrderDetailCardSkeleton from "../components/DetailSkeleton";
 import OrderShippingDetailSummary from "../components/OrderShippingDetailSummary";
+import React from "react";
 
 function Page({ params }: { params: { id: string | number } }) {
   const { DBDetails, FBaseDetails } = useAppStore();
@@ -56,14 +57,15 @@ function Page({ params }: { params: { id: string | number } }) {
               {order?.items?.map((item, index) => (
                 <div
                   className="flex  w-full  mt-3 items-center justify-start"
-                  key={index}>
+                  key={index}
+                >
                   <OrderDetailCard currency={currency} item={item} />
                 </div>
               ))}
             </section>
           </div>
           <section className="w-full flex justify-between flex-col md:flex-row mt-4 gap-5">
-            <OrderShippingDetailSummary order={order}/>
+            <OrderShippingDetailSummary order={order} />
             <OrderSummary currency={currency} order={order} />
           </section>
         </>

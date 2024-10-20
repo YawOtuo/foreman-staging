@@ -14,12 +14,11 @@ export default function AuthLayout({
           pathname == "/login"
             ? "bg-[url('/login2.jpg')]"
             : "bg-[url('/login1.jpg')]"
-        }   `}></div>
+        }   `}
+      ></div>
       <div className="flex items-center right w-full lg:w-[70%] py-20 lg:py-0 lg:min-h-screen px-5 lg:px-20">
         <div className="flex flex-col gap-4 h-full w-full items-start justify-center py-5 lg:py-0">
-          <div className="w-full md:w-fit flex flex-col gap-3">
-          {children}
-          </div>
+          <div className="w-full md:w-fit flex flex-col gap-3">{children}</div>
         </div>
       </div>
     </div>
