@@ -1,5 +1,5 @@
 const MetricCard = ({ title, value }: { title: any; value: any }) => (
-  <div className="border-0 shadow-lg rounded-lg hover:bg-secondary cursor-pointer px-5 py-4">
+  <div className="border-0 shadow-lg rounded-lg hover:bg-secondary cursor-pointer px-5 py-4 flex flex-col items-start justify-between h-full">
     <div className="flex flex-row items-center justify-between space-y-0 pb-2">
       <div className="text-sm font-medium">{title}</div>
     </div>
