@@ -15,7 +15,9 @@ export interface CartProductVariant {
   availability: string;
   images: Image[];
   unit_of_measurement: UnitOfMeasurement | null;
-  min_order_quantity: string | null;
+
+  min_order_quantity: number 
+  min_order_value: number
 }
 
 export interface ProductVariant {
@@ -28,14 +30,19 @@ export interface ProductVariant {
   size: string | null;
   length: number | null;
   width: number | null;
-  price: { unit_of_measurement: UnitOfMeasurement; price: number }[];
+  price: {
+    unit_of_measurement: UnitOfMeasurement;
+    price: number;
+    min_order_quantity: number;
+    min_order_value: number;
+  }[];
   availability: string;
   created_at: string;
   updated_at: string;
   product: number;
   related_products: RelatedProduct[];
-  min_order_value: string | null;
-  min_order_quantity: string | null;
+  // min_order_value: string | null;
+  // min_order_quantity: string | null;
 }
 
 export interface RelatedProduct {

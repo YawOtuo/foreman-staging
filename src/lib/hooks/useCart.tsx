@@ -13,11 +13,6 @@ const initialCart: Cart = {
   totalCost: 0,
 };
 
-// const ToastDesc = () => {
-//   return (
-//     <div><div>
-//   )
-// }
 
 const useCart = () => {
   let cart: Cart = initialCart; // Initialize cart with initialCart
@@ -49,22 +44,37 @@ const useCart = () => {
     const existingItem = cart.items.find((cartItem) => cartItem.id === item.id);
 
     if (existingItem) {
-      existingItem.quantity += item.quantity;
-      existingItem.totalCost =
-        existingItem.quantity * Number(existingItem.product_variant.price);
+      const updatedItems = cart.items.map((cartItem) =>
+        cartItem.id === item.id
+          ? {
+              ...cartItem,
+              ...item,
+              // quantity: cartItem.quantity + item.quantity,
+              totalCost:
+                (cartItem.quantity + item.quantity) *
+                Number(item.product_variant.price),
+            }
+          : cartItem
+      );
+      setCart({ ...cart, items: updatedItems });
     } else {
-      cart.items.push({
-        ...item,
-        totalCost: item.quantity * Number(item.product_variant.price),
+      setCart({
+        ...cart,
+        items: [
+          ...cart.items,
+          {
+            ...item,
+            totalCost: item.quantity * Number(item.product_variant.price),
+          },
+        ],
       });
     }
 
-    setCart({ ...cart });
     const { dismiss } = toast({
       title: "Success",
       description: (
         <div className="flex flex-col gap-0 items-start">
-          <p>{item?.product_variant.name} added to cart Successfully</p>
+          <p>{item?.product_variant.name} added to cart successfully</p>
           <Link
             href="/cart"
             className="uppercase font-bold"

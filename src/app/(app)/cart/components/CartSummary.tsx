@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useCurrency } from "@/context/CurrencyContext";
 import { convertPrice } from "@/lib/utils/convertPrice";
 import { useAppStore } from "@/lib/store/useAppStore";
+import { useCartPageStore } from "../useCartPageStore";
+import { toast } from "@/components/ui/use-toast";
 
 type CartSummaryProps = {
   navigation: () => void;
@@ -20,6 +22,7 @@ function CartSummary({ navigation }: CartSummaryProps) {
     currency,
     exchangeRates
   );
+  const { cartValid } = useCartPageStore();
   return (
     <div className="flex flex-col gap-5 items-start py-4 px-4 border h-fit">
       <p className="text-base font-semibold">CART SUMMARY</p>
@@ -41,13 +44,28 @@ function CartSummary({ navigation }: CartSummaryProps) {
           </p>{" "}
         </div>
       </div>
-      <Link
-        href={`${DBDetails?.email ? "/checkout" : "/login?redirect-url=checkout"}`}
-        className="w-full">
-        <Button className="mt-4 uppercase w-full" size={"lg"}>
+      {cartValid ? (
+        <Link
+          href={`${
+            DBDetails?.email ? "/checkout" : "/login?redirect-url=checkout"
+          }`}
+          className="w-full">
+          <Button className="mt-4 uppercase w-full" size={"lg"}>
+            Checkout
+          </Button>
+        </Link>
+      ) : (
+        <Button className="mt-4 uppercase w-full" size={"lg"}
+        onClick={() => {
+          toast({
+            variant: "destructive",
+            title:"Please verify that all items are above their minimum order quantity before proceeding"
+          })
+        }}
+        >
           Checkout
         </Button>
-      </Link>
+      )}
       {/* <PayStackPay /> */}
     </div>
   );

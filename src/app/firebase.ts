@@ -8,8 +8,8 @@ import { getAuth } from "firebase/auth";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCyrMG6ik7QhufU89tHGxqqresu2TxkTUc",
-  authDomain: "foreman-f3e68.firebaseapp.com",
-  // authDomain: "auth.foremangh.com",
+  // authDomain: "foreman-f3e68.firebaseapp.com",
+  authDomain: "auth.foremangh.com",
   projectId: "foreman-f3e68",
   storageBucket: "foreman-f3e68.appspot.com",
   messagingSenderId: "138274873973",
