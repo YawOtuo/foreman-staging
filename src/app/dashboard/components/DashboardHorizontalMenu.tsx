@@ -16,17 +16,19 @@ function DashboardHorizonalMenu() {
   const { logout } = useLogout();
   return (
     <div className=" flex items-center justify-between px-4 gap-5 border-b-[1px] py-1 text-sm">
-  
       <div className="flex items-center gap-3 text-xs md:text-base w-full">
-        <div className="w-full flex items-center gap-5 justify-end text-xs">
-          <p>{DBDetails?.username}</p>
-          <p  className="hidden lg:block" > {DBDetails?.email}</p>
-          <Button
-            variant={"outline"}
-            className="text-xs"
-            onClick={() => logout()}>
-            Logout
-          </Button>
+        <div className="w-full flex items-center gap-5 between text-xs">
+          <p className="text-primary font-semibold">FOREMAN</p>
+          <div className="flex items-center justify-end gap-3 text-xs w-full">
+            <p>{DBDetails?.username}</p>
+            <p className="hidden lg:block"> {DBDetails?.email}</p>
+            <Button
+              variant={"outline"}
+              className="text-xs"
+              onClick={() => logout()}>
+              Logout
+            </Button>
+          </div>
         </div>
       </div>
 

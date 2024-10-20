@@ -48,6 +48,7 @@ function Navbar() {
           <Image src={"/logo-shop.png"} alt="Logo" fill objectFit="cover" />
         </div>
       </Link>
+      
 
       <div className=" items-center gap-5   justify-center hidden lg:flex">
         {links?.map((r, index) => (

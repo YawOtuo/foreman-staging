@@ -39,10 +39,10 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="p-5 space-y-5">
+    <div className="p-5 pt-0 space-y-5">
       <h1 className="text-xl font-semibold mb-4">My Dashboard</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <MetricCard title="Total Orders" value={userMetrics.totalOrders} />
         <MetricCard
           title="Completed Orders"

@@ -3,7 +3,7 @@ const MetricCard = ({ title, value }: { title: any; value: any }) => (
     <div className="flex flex-row items-center justify-between space-y-0 pb-2">
       <div className="text-sm font-medium">{title}</div>
     </div>
-    <div className="text-2xl font-semibold text-primary lg:text-slate-600">{value}</div>
+    <div className="text-sm lg:text-2xl font-semibold text-primary lg:text-slate-600">{value}</div>
   </div>
 );
 
