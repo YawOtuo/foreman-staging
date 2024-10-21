@@ -7,6 +7,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "@/app/firebase";
 import { HiOutlineLockOpen } from "react-icons/hi";
 import Link from "next/link";
+import Image from "next/image";
 
 const Page = () => {
   const [email, setEmail] = useState("");
@@ -35,7 +36,12 @@ const Page = () => {
       {!message ? (
         <>
           <div>
-            <HiOutlineLockOpen size={70} />
+            <Image
+              src={"/lock.jpg"}
+              alt="lock image"
+              width={100}
+              height={100}
+            />
           </div>
           <div className="space-y-1">
             <h1 className="font-semibold text-xl">Forgot your password?</h1>
