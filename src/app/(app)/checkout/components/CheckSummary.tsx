@@ -1,17 +1,13 @@
 import { useCurrency } from "@/context/CurrencyContext";
 import { convertPrice } from "@/lib/utils/convertPrice";
-import Link from "next/link";
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { FaShoppingCart } from "react-icons/fa";
-import { RiVisaFill } from "react-icons/ri";
-import { FaCcMastercard } from "react-icons/fa6";
 import Image from "next/image";
+import useGetDeliveryFee from "@/lib/hooks/useGetDeliveryFee";
+import { useArea } from "@/context/AreaContext";
 
 interface CheckSummaryProps {
   subTotal: number;
-  deliveryCharge: number;
-  // payment: <Reco
 }
 
 const momoImages = [
@@ -42,17 +38,24 @@ const momoImages = [
   },
 ];
 
-const CheckSummary: React.FC<CheckSummaryProps> = ({
-  subTotal,
-  deliveryCharge,
-}) => {
+const CheckSummary: React.FC<CheckSummaryProps> = ({ subTotal }) => {
   const { currency, exchangeRates } = useCurrency();
   const {
     register,
     formState: { errors },
   } = useFormContext();
 
-  const Total = subTotal + deliveryCharge;
+  const { areas, area } = useArea();
+  const selectedArea = areas && areas.find((item) => item.name === area)?.id;
+
+  const { deliveryFees, isDeliveryFeesError, isDeliveryFeesLoading } =
+    useGetDeliveryFee(selectedArea!);
+
+  if (isDeliveryFeesError) {
+    return <p>An error occurred fetching delivery fees</p>;
+  }
+
+  const Total = subTotal + Number(deliveryFees?.fee!);
   const TotalConvertedPrice = convertPrice(
     Total,
     "GHS",
@@ -66,7 +69,7 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
     exchangeRates
   );
   const DeliveryConvertedPrice = convertPrice(
-    deliveryCharge,
+    Number(deliveryFees?.fee!),
     "GHS",
     currency,
     exchangeRates
@@ -94,24 +97,32 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
             <div className="flex justify-between w-full">
               <p>Delivery</p>
               <p>
-                {currency}{" "}
+                {isDeliveryFeesLoading ? "" : currency}{" "}
                 <span>
-                  {Number(DeliveryConvertedPrice).toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
+                  {isDeliveryFeesLoading ? (
+                    <p>Loading...</p>
+                  ) : (
+                    Number(DeliveryConvertedPrice).toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })
+                  )}
                 </span>
               </p>
             </div>
             <div className="flex justify-between w-full border-y-[1px] border-white py-4">
               <p>Total</p>
               <p className="font-bold text-3xl text-primary">
-                {currency}{" "}
+                {isDeliveryFeesLoading ? "" : currency}{" "}
                 <span>
-                  {Number(TotalConvertedPrice).toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
+                  {isDeliveryFeesLoading ? (
+                    <p>Loading...</p>
+                  ) : (
+                    Number(TotalConvertedPrice).toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })
+                  )}
                 </span>
               </p>
             </div>

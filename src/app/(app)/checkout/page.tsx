@@ -14,6 +14,7 @@ import useCheckout from "./useCheckout";
 import { useAppStore } from "@/lib/store/useAppStore";
 import CheckProductSm from "./components/CheckProductSm";
 import dynamic from "next/dynamic";
+import { AreaProvider } from "@/context/AreaContext";
 const DeliveryAddressForm = dynamic(
   () => import("./components/DeliveryAddress")
 );
@@ -37,8 +38,6 @@ export default function CheckOutPage() {
     getValues,
     formState: { errors, isSubmitting, isValid },
   } = methods;
-
-  const [deliveryCharge, setDeliveryCharge] = useState(50.0);
 
   const onSubmit: SubmitHandler<FormFields> = async () => {
     const formValues = getValues();
@@ -110,39 +109,43 @@ export default function CheckOutPage() {
           <FormProvider {...methods}>
             <form
               className="flex flex-col sm:justify-centeritems-start lg:items-center flex-1 mt-6 "
-              onSubmit={methods.handleSubmit(onSubmit)}>
-              <CheckSummary
-                deliveryCharge={deliveryCharge}
-                subTotal={cart.totalCost}
-              />
-              <div className="mt-6 w-full flex flex-col items-center gap-5 justify-center sm:w-4/5">
-                <DeliveryAddressForm />
-                <label className="space-y-1">
-                  Can't find location? Please enter location with closest
-                  landmark
-                  <input
-                    type="text"
-                    placeholder="Please enter location with closest landmark"
-                    className="border rounded p-2 w-full h-10"
-                    {...register("nearestLandmark")}
-                  />
-                </label>
-                <label className="text-xs sm:text-base">
-                  <input
-                    type="checkbox"
-                    {...register("agreement", {
-                      required: "field is required *",
-                    })}
-                  />{" "}
-                  I accept any price chages within 24 hours of placing this
-                  order.{" "}
-                  {errors.agreement && (
-                    <div className="text-red-600">
-                      {errors.agreement.message}
-                    </div>
-                  )}
-                </label>
-              </div>
+              onSubmit={methods.handleSubmit(onSubmit)}
+            >
+              {/* in the check summary, pass a delivery fee prop. */}
+              <AreaProvider>
+                <CheckSummary
+                  // deliveryCharge={deliveryCharge}
+                  subTotal={cart.totalCost}
+                />
+                <div className="mt-6 w-full flex flex-col items-center gap-5 justify-center sm:w-4/5">
+                  <DeliveryAddressForm />
+                  <label className="space-y-1">
+                    Can't find location? Please enter location with closest
+                    landmark
+                    <input
+                      type="text"
+                      placeholder="Please enter location with closest landmark"
+                      className="border rounded p-2 w-full h-10"
+                      {...register("nearestLandmark")}
+                    />
+                  </label>
+                  <label className="text-xs sm:text-base">
+                    <input
+                      type="checkbox"
+                      {...register("agreement", {
+                        required: "field is required *",
+                      })}
+                    />{" "}
+                    I accept any price chages within 24 hours of placing this
+                    order.{" "}
+                    {errors.agreement && (
+                      <div className="text-red-600">
+                        {errors.agreement.message}
+                      </div>
+                    )}
+                  </label>
+                </div>
+              </AreaProvider>
               <div className="mt-5 w-full sm:w-4/5 flex flex-col gap-3 justify-center items-center">
                 <CheckoutButton
                   onClick={() => onSubmit}
@@ -151,7 +154,8 @@ export default function CheckOutPage() {
 
                 <Link
                   href="/warehousing"
-                  className="text-shade-300 uppercase text-right mt-6 underline pb-10">
+                  className="text-shade-300 uppercase text-right mt-6 underline pb-10"
+                >
                   Try Flexi Plan
                 </Link>
               </div>

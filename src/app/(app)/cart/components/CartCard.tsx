@@ -66,7 +66,7 @@ function CartCard({ data }: Props) {
             {data.product_variant.brief_description}
           </p>
         </div>
-        <div className="flex flex-col gap-2 items-start lg:items-end gap-1">
+        <div className="flex flex-col gap-2 items-start lg:items-end">
           <p className="whitespace-nowrap font-bold text-2xl group-hover:text-primary-100 transition-all">
             {currency}{" "}
             {Number(convertedTotalPrice).toLocaleString(undefined, {
@@ -90,7 +90,8 @@ function CartCard({ data }: Props) {
             className="text-primary-100"
             variant={"ghost"}
             size={"sm"}
-            fontSize={"sm"}>
+            fontSize={"sm"}
+          >
             <MdDeleteOutline size={20} className="mr-1" />
             Remove
           </Button>
@@ -98,7 +99,8 @@ function CartCard({ data }: Props) {
             variant={"ghost"}
             size={"sm"}
             fontSize={"sm"}
-            onClick={() => handleAddToFavourites(data.product_variant.id)}>
+            onClick={() => handleAddToFavourites(data.product_variant.id)}
+          >
             <FaRegHeart className="mr-2" />
             Add To Favourites
           </Button>
