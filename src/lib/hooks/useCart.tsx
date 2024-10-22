@@ -99,6 +99,7 @@ const useCart = () => {
       title: "Success",
       description: "Item quantity updated in cart",
       variant: "success",
+      className: "z-[999]",
     });
   };
 

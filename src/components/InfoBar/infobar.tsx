@@ -21,8 +21,9 @@ import useLogout from "@/app/(app)/(auth)/login/components/useLogout";
 export default function InfoBar() {
   //   const { data, error, isLoading } = useAuthState(auth);
   //   const { user } = useUser();
-  const {logout} = useLogout()
-  const { DBDetails, FBaseDetails, setDBDetails,setFBaseDetails } = useAppStore();
+  const { logout } = useLogout();
+  const { DBDetails, FBaseDetails, setDBDetails, setFBaseDetails } =
+    useAppStore();
   const router = useRouter();
 
   return (
@@ -42,16 +43,16 @@ export default function InfoBar() {
       </div>
       <div className="flex gap-3 items-center">
         {Object.keys(FBaseDetails).length > 0 ? (
-          <DropdownMenu >
+          <DropdownMenu>
             <DropdownMenuTrigger asChild className="">
               <Avatar>
-                  <AvatarImage src={FBaseDetails?.photoURL} />
+                <AvatarImage src={FBaseDetails?.photoURL} />
                 <AvatarFallback>
                   {<UserIcon size={24} color="black" />}
                 </AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
+            <DropdownMenuContent className="z-999">
               <DropdownMenuLabel>
                 My Account <br />
                 <span className="font-normal">
@@ -66,8 +67,9 @@ export default function InfoBar() {
               <DropdownMenuItem>Team</DropdownMenuItem> */}
               <DropdownMenuItem
                 onClick={() => {
-                 logout()
-                }}>
+                  logout();
+                }}
+              >
                 Logout
               </DropdownMenuItem>
             </DropdownMenuContent>

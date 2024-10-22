@@ -20,7 +20,7 @@ const CurrencyConv = () => {
         <SelectTrigger className="text-black p-4 py-0">
           <SelectValue placeholder="Select Currency" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="z-999">
           <SelectItem value="GHS">GHS</SelectItem>
           <SelectItem value="GBP">GBP</SelectItem>
           <SelectItem value="USD">USD</SelectItem>

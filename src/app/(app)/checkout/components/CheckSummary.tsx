@@ -100,7 +100,7 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({ subTotal }) => {
                 {isDeliveryFeesLoading ? "" : currency}{" "}
                 <span>
                   {isDeliveryFeesLoading ? (
-                    <p>Loading...</p>
+                    <p>---</p>
                   ) : (
                     Number(DeliveryConvertedPrice).toLocaleString(undefined, {
                       minimumFractionDigits: 2,
@@ -116,7 +116,7 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({ subTotal }) => {
                 {isDeliveryFeesLoading ? "" : currency}{" "}
                 <span>
                   {isDeliveryFeesLoading ? (
-                    <p>Loading...</p>
+                    <p>---</p>
                   ) : (
                     Number(TotalConvertedPrice).toLocaleString(undefined, {
                       minimumFractionDigits: 2,

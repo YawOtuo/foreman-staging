@@ -111,12 +111,8 @@ export default function CheckOutPage() {
               className="flex flex-col sm:justify-centeritems-start lg:items-center flex-1 mt-6 "
               onSubmit={methods.handleSubmit(onSubmit)}
             >
-              {/* in the check summary, pass a delivery fee prop. */}
               <AreaProvider>
-                <CheckSummary
-                  // deliveryCharge={deliveryCharge}
-                  subTotal={cart.totalCost}
-                />
+                <CheckSummary subTotal={cart.totalCost} />
                 <div className="mt-6 w-full flex flex-col items-center gap-5 justify-center sm:w-4/5">
                   <DeliveryAddressForm />
                   <label className="space-y-1">
