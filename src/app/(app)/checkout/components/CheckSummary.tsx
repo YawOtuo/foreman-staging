@@ -52,7 +52,7 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({ subTotal }) => {
     useGetDeliveryFee(selectedArea!);
 
   if (isDeliveryFeesError) {
-    return <p>An error occurred fetching delivery fees</p>;
+    return <p>An error occurred fetching delivery fees. Please retry again.</p>;
   }
 
   const Total = subTotal + Number(deliveryFees?.fee!);
