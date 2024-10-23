@@ -51,9 +51,9 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({ subTotal }) => {
   const { deliveryFees, isDeliveryFeesError, isDeliveryFeesLoading } =
     useGetDeliveryFee(selectedArea!);
 
-  if (isDeliveryFeesError) {
-    return <p>An error occurred fetching delivery fees. Please retry again.</p>;
-  }
+  // if (isDeliveryFeesError) {
+  //   return <p>An error occurred fetching delivery fees. Please retry again.</p>;
+  // }
 
   const Total = subTotal + Number(deliveryFees?.fee!);
   const TotalConvertedPrice = convertPrice(
@@ -81,6 +81,13 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({ subTotal }) => {
         {/* Summary side */}
         <div className="h-1/2 flex flex-col justify-center">
           <div className="space-y-3">
+            {isDeliveryFeesError ? (
+              <p className="text-red-600">
+                Please select a District and Area, to get your Total Fee
+              </p>
+            ) : (
+              ""
+            )}
             <h6 className="font-semibold text-base">Summary</h6>
             <div className="flex justify-between w-full">
               <p>Sub Total</p>
@@ -97,32 +104,28 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({ subTotal }) => {
             <div className="flex justify-between w-full">
               <p>Delivery</p>
               <p>
-                {isDeliveryFeesLoading ? "" : currency}{" "}
+                {currency}{" "}
                 <span>
-                  {isDeliveryFeesLoading ? (
-                    <p>---</p>
-                  ) : (
-                    Number(DeliveryConvertedPrice).toLocaleString(undefined, {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })
-                  )}
+                  {isDeliveryFeesLoading || isDeliveryFeesError
+                    ? `---`
+                    : Number(DeliveryConvertedPrice).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                 </span>
               </p>
             </div>
             <div className="flex justify-between w-full border-y-[1px] border-white py-4">
               <p>Total</p>
               <p className="font-bold text-3xl text-primary">
-                {isDeliveryFeesLoading ? "" : currency}{" "}
+                {currency}{" "}
                 <span>
-                  {isDeliveryFeesLoading ? (
-                    <p>---</p>
-                  ) : (
-                    Number(TotalConvertedPrice).toLocaleString(undefined, {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })
-                  )}
+                  {isDeliveryFeesLoading || isDeliveryFeesError
+                    ? `---`
+                    : Number(TotalConvertedPrice).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                 </span>
               </p>
             </div>
