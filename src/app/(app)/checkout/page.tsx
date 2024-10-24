@@ -53,14 +53,14 @@ export default function CheckOutPage() {
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
-      <div className="md:w-[90%]   ">
+      <div className="md:w-[90%] ">
         <div className=" w-full flex-1 py-6 px-4">
           <div className="flex justify-between items-center flex-row w-full ">
             <h6 className="font-semibold text-3xl ">Checkout</h6>
             <div className="flex flex-row w-1/3 sm:w-1/6 md:w-[10%]  items-center justify-evenly text-gray-400"></div>
           </div>
         </div>
-        <div className="flex flex-col  px-4  lg:flex-row items-start lg:items-start justify-start lg:justify-center">
+        <div className="flex flex-col px-4  lg:flex-row-reverse items-start lg:items-start justify-start lg:gap-10 lg:justify-center w-full">
           <div className="w-full md:w-[60%]">
             <div className="w-full sm:py-4 ">
               <h6 className="font-bold text-lg text-primary/80">My Orders</h6>
@@ -108,53 +108,57 @@ export default function CheckOutPage() {
 
           <FormProvider {...methods}>
             <form
-              className="flex flex-col sm:justify-centeritems-start lg:items-center flex-1 mt-6 "
+              className="flex flex-col items-start flex-1 mt-6 w-full"
               onSubmit={methods.handleSubmit(onSubmit)}
             >
               <AreaProvider>
-                <CheckSummary subTotal={cart.totalCost} />
-                <div className="mt-6 w-full flex flex-col items-center gap-5 justify-center sm:w-4/5">
-                  <DeliveryAddressForm />
-                  <label className="space-y-1">
-                    Can't find location? Please enter location with closest
-                    landmark
-                    <input
-                      type="text"
-                      placeholder="Please enter location with closest landmark"
-                      className="border rounded p-2 w-full h-10"
-                      {...register("nearestLandmark")}
-                    />
-                  </label>
-                  <label className="text-xs sm:text-base">
-                    <input
-                      type="checkbox"
-                      {...register("agreement", {
-                        required: "field is required *",
-                      })}
-                    />{" "}
-                    I accept any price chages within 24 hours of placing this
-                    order.{" "}
-                    {errors.agreement && (
-                      <div className="text-red-600">
-                        {errors.agreement.message}
-                      </div>
-                    )}
-                  </label>
+                <div className="flex flex-col-reverse justify-between sm:gap-12">
+                  <div>
+                    <CheckSummary subTotal={cart.totalCost} />
+                    <div className="mt-5 w-full sm:w-4/5 flex flex-col gap-3 justify-center items-center disabled:opacity-50 disabled:pointer-events-none disabled:cursor-wait">
+                      <CheckoutButton
+                        onClick={() => onSubmit}
+                        disabled={isSubmitting} // Disable button if form is not valid
+                      />
+
+                      <Link
+                        href="/warehousing"
+                        className="text-shade-300 uppercase text-right mt-6 underline pb-10"
+                      >
+                        Try Flexi Plan
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="w-full flex flex-col items-center gap-5 justify-center sm:w-[500px]">
+                    <DeliveryAddressForm />
+                    <label className="space-y-1">
+                      Can't find location? Please enter location with closest
+                      landmark
+                      <input
+                        type="text"
+                        placeholder="Please enter location with closest landmark"
+                        className="border rounded p-2 w-full h-10"
+                        {...register("nearestLandmark")}
+                      />
+                    </label>
+                    <label className="text-sm sm:text-base">
+                      <input
+                        type="checkbox"
+                        {...register("agreement", {
+                          required: "field is required *",
+                        })}
+                      />{" "}
+                      I accept any price chages within 24 hours of placing this
+                      order.{" "}
+                      {errors.agreement && (
+                        <div className="text-red-600">
+                          {errors.agreement.message}
+                        </div>
+                      )}
+                    </label>
+                  </div>
                 </div>
               </AreaProvider>
-              <div className="mt-5 w-full sm:w-4/5 flex flex-col gap-3 justify-center items-center">
-                <CheckoutButton
-                  onClick={() => onSubmit}
-                  disabled={isSubmitting} // Disable button if form is not valid
-                />
-
-                <Link
-                  href="/warehousing"
-                  className="text-shade-300 uppercase text-right mt-6 underline pb-10"
-                >
-                  Try Flexi Plan
-                </Link>
-              </div>
             </form>
           </FormProvider>
         </div>

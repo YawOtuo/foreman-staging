@@ -77,17 +77,17 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({ subTotal }) => {
 
   return (
     <>
-      <div className=" flex flex-col w-full  sm:w-4/5 md:w-4/5 border-2 bg-secondary p-5 h-[400px] justify-center rounded-md">
+      <div className=" flex flex-col w-full sm:w-[500px] border-2 bg-secondary p-5 h-[450px] justify-center rounded-md mt-3 sm:mt-0">
         {/* Summary side */}
         <div className="h-1/2 flex flex-col justify-center">
+          {isDeliveryFeesError ? (
+            <p className="text-red-600 text-sm">
+              Please select a District and Area, to get your Total Fee
+            </p>
+          ) : (
+            ""
+          )}
           <div className="space-y-3">
-            {isDeliveryFeesError ? (
-              <p className="text-red-600">
-                Please select a District and Area, to get your Total Fee
-              </p>
-            ) : (
-              ""
-            )}
             <h6 className="font-semibold text-base">Summary</h6>
             <div className="flex justify-between w-full">
               <p>Sub Total</p>
