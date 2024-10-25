@@ -13,7 +13,6 @@ const initialCart: Cart = {
   totalCost: 0,
 };
 
-
 const useCart = () => {
   let cart: Cart = initialCart; // Initialize cart with initialCart
   let setCart: (cart: Cart) => void;
@@ -78,7 +77,8 @@ const useCart = () => {
           <Link
             href="/cart"
             className="uppercase font-bold"
-            onClick={() => dismiss()}>
+            onClick={() => dismiss()}
+          >
             View Cart
           </Link>
         </div>
@@ -99,6 +99,7 @@ const useCart = () => {
       title: "Success",
       description: "Item quantity updated in cart",
       variant: "success",
+      className: "z-[999]",
     });
   };
 

@@ -1,6 +1,6 @@
 // store/useCartPageStore.ts
 
-import create from 'zustand';
+import { create } from "zustand";
 
 interface CartPageStore {
   cartValid: boolean;

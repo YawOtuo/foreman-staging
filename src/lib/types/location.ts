@@ -1,9 +1,9 @@
-
 export interface Constituency {
-    name: string
+  name: string;
 }
 
 export interface Area {
-    name: string
-    constituency: Constituency
+  id: number;
+  name: string;
+  constituency: Constituency;
 }

@@ -1,17 +1,13 @@
 import { useCurrency } from "@/context/CurrencyContext";
 import { convertPrice } from "@/lib/utils/convertPrice";
-import Link from "next/link";
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { FaShoppingCart } from "react-icons/fa";
-import { RiVisaFill } from "react-icons/ri";
-import { FaCcMastercard } from "react-icons/fa6";
 import Image from "next/image";
+import useGetDeliveryFee from "@/lib/hooks/useGetDeliveryFee";
+import { useArea } from "@/context/AreaContext";
 
 interface CheckSummaryProps {
   subTotal: number;
-  deliveryCharge: number;
-  // payment: <Reco
 }
 
 const momoImages = [
@@ -42,17 +38,24 @@ const momoImages = [
   },
 ];
 
-const CheckSummary: React.FC<CheckSummaryProps> = ({
-  subTotal,
-  deliveryCharge,
-}) => {
+const CheckSummary: React.FC<CheckSummaryProps> = ({ subTotal }) => {
   const { currency, exchangeRates } = useCurrency();
   const {
     register,
     formState: { errors },
   } = useFormContext();
 
-  const Total = subTotal + deliveryCharge;
+  const { areas, area } = useArea();
+  const selectedArea = areas && areas.find((item) => item.name === area)?.id;
+
+  const { deliveryFees, isDeliveryFeesError, isDeliveryFeesLoading } =
+    useGetDeliveryFee(selectedArea!);
+
+  // if (isDeliveryFeesError) {
+  //   return <p>An error occurred fetching delivery fees. Please retry again.</p>;
+  // }
+
+  const Total = subTotal + Number(deliveryFees?.fee!);
   const TotalConvertedPrice = convertPrice(
     Total,
     "GHS",
@@ -66,7 +69,7 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
     exchangeRates
   );
   const DeliveryConvertedPrice = convertPrice(
-    deliveryCharge,
+    Number(deliveryFees?.fee!),
     "GHS",
     currency,
     exchangeRates
@@ -74,9 +77,16 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
 
   return (
     <>
-      <div className=" flex flex-col w-full  sm:w-4/5 md:w-4/5 border-2 bg-secondary p-5 h-[400px] justify-center rounded-md">
+      <div className=" flex flex-col w-full sm:w-[500px] border-2 bg-secondary p-5 h-[450px] justify-center rounded-md mt-3 sm:mt-0">
         {/* Summary side */}
         <div className="h-1/2 flex flex-col justify-center">
+          {isDeliveryFeesError ? (
+            <p className="text-red-600 text-sm">
+              Please select a District and Area, to get your Total Fee
+            </p>
+          ) : (
+            ""
+          )}
           <div className="space-y-3">
             <h6 className="font-semibold text-base">Summary</h6>
             <div className="flex justify-between w-full">
@@ -96,10 +106,12 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
               <p>
                 {currency}{" "}
                 <span>
-                  {Number(DeliveryConvertedPrice).toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
+                  {isDeliveryFeesLoading || isDeliveryFeesError
+                    ? `---`
+                    : Number(DeliveryConvertedPrice).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                 </span>
               </p>
             </div>
@@ -108,10 +120,12 @@ const CheckSummary: React.FC<CheckSummaryProps> = ({
               <p className="font-bold text-3xl text-primary">
                 {currency}{" "}
                 <span>
-                  {Number(TotalConvertedPrice).toLocaleString(undefined, {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}
+                  {isDeliveryFeesLoading || isDeliveryFeesError
+                    ? `---`
+                    : Number(TotalConvertedPrice).toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
                 </span>
               </p>
             </div>
