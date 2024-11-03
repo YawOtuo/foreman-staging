@@ -1,13 +1,9 @@
-import {
-  Facebook,
-  Instagram,
-  Mail,
-  Phone,
-  Twitter,
-  Youtube,
-} from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FiFacebook } from "react-icons/fi";
 
 function Footer() {
   return (
@@ -31,7 +27,7 @@ function Footer() {
             </div>
             <div className="flex space-x-4">
               <Link href={"https://x.com/foreman_gh"}>
-                <Twitter
+                <FaXTwitter
                   className="cursor-pointer hover:text-white"
                   size={20}
                 />
@@ -41,13 +37,13 @@ function Footer() {
                   "https://www.instagram.com/foreman_ghana?igsh=amIxYnNqeXBieGll"
                 }
               >
-                <Instagram
+                <FaInstagram
                   className="cursor-pointer hover:text-white"
                   size={20}
                 />
               </Link>
               <Link href={"https://web.facebook.com/Myforeman"}>
-                <Facebook
+                <FiFacebook
                   className="cursor-pointer hover:text-white"
                   size={20}
                 />
