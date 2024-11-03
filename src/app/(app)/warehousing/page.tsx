@@ -39,9 +39,9 @@ function Warehousing() {
           <div className="w-full">
             <div className="space-y-3">
               <p>
-                Make your dream home or project a reality with the Foreman
-                Flexi Plan option. The best preparation for tomorrow is doing
-                your best today.
+                Make your dream home or project a reality with the Foreman Flexi
+                Plan option. The best preparation for tomorrow is doing your
+                best today.
               </p>
               <p>
                 "Start where you are. Use what you have. Do what you can. One
@@ -52,7 +52,10 @@ function Warehousing() {
               <p>
                 We will store them for you until you are ready to build. It's
                 that simple and convenient. You can build it….
-                <Link href={"/contact"} className="text-yellow-400 hover:underline">
+                <Link
+                  href={"/contact"}
+                  className="text-primary font-bold hover:underline"
+                >
                   Start today!
                 </Link>
               </p>
