@@ -30,7 +30,7 @@ const ProjectManagement = () => {
             participation and satisfaction every step of the way.
           </p>
           <Link href={"/contact"}>
-            <p className="font-medium text-yellow-500 mt-2"> Learn More</p>
+            <p className="font-medium text-yellow-500 mt-2"> Contact Us </p>
           </Link>
         </section>
         <div className="flex justify-center items-center md:w-1/2 mt-6 md:mt-0">
