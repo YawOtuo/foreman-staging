@@ -6,6 +6,7 @@ import {
   Twitter,
   Youtube,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 function Footer() {
@@ -14,10 +15,11 @@ function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <img
+            <Image
               src="/logo-shop.png"
               alt="Construction Marketplace Logo"
-              className="h-8"
+              width={200}
+              height={50}
             />
             <div className="flex items-center space-x-2">
               <Mail size={16} />
