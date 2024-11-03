@@ -9,7 +9,7 @@ import { Product, ProductVariant } from "@/lib/types/product";
 
 type Props = {
   product?: Product;
-  selectedVariant: ProductVariant | null
+  selectedVariant: ProductVariant | null;
   handleVariantChange: (value: string) => void;
 };
 
@@ -23,7 +23,8 @@ function SelectVariant({
       {Number(product?.variants.length) > 1 ? (
         <Select
           onValueChange={handleVariantChange}
-          value={selectedVariant?.id.toString()}>
+          value={selectedVariant?.id.toString()}
+        >
           <SelectTrigger>
             <SelectValue placeholder="Select a variant" />
           </SelectTrigger>
