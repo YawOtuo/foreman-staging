@@ -26,8 +26,8 @@ const CheckProductSm: React.FC<CheckProductSmRowProps> = ({ cart_item }) => {
           alt={cart_item.product_variant.name}
           className="aspect-[3/2]  lg:max-w-[150px] lg:aspect-[4/3] "
         />
-        <div className="px-5 pt-1 ">
-          <p className="text-xl e font-semibold">
+        <div className="px-4 pt-1 ">
+          <p className="text-xl font-semibold">
             {" "}
             {cart_item.product_variant.name}{" "}
           </p>
