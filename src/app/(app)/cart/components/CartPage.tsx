@@ -2,13 +2,15 @@
 import React from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import CartCard from "./CartCard";
+import CartCard from "./CartCardBg";
 import CartSummary from "./CartSummary";
 import { Button } from "@/components/ui/button";
 import { CartItem } from "@/lib/types/cart";
 import Link from "next/link";
 import useCart from "@/lib/hooks/useCart";
 import { FaShoppingCart } from "react-icons/fa";
+import CartCardBg from "./CartCardBg";
+import CartCartSm from "./CartCardSm";
 
 function CartPage() {
   const router = useRouter();
@@ -26,7 +28,8 @@ function CartPage() {
             onClick={goBack}
             variant={"ghost"}
             size={"lg"}
-            className="!px-2">
+            className="!px-2"
+          >
             <MdKeyboardArrowLeft className="mr-2" />
             Back{" "}
           </Button>
@@ -38,7 +41,14 @@ function CartPage() {
         <div className="w-full flex flex-col gap-5 basis-[70%] shrink-0">
           {cart?.items?.map((r: CartItem) => (
             <div className="" key={r?.id}>
-              <CartCard data={r} />
+              <>
+                <div className="hidden lg:block">
+                  <CartCardBg data={r} />
+                </div>
+                <div className="lg:hidden">
+                  <CartCartSm data={r} />
+                </div>
+              </>
             </div>
           ))}
           {cart?.items?.length < 1 && (

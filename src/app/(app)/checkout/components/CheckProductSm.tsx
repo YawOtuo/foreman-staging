@@ -19,7 +19,7 @@ const CheckProductSm: React.FC<CheckProductSmRowProps> = ({ cart_item }) => {
     exchangeRates
   );
   return (
-    <div className="flex  flex-col  items-start justify-between text-sm sm:text-base border-2 py-0  px-0  rounded-xl overflow-hidden">
+    <div className="w-full flex  flex-col  items-start justify-between text-sm sm:text-base border-2 py-0  px-0  rounded-xl overflow-hidden">
       <div className="flex flex-col  justify-start relative l w-full items-start  gap-2 lg:gap-5">
         <OptimizedImage
           src={`https://res.cloudinary.com/dajli9sqa/${cart_item.product_variant?.images[0]?.image}`}
