@@ -1,12 +1,9 @@
-import {
-  Facebook,
-  Instagram,
-  Mail,
-  Phone,
-  Twitter,
-  Youtube,
-} from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FiFacebook } from "react-icons/fi";
 
 function Footer() {
   return (
@@ -14,10 +11,11 @@ function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <img
+            <Image
               src="/logo-shop.png"
               alt="Construction Marketplace Logo"
-              className="h-8"
+              width={200}
+              height={50}
             />
             <div className="flex items-center space-x-2">
               <Mail size={16} />
@@ -29,7 +27,7 @@ function Footer() {
             </div>
             <div className="flex space-x-4">
               <Link href={"https://x.com/foreman_gh"}>
-                <Twitter
+                <FaXTwitter
                   className="cursor-pointer hover:text-white"
                   size={20}
                 />
@@ -39,13 +37,13 @@ function Footer() {
                   "https://www.instagram.com/foreman_ghana?igsh=amIxYnNqeXBieGll"
                 }
               >
-                <Instagram
+                <FaInstagram
                   className="cursor-pointer hover:text-white"
                   size={20}
                 />
               </Link>
               <Link href={"https://web.facebook.com/Myforeman"}>
-                <Facebook
+                <FiFacebook
                   className="cursor-pointer hover:text-white"
                   size={20}
                 />

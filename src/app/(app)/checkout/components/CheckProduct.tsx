@@ -25,8 +25,8 @@ const CheckProduct: React.FC<CheckProductRowProps> = ({ cart_item }) => {
             src={`https://res.cloudinary.com/dajli9sqa/${cart_item.product_variant?.images[0]?.image}`}
             alt={cart_item.product_variant.name}
             objectFit="cover"
-            width={150}
-            height={150}
+            width={100}
+            height={100}
           />
         </div>
         <div>

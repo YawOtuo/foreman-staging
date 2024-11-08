@@ -10,10 +10,19 @@ import OrderDetailCard from "../components/OrderDetailCard";
 import OrderDetailCardSkeleton from "../components/DetailSkeleton";
 import OrderShippingDetailSummary from "../components/OrderShippingDetailSummary";
 import React from "react";
-
+import { MdKeyboardArrowLeft } from "react-icons/md";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
 function Page({ params }: { params: { id: string | number } }) {
   const { DBDetails, FBaseDetails } = useAppStore();
+
+  const router = useRouter();
+
+  // Function to handle going back to the previous page
+  const goBack = () => {
+    router.back();
+  };
 
   const {
     data: order,
@@ -31,9 +40,20 @@ function Page({ params }: { params: { id: string | number } }) {
 
   return (
     <div className="py-10 px-5">
-      <div className="flex space-x-4">
-        <h6 className="text-3xl font-semibold">Order Details</h6>
-        <p className="text-primary text-4xl font-semibold">#{params.id}</p>
+      <div className="flex flex-col items-start lg:gap-x-5 ">
+        <Button
+          onClick={goBack}
+          variant={"ghost"}
+          size={"lg"}
+          className="!px-2"
+        >
+          <MdKeyboardArrowLeft className="mr-2" />
+          Back{" "}
+        </Button>
+        <div className="flex space-x-4">
+          <h6 className="text-3xl font-semibold">Order Details</h6>
+          <p className="text-primary text-4xl font-semibold">#{params.id}</p>
+        </div>
       </div>
       <p> {order?.created_at ? order.created_at.toString() : "No date"}</p>
 

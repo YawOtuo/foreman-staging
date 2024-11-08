@@ -29,10 +29,10 @@ const Delivery = () => {
           An estimated delivery time will be provided to you once your order is
           placed. Delivery times are estimated and commence from the date of
           payment or when you place a request. We aim to deliver within 48 hours
-          for orders placed on our retail site. Delivery requests made for
-          our Lay-by option could take up to 5 days. Delivery times are to be
-          used as a guide only and are subject to the acceptance and approval of
-          your payment or delivery request.
+          for orders placed on our retail site. Delivery requests made for our
+          Lay-by option could take up to 5 days. Delivery times are to be used
+          as a guide only and are subject to the acceptance and approval of your
+          payment or delivery request.
         </p>
         <p>
           <span className="font-semibold">
@@ -69,11 +69,11 @@ const Delivery = () => {
       <section className="space-y-5 mb-8">
         <h1 className="font-semibold py-2 uppercase">Damages</h1>
         <p>
-        If there is any damage to your order at the point of delivery, please contact us
-          immediately at{" "}
+          If there is any damage to your order at the point of delivery, please
+          contact us immediately at{" "}
           <a href=" myforemangh@gmail.com" className="underline">
             {" "}
-            myforemangh@gmail.com
+            charles@foremangh.com
           </a>{" "}
           or via phone on{" "}
           <a
@@ -93,7 +93,7 @@ const Delivery = () => {
           contact us at{" "}
           <a href="myforemangh@gmail.com" className="underline">
             {" "}
-            myforemangh@gmail.com
+            charles@foremangh.com
           </a>{" "}
           or via phone on{" "}
           <a

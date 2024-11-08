@@ -18,7 +18,13 @@ const CurrencyContext = createContext<CurrencyContextType | undefined>(
 );
 
 export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
-  const [currency, setCurrency] = useState("GHS");
+  const [currency, setCurrency] = useState<string>(() => {
+    if (typeof window !== "undefined") {
+      const storedCurrency = window.localStorage.getItem("selectedCurrency");
+      return storedCurrency || "GHS";
+    }
+    return "GHS";
+  });
   const [exchangeRates, setExchangeRates] = useState<Record<string, number>>(
     {}
   );
@@ -29,7 +35,11 @@ export const CurrencyProvider = ({ children }: { children: ReactNode }) => {
       setExchangeRates(rates);
     };
     fetchRates();
-  }, []);
+  }, [currency]);
+
+  useEffect(() => {
+    window.localStorage.setItem("selectedCurrency", currency);
+  }, [currency]);
 
   return (
     <CurrencyContext.Provider value={{ currency, exchangeRates, setCurrency }}>

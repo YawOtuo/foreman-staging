@@ -48,6 +48,11 @@ function useOrders(orderNumber?: number) {
     },
   });
 
+  const createOrderMutationNow = useMutation({
+    mutationFn: (orderData: CreateOrderArgs) =>
+      CreateOrder(Number(user_id), orderData),
+  });
+
   const updateOrderMutation = useMutation({
     mutationFn: (orderData: UpdateOrderArgs) =>
       UpdateOrder(Number(user_id), orderData),
@@ -87,16 +92,24 @@ function useOrders(orderNumber?: number) {
       });
     },
   });
-  const handleCreateOrder = async (orderData: CreateOrderArgs) => {
+  const handleCreateOrder = async (
+    orderData: CreateOrderArgs,
+    option: string
+  ) => {
     try {
-      console.log("Sending Data:");
-      toast({
-        title: "Loading",
-        description: "Checking Out",
-        variant: "success", //should be order
-      });
-      const result = await createOrderMutation.mutateAsync(orderData);
-      return result;
+      if (option === "delivery") {
+        console.log("Sending Data:");
+        toast({
+          title: "Loading",
+          description: "Checking Out",
+          variant: "success", //should be order
+        });
+        const result = await createOrderMutation.mutateAsync(orderData);
+        return result;
+      } else if (option === "now") {
+        const result = await createOrderMutationNow.mutateAsync(orderData);
+        return result;
+      }
     } catch (error) {
       console.error(error);
       throw error;

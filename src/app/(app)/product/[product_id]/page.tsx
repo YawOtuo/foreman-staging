@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import ProductLoadingSkeleton from "./ProductLoadingSkeleton";
 import { fetchOneProduct } from "@/lib/api/products";
-import {  ProductVariant } from "@/lib/types/product";
+import { ProductVariant } from "@/lib/types/product";
 import useCart from "@/lib/hooks/useCart";
 import { Autoplay, EffectFlip } from "swiper/modules";
 import { useToast } from "@/components/ui/use-toast";
@@ -17,7 +17,9 @@ import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 
 const RelatedProducts = dynamic(() => import("./components/RelatedProducts"));
-const QuantitySelection = dynamic(() => import("./components/QuantitySelection"));
+const QuantitySelection = dynamic(
+  () => import("./components/QuantitySelection")
+);
 
 const SelectVariant = dynamic(() => import("./components/SelectVariant"));
 
@@ -77,7 +79,7 @@ export default function ProductDetailPage({
         );
       }
     }
-  }, [product]);
+  }, [product, cart.items]);
 
   useEffect(() => {
     if (selectedVariant && selectedUnitOfPricing) {
@@ -200,7 +202,8 @@ export default function ProductDetailPage({
               disableOnInteraction: false,
             }}
             className="w-full rounded-lg overflow-hidden border-2 transition-all duration-300"
-            spaceBetween={5}>
+            spaceBetween={5}
+          >
             {selectedVariant?.images.map((image) => (
               <SwiperSlide key={image.id}>
                 <OptimizedImage

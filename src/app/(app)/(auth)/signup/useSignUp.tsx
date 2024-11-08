@@ -65,7 +65,7 @@ function useSignUp() {
         if (searchParams.get("redirect-url") == "checkout") {
           router.push("/checkout");
         } else {
-          router.push("/dashboard");
+          router.push("/");
         }
       } catch (error: any) {
         const errorCode = error.code;

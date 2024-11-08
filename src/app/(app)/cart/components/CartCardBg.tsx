@@ -15,7 +15,7 @@ type Props = {
   data: CartItem;
 };
 
-function CartCard({ data }: Props) {
+function CartCardBg({ data }: Props) {
   const { removeItemFromCart } = useCart();
   const { handleAddToFavourites } = useFavourites();
   const { setCartValid } = useCartPageStore();
@@ -121,4 +121,4 @@ function CartCard({ data }: Props) {
   );
 }
 
-export default CartCard;
+export default CartCardBg;

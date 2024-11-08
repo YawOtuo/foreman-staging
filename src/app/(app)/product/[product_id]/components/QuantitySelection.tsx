@@ -59,7 +59,7 @@ function QuantitySelection({
           })}
         </p>
       )}
-      <p className="text-sm text-gray-700s">SKU: {selectedVariant.sku}</p>
+      {/* <p className="text-sm text-gray-700s">SKU: {selectedVariant.sku}</p> */}
       {/* <p>{selectedVariant.brief_description}</p> */}
       <div className="flex items-center gap-2 mt-4">
         <label htmlFor="quantity" className="mr-2">
@@ -70,7 +70,8 @@ function QuantitySelection({
             onClick={decrementQuantity}
             variant="outline"
             size="icon"
-            className="h-10 w-10">
+            className="h-10 w-10"
+          >
             <Minus className="h-4 w-4" />
           </Button>
           <Input
@@ -90,16 +91,17 @@ function QuantitySelection({
             onClick={incrementQuantity}
             variant="outline"
             size="icon"
-            className="h-10 w-10">
+            className="h-10 w-10"
+          >
             <Plus className="h-4 w-4" />
           </Button>
         </div>
 
-        {
-       selectedVariant.price.length > 1 ? (
+        {selectedVariant.price.length > 1 ? (
           <Select
             onValueChange={handleUnitChange}
-            value={selectedUnitOfPricing?.unit_of_measurement?.unit}>
+            value={selectedUnitOfPricing?.unit_of_measurement?.unit}
+          >
             <SelectTrigger className="w-fit">
               <SelectValue placeholder="Select a unit" />
             </SelectTrigger>
@@ -107,7 +109,8 @@ function QuantitySelection({
               {selectedVariant?.price.map((priceEntry) => (
                 <SelectItem
                   key={priceEntry.unit_of_measurement.unit}
-                  value={priceEntry.unit_of_measurement.unit}>
+                  value={priceEntry.unit_of_measurement.unit}
+                >
                   {priceEntry.unit_of_measurement.unit}
                 </SelectItem>
               ))}
