@@ -19,9 +19,13 @@ function useCheckout() {
   const { clearCart } = useCart();
   const { sendEmail } = useEmail();
   const { DBDetails } = useAppStore();
-  const totatTotalCost = (cart.totalCost + 50);
+  const totatTotalCost = cart.totalCost + 50;
 
-  const sendOrderEmail = (order_id: number, type: "paid" | "unpaid", deliveryDate: Date) => {
+  const sendOrderEmail = (
+    order_id: number,
+    type: "paid" | "unpaid",
+    deliveryDate: Date
+  ) => {
     // Get today's date and calculate a week from today
     // const today = new Date();
     // const deliveryDate = new Date(today);
@@ -45,7 +49,7 @@ function useCheckout() {
       templateData: {
         username: DBDetails?.username,
         cost: totatTotalCost.toFixed(2),
-        delivery_date: formattedDeliveryDate,  // Add delivery date here
+        delivery_date: formattedDeliveryDate, // Add delivery date here
         order_id: order_id,
         button_url: `https://foremangh.com/dashboard/orders/${order_id}`,
       },
@@ -64,20 +68,23 @@ function useCheckout() {
     }));
 
     try {
-      const result = await handleCreateOrder({
-        total_order_cost: totatTotalCost,
-        total_order_quantity: cart.totalQuantity,
-        order_items: orderItems,
-        shipping_address: {
-          nearest_landmark: formValues.nearestLandmark,
-          recipient_name: formValues.address.name,
-          recipient_phone: formValues.address.phone,
-          constituency: formValues.address.city,
-          area: formValues.address.suburb,
-          location: formValues.address.location,
-          deliveryDate: formValues.address.deliveryDate,
+      const result = await handleCreateOrder(
+        {
+          total_order_cost: totatTotalCost,
+          total_order_quantity: cart.totalQuantity,
+          order_items: orderItems,
+          shipping_address: {
+            nearest_landmark: formValues.nearestLandmark,
+            recipient_name: formValues.address.name,
+            recipient_phone: formValues.address.phone,
+            constituency: formValues.address.city,
+            area: formValues.address.suburb,
+            location: formValues.address.location,
+            deliveryDate: formValues.address.deliveryDate,
+          },
         },
-      });
+        option
+      );
 
       if (result && result.id) {
         if (option === "now") {
@@ -86,13 +93,21 @@ function useCheckout() {
               order_id: result.id,
               orderData: { is_paid: true },
             }).then((res) => {
-              sendOrderEmail(result.id, "paid", formValues.address.deliveryDate as Date);
+              sendOrderEmail(
+                result.id,
+                "paid",
+                formValues.address.deliveryDate as Date
+              );
               router.push(`/checkout-success/${result.id}`);
               clearCart();
             });
           });
         } else {
-          sendOrderEmail(result.id, "unpaid", formValues.address.deliveryDate as Date);
+          sendOrderEmail(
+            result.id,
+            "unpaid",
+            formValues.address.deliveryDate as Date
+          );
 
           router.push(`/checkout-success/${result.id}`);
           clearCart();

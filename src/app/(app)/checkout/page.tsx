@@ -32,11 +32,8 @@ export default function CheckOutPage() {
 
   const {
     register,
-    setError,
-    handleSubmit,
-    getFieldState,
     getValues,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting },
   } = methods;
 
   const onSubmit: SubmitHandler<FormFields> = async () => {
@@ -116,10 +113,7 @@ export default function CheckOutPage() {
                   <div>
                     <CheckSummary subTotal={cart.totalCost} />
                     <div className="mt-5 w-full sm:w-4/5 flex flex-col gap-3 justify-center items-center disabled:opacity-50 disabled:pointer-events-none disabled:cursor-wait">
-                      <CheckoutButton
-                        onClick={() => onSubmit}
-                        disabled={isSubmitting} // Disable button if form is not valid
-                      />
+                      <CheckoutButton disabled={isSubmitting} />
 
                       <Link
                         href="/warehousing"
