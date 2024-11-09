@@ -7,6 +7,7 @@ import OrderCardSkeleton from "../orders/components/OrderCardSkeleton";
 import { Order } from "@/lib/types/order";
 import { FaLongArrowAltRight } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import { useCurrency } from "@/context/CurrencyContext";
 
 function PendingOrders() {
   const { orderData, isOrderLoading, orderError } = useOrders();

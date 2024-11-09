@@ -14,6 +14,8 @@ import ProductCard from "@/components/ProductCard";
 import dynamic from "next/dynamic";
 import Welcome from "./components/Welcome";
 import PendingOrders from "./components/PendingOrders";
+import { useCurrency } from "@/context/CurrencyContext";
+import { convertPrice } from "@/lib/utils/convertPrice";
 const OrderHistoryChart = dynamic(
   () => import("./components/OrderHistoryCart")
 );
@@ -21,6 +23,7 @@ const Dashboard = () => {
   const { allProducts } = useProducts();
   const { cart } = useCart();
   const { DBDetails } = useAppStore();
+  const { currency, exchangeRates } = useCurrency();
   const {
     data: dashboardData,
     isLoading: isDashboardDataLoading,
@@ -38,6 +41,17 @@ const Dashboard = () => {
     itemsInCart: cart.items.length,
   };
 
+  let convertedPrice = 0
+
+  if (userMetrics.totalAmountSpent) {
+     convertedPrice = convertPrice(
+      userMetrics.totalAmountSpent,
+      "GHS",
+      currency,
+      exchangeRates
+    );
+  }
+
   return (
     <div className="p-5 pt-0 space-y-5">
       <h1 className="text-xl font-semibold mb-4">My Dashboard</h1>
@@ -50,7 +64,7 @@ const Dashboard = () => {
         />
         <MetricCard
           title="Total Amount Spent"
-          value={`GHS ${userMetrics.totalAmountSpent?.toLocaleString(
+          value={`${currency} ${convertedPrice?.toLocaleString(
             undefined,
             {
               minimumFractionDigits: 2,
@@ -69,7 +83,9 @@ const Dashboard = () => {
 
       <div className="mt-4 w-full flex flex-col gap-3">
         <div>
-          <p className="font-semibold text-xl text-slate-600">Recommended Products</p>
+          <p className="font-semibold text-xl text-slate-600">
+            Recommended Products
+          </p>
         </div>
         <div className="gap-4 w-full">
           <Swiper
@@ -81,7 +97,8 @@ const Dashboard = () => {
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
-            }}>
+            }}
+          >
             {allProducts?.slice(0, 6).map((product, index) => (
               <SwiperSlide key={index}>
                 <ProductCard product={product} />
