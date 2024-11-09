@@ -3,7 +3,6 @@ import { IoArrowBack, IoHomeOutline } from "react-icons/io5";
 import { IoCartOutline } from "react-icons/io5";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { RiAlignItemBottomLine } from "react-icons/ri";
-import { MdOutlineAccountCircle } from "react-icons/md";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserIcon } from "lucide-react";
@@ -29,11 +28,11 @@ export const dashboardMenuLinks = [
     url: "/dashboard/orders",
     icon: <RiAlignItemBottomLine />,
   },
-  {
-    name: "Account",
-    url: "/dashboard",
-    icon: <MdOutlineAccountCircle />,
-  },
+  // {
+  //   name: "Account",
+  //   url: "/dashboard",
+  //   icon: <MdOutlineAccountCircle />,
+  // },
   // {
   //   name: "Logout",
   //   url: "/dashboard",
@@ -58,13 +57,7 @@ function DashboardSideMenu() {
             {FBaseDetails?.photoURL ? (
               <AvatarImage src={FBaseDetails?.photoURL} />
             ) : (
-              <AvatarImage
-                src={
-                  `https://api.dicebear.com/8.x/adventurer/svg?seed=$` +
-                  DBDetails?.email +
-                  `&backgroundType=gradientLinear&backgroundColor=b6e3f4,c0aede,ffd5dc,ffdfbf,d1d4f9`
-                }
-              />
+              <UserIcon color="white" size={24}/>
             )}
             <AvatarFallback>{<UserIcon color="white" />}</AvatarFallback>
           </Avatar>

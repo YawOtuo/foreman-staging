@@ -49,7 +49,7 @@ function useFavourites() {
       const { dismiss } = toast({
         description: (
           <div className="flex py-1 flex-col items-start">
-            <p>Please log in before proceeding</p>
+            <p>Please log to use this feature</p>
             <Link href={"/login"} className="pt-1">
               <Button size={"sm"} variant={"link"} className="font-bold">
                 Login
@@ -62,7 +62,7 @@ function useFavourites() {
 
       setTimeout(() => {
         dismiss();
-      }, 2000);
+      }, 5000);
     },
   });
 

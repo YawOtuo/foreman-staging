@@ -13,6 +13,7 @@ import React from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { formatDate } from "@/lib/utils/formatDate";
 
 function Page({ params }: { params: { id: string | number } }) {
   const { DBDetails, FBaseDetails } = useAppStore();
@@ -55,7 +56,7 @@ function Page({ params }: { params: { id: string | number } }) {
           <p className="text-primary text-4xl font-semibold">#{params.id}</p>
         </div>
       </div>
-      <p> {order?.created_at ? order.created_at.toString() : "No date"}</p>
+      <p> {order?.created_at ? formatDate(order?.created_at) : "No date"}</p>
 
       {!order && isLoading ? (
         <div className="flex flex-col ">

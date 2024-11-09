@@ -1,5 +1,6 @@
 import { Order } from "@/lib/types/order";
-import moment from 'moment'
+import { addCommasToNumber } from "@/lib/utils/numberFormatter";
+import moment from "moment";
 
 type Props = {
   order: Order;
@@ -12,7 +13,7 @@ function OrderCard({ order }: Props) {
       text-2xl lg:text-base
       ">
         #{order.id}
-      </p>{" "}
+      </p>
       <p className="text-sm col-span-2">
         {moment(order.created_at).format("Do MMMM YYYY hh:mm")}
       </p>
@@ -33,8 +34,10 @@ function OrderCard({ order }: Props) {
           <span className="font-semibold">{order.total_cost}</span>
         </p>
       </div>
-      <p className="hidden lg:flex">{order.total_quantity}</p>
-      <p className="hidden lg:flex">{order.total_cost}</p>
+      <p className="hidden lg:flex">
+        {addCommasToNumber(order?.total_quantity)}
+      </p>
+      <p className="hidden lg:flex">{addCommasToNumber(order.total_cost)}</p>
     </div>
   );
 }

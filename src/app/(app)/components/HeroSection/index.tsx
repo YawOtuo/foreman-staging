@@ -32,7 +32,7 @@ function HeroSection() {
               Start Shopping
             </Button>{" "}
           </Link>
-          <Link href={"/warehousing"}>
+          <Link href={"/flexi-plan"}>
             <Button size={"md"} className="px-7" variant="outline">
               Try Flexi Plan
             </Button>

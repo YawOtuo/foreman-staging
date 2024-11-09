@@ -34,7 +34,7 @@ export const links: { name: string; url: string; icon: React.ReactNode }[] = [
   },
   {
     name: "flexi Plan",
-    url: "/warehousing",
+    url: "/flexi-plan",
     icon: <MdOutlineWarehouse />,
   },
   {

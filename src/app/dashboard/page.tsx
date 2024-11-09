@@ -14,6 +14,7 @@ import ProductCard from "@/components/ProductCard";
 import dynamic from "next/dynamic";
 import Welcome from "./components/Welcome";
 import PendingOrders from "./components/PendingOrders";
+import { addCommasToNumber } from "@/lib/utils/numberFormatter";
 const OrderHistoryChart = dynamic(
   () => import("./components/OrderHistoryCart")
 );
@@ -50,13 +51,7 @@ const Dashboard = () => {
         />
         <MetricCard
           title="Total Amount Spent"
-          value={`GHS ${userMetrics.totalAmountSpent?.toLocaleString(
-            undefined,
-            {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            }
-          )}`}
+          value={`GHS ${addCommasToNumber(userMetrics.totalAmountSpent)}`}
         />
         <MetricCard title="Items in Cart" value={userMetrics.itemsInCart} />
       </div>
@@ -69,7 +64,9 @@ const Dashboard = () => {
 
       <div className="mt-4 w-full flex flex-col gap-3">
         <div>
-          <p className="font-semibold text-xl text-slate-600">Recommended Products</p>
+          <p className="font-semibold text-xl text-slate-600">
+            Recommended Products
+          </p>
         </div>
         <div className="gap-4 w-full">
           <Swiper
