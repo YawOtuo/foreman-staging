@@ -187,13 +187,13 @@ const CustomSelect = <T extends { [key: string]: any }>({
       {label && <p className="text-xs whitespace-nowrap">{label}</p>}
       <Select onValueChange={handleValueChange}>
         <SelectTrigger className={`${className} w-[180px]`}>
-          <SelectValue placeholder={placeholder} className="!capitalize">
+          <h4  className="!capitalize">
             {selectedValue
               ? data.find((item) => item[valueField] === selectedValue)?.[
                   labelField
-                ]
-              : ""}
-          </SelectValue>
+                ] ?? ""
+              : placeholder}
+          </h4>
         </SelectTrigger>
         <SelectContent>
           {data?.map((item, index) => (

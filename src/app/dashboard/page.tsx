@@ -16,6 +16,7 @@ import Welcome from "./components/Welcome";
 import PendingOrders from "./components/PendingOrders";
 import { useCurrency } from "@/context/CurrencyContext";
 import { convertPrice } from "@/lib/utils/convertPrice";
+import { addCommasToNumber } from "@/lib/utils/numberFormatter";
 const OrderHistoryChart = dynamic(
   () => import("./components/OrderHistoryCart")
 );
@@ -41,10 +42,10 @@ const Dashboard = () => {
     itemsInCart: cart.items.length,
   };
 
-  let convertedPrice = 0
+  let convertedPrice = 0;
 
   if (userMetrics.totalAmountSpent) {
-     convertedPrice = convertPrice(
+    convertedPrice = convertPrice(
       userMetrics.totalAmountSpent,
       "GHS",
       currency,
@@ -64,13 +65,7 @@ const Dashboard = () => {
         />
         <MetricCard
           title="Total Amount Spent"
-          value={`${currency} ${convertedPrice?.toLocaleString(
-            undefined,
-            {
-              minimumFractionDigits: 2,
-              maximumFractionDigits: 2,
-            }
-          )}`}
+          value={`${currency} ${addCommasToNumber(convertedPrice)}`}
         />
         <MetricCard title="Items in Cart" value={userMetrics.itemsInCart} />
       </div>

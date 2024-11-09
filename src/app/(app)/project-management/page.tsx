@@ -46,7 +46,7 @@ const ProjectManagement = () => {
       </div>
 
       {/* <section className="pt-10">
-        <Link href={"/warehousing"}>
+        <Link href={"/flexi-plan"}>
           <p className="pt-8">
             Try{" "}
             <span className="hover:underline text-yellow-500 font-medium">

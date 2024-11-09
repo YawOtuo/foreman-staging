@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useAppStore } from "../store/useAppStore";
 import { useToast } from "@/components/ui/use-toast";
@@ -9,15 +9,16 @@ import {
   generalEmailRecipients,
   templateIds,
 } from "../utils/emailTemplateIds";
-import { User } from "../types/user";
-import useSignUpStore from "@/app/(app)/(auth)/signup/useSignUpStore";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function useAuthState(auth: any) {
   const { toast } = useToast();
   const { setDBDetails, setFBaseDetails, error, setError, setIsLoading } =
     useAppStore();
   const { sendEmail } = useEmail();
-  // const { username } = useSignUpStore();
+  const pathname = usePathname(); // Get the current path
+  const router = useRouter();
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(
       auth,
@@ -35,7 +36,8 @@ export default function useAuthState(auth: any) {
                 uid: userAuth?.uid,
               });
 
-            if (userData?.message == "User created successfully") {
+            // Send email only if the user is newly created
+            if (userData?.message === "User created successfully") {
               sendEmail({
                 to: [
                   ...(generalEmailRecipients["signup"] || []),
@@ -47,11 +49,21 @@ export default function useAuthState(auth: any) {
                   username: userAuth?.displayName || "User",
                 },
               });
-              // console.log("emailing...");
             }
-            console.log("not emailing...");
+
             setDBDetails(userData?.user);
+
+            // Only redirect once when logged in
+            if (pathname === "/login") {
+              router.push("/dashboard");
+            }
+          } else {
+            // If user is not authenticated, redirect to login from any protected page
+            if (pathname.startsWith("/dashboard")) {
+              router.push("/login");
+            }
           }
+
           setIsLoading(false);
         } catch (error) {
           setError(error);
@@ -65,7 +77,7 @@ export default function useAuthState(auth: any) {
     );
 
     return () => unsubscribe();
-  }, [auth, setFBaseDetails, setDBDetails]);
+  }, [auth, setFBaseDetails, setDBDetails, pathname, router]);
 
   // Display authentication error toast
   useEffect(() => {
@@ -75,7 +87,6 @@ export default function useAuthState(auth: any) {
         description: error.message,
         variant: "destructive",
         duration: 5000,
-        // isClosable: true,
       });
     }
   }, [error, toast]);

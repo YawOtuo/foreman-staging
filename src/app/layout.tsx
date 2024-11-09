@@ -31,10 +31,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${mont.className} flex flex-col justify-center items-center`}>
+        className={`${mont.className} flex flex-col justify-center items-center bg-slate-50 shadow-lg`}>
         <Providers>
           <Suspense fallback={null}>
-            <div className="w-full max-w-[1750px] flex flex-col items-center bg-white">
+            <div className="w-full max-w-[1920px] flex flex-col items-center bg-white">
               <MobileMenuWrapper>
                 <div className="w-full"> {children}</div>
                 <WhatsAppIcon />

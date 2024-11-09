@@ -116,7 +116,7 @@ export default function CheckOutPage() {
                       <CheckoutButton disabled={isSubmitting} />
 
                       <Link
-                        href="/warehousing"
+                        href="/flexi-plan"
                         className="text-shade-300 uppercase text-right mt-6 underline pb-10"
                       >
                         Try Flexi Plan

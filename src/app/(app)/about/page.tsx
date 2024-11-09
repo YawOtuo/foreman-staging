@@ -68,7 +68,7 @@ const AboutUs: React.FC = () => {
           of mind, save on storage and avoid potential losses due to damages and
           petty theft. As a trusted companion, we are ready to embark on the
           journey with you - opt for our{" "}
-          <Link href={"/warehousing"} className="font-semibold text-primary">
+          <Link href={"/flexi-plan"} className="font-semibold text-primary">
             Flexi plan today
           </Link>{" "}
           and let&apos;s help you prepare for your dream project.

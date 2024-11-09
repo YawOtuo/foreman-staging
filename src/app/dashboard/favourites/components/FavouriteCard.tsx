@@ -44,7 +44,7 @@ function FavouriteCard({ data }: Props) {
           <div className="flex items-start justify-between w-full gap-1">
             <div className="flex flex-col gap-0">
               <p className="font-semibold capitalize">{data?.product.name}</p>
-              <p className="text-sm text-shade-200">
+              <p className="text-xs text-shade-200">
                 {data?.product?.description || "No description"}
               </p>
             </div>

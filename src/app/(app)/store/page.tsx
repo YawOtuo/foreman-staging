@@ -6,7 +6,7 @@ import PCSkeleton from "@/components/ProductCard/PCSkeleton";
 import { useProducts } from "@/lib/hooks/useProducts";
 import { Product } from "@/lib/types/product";
 import { Suspense, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useStoreStore } from "./components/useStoreStore";
 import dynamic from "next/dynamic";
 
@@ -15,12 +15,13 @@ function StoreContent() {
   const { filter, setFilter } = useStoreStore();
   const { allProductsError, allProductsLoading, allProducts } =
     useProducts(filter);
+    const pathname = usePathname()
   const searchParams = useSearchParams();
   useEffect(() => {
     if (searchParams?.get("category")) {
       setFilter({ category__name: searchParams?.get("category") });
     }
-  }, [searchParams]);
+  }, [searchParams, pathname, setFilter]);
 
   return (
     <div className="flex flex-col  w-full pb-10 ">

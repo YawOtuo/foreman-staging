@@ -65,7 +65,7 @@ export default function WarehousingSection() {
           </li>
         </ul>
 
-        <Link href={"/warehousing"}>
+        <Link href={"/flexi-plan"}>
           <Button variant={"default"} animated={"none"} className="mt-5 bg-yellow-500 text-white">
             Try Flexi Plan
           </Button>

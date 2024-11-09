@@ -25,7 +25,7 @@ const links = [
 
   {
     name: "Flexi-Plan",
-    url: "/warehousing",
+    url: "/flexi-plan",
   },
   {
     name: "About Us",

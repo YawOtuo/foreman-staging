@@ -1,6 +1,7 @@
 import { useCurrency } from "@/context/CurrencyContext";
 import { Order } from "@/lib/types/order";
 import { convertPrice } from "@/lib/utils/convertPrice";
+import { addCommasToNumber } from "@/lib/utils/numberFormatter";
 import moment from "moment";
 
 type Props = {
@@ -17,7 +18,7 @@ function OrderCard({ order }: Props) {
       "
       >
         #{order.id}
-      </p>{" "}
+      </p>
       <p className="text-sm col-span-2">
         {moment(order.created_at).format("Do MMMM YYYY hh:mm")}
       </p>
@@ -38,24 +39,34 @@ function OrderCard({ order }: Props) {
           <span className="font-semibold">
             {" "}
             {currency}{" "}
-            {convertPrice(
+            {addCommasToNumber(
+              Number(
+                convertPrice(
+                  order.total_cost ? order.total_cost : 0,
+                  "GHS",
+                  currency,
+                  exchangeRates
+                ).toFixed(2)
+              )
+            )}
+          </span>
+        </p>
+      </div>
+      <p className="hidden lg:flex">
+        {addCommasToNumber(order?.total_quantity)}
+      </p>
+      <p className="hidden lg:flex">
+        {currency}{" "}
+        {addCommasToNumber(
+          Number(
+            convertPrice(
               order.total_cost ? order.total_cost : 0,
               "GHS",
               currency,
               exchangeRates
-            ).toFixed(2)}
-          </span>
-        </p>
-      </div>
-      <p className="hidden lg:flex">{order.total_quantity}</p>
-      <p className="hidden lg:flex">
-        {currency}{" "}
-        {convertPrice(
-          order.total_cost ? order.total_cost : 0,
-          "GHS",
-          currency,
-          exchangeRates
-        ).toFixed(2)}
+            ).toFixed(2)
+          )
+        )}
       </p>
     </div>
   );
