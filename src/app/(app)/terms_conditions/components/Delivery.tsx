@@ -71,13 +71,13 @@ const Delivery = () => {
         <p>
           If there is any damage to your order at the point of delivery, please
           contact us immediately at{" "}
-          <a href=" myforemangh@gmail.com" className="underline">
+          <a href="mailto:myforemangh@gmail.com" className="underline">
             {" "}
             charles@foremangh.com
           </a>{" "}
           or via phone on{" "}
           <a
-            href="https://wa.me/233540124783"
+            href="tel:233540124783"
             target="_blank"
             className="underline"
           >
@@ -91,13 +91,13 @@ const Delivery = () => {
         <p>
           If you have any questions about the delivery of your order, please
           contact us at{" "}
-          <a href="myforemangh@gmail.com" className="underline">
+          <a href="mailto:myforemangh@gmail.com" className="underline">
             {" "}
             charles@foremangh.com
           </a>{" "}
           or via phone on{" "}
           <a
-            href="https://wa.me/233540124783"
+            href="tel:233540124783"
             target="_blank"
             className="underline"
           >

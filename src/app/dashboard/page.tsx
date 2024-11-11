@@ -14,6 +14,8 @@ import ProductCard from "@/components/ProductCard";
 import dynamic from "next/dynamic";
 import Welcome from "./components/Welcome";
 import PendingOrders from "./components/PendingOrders";
+import { useCurrency } from "@/context/CurrencyContext";
+import { convertPrice } from "@/lib/utils/convertPrice";
 import { addCommasToNumber } from "@/lib/utils/numberFormatter";
 const OrderHistoryChart = dynamic(
   () => import("./components/OrderHistoryCart")
@@ -22,6 +24,7 @@ const Dashboard = () => {
   const { allProducts } = useProducts();
   const { cart } = useCart();
   const { DBDetails } = useAppStore();
+  const { currency, exchangeRates } = useCurrency();
   const {
     data: dashboardData,
     isLoading: isDashboardDataLoading,
@@ -39,6 +42,17 @@ const Dashboard = () => {
     itemsInCart: cart.items.length,
   };
 
+  let convertedPrice = 0;
+
+  if (userMetrics.totalAmountSpent) {
+    convertedPrice = convertPrice(
+      userMetrics.totalAmountSpent,
+      "GHS",
+      currency,
+      exchangeRates
+    );
+  }
+
   return (
     <div className="p-5 pt-0 space-y-5">
       <h1 className="text-xl font-semibold mb-4">My Dashboard</h1>
@@ -51,7 +65,7 @@ const Dashboard = () => {
         />
         <MetricCard
           title="Total Amount Spent"
-          value={`GHS ${addCommasToNumber(userMetrics.totalAmountSpent)}`}
+          value={`${currency} ${addCommasToNumber(convertedPrice)}`}
         />
         <MetricCard title="Items in Cart" value={userMetrics.itemsInCart} />
       </div>
@@ -78,7 +92,8 @@ const Dashboard = () => {
             autoplay={{
               delay: 2500,
               disableOnInteraction: false,
-            }}>
+            }}
+          >
             {allProducts?.slice(0, 6).map((product, index) => (
               <SwiperSlide key={index}>
                 <ProductCard product={product} />

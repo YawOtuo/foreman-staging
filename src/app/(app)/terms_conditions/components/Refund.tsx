@@ -14,11 +14,11 @@ const Refund = () => {
           but, if you do change your mind, you can request for a refund or
           cancel a delivery within 12 hours of purchase. You can do so by
           calling or whatsapping{" "}
-          <a href="https://wa.me/233540124783" className="underline">
+          <a href="tel:233540124783" className="underline">
             +233 54 0124783
           </a>{" "}
           or emailing us at{" "}
-          <a href=" myforemangh@gmail.com" className="underline">
+          <a href="mailto:myforemangh@gmail.com" className="underline">
             {" "}
             charles@foremangh.com
           </a>{" "}
@@ -43,12 +43,12 @@ const Refund = () => {
           We'll be pleased to give you a refund or exchange if you tell us about
           the problem at the time or point of delivery. Refunds do not include
           delivery charges You can arrange a free collection by emailing
-          <a href=" myforemangh@gmail.com" className="underline">
+          <a href="mailto:myforemangh@gmail.com" className="underline">
             {" "}
             charles@foremangh.com
           </a>{" "}
           or calling or whatsapping{" "}
-          <a href="https://wa.me/233540124783" className="underline">
+          <a href="tel:233540124783" className="underline">
             +233 54 0124783
           </a>{" "}
           with your order number and product details. Items sent back to us

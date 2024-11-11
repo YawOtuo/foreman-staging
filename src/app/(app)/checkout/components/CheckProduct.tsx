@@ -1,5 +1,4 @@
 import { useCurrency } from "@/context/CurrencyContext";
-import useCart from "@/lib/hooks/useCart";
 import { CartItem } from "@/lib/types/cart";
 import { convertPrice } from "@/lib/utils/convertPrice";
 import Image from "next/image";
@@ -31,10 +30,6 @@ const CheckProduct: React.FC<CheckProductRowProps> = ({ cart_item }) => {
         </div>
         <div>
           <p className="font-semibold"> {cart_item.product_variant.name} </p>
-          {/* <p className="text-gray-500"> {cart_item.product.size} {cart_item.product.unit} </p> */}
-
-          {/* placeholder for the size and units of products */}
-          {/* <p className="text-gray-500">100 pieces</p> */}
         </div>
       </div>
 

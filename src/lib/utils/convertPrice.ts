@@ -10,3 +10,4 @@ export const convertPrice = (
   const rate = exchangeRates[toCurrency] / exchangeRates[fromCurrency];
   return price * rate;
 };
+ 
