@@ -3,7 +3,7 @@ export function addCommasToNumber(num: number | undefined, locale: string = "en-
       return ""; 
     }
   
-    return num.toLocaleString(locale, {
+    return Number(num).toLocaleString(locale, {
       minimumFractionDigits: 2, 
       maximumFractionDigits: 2, 
     });

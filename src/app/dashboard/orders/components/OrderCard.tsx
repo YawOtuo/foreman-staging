@@ -49,6 +49,7 @@ function OrderCard({ order }: Props) {
                 ).toFixed(2)
               )
             )}
+
           </span>
         </p>
       </div>
@@ -68,6 +69,7 @@ function OrderCard({ order }: Props) {
           )
         )}
       </p>
+
     </div>
   );
 }
