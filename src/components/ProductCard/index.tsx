@@ -96,7 +96,7 @@ function ProductCard({ product }: Props) {
               </div>
             </div>
             <Link href={`/product/${product.id}`}>
-              <p className="text-xs text-shade-200">
+              <p className="text-xs text-shade-200 line-clamp-1">
                 {product?.description || "No description"}
               </p>
             </Link>

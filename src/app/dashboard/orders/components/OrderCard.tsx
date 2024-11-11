@@ -31,13 +31,15 @@ function OrderCard({ order }: Props) {
         </p>
         <p>
           <span className="text-shade-300">Total Cost:</span>{" "}
-          <span className="font-semibold">{order.total_cost}</span>
+          <span className="font-semibold">
+            {addCommasToNumber(order?.total_cost)}
+          </span>
         </p>
       </div>
       <p className="hidden lg:flex">
         {addCommasToNumber(order?.total_quantity)}
       </p>
-      <p className="hidden lg:flex">{addCommasToNumber(order.total_cost)}</p>
+      <p className="hidden lg:flex">{addCommasToNumber(order?.total_cost)}</p>
     </div>
   );
 }
