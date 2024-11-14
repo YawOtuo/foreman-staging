@@ -15,8 +15,7 @@ function OrderCard({ order }: Props) {
       <p
         className="lg:text-shade-300 font-semibold text-primary 
       text-2xl lg:text-base
-      "
-      >
+      ">
         #{order.id}
       </p>
       <p className="text-sm col-span-2">
@@ -40,16 +39,13 @@ function OrderCard({ order }: Props) {
             {" "}
             {currency}{" "}
             {addCommasToNumber(
-              Number(
-                convertPrice(
-                  order.total_cost ? order.total_cost : 0,
-                  "GHS",
-                  currency,
-                  exchangeRates
-                ).toFixed(2)
-              )
+              convertPrice(
+                order.total_cost ? order.total_cost : 0,
+                "GHS",
+                currency,
+                exchangeRates
+              ).toFixed(2)
             )}
-
           </span>
         </p>
       </div>
@@ -69,7 +65,6 @@ function OrderCard({ order }: Props) {
           )
         )}
       </p>
-
     </div>
   );
 }

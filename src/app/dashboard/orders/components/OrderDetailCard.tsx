@@ -1,4 +1,5 @@
 import { OrderItem } from "@/lib/types/order";
+import { addCommasToNumber } from "@/lib/utils/numberFormatter";
 import Image from "next/image";
 import React from "react";
 
@@ -25,7 +26,7 @@ const OrderDetailCard = ({ item, currency }: DetailProps) => {
         <div className="w-1/2 flex justify-evenly">
           <p>{item.quantity} {item?.unit_of_measurement?.unit}</p>
           <p className="font-bold">
-            {currency} {item.total_cost}
+            {currency} {addCommasToNumber(item.total_cost)}
           </p>
         </div>
       </div>
@@ -49,7 +50,7 @@ const OrderDetailCard = ({ item, currency }: DetailProps) => {
             Quantity: {item.quantity} {item?.unit_of_measurement?.unit}
           </p>
           <p>
-            {currency} {item.total_cost}
+            {currency} {addCommasToNumber(item.total_cost)}
           </p>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 import CategoryCard from "@/components/CategoryCard";
 import FetchingState from "@/components/FetchingState";
+import { Skeleton } from "@/components/ui/skeleton";
 
 import { fetchCategories } from "@/lib/api/categories";
 import useCategories from "@/lib/hooks/useCategories";
@@ -18,11 +19,11 @@ function CategoriesOfProducts() {
       <p className="text-2xl  font-semibold ">Search by Categories</p>
 
       <FetchingState
-        className="w-full"
-        skeletonCount={1}
+        className="w-full flex items-center gap-5 justify-center"
+        skeletonCount={5}
         isLoading={catLoading}
         isError={catError}
-        loading={<div className="text-shade-300">Loading Categories </div>}
+        loading={<Skeleton className="w-[250px] h-[300px]" />}
         success={
           <div className="flex  items-center gap-1 md:gap-5 justify-center  w-full relative">
             <button

@@ -1,3 +1,4 @@
+import { addCommasToNumber } from "@/lib/utils/numberFormatter";
 import React from "react";
 
 type Props = {
@@ -15,7 +16,9 @@ const OrderSummary = ({ order, currency }: Props) => {
           <p className="font-semibold text-">Product Total</p>
           <p className="font-bold">
             {currency}{" "}
-            {order?.total_cost ? order?.total_cost - shipFee : shipFee}
+            {addCommasToNumber(
+              order?.total_cost ? order?.total_cost - shipFee : shipFee
+            )}
           </p>
         </div>
         <div className="w-full flex justify-between">
@@ -27,7 +30,7 @@ const OrderSummary = ({ order, currency }: Props) => {
         <div className="w-full flex justify-between">
           <p className="font-semibold">Total</p>
           <p className="text-[#F5B42A] text-2xl font-bold">
-            {currency} {order?.total_cost}
+            {currency} {addCommasToNumber(order?.total_cost)}
           </p>
         </div>
       </div>
