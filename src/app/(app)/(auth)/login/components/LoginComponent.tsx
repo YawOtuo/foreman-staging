@@ -5,21 +5,17 @@ import {
   PiGoogleLogo,
   PiSignInDuotone,
 } from "react-icons/pi";
-import {
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
+
 import { auth } from "@/app/firebase";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { useRouter, useSearchParams } from "next/navigation";
 import FormInput from "../../components/FormInput";
 import LoginButton from "../../components/LoginButton";
 import { firebaseErrorMap } from "@/lib/utils/firebaseErrorMap";
 import useLogin from "./useLogin";
 import React from "react";
 import { Loader2 } from "lucide-react";
+import CaGoogleColoured from "@/components/icons/CaGoogleColoured";
 
 type Props = {};
 
@@ -101,14 +97,14 @@ function LoginComponent({}: Props) {
           </div>
 
           <LoginButton
-            icon={<PiGoogleLogo />}
+            icon={<CaGoogleColoured />}
             onClick={GoogleSignIn}
             type="button"
             disabled={isGoogleLoading}
             name={
               isGoogleLoading
                 ? "Signing in with Google..."
-                : "Continue with Goodgle"
+                : "Continue with Google"
             }
           />
           {/* <LoginButton

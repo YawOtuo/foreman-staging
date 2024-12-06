@@ -2,7 +2,6 @@
 import React from "react";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import CartCard from "./CartCardBg";
 import CartSummary from "./CartSummary";
 import { Button } from "@/components/ui/button";
 import { CartItem } from "@/lib/types/cart";

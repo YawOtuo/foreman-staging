@@ -1,14 +1,11 @@
 "use client";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useAppStore } from "@/lib/store/useAppStore";
-import { UserIcon } from "lucide-react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useDashboardMobileStore } from "./DashboardMobileNavbar/components/useDashboardMobileNavStore";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { signOut } from "firebase/auth";
-import { auth } from "@/app/firebase";
 import useLogout from "@/app/(app)/(auth)/login/components/useLogout";
+import Link from "next/link";
 
 function DashboardHorizonalMenu() {
   const { FBaseDetails, DBDetails } = useAppStore();
@@ -18,7 +15,9 @@ function DashboardHorizonalMenu() {
     <div className=" flex items-center justify-between px-4 gap-5 border-b-[1px] py-1 text-sm">
       <div className="flex items-center gap-3 text-xs md:text-base w-full">
         <div className="w-full flex items-center gap-5 between text-xs">
-          <p className="lg:hidden text-primary font-semibold">FOREMAN</p>
+          <Link href={"/"} className="lg:hidden text-primary font-semibold">
+            <p className="">FOREMAN</p>
+          </Link>{" "}
           <div className="flex items-center justify-end gap-3 text-xs w-full">
             <p>{DBDetails?.username}</p>
             <p className="hidden lg:block"> {DBDetails?.email}</p>

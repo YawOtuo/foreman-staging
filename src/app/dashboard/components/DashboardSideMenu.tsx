@@ -50,14 +50,15 @@ function DashboardSideMenu() {
   return (
     <div className="flex flex-col justify-start sticky top-0 h-screen">
       <div className="px-10 pt-10 pb-5">
-        <p className="text-white uppercase font-bold">Foreman</p>
-
+        <Link href={"/"}>
+          <p className="text-white uppercase font-bold">Foreman</p>
+        </Link>
         <div className="flex items-center gap-3">
           <Avatar className="border-2 border-white">
             {FBaseDetails?.photoURL ? (
               <AvatarImage src={FBaseDetails?.photoURL} />
             ) : (
-              <UserIcon color="white" size={24}/>
+              <UserIcon color="white" size={24} />
             )}
             <AvatarFallback>{<UserIcon color="white" />}</AvatarFallback>
           </Avatar>

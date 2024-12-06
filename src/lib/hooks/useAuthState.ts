@@ -54,7 +54,7 @@ export default function useAuthState(auth: any) {
             setDBDetails(userData?.user);
 
             // Only redirect once when logged in
-            if (pathname === "/login") {
+            if (pathname === "/login" || pathname === "/signup") {
               router.push("/dashboard");
             }
           } else {
