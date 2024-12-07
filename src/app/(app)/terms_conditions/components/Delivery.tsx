@@ -73,15 +73,15 @@ const Delivery = () => {
           contact us immediately at{" "}
           <a href="mailto:myforemangh@gmail.com" className="underline">
             {" "}
-            charles@foremangh.com
+            infor@foremangh.com
           </a>{" "}
           or via phone on{" "}
-          <a
-            href="tel:233540124783"
-            target="_blank"
-            className="underline"
-          >
-            +233 54 0124783
+          <a href="tel:233054124783" target="_blank" className="underline">
+            054124783
+          </a>
+          /{" "}
+          <a href="tel:2330558587833" target="_blank" className="underline">
+            0558587833
           </a>
         </p>
       </section>
@@ -93,15 +93,15 @@ const Delivery = () => {
           contact us at{" "}
           <a href="mailto:myforemangh@gmail.com" className="underline">
             {" "}
-            charles@foremangh.com
+            info@foremangh.com
           </a>{" "}
           or via phone on{" "}
-          <a
-            href="tel:233540124783"
-            target="_blank"
-            className="underline"
-          >
-            +233 54 0124783
+          <a href="tel:233054124783" target="_blank" className="underline">
+            054124783
+          </a>
+          /{" "}
+          <a href="tel:2330558587833" target="_blank" className="underline">
+            0558587833
           </a>
         </p>
       </section>
