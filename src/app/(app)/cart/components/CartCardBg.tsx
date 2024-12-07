@@ -109,7 +109,8 @@ function CartCardBg({ data }: Props) {
           {data.quantity < data.product_variant.min_order_quantity && (
             <p className="text-red-500 text-xs font-semibold">
               Minimum quantity for {data.product_variant.name} is{" "}
-              {data.product_variant.min_order_quantity}
+              {data.product_variant.min_order_quantity}{" "}
+              {data.product_variant.unit_of_measurement?.unit}
             </p>
           )}
         </div>
