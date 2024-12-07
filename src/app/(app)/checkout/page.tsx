@@ -126,8 +126,8 @@ export default function CheckOutPage() {
                   <div className="w-full flex flex-col items-center gap-5 justify-center sm:w-[500px]">
                     <DeliveryAddressForm />
                     <label className="space-y-1">
-                      Can't find location? Please enter location with closest
-                      landmark
+                      Can't find location? Please type the{" "}
+                      <b>name of the area</b> and add a <b>popular landmark</b>
                       <input
                         type="text"
                         placeholder="Please enter location with closest landmark"
