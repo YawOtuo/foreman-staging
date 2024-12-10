@@ -2,7 +2,6 @@
 import LottieFileBuilder from "@/components/LottieFileBuilder";
 import { Button } from "@/components/ui/button";
 import animationData from "@/lotties/crane1.json";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -29,15 +28,13 @@ export default function SupplySection() {
             management, negotiation skills, and quality supervision ensure value
             for your money.
           </p>
-          <p>
-            Contact us today for seamless project coordination and satisfaction.
-          </p>
+      
         </div>
         <Link className="" href={"/project-management"}>
           <Button
             // variant={"outline"}
             // animated={"slide"}
-            className="mt-5 bg-yellow-500 text-white"
+            className=" bg-yellow-500 text-white"
           >
             Learn More
           </Button>

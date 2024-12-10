@@ -9,7 +9,7 @@ import {
   generalEmailRecipients,
   templateIds,
 } from "../utils/emailTemplateIds";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function useAuthState(auth: any) {
   const { toast } = useToast();
@@ -18,7 +18,7 @@ export default function useAuthState(auth: any) {
   const { sendEmail } = useEmail();
   const pathname = usePathname(); // Get the current path
   const router = useRouter();
-
+  const params = useSearchParams();
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(
       auth,
@@ -54,7 +54,7 @@ export default function useAuthState(auth: any) {
             setDBDetails(userData?.user);
 
             // Only redirect once when logged in
-            if (pathname === "/login" || pathname === "/signup") {
+            if ((pathname === "/login" || pathname === "/signup") && !params.has("redirect-url")) {
               router.push("/dashboard");
             }
           } else {
@@ -77,7 +77,7 @@ export default function useAuthState(auth: any) {
     );
 
     return () => unsubscribe();
-  }, [auth, setFBaseDetails, setDBDetails, pathname, router]);
+  }, [auth, setFBaseDetails, setDBDetails, pathname, router, params]);
 
   // Display authentication error toast
   useEffect(() => {
