@@ -1,3 +1,4 @@
+"use client";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useAppStore } from "../store/useAppStore";
