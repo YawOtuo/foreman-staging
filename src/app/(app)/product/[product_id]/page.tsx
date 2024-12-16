@@ -79,6 +79,7 @@ export default function ProductDetailPage({
         );
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
   // useEffect(() => {
