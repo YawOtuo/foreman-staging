@@ -1,17 +1,11 @@
 "use client";
 import Link from "next/link";
 import {
-  PiFacebookLogoDuotone,
-  PiGoogleLogo,
   PiSignInDuotone,
 } from "react-icons/pi";
-
-import { auth } from "@/app/firebase";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
 import FormInput from "../../components/FormInput";
 import LoginButton from "../../components/LoginButton";
-import { firebaseErrorMap } from "@/lib/utils/firebaseErrorMap";
 import useLogin from "./useLogin";
 import React from "react";
 import { Loader2 } from "lucide-react";

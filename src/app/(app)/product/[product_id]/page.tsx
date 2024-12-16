@@ -82,6 +82,18 @@ export default function ProductDetailPage({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
+  // useEffect(() => {
+  //         if (existingItem) {
+  //       setQuantity(existingItem.quantity);
+  //     } else {
+  //       setQuantity(
+  //         inititialPricingData?.min_order_quantity
+  //           ? Math.floor(inititialPricingData.min_order_quantity)
+  //           : 10
+  //       );
+  //     }
+  // }, []);
+
   useEffect(() => {
     if (selectedVariant && selectedUnitOfPricing) {
       // Find the price for the selected unit
@@ -170,6 +182,7 @@ export default function ProductDetailPage({
   const handleVariantChange = (value: string) => {
     const newVariant =
       product?.variants.find((v) => v.id.toString() === value) || null;
+    console.log(newVariant);
     setSelectedVariant(newVariant);
     // setQuantity(
     //   newVariant?.price?.[0]?.min_order_quantity
@@ -204,8 +217,7 @@ export default function ProductDetailPage({
               disableOnInteraction: false,
             }}
             className="w-full rounded-lg overflow-hidden border-2 transition-all duration-300"
-            spaceBetween={5}
-          >
+            spaceBetween={5}>
             {selectedVariant?.images.map((image) => (
               <SwiperSlide key={image.id}>
                 <OptimizedImage

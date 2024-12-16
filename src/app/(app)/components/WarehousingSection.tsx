@@ -38,11 +38,11 @@ export default function WarehousingSection() {
             cost. Your purchased materials will be delivered to your designated
             delivery address once you are ready to build or use them.
           </p>
-          <p>
+          {/* <p>
             As a trusted companion, we are ready to embark on the journey with
             you - opt for our Flexi plan today and let’s help you prepare for
             your dream project.
-          </p>
+          </p> */}
         </div>
         <ul>
           <li className="flex gap-3 items-center p-3 ">
