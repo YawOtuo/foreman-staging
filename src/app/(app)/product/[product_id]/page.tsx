@@ -32,7 +32,6 @@ export default function ProductDetailPage({
     null
   );
 
-  const { cart, AddToCart } = useCart();
   const [quantity, setQuantity] = useState<number>(10);
 
   const { toast } = useToast();
@@ -48,6 +47,7 @@ export default function ProductDetailPage({
     min_order_value: number;
   } | null>(null);
   // const [selectedPrice, setSelectedPrice] = useState<number | undefined>();
+  const { cart, AddToCart } = useCart();
 
   useEffect(() => {
     if (product) {
@@ -79,7 +79,8 @@ export default function ProductDetailPage({
         );
       }
     }
-  }, [product, cart.items]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [product]);
 
   useEffect(() => {
     if (selectedVariant && selectedUnitOfPricing) {
@@ -106,6 +107,7 @@ export default function ProductDetailPage({
     setQuantity((prev) =>
       prev ? prev + 1 : Number(selectedUnitOfPricing?.min_order_quantity) || 10
     );
+    console.log("increasing");
   };
 
   const decrementQuantity = () => {
