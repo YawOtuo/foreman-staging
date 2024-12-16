@@ -53,7 +53,7 @@ function Warehousing() {
                 We will store them for you until you are ready to build. It's
                 that simple and convenient. You can build it….
                 <Link
-                  href={"/contact"}
+                  href={"/flexi-plan/flexi-soon"}
                   className="text-primary font-bold hover:underline"
                 >
                   Start today!
@@ -72,9 +72,7 @@ function Warehousing() {
               </ol>
             </section>
 
-            <section className="flex justify-start pb-10">
-              <p className="font-bold text-3xl text-primary">Coming Soon</p>
-            </section>
+           
           </div>
         </div>
       </section>

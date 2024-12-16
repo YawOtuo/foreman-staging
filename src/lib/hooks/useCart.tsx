@@ -90,6 +90,8 @@ const useCart = () => {
   const updateItemQuantity = (itemId: number, quantity: number) => {
     const item = cart.items.find((cartItem) => cartItem.id === itemId);
 
+    console.log("update quantity");
+
     if (item) {
       item.quantity = quantity;
       item.totalCost = item.quantity * Number(item.product_variant.price);

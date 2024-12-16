@@ -19,11 +19,12 @@ function Footer() {
             />
             <div className="flex items-center space-x-2">
               <Mail size={16} />
-              <a href="mailto:charles@foremangh.com">charles@foremangh.com</a>
+              <a href="mailto:info@foremangh.com">info@foremangh.com</a>
             </div>
             <div className="flex items-center space-x-2">
               <Phone size={16} />
-              <a href="tel:+233249911264">+233 249 911 264</a>
+              <a href="tel:+2330558587833">0558587833</a> /{" "}
+              <a href="tel:+233054124783">054124783</a>
             </div>
             <div className="flex space-x-4">
               <Link href={"https://x.com/foreman_gh"}>
