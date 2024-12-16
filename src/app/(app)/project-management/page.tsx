@@ -3,11 +3,8 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
-import { MdOutlineStorage } from "react-icons/md";
 
 const ProjectManagement = () => {
-  const [showMore, setShowMore] = useState(false);
-
   return (
     <main className="p-6 sm:mb-32">
       <div className="flex flex-col-reverse lg:flex-row w-full justify-center items-center">
@@ -26,29 +23,16 @@ const ProjectManagement = () => {
             carpenters among others to carry out quality building construction
             on your behalf.
           </p>
-          <div>
-            {!showMore && (
-              <Button
-                className="w-fit px-0"
-                variant={"link"}
-                onClick={() => setShowMore(true)}>
-                Read More
-              </Button>
-            )}
-          </div>
-          {showMore && (
-            <>
-              <p>
-                We direct and coordinate human and material resources throughout
-                the various stages of your project using hands-on management
-                techniques, negotiation skills and quality supervision to offer
-                you value for money. Our team of relationship managers will
-                ensure your participation and satisfaction every step of the
-                way.
-              </p>
-            </>
-          )}
-          <Link href={"/contact"}>
+
+          <p>
+            We direct and coordinate human and material resources throughout the
+            various stages of your project using hands-on management techniques,
+            negotiation skills and quality supervision to offer you value for
+            money. Our team of relationship managers will ensure your
+            participation and satisfaction every step of the way.
+          </p>
+
+          <Link href={"/contact"} className="mt-5">
             <Button>Contact Us</Button>
           </Link>
         </section>

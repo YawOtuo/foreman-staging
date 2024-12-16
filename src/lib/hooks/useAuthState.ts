@@ -55,13 +55,24 @@ export default function useAuthState(auth: any) {
             setDBDetails(userData?.user);
 
             // Only redirect once when logged in
-            if ((pathname === "/login" || pathname === "/signup") && !params.has("redirect-url")) {
-              router.push("/dashboard");
+            if (
+              (pathname === "/login" || pathname === "/signup") &&
+              !params.has("redirect-url")
+            ) {
+              toast({
+                title: "Logged in",
+                description: "You are logged in",
+                variant: "success",
+                duration: 5000,
+              });
+              router.push("/");
             }
           } else {
             // If user is not authenticated, redirect to login from any protected page
             if (pathname.startsWith("/dashboard")) {
               router.push("/login");
+            } else {
+              router.push("/");
             }
           }
 
