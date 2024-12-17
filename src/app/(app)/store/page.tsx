@@ -15,8 +15,9 @@ function StoreContent() {
   const { filter, setFilter } = useStoreStore();
   const { allProductsError, allProductsLoading, allProducts } =
     useProducts(filter);
-    const pathname = usePathname()
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+
   useEffect(() => {
     if (searchParams?.get("category")) {
       setFilter({ category__name: searchParams?.get("category") });

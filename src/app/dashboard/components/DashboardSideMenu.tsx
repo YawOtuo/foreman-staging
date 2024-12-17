@@ -6,6 +6,7 @@ import { RiAlignItemBottomLine } from "react-icons/ri";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { UserIcon } from "lucide-react";
+import { MdOutlineAccountCircle } from "react-icons/md";
 
 export const dashboardMenuLinks = [
   {
@@ -28,11 +29,11 @@ export const dashboardMenuLinks = [
     url: "/dashboard/orders",
     icon: <RiAlignItemBottomLine />,
   },
-  // {
-  //   name: "Account",
-  //   url: "/dashboard",
-  //   icon: <MdOutlineAccountCircle />,
-  // },
+  {
+    name: "Account",
+    url: "/dashboard/account",
+    icon: <MdOutlineAccountCircle />,
+  },
   // {
   //   name: "Logout",
   //   url: "/dashboard",
