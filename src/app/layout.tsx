@@ -32,8 +32,8 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${mont.className} flex flex-col justify-center items-center bg-slate-50 shadow-lg`}>
-        <Providers>
-          <Suspense fallback={null}>
+        <Suspense fallback={null}>
+          <Providers>
             <div className="w-full max-w-[1920px] flex flex-col items-center bg-white">
               <MobileMenuWrapper>
                 <div className="w-full"> {children}</div>
@@ -44,8 +44,8 @@ export default function RootLayout({
             </div>
             <ScrollToTop />
             <LoadingIndicator />
-          </Suspense>
-        </Providers>
+          </Providers>
+        </Suspense>
       </body>
     </html>
   );
