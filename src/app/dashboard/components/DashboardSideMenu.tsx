@@ -57,7 +57,7 @@ function DashboardSideMenu() {
         <div className="flex items-center gap-3">
           <Avatar className="border-2 border-white">
             {FBaseDetails?.photoURL ? (
-              <AvatarImage src={FBaseDetails?.photoURL} />
+              <AvatarImage src={DBDetails?.image_url || FBaseDetails?.photoURL} />
             ) : (
               <UserIcon color="white" size={24} />
             )}

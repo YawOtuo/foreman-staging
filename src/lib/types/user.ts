@@ -5,6 +5,7 @@ export interface User {
     email: string;
     uid: string
     cart_id : number
+    image_url?: string;
     // Add other user fields as necessary
   }
   

@@ -9,9 +9,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import useAuthState from "@/lib/hooks/useAuthState";
-import { signOut } from "firebase/auth";
-import { auth } from "@/app/firebase";
 import Link from "next/link";
 import { useAppStore } from "@/lib/store/useAppStore";
 import { useRouter } from "next/navigation";
@@ -46,7 +43,7 @@ export default function InfoBar() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild className="">
               <Avatar>
-                <AvatarImage src={FBaseDetails?.photoURL} />
+                <AvatarImage src={DBDetails?.image_url || FBaseDetails?.photoURL} />
                 <AvatarFallback>
                   {<UserIcon size={24} color="black" />}
                 </AvatarFallback>

@@ -71,8 +71,6 @@ export default function useAuthState(auth: any) {
             // If user is not authenticated, redirect to login from any protected page
             if (pathname.startsWith("/dashboard")) {
               router.push("/login");
-            } else {
-              router.push("/");
             }
           }
 

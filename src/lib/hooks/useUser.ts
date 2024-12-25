@@ -4,20 +4,20 @@ import { updateUser } from "../api/users";
 import { User } from "../types/user";
 import { useAppStore } from "../store/useAppStore";
 
-// interface AddUserAgs {
-//   email: string;
-//   username: string;
-//   uid: string;
-// }
-
 function useUser() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const { setDBDetails, setFBaseDetails } = useAppStore();
 
   const updateUserMutation = useMutation({
     mutationFn: (userData: Partial<User>) =>
       updateUser(userData, Number(userData.id)),
+    onMutate: () => {
+      toast({
+        title: "Loading...",
+        description: "Updating user...",
+        variant: "loading",
+      });
+    },
     onSuccess: (data) => {
       toast({
         title: "Success",
